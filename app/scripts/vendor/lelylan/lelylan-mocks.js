@@ -1,0 +1,35 @@
+'use strict';
+
+var test = angular.module('test', ['lelylan.dashboards.devices', 'ngMockE2E']);
+
+test.run(function($httpBackend, LoggedUser) {
+
+  /* Dashboard */
+
+  $httpBackend.whenGET('http://api.lelylan.com/me').respond({ id: 1, email: 'alice@example.com' });
+  $httpBackend.whenGET('http://api.lelylan.com/devices?per=200').respond([device]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=lights').respond([device]);
+  $httpBackend.whenGET(/http:\/\/api.lelylan.com\/devices\//).respond([]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/1').respond(device);
+  $httpBackend.whenPOST('http://api.lelylan.com/devices').respond(device);
+
+  /* Simulated Device */
+
+  $httpBackend.whenPUT(/http:\/\/api.lelylan.com\/devices\/1\/properties/)
+    .respond(function(method, url, data, headers){ return [200, updateDevice(data), {}]; });
+
+  var updateDevice = function(data) {
+    data = angular.fromJson(data);
+    var resource = device;
+    _.each(data.properties, function(property) {
+      var result = _.find(resource.properties, function(_property){ return _property.id == property.id; });
+      result.expected = result.value = property.value;
+    });
+    return resource;
+  }
+
+  /* Pass through */
+
+  $httpBackend.whenGET(/partials/).passThrough();
+  $httpBackend.whenGET(/templates/).passThrough();
+});

@@ -1,0 +1,299 @@
+@import "device_component.min";
+@import "compass_twitter_bootstrap";
+@import "compass_twitter_bootstrap_responsive";
+@import "overlay";
+@import "circles";
+
+$lelylanColor:    #239cbb !default;
+$typeBorderColor: #ddd !default;
+$lineColor:       #e8e8e8 !default;
+
+
+/* Dashboard (generic) */
+
+body {
+  background-color: $lineColor !important;
+}
+
+.dashboard {
+  padding-top: 40px;
+}
+
+.dashboard input {
+  @include placeholder(#ccc);
+}
+
+.dashboard a:hover {
+  text-decoration: none;
+}
+
+.dashboard footer {
+  margin-top: 20px;
+  padding-right: 2px;
+}
+
+#lelylan-request-loading {
+  display: none;
+  margin-top: 4px;
+}
+
+
+.dashboard  {
+
+  /* Header */
+
+  .navbar {
+    background-color: rgba(232, 232, 232, 0.9);
+  }
+
+  .navbar-fixed-top a {
+    color: $linkColor !important;
+  }
+
+  .navbar-fixed-top a:hover {
+    color: $linkColorHover !important;
+  }
+
+  .navbar .brand {
+    padding: 5px 20px 10px !important;
+  }
+
+  .clearfix {
+    margin-bottom: 0 !important;
+  }
+
+
+  /* Side */
+
+  .nav-list {
+    padding-left: 0;
+  }
+
+  .nav-list li > a {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .nav-list .divider {
+    background-color: transparent;
+    border-color: $lineColor;
+  }
+
+  .nav-header {
+    font-size: 13px;
+    font-weight: normal;
+  }
+
+
+  /* Content (generic) */
+
+  .dashboard-content {
+    background-color: #fff;
+    border: 1px solid $lineColor;
+    min-height: 380px;
+    padding: 20px;
+  }
+
+  .search-query {
+    height: 40px;
+    width: 400px;
+    font-size: 26px;
+    line-height: 32px;
+    @include border-radius(30px);
+  }
+
+
+  /* Type list */
+
+  .type h1.name a {
+    font-size: 48px;
+    font-weight: 200;
+  }
+
+  .type .name a:hover {
+    background: url(/images/icon-arrow-right-lg.png) no-repeat left 45%;
+    padding-left: 60px;
+  }
+
+  .type a {
+    background-color: transparent;
+    padding-right: 0;
+    text-transform: uppercase;
+
+  }
+  .type .categories {
+    margin-top: 3px;
+    font-size: 13px;
+  }
+
+  .type .categories ul {
+    margin-bottom: 0;
+  }
+
+  .type .categories a {
+    background-color: transparent;
+  }
+
+
+  /* Dashboard messages */
+
+  .alert-block {
+    background-color: #f8f8f8;
+    border-color: $lineColor;
+    color: #333;
+  }
+
+
+  /* Create form type */
+
+  .new-view h1 {
+    font-weight: 200;
+  }
+
+  .new-view .control-group {
+    padding: 3px 0;
+  }
+
+  .new-view .type-name input,
+  .new-view .type-description textarea {
+    font-size: 26px;
+    font-weight: 200;
+    line-height: 32px;
+    margin-bottom: 0;
+  }
+
+  .new-view .type-name input {
+    height: 40px;
+  }
+
+  .new-view .type-name .add-on,
+  .new-view .type-description .add-on {
+    font-size: 18px;
+    height: 122px;
+    width: 100px;
+    padding-top: 10px;
+  }
+
+  .new-view .type-name .add-on {
+    height: 30px;
+    padding-top: 14px;
+  }
+
+  .new-view .type-description .add-on {
+    height: 122px;
+  }
+
+
+  /* Prsesentation pages (general) */
+
+  .presentation {
+    margin: 10px 0;
+  }
+
+  .presentation h1 {
+    color: #239cbb;
+    font-size: 58px;
+    font-weight: 200;
+    line-height: 52px;
+    letter-spacing: 2px;
+    margin: 10px 0 20px;
+    padding: 0px 0 0 30px;
+  }
+
+  .presentation h3,
+  .presentation h2 {
+    margin-top: 30px;
+    font-weight: 200;
+    font-size: 28px;
+    line-height: 28px;
+  }
+
+  .presentation h2 {
+    margin-top: 50px;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .presentation h4 {
+    font-size: 26px;
+    font-weight: 200;
+  }
+
+  .presentation .description {
+    margin-left: 30px;
+    font-weight: 200;
+  }
+
+  .presentation .description p {
+    font-size: 15px;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+
+  .presentation .description .btn {
+    line-height: 20px;
+    width: 240px;
+    height: 20px;
+    font-size: 18px;
+    margin: 10px;
+    letter-spacing: 1px;
+  }
+
+  .presentation p {
+    margin-bottom: 10px;
+  }
+
+  .presentation code {
+    font-size: 12px;
+    color: #333;
+    background-color: rgb(255, 255, 255);
+  }
+
+  .presentation .label-info {
+    background-color: #239cbb;
+  }
+
+  .presentation .more-buttons {
+    text-align: center;
+  }
+
+  /* Presentation home page */
+
+  .home {
+    text-align: center;
+  }
+
+  .home h1.title {
+    margin-top: 25px;
+    font-size: 72px;
+    padding-left: 0;
+  }
+
+  .home h2.payoff {
+    padding: 0 10px 20px;
+    font-size: 32px;
+    color: #666;
+    font-weight: 200;
+    line-height: 36px;
+  }
+
+  .home .description {
+    margin-top: 30px;
+    padding: 0px 30px;
+  }
+
+  .home .description p {
+    font-size: 15px;
+    line-height: 24px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+/* Type component overriding */
+
+.tc-header,
+.tc-description {
+  margin-bottom: 0;
+}
+
