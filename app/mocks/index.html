@@ -41,7 +41,7 @@
                 <li ng-class="{active: active=='create'}"><a class="create" href="/new"><i class="icon-plus"></i> Create Device</a></li>
                 <li class="divider"></li>
                 <li class="nav-header">Devices</li>
-                <li ng-class="{active: active=='all'}"><a class="all" href="/popular"><i class="icon-star"></i> All <span class="ng-cloak">{{devices.length}}</span></a></li>
+                <li ng-class="{active: active=='all'}"><a class="all" href="/all"><i class="icon-star"></i> All <span class="ng-cloak">{{devices.length}}</span></a></li>
                 <li ng-class="{active: active=='lights'}"><a class="lights" href="/categories/lights"><i class="icon-tag"></i> Lights</a></li>
                 <li ng-class="{active: active=='locks'}"><a class="locks"  href="/categories/locks"><i class="icon-tag"></i> Locks</a></li>
                 <li ng-class="{active: active=='thermostats'}"><a class="thermostats"  href="/categories/thermostats"><i class="icon-tag"></i> Thermostats</a></li>
@@ -83,6 +83,7 @@
     <script src="/scripts/app.js"></script>
     <script src="/scripts/controllers/dashboard-controller.js"></script>
     <script src="/scripts/controllers/create-controller.js"></script>
+    <script src="/scripts/controllers/devices-controller.js"></script>
 
     <!-- Test helpers -->
     <script src="../scripts/vendor/angular/angular-mocks.js"></script>

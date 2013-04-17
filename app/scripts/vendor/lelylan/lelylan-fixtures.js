@@ -35,6 +35,18 @@ var device = {
   updated_from: { uri: 'http://api.lelylan.com/users/1', name: 'Andrea Reginato' }
 };
 
+var device2 = angular.copy(device)
+device2.id = 2
+device2.name = 'Babies Light'
+
+var device3 = angular.copy(device)
+device3.id = 3
+device3.name = 'Garage Light'
+
+var device4 = angular.copy(device)
+device4.id = 4
+device4.name = 'Kitchen Light'
+
 var type = {
   uri: 'http://api.lelylan.com/types/1',
   id: '1',

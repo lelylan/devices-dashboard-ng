@@ -3,9 +3,9 @@
 @import "overlay";
 @import "circles";
 
-$lelylanColor:    #239cbb !default;
-$typeBorderColor: #ddd !default;
-$lineColor:       #e8e8e8 !default;
+$lelylanColor: #239cbb !default;
+$lelylanBorderColor: #ddd !default;
+$lineColor: #e8e8e8 !default;
 
 
 /* Dashboard (generic) */
@@ -102,35 +102,10 @@ body {
   }
 
 
-  /* Type list */
+  /* Devices list */
 
-  .type h1.name a {
-    font-size: 48px;
-    font-weight: 200;
-  }
-
-  .type .name a:hover {
-    background: url(/images/icon-arrow-right-lg.png) no-repeat left 45%;
-    padding-left: 60px;
-  }
-
-  .type a {
-    background-color: transparent;
-    padding-right: 0;
-    text-transform: uppercase;
-
-  }
-  .type .categories {
-    margin-top: 3px;
-    font-size: 13px;
-  }
-
-  .type .categories ul {
-    margin-bottom: 0;
-  }
-
-  .type .categories a {
-    background-color: transparent;
+  .devices-view hr.search-divider {
+    margin: 20px 0 0;
   }
 
 
@@ -292,11 +267,12 @@ body {
   }
 }
 
-/* Type component overriding */
+/* Device component overriding */
 
-.tc-header,
-.tc-description {
-  margin-bottom: 0;
+.device-component {
+  margin: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid $lineColor !important;
 }
 
 @import "device_component.min";
