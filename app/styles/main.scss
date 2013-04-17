@@ -95,7 +95,7 @@ body {
 
   .search-query {
     height: 40px;
-    width: 400px;
+    width: 360px;
     font-size: 26px;
     line-height: 32px;
     @include border-radius(30px);
@@ -106,13 +106,14 @@ body {
 
   .devices-view hr.search-divider {
     margin: 20px 0 0;
+    border-bottom: none;
   }
 
 
   /* Dashboard messages */
 
   .alert-block {
-    background-color: #f8f8f8;
+    background-color: $lineColor;
     border-color: $lineColor;
     color: #333;
   }
@@ -269,10 +270,39 @@ body {
 
 /* Device component overriding */
 
-.device-component {
+.devices .device-component {
   margin: 0 !important;
-  border: none !important;
-  border-bottom: 1px solid $lineColor !important;
 }
+
+.devices .detail .device-component hr,
+.devices .preview .device-component {
+  border-top: none !important;
+  border-color: $lineColor !important;
+}
+
+.devices .preview .device-component .dc-main {
+  opacity: 0.4;
+}
+
+.devices .preview .device-component .dc-main:hover {
+  opacity: 1;
+}
+
+.devices .preview .active .device-component {
+  border-right: none !important
+}
+
+.devices .preview .active .device-component .dc-main {
+  opacity: 1.0;
+}
+
+.devices .detail .device-component {
+  border: none !important;
+  margin-left: 15px !important;
+}
+
+.devices .detail .device-component hr{
+}
+
 
 @import "device_component.min";
