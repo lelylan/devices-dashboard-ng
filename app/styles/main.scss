@@ -143,7 +143,7 @@ body {
   }
 
 
-  /* Create form type */
+  /* Create form */
 
   .new-view h1 {
     font-weight: 200;
@@ -153,33 +153,38 @@ body {
     padding: 3px 0;
   }
 
-  .new-view .type-name input,
-  .new-view .type-description textarea {
+  .new-view .control-group .muted {
+    color: #666;
+  }
+
+  .new-view .control-group small{
+    display: block;
+    padding-left: 0;
+  }
+
+  .new-view input {
     font-size: 26px;
     font-weight: 200;
     line-height: 32px;
     margin-bottom: 0;
-  }
-
-  .new-view .type-name input {
     height: 40px;
   }
 
-  .new-view .type-name .add-on,
-  .new-view .type-description .add-on {
+  .new-view .add-on {
     font-size: 18px;
     height: 122px;
     width: 100px;
     padding-top: 10px;
-  }
-
-  .new-view .type-name .add-on {
     height: 30px;
     padding-top: 14px;
   }
 
-  .new-view .type-description .add-on {
+  .new-view .device-description .add-on {
     height: 122px;
+  }
+
+  .btn-lelylan {
+    @include buttonBackground($lelylanColor, $lelylanColor);
   }
 
 

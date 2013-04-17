@@ -7,11 +7,10 @@ test.run(function($httpBackend, LoggedUser) {
   /* Dashboard */
 
   $httpBackend.whenGET('http://api.lelylan.com/me').respond({ id: 1, email: 'alice@example.com' });
-  $httpBackend.whenGET('http://api.lelylan.com/devices?per=200').respond([device]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?per=100').respond([device]);
   $httpBackend.whenGET('http://api.lelylan.com/devices?category=lights').respond([device]);
-  $httpBackend.whenGET(/http:\/\/api.lelylan.com\/devices\//).respond([]);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/1').respond(device);
   $httpBackend.whenPOST('http://api.lelylan.com/devices').respond(device);
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/1').respond(device);
 
   /* Simulated Device */
 

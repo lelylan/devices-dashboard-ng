@@ -5,9 +5,6 @@ var app = angular.module('lelylan.dashboards.devices', ['lelylan.components.devi
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', { templateUrl: '/partials/home.html', controller: DashboardCtrl }).
+    when('/new', { templateUrl: '/partials/new-device.html', controller: CreateCtrl }).
     otherwise({redirectTo: '/'});
 }]);
-
-//directives.config(['$locationProvider', function($locationProvider) {
-  //$locationProvider.html5Mode(false).hashPrefix('!');
-//}]);
