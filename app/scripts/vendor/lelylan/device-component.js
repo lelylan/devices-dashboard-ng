@@ -35,16 +35,17 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
           '<div class="dc-function function-{{status.function.id}} row-fluid">' +
             '<div class="action">' +
               '<a href="#" ng-click="execute(status.function)" class="execute" title="{{status.function.name}}"></a>' +
-              '<div ng-show="device.pending" id="pending-{{device.id}}" class="pending"></div>' +
+              '<div ng-show="device.pending" id="pending-{{$id}}-{{device.id}}" class="pending"></div>' +
             '</div>' +
             '<div class="dc-description" ng-show="!list">' +
               '<p class="status lead">{{status.name}}</p>' +
-              '<small class="muted">{{device.updated_at_relative}} from {{device.updated_from.name}}</small>' +
+              '<small class="dc-updated-from muted">{{device.updated_at_relative}} from {{device.updated_from.name}}</small>' +
             '</div>' +
-            '<div class="dc-list-description" ng-show="list">' +
+            '<div class="dc-list-description" ng-show="list" ng-click="fireOpen()" ng-mouseover="entry=true" ng-mouseleave="entry=false">' +
               '<p class="lead color dc-name">{{device.name}}</p>' +
               '<p class="lead dc-status-name"><em>{{status.name}}</em></p>' +
-              '<a class="dc-open" href="#" ng-click="fireOpen()"><img class="dc-details" src="/images/chevron-right.png"></a>' +
+              '<a ng-show="!entry" class="dc-open" href="#"><img class="dc-details" src="/images/chevron-right.png"></a>' +
+              '<a ng-show="entry" class="dc-open" href="#"><img class="dc-details" src="/images/chevron-right-hover.png"></a>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -85,7 +86,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
                 '<form>' +
                   '<div ng-repeat="property in function.properties" ng-show="property.visible" class="property property-{{property.id}}">' +
                     '<div>' +
-                      '<small class="muted">Set {{property.name}} to {{property.value}}</small> ' +
+                      '<small class="muted">Set {{property.name}} to {{property.value}}</small><br/>' +
                       '<input type="{{property.type}}" min="{{property.range.min}}" max="{{property.range.max}}" step="{{property.range.step}}" ng-model="property.value"></input>' +
                     '</div>' +
                   '</div>' +
@@ -216,10 +217,11 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
     };
 
     // Extend device.properties and function.each.properties binding values.
-    var initResources = function() {
-      extendDeviceProperties();    // extende device properties with type properties
-      extendFunctionsProperties(); // extende type functions properties with type properties
-      setDeviceStatus();           // find the device status
+    var initResources = function(external) {
+      if (scope.loaded && external) fireRequestEnd(); // send an event when properties are updated
+      extendDeviceProperties();           // extende device properties with type properties
+      extendFunctionsProperties();        // extende type functions properties with type properties
+      setDeviceStatus();                  // find the device status
       hideFunctionForms();
     };
 
@@ -228,9 +230,6 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
     scope.showMain     = function() { scope.action = { main: true }; };
     scope.compact      = function() { scope.extended = false; scope.action = { main: true }; };
     scope.extend       = function() { scope.extended = true; scope.action = { main: true }; };
-
-    // Events
-    scope.fireOpen = function() { $rootScope.$broadcast('lelylan:device:open', scope.device.id); };
 
     // Execute the device function. If the function form is visible it first shows it.
     scope.execute = function(_function) {
@@ -245,6 +244,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
       scope.device.properties = properties;              // update the proeprties value to the model
       scope.device.$properties({}, initResources);       // send update properties update request
       scope.device.properties = _prop;                   // [hack] copy properties to not make the UI change while waiting for the response
+      fireRequestStart();
     };
 
     // Reload the device.
@@ -264,7 +264,10 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
 
     // Destroy the resource and hide the component
     scope.destroy = function() {
-      scope.device.$delete(function() { scope.destroyed = true; })
+      scope.device.$delete(function() {
+        scope.destroyed = true;
+        fireDelete();
+      })
     }
 
     scope.clear = function() {
@@ -353,9 +356,27 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
       });
     }
 
+    // Events Emitter
+    scope.fireOpen   = function() { $rootScope.$broadcast('lelylan:device:open', scope.device); };
+    var fireDelete = function() { $rootScope.$broadcast('lelylan:device:delete', scope.device); };
+    var fireRequestStart = function() { $rootScope.$broadcast('lelylan:device:request:start', scope.device); };
+    var fireRequestEnd   = function() { $rootScope.$broadcast('lelylan:device:request:end', scope.device); };
+
+    // Events Listener
+    scope.$on('lelylan:device:request:start', function(event, device) { syncProperties(device) });
+    scope.$on('lelylan:device:request:end', function(event, device) { syncProperties(device) });
+
+    var syncProperties = function(device) {
+      if (device.id == scope.device.id) {
+        scope.device.properties = device.properties;
+        scope.device.pending = device.pending;
+        initResources(false);
+      }
+    }
+
     // Preloader.
     var setPreloader = function() {
-      var cl = new CanvasLoader('pending-' + scope.device.id);
+      var cl = new CanvasLoader('pending-' + scope.$id + '-' + scope.device.id);
       cl.setColor('#01cf9e'); // default is '#000000'
       cl.setDiameter(20); // default is 40
       cl.setDensity(70); // default is 40
