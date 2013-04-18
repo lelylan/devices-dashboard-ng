@@ -4,7 +4,6 @@
 function CreateCtrl(Device, AccessToken, $scope, $rootScope, $location) {
   $rootScope.active = 'create';
   $scope.authorized = (!!AccessToken.get().access_token);
-  //$scope.authorized = true;
   $scope.device = new Device();
 
   $scope.create = function() {
