@@ -14,7 +14,6 @@ function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) 
   $scope.$on('lelylan:device:open', function(event, id) {
     $scope.selected = _.findWhere($scope.devices, { id: id });
   });
-
 };
 
 DevicesCtrl.$inject = ['AccessToken', 'Device', '$scope', '$rootScope', '$http', '$location'];
