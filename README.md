@@ -2,7 +2,7 @@
 
 Source code for [Lelylan Dashboard](http://d.lelylan.com).
 
-![Lelylan Dashboard](http://i.imgur.com/todo.png)
+![Lelylan Dashboard](http://i.imgur.com/xxtW18T.png)
 
 ## Introduction
 
