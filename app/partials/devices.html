@@ -19,14 +19,16 @@
     </div>
   </div>
 
-  <!-- Authorization needed message -->
-
+  <!-- Authorization needed -->
   <div class="authorization alert alert-block" ng-show="!authorized">
     <p class="lead">To see your devices you first need to <strong>Sign In</strong>.</p>
   </div>
 
   <!-- No devices found -->
   <div class="empty alert alert-block" ng-show="authorized && devices.length==0">
-    <p class="lead">No devices were found. Be the first to <a href="/new">create a new one</a>.</p>
+    <p class="lead">
+    No devices were found. <a href="/new">Create</a> a new one or
+    get familiar playing with the <a href="/demo">demo</a>.
+    </p>
   </div>
 </div>

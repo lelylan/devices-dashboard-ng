@@ -280,6 +280,10 @@ body {
   border-color: $lineColor !important;
 }
 
+.devices .preview .device-component {
+  height: 55px !important;
+}
+
 .devices .preview .device-component .dc-main {
   opacity: 0.4;
 }
