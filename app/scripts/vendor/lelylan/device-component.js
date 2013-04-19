@@ -180,8 +180,12 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
       if (scope.deviceId) scope.device = Device.get({ id: scope.deviceId }, initialize);
     });
 
-    scope.$watch('deviceJson', function(value) {
-      if (scope.deviceJson) { scope.device = scope.deviceJson; initialize(); }
+    scope.$watch('deviceJson', function(value, old) {
+      if (scope.deviceJson) {
+        scope.device = scope.deviceJson;
+        scope.type = null;
+        initialize();
+      }
     });
 
     scope.$watch('deviceType', function(value, old) {

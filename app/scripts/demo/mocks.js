@@ -14,7 +14,7 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
 
   /* Device List */
 
-  var devices = [lock];
+  var devices = [light, lock];
 
   // Light
   $httpBackend.whenDELETE('http://api.lelylan.com/devices/1').respond(light);

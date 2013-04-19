@@ -30,7 +30,7 @@ var lockType = {
     id: '1',
     name: 'Status',
     default: 'close',
-    suggested: {'open': 'Open', 'close': 'Close'},
+    suggested: {'open': 'Open', 'close': 'Closed'},
     type: 'text'
   }],
   functions: [{
