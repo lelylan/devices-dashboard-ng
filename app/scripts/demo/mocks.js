@@ -14,7 +14,16 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
 
   /* Device List */
 
-  var devices = [light, lock, thermostat, alarmClock, camera, alarm];
+  var devices = [
+    light,
+    lock,
+    thermostat,
+    alarmClock,
+    camera,
+    alarm,
+    meter,
+    rollingShutter
+  ];
 
   // Light
   $httpBackend.whenDELETE('http://api.lelylan.com/devices/1').respond(light);
@@ -46,6 +55,16 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
   $httpBackend.whenGET('http://api.lelylan.com/devices/6').respond(alarm);
   $httpBackend.whenGET('http://api.lelylan.com/types/6').respond(alarmType);
 
+  // Meter
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/7').respond(meter);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/7').respond(meter);
+  $httpBackend.whenGET('http://api.lelylan.com/types/7').respond(meterType);
+
+  // Rolling Shutter
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/8').respond(rollingShutter);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/8').respond(rollingShutter);
+  $httpBackend.whenGET('http://api.lelylan.com/types/8').respond(rollingShutterType);
+
   // Devices request
   $httpBackend.whenGET('http://api.lelylan.com/devices?per=100')
     .respond(function(method, url, data, headers){ return [200, updateDevices(), {}]; });
@@ -69,6 +88,8 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
     if(data.id == '4') resource = alarmClock;
     if(data.id == '5') resource = camera;
     if(data.id == '6') resource = alarm;
+    if(data.id == '7') resource = meter;
+    if(data.id == '8') resource = rollingShutter;
 
     resource.updated_at = new Date();
     _.each(data.properties, function(property) {
