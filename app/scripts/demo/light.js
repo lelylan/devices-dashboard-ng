@@ -32,7 +32,7 @@ var light = {
   owner_id: '1',
   created_at: '2012-09-01T16:00:32Z',
   updated_at: '2013-04-10T16:19:20Z',
-  updated_from: { uri: 'http://api.lelylan.com/users/1', name: 'Andrea Reginato' }
+  updated_from: { uri: 'http://api.lelylan.com/users/1', name: 'Lelylan Demo' }
 };
 
 var lightType = {
