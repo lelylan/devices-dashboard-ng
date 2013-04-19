@@ -83,6 +83,19 @@ body {
     font-weight: normal;
   }
 
+  .nav-list [class^="icon-"] {
+    margin-top: -1px;
+  }
+
+  .nav-list li.deactivated {
+    opacity: 0.3;
+  }
+
+  .nav-list li.deactivated a:hover {
+    background: transparent;
+    color: $lelylanColor;
+    cursor: default;
+  }
 
   /* Content (generic) */
 

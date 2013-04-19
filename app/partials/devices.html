@@ -11,7 +11,7 @@
         <div class="device device-{{device.id}}" ng-class="{active: device.id == selected.id}" ng-repeat="device in devices | filter:query">
           <device style="width:100%" device-json="device" device-view="list"></device>
         </div>
-        <div class="clearfix"></div>
+        <div class="clearfix">&nbsp;</div>
       </div>
       <div class="span4 detail">
         <device style="width:100%" device-json="selected"></device>

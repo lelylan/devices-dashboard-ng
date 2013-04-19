@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="test">
+<html ng-app="demo">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lelylan Dashboard</title>
     <link rel="stylesheet" href="/styles/main.css">
+    <style>
+      .dc-header .dc-options { display: none; }
+    </style>
   </head>
   <body>
 
@@ -16,10 +19,9 @@
         <div class="navbar-inner-flat">
           <div class="container">
             <div class="nav-collapse collapse">
-              <login class="nav pull-right" text="Sign In" client="devices-dashboard-id" redirect="redirect" scope="resources+privates"></login>
               <ul class="nav pull-right">
-                <li><a href="/demo">Play demo</a></li>
-                <li><a href="/learn">Learn more</a></li>
+                <li><a href="/demo">Try Demo</a></li>
+                <li><a href="/learn">Learn More</a></li>
               </ul>
             </div>
           </div>
@@ -33,12 +35,12 @@
 
           <div class="span3">
             <div class="navbar clearfix">
-              <a class="brand home" href="/"><strong>Lelylan</strong> Dashboard</a>
+              <a class="brand home" href="/home"><strong>Demo</strong> Dashboard</a>
               <div id="lelylan-request-loading"></div>
             </div>
             <div class="sidebar-nav">
               <ul class="nav nav-list">
-                <li ng-class="{active: active=='create'}"><a class="create" href="/new"><i class="icon-plus"></i> Create Device</a></li>
+                <li class="deactivated" ng-class="{active: active=='create'}"><a class="create" href="#"><i class="icon-plus"></i> Create Device</a></li>
                 <li class="divider"></li>
                 <li class="nav-header">Devices</li>
                 <li ng-class="{active: active=='all'}"><a class="all" href="/all"><i class="icon-star"></i> All</a></li>
@@ -80,14 +82,14 @@
     <script src="/scripts/vendor/lelylan/lelylan.js"></script>
     <script src="/scripts/vendor/lelylan/device-component.js"></script>
 
-    <script src="/scripts/app.js"></script>
+    <script src="/scripts/demo.js"></script>
     <script src="/scripts/controllers/dashboard-controller.js"></script>
     <script src="/scripts/controllers/create-controller.js"></script>
     <script src="/scripts/controllers/devices-controller.js"></script>
 
-    <!-- Test helpers -->
+    <!-- Demo -->
     <script src="../scripts/vendor/angular/angular-mocks.js"></script>
-    <script src="../scripts/vendor/lelylan/lelylan-mocks.js"></script>
-    <script src="../scripts/vendor/lelylan/lelylan-fixtures.js"></script>
+    <script src="../scripts/demo/demo-mocks.js"></script>
+    <script src="../scripts/demo/light-fixtures.js"></script>
   </body>
 </html>

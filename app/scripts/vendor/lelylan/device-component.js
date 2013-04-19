@@ -206,7 +206,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
     // Component initialization.
     var initialize = function() {
       if (scope.deviceType) { scope.type = scope.deviceType } // HACK due to the fact that the type component could not be loaded yet
-      (scope.type) ? initComponent() : scope.type = Type.get({ id: device.type.id }, initComponent);
+      (scope.type) ? initComponent() : scope.type = Type.get({ id: scope.device.type.id }, initComponent);
     };
 
     var initComponent = function() {

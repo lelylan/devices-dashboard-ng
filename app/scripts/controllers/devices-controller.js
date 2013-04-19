@@ -6,8 +6,6 @@ function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) 
     $rootScope.active = 'all';
     $scope.devices = Device.query({ per: 100 }, function() {
       if ($scope.devices.length > 0) { $scope.selected = $scope.devices[0] }
-      $scope.app = {};
-      _.each($scope.devices, function(device) { $scope.app[device.id] = angular.copy(device) });
     });
   };
 
