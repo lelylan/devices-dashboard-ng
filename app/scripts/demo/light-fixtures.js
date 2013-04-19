@@ -38,7 +38,7 @@ var light = {
 var lightType = {
   uri: 'http://api.lelylan.com/types/1',
   id: '1',
-  name: 'Basic Light',
+  name: 'Light',
   created_at: '2012-09-01T15:01:22Z',
   updated_at: '2012-09-01T15:01:22Z',
   properties: [{

@@ -18,7 +18,12 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
    */
 
   var devices = [light];
-  $httpBackend.whenGET('http://api.lelylan.com/devices?per=100').respond(devices);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?per=100')
+    .respond(function(method, url, data, headers){ return [200, updateDevices(), {}]; });
+
+  var updateDevices = function() {
+    return _.map(devices, function(device) { device.updated_at = new Date(); return device; })
+  }
 
   /*
    * Lights
