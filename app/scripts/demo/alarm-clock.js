@@ -61,7 +61,7 @@ var alarmClockType = {
     id: '2',
     name: 'Mode',
     default: 'off',
-    suggested: {'on': 'Alarm On', 'off': 'Alarm Off'},
+    suggested: {'on': 'Activated', 'off': 'Deactivated'},
     type: 'text'
   }, {
     uri: 'http://api.lelylan.com/properties/3',
@@ -165,6 +165,15 @@ var alarmClockType = {
   }, {
     uri: 'http://api.lelylan.com/functions/6',
     id: '6',
+    name: 'Turn On',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'on'
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/7',
+    id: '7',
     name: 'Turn Off',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -175,8 +184,8 @@ var alarmClockType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The Alarm Clock is On',
-    function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
+    name: 'The alarm is on',
+    function: { uri: 'http://api.lelylan.com/functions/7', id: '7' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -186,8 +195,8 @@ var alarmClockType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The Alarm Clock is Off',
-    function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
+    name: 'The alarm is off',
+    function: { uri: 'http://api.lelylan.com/functions/6', id: '6' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',

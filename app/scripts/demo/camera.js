@@ -207,7 +207,7 @@ var cameraType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The Camera is On',
+    name: 'The camera is on',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -218,7 +218,7 @@ var cameraType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The Camera is Off',
+    name: 'The camera is off',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',

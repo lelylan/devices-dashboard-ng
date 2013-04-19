@@ -139,6 +139,15 @@ var ThermostatType = {
   }, {
     uri: 'http://api.lelylan.com/functions/6',
     id: '6',
+    name: 'Turn On',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'on'
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/7',
+    id: '7',
     name: 'Turn Off',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -149,8 +158,8 @@ var ThermostatType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The Thermostat is On',
-    function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
+    name: 'The thermostat is on',
+    function: { uri: 'http://api.lelylan.com/functions/7', id: '7' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -160,8 +169,8 @@ var ThermostatType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The Thermostat is Off',
-    function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
+    name: 'The thermostat is off',
+    function: { uri: 'http://api.lelylan.com/functions/6', id: '6' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
