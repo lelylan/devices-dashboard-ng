@@ -1,6 +1,6 @@
 'use strict';
 
-var alarmClock = {
+var clock = {
   uri: 'http://api.lelylan.com/devices/4',
   id: '4',
   name: 'Connected Alarm Clock',
@@ -43,7 +43,7 @@ var alarmClock = {
   updated_from: { uri: 'http://api.lelylan.com/users/1', name: 'Lelylan Demo' }
 };
 
-var alarmClockType = {
+var clockType = {
   uri: 'http://api.lelylan.com/types/4',
   id: '4',
   name: 'Alarm Clock',
@@ -165,7 +165,7 @@ var alarmClockType = {
   }, {
     uri: 'http://api.lelylan.com/functions/6',
     id: '6',
-    name: 'Turn On',
+    name: 'Power On',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -174,7 +174,7 @@ var alarmClockType = {
   }, {
     uri: 'http://api.lelylan.com/functions/7',
     id: '7',
-    name: 'Turn Off',
+    name: 'Power Off',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -184,22 +184,22 @@ var alarmClockType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The alarm is on',
-    function: { uri: 'http://api.lelylan.com/functions/7', id: '7' },
+    name: 'The alarm is activated',
+    function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['on'],
       pending: null,
     }]
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The alarm is off',
-    function: { uri: 'http://api.lelylan.com/functions/6', id: '6' },
+    name: 'The alarm is deactivated',
+    function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['off'],
       pending: null,
     }]

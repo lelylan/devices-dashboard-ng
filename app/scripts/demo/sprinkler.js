@@ -94,7 +94,7 @@ var sprinklerType = {
   }, {
     uri: 'http://api.lelylan.com/functions/4',
     id: '4',
-    name: 'Turn On',
+    name: 'Power On',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -103,7 +103,7 @@ var sprinklerType = {
   }, {
     uri: 'http://api.lelylan.com/functions/5',
     id: '5',
-    name: 'Turn Off',
+    name: 'Power Off',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -113,7 +113,7 @@ var sprinklerType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The sprinkler system is activated',
+    name: 'The sprinkler system is watering',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',
@@ -124,7 +124,7 @@ var sprinklerType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The sprinkler system is deactivated',
+    name: 'The sprinkler system is not watering',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',

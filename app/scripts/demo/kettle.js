@@ -1,11 +1,11 @@
 'use strict';
 
-var meter = {
-  uri: 'http://api.lelylan.com/devices/7',
-  id: '7',
-  name: 'Connected Meter',
-  type: { uri: 'http://api.lelylan.com/types/7', id: '7' },
-  physical: { uri: 'http://arduino.house.com/7' },
+var kettle = {
+  uri: 'http://api.lelylan.com/devices/10',
+  id: '10',
+  name: 'Connected Kettle',
+  type: { uri: 'http://api.lelylan.com/types/10', id: '10' },
+  physical: { uri: 'http://arduino.house.com/10' },
   pending: false,
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
@@ -13,19 +13,11 @@ var meter = {
     suggested: {'on': 'On', 'off': 'Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/2',
-    id: '2', value: '230.95', expected: '230.95', pending: false,
+    id: '2', value: 'off', expected: 'off', pending: false,
     suggested: {}
   }, {
     uri: 'http://api.lelylan.com/properties/3',
-    id: '3', value: '0.26', expected: '0.26', pending: false,
-    suggested: {}
-  }, {
-    uri: 'http://api.lelylan.com/properties/4',
-    id: '4', value: '3', expected: '3', pending: false,
-    suggested: {}
-  }, {
-    uri: 'http://api.lelylan.com/properties/5',
-    id: '5', value: 'under', expected: 'under', pending: false,
+    id: '3', value: '18', expected: '18', pending: false,
     suggested: {}
   }],
   creator_id: '1',
@@ -35,10 +27,10 @@ var meter = {
   updated_from: { uri: 'http://api.lelylan.com/users/1', name: 'Lelylan Demo' }
 };
 
-var meterType = {
-  uri: 'http://api.lelylan.com/types/1',
-  id: '1',
-  name: 'Meter',
+var kettleType = {
+  uri: 'http://api.lelylan.com/types/10',
+  id: '10',
+  name: 'Kettle',
   created_at: '2012-09-01T15:01:22Z',
   updated_at: '2012-09-01T15:01:22Z',
   properties: [{
@@ -51,35 +43,48 @@ var meterType = {
   }, {
     uri: 'http://api.lelylan.com/properties/2',
     id: '2',
-    name: 'Cumulative Consumption (kWh)',
-    default: '0',
-    suggested: {},
-    type: 'text',
+    name: 'Heating water',
+    default: 'off',
+    suggested: {'on': 'Activated', 'off': 'Deactivated'},
+    type: 'text'
   }, {
     uri: 'http://api.lelylan.com/properties/3',
     id: '3',
-    name: 'Instantaneous Consumption (kWh)',
-    default: '0',
+    name: 'Water temperature',
+    default: '18',
     suggested: {},
-    type: 'text'
-  }, {
-    uri: 'http://api.lelylan.com/properties/4',
-    id: '4',
-    name: 'Capacity (kWh)',
-    default: '3',
-    suggested: {},
-    type: 'text'
-  }, {
-    uri: 'http://api.lelylan.com/properties/5',
-    id: '5',
-    name: 'Capacity State',
-    default: 'under',
-    suggested: {'under': 'Under capacity', 'alert': 'Close to capacity limit', 'over': 'Over capacity'},
-    type: 'text'
+    type: 'range',
+    range: { min: 0, max: 150, step: 5 }
   }],
   functions: [{
     uri: 'http://api.lelylan.com/functions/1',
     id: '1',
+    name: 'Start Heating Water',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'on'
+    }, {
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
+      value: 'on'
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/2',
+    id: '2',
+    name: 'Stop Heating Water',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'on'
+    }, {
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
+      value: 'off'
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/3',
+    id: '3',
     name: 'Power On',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -87,8 +92,8 @@ var meterType = {
       value: 'on'
     }]
   }, {
-    uri: 'http://api.lelylan.com/functions/2',
-    id: '2',
+    uri: 'http://api.lelylan.com/functions/4',
+    id: '4',
     name: 'Power Off',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -99,22 +104,22 @@ var meterType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The meter is on',
+    name: 'The kettle is heating water',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['on'],
       pending: null,
     }]
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The meter is off',
+    name: 'The kettle is not heating water',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['off'],
       pending: null,
     }]

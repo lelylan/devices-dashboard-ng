@@ -124,24 +124,6 @@ var cameraType = {
     type: 'text',
   }],
   functions: [{
-    uri: 'http://api.lelylan.com/functions/1',
-    id: '1',
-    name: 'Turn On',
-    properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
-      value: 'on'
-    }]
-  }, {
-    uri: 'http://api.lelylan.com/functions/2',
-    id: '2',
-    name: 'Turn Off',
-    properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
-      value: 'off'
-    }]
-  }, {
     uri: 'http://api.lelylan.com/functions/3',
     id: '3',
     name: 'Set Rotation',
@@ -202,6 +184,24 @@ var cameraType = {
       uri: 'http://api.lelylan.com/properties/9',
       id: '9',
       value: null
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/1',
+    id: '1',
+    name: 'Power On',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'on'
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/2',
+    id: '2',
+    name: 'Power Off',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'off'
     }]
   }],
   statuses: [{

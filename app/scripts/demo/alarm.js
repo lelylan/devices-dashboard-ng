@@ -69,24 +69,6 @@ var alarmType = {
   functions: [{
     uri: 'http://api.lelylan.com/functions/1',
     id: '1',
-    name: 'Turn On',
-    properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
-      value: 'on'
-    }]
-  }, {
-    uri: 'http://api.lelylan.com/functions/2',
-    id: '2',
-    name: 'Turn Off',
-    properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
-      value: 'off'
-    }]
-  }, {
-    uri: 'http://api.lelylan.com/functions/3',
-    id: '3',
     name: 'Activate Alarm',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -102,8 +84,8 @@ var alarmType = {
       value: null
     }]
   }, {
-    uri: 'http://api.lelylan.com/functions/4',
-    id: '4',
+    uri: 'http://api.lelylan.com/functions/2',
+    id: '2',
     name: 'Deactivate Alarm',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -118,6 +100,24 @@ var alarmType = {
       id: '4',
       value: null
     }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/3',
+    id: '3',
+    name: 'Power On',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'on'
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/4',
+    id: '4',
+    name: 'Power Off',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'off'
+    }]
   }],
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
@@ -125,8 +125,8 @@ var alarmType = {
     name: 'The alarm is on',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['on'],
       pending: null,
     }]
@@ -136,8 +136,8 @@ var alarmType = {
     name: 'The alarm is off',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['off'],
       pending: null,
     }]

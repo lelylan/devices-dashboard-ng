@@ -18,12 +18,13 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
     light,
     lock,
     thermostat,
-    alarmClock,
+    clock,
     camera,
     alarm,
     meter,
-    rollingShutter,
-    sprinkler
+    shutter,
+    sprinkler,
+    kettle
   ];
 
   // Light
@@ -42,9 +43,9 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
   $httpBackend.whenGET('http://api.lelylan.com/types/3').respond(ThermostatType);
 
   // Alarm Clock
-  $httpBackend.whenDELETE('http://api.lelylan.com/devices/4').respond(alarmClock);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/4').respond(alarmClock);
-  $httpBackend.whenGET('http://api.lelylan.com/types/4').respond(alarmClockType);
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/4').respond(clock);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/4').respond(clock);
+  $httpBackend.whenGET('http://api.lelylan.com/types/4').respond(clockType);
 
   // Camera
   $httpBackend.whenDELETE('http://api.lelylan.com/devices/5').respond(camera);
@@ -62,14 +63,20 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
   $httpBackend.whenGET('http://api.lelylan.com/types/7').respond(meterType);
 
   // Rolling Shutter
-  $httpBackend.whenDELETE('http://api.lelylan.com/devices/8').respond(rollingShutter);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/8').respond(rollingShutter);
-  $httpBackend.whenGET('http://api.lelylan.com/types/8').respond(rollingShutterType);
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/8').respond(shutter);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/8').respond(shutter);
+  $httpBackend.whenGET('http://api.lelylan.com/types/8').respond(shutterType);
 
   // Sprinkler system
   $httpBackend.whenDELETE('http://api.lelylan.com/devices/9').respond(sprinkler);
   $httpBackend.whenGET('http://api.lelylan.com/devices/9').respond(sprinkler);
   $httpBackend.whenGET('http://api.lelylan.com/types/9').respond(sprinklerType);
+
+  // Kettle
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/10').respond(kettle);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/10').respond(kettle);
+  $httpBackend.whenGET('http://api.lelylan.com/types/10').respond(kettleType);
+
 
   // Devices request
   $httpBackend.whenGET('http://api.lelylan.com/devices?per=100')
@@ -88,15 +95,16 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
     data = angular.fromJson(data);
 
     var resource;
-    if(data.id == '1') resource = light;
-    if(data.id == '2') resource = lock;
-    if(data.id == '3') resource = thermostat;
-    if(data.id == '4') resource = alarmClock;
-    if(data.id == '5') resource = camera;
-    if(data.id == '6') resource = alarm;
-    if(data.id == '7') resource = meter;
-    if(data.id == '8') resource = rollingShutter;
-    if(data.id == '9') resource = sprinkler;
+    if(data.id == '1')  resource = light;
+    if(data.id == '2')  resource = lock;
+    if(data.id == '3')  resource = thermostat;
+    if(data.id == '4')  resource = clock;
+    if(data.id == '5')  resource = camera;
+    if(data.id == '6')  resource = alarm;
+    if(data.id == '7')  resource = meter;
+    if(data.id == '8')  resource = shutter;
+    if(data.id == '9')  resource = sprinkler;
+    if(data.id == '10') resource = kettle;
 
     resource.updated_at = new Date();
     _.each(data.properties, function(property) {

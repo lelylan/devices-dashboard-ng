@@ -9,23 +9,27 @@ var thermostat = {
   pending: false,
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
-    id: '1', value: 'off', expected: 'off', pending: false,
+    id: '1', value: 'on', expected: 'on', pending: false,
     suggested: {'on': 'On', 'off': 'Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/2',
-    id: '2', value: 'pause', expected: 'pause', pending: false,
-    suggested: {}
+    id: '2', value: 'off', expected: 'off', pending: false,
+    suggested: {'on': 'On', 'off': 'Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/3',
-    id: '3', value: '18', expected: '18', pending: false,
+    id: '3', value: 'cool', expected: 'cool', pending: false,
     suggested: {}
   }, {
     uri: 'http://api.lelylan.com/properties/4',
-    id: '4', value: '1', expected: '1', pending: false,
+    id: '4', value: '18', expected: '18', pending: false,
     suggested: {}
   }, {
     uri: 'http://api.lelylan.com/properties/5',
-    id: '5', value: 'c', expected: 'c', pending: false,
+    id: '5', value: '1', expected: '1', pending: false,
+    suggested: {}
+  }, {
+    uri: 'http://api.lelylan.com/properties/6',
+    id: '6', value: 'c', expected: 'c', pending: false,
     suggested: {}
   }],
   creator_id: '1',
@@ -51,29 +55,36 @@ var ThermostatType = {
   }, {
     uri: 'http://api.lelylan.com/properties/2',
     id: '2',
-    name: 'Activity',
-    default: 'pause',
-    suggested: {'pause': 'Pause', 'warm': 'Warming', 'cool': 'Cooling'},
+    name: 'Mode',
+    default: 'warm',
+    suggested: {'on': 'Activated', 'off': 'Deactivated'},
     type: 'string'
   }, {
     uri: 'http://api.lelylan.com/properties/3',
     id: '3',
+    name: 'Activity',
+    default: 'warm',
+    suggested: {'warm': 'Warming', 'cool': 'Cooling'},
+    type: 'string'
+  }, {
+    uri: 'http://api.lelylan.com/properties/4',
+    id: '4',
     name: 'Temperature',
     default: '18',
     suggested: {},
     type: 'range',
     range: { min: 0, max: 50, step: 0.5 }
   }, {
-    uri: 'http://api.lelylan.com/properties/4',
-    id: '4',
+    uri: 'http://api.lelylan.com/properties/5',
+    id: '5',
     name: 'Speed',
     default: '1.0',
     suggested: {},
     type: 'range',
     range: { min: 0, max: 10, step: 1 }
   }, {
-    uri: 'http://api.lelylan.com/properties/5',
-    id: '5',
+    uri: 'http://api.lelylan.com/properties/6',
+    id: '6',
     name: 'Unit',
     default: 'c',
     suggested: {'c': 'Celsius (ºC)', 'warm': '(ºF)', 'cool': 'Cooling'},
@@ -90,6 +101,10 @@ var ThermostatType = {
     }, {
       uri: 'http://api.lelylan.com/properties/2',
       id: '2',
+      value: 'on'
+    }, {
+      uri: 'http://api.lelylan.com/properties/3',
+      id: '3',
       value: 'warm'
     }]
   }, {
@@ -103,6 +118,10 @@ var ThermostatType = {
     }, {
       uri: 'http://api.lelylan.com/properties/2',
       id: '2',
+      value: 'on'
+    }, {
+      uri: 'http://api.lelylan.com/properties/3',
+      id: '3',
       value: 'cool'
     }]
   }, {
@@ -110,8 +129,8 @@ var ThermostatType = {
     id: '3',
     name: 'Set Temperature',
     properties: [{
-      uri: 'http://api.lelylan.com/properties/3',
-      id: '3',
+      uri: 'http://api.lelylan.com/properties/4',
+      id: '4',
       value: null
     }]
   }, {
@@ -119,14 +138,14 @@ var ThermostatType = {
     id: '4',
     name: 'Set Speed',
     properties: [{
-      uri: 'http://api.lelylan.com/properties/4',
-      id: '4',
+      uri: 'http://api.lelylan.com/properties/5',
+      id: '5',
       value: null
     }]
   }, {
     uri: 'http://api.lelylan.com/functions/5',
     id: '5',
-    name: 'Pause',
+    name: 'Activate',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -134,21 +153,34 @@ var ThermostatType = {
     }, {
       uri: 'http://api.lelylan.com/properties/2',
       id: '2',
-      value: 'pause'
+      value: 'on'
     }]
   }, {
     uri: 'http://api.lelylan.com/functions/6',
     id: '6',
-    name: 'Turn On',
+    name: 'Deactivate',
+    properties: [{
+      uri: 'http://api.lelylan.com/properties/1',
+      id: '1',
+      value: 'on'
+    }, {
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
+      value: 'off'
+    }]
+  }, {
+    uri: 'http://api.lelylan.com/functions/7',
+    id: '7',
+    name: 'Power On',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
       value: 'on'
     }]
   }, {
-    uri: 'http://api.lelylan.com/functions/7',
-    id: '7',
-    name: 'Turn Off',
+    uri: 'http://api.lelylan.com/functions/8',
+    id: '8',
+    name: 'Power Off',
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
       id: '1',
@@ -158,22 +190,22 @@ var ThermostatType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The thermostat is on',
-    function: { uri: 'http://api.lelylan.com/functions/7', id: '7' },
+    name: 'The thermostat is active',
+    function: { uri: 'http://api.lelylan.com/functions/6', id: '6' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['on'],
       pending: null,
     }]
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The thermostat is off',
-    function: { uri: 'http://api.lelylan.com/functions/6', id: '6' },
+    name: 'The thermostat is paused',
+    function: { uri: 'http://api.lelylan.com/functions/5', id: '5' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['off'],
       pending: null,
     }]
