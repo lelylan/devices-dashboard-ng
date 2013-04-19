@@ -14,7 +14,7 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
 
   /* Device List */
 
-  var devices = [light, lock, thermostat];
+  var devices = [light, lock, thermostat, alarmClock];
 
   // Light
   $httpBackend.whenDELETE('http://api.lelylan.com/devices/1').respond(light);
@@ -31,6 +31,10 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
   $httpBackend.whenGET('http://api.lelylan.com/devices/3').respond(thermostat);
   $httpBackend.whenGET('http://api.lelylan.com/types/3').respond(ThermostatType);
 
+  // Alarm Clock
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/4').respond(alarmClock);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/4').respond(alarmClock);
+  $httpBackend.whenGET('http://api.lelylan.com/types/4').respond(alarmClockType);
 
   // Devices request
   $httpBackend.whenGET('http://api.lelylan.com/devices?per=100')
@@ -53,6 +57,7 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
     if(data.id == '1') resource = light;
     if(data.id == '2') resource = lock;
     if(data.id == '3') resource = thermostat;
+    if(data.id == '4') resource = alarmClock;
 
     resource.updated_at = new Date();
     _.each(data.properties, function(property) {
