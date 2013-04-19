@@ -22,7 +22,8 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
     camera,
     alarm,
     meter,
-    rollingShutter
+    rollingShutter,
+    sprinkler
   ];
 
   // Light
@@ -65,6 +66,11 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
   $httpBackend.whenGET('http://api.lelylan.com/devices/8').respond(rollingShutter);
   $httpBackend.whenGET('http://api.lelylan.com/types/8').respond(rollingShutterType);
 
+  // Sprinkler system
+  $httpBackend.whenDELETE('http://api.lelylan.com/devices/9').respond(sprinkler);
+  $httpBackend.whenGET('http://api.lelylan.com/devices/9').respond(sprinkler);
+  $httpBackend.whenGET('http://api.lelylan.com/types/9').respond(sprinklerType);
+
   // Devices request
   $httpBackend.whenGET('http://api.lelylan.com/devices?per=100')
     .respond(function(method, url, data, headers){ return [200, updateDevices(), {}]; });
@@ -90,6 +96,7 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
     if(data.id == '6') resource = alarm;
     if(data.id == '7') resource = meter;
     if(data.id == '8') resource = rollingShutter;
+    if(data.id == '9') resource = sprinkler;
 
     resource.updated_at = new Date();
     _.each(data.properties, function(property) {
