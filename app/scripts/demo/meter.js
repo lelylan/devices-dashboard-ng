@@ -4,6 +4,7 @@ var meter = {
   uri: 'http://api.lelylan.com/devices/7',
   id: '7',
   name: 'Connected Meter',
+  categories: ['meters'],
   type: { uri: 'http://api.lelylan.com/types/7', id: '7' },
   physical: { uri: 'http://arduino.house.com/7' },
   pending: false,

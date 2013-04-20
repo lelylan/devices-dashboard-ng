@@ -5,6 +5,7 @@ var camera = {
   id: '5',
   name: 'Connected IP Camera',
   type: { uri: 'http://api.lelylan.com/types/5', id: '5' },
+  categories: ['cameras'],
   physical: { uri: 'http://arduino.house.com/5' },
   pending: false,
   properties: [{
@@ -99,7 +100,7 @@ var cameraType = {
     id: '6',
     name: 'Led',
     default: 'off',
-    suggested: {'on': 'Light On', 'off': 'Light Off'},
+    suggested: {'on': 'Led On', 'off': 'Led Off'},
     type: 'text'
   }, {
     uri: 'http://api.lelylan.com/properties/7',

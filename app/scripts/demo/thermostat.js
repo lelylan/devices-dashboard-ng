@@ -4,6 +4,7 @@ var thermostat = {
   uri: 'http://api.lelylan.com/devices/3',
   id: '3',
   name: 'Connected Thermostat',
+  categories: ['thermostats'],
   type: { uri: 'http://api.lelylan.com/types/3', id: '3' },
   physical: { uri: 'http://arduino.house.com/3' },
   pending: false,

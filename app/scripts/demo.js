@@ -6,5 +6,6 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/home', { templateUrl: '/partials/home-demo.html', controller: DashboardCtrl }).
     when('/all', { templateUrl: '/partials/devices.html', controller: DevicesCtrl }).
+    when('/categories/:category', { templateUrl: '/partials/devices.html', controller: CategoryCtrl }).
     otherwise({redirectTo: '/all'});
 }]);

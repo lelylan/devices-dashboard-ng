@@ -4,6 +4,7 @@ var sprinkler = {
   uri: 'http://api.lelylan.com/devices/9',
   id: '9',
   name: 'Connected Sprinkler System',
+  categories: ['gardenings'],
   type: { uri: 'http://api.lelylan.com/types/9', id: '9' },
   physical: { uri: 'http://arduino.house.com/9' },
   pending: false,

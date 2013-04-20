@@ -79,7 +79,7 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
 
 
   // Devices request
-  $httpBackend.whenGET('http://api.lelylan.com/devices?per=100')
+  $httpBackend.whenGET('http://api.lelylan.com/devices?per=250')
     .respond(function(method, url, data, headers){ return [200, updateDevices(), {}]; });
 
   var updateDevices = function() {
@@ -113,6 +113,20 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
     });
     return resource;
   }
+
+  /* Categories */
+
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=lights&per=250').respond([light]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=locks&per=250').respond([lock]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=thermostats&per=250').respond([thermostat]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=alarms&per=250').respond([alarm]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=meters&per=250').respond([meter]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=cameras&per=250').respond([camera]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=windows&per=250').respond([shutter]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=appliances&per=250').respond([kettle]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=gardenings&per=250').respond([sprinkler]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=sensors&per=250').respond([]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=others&per=250').respond([clock]);
 
   /* Pass through */
 

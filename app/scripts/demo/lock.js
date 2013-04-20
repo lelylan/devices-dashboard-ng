@@ -4,6 +4,7 @@ var lock = {
   uri: 'http://api.lelylan.com/devices/2',
   id: '2',
   name: 'Connected Lock',
+  categories: ['locks'],
   type: { uri: 'http://api.lelylan.com/types/2', id: '2' },
   physical: { uri: 'http://arduino.house.com/2' },
   pending: false,

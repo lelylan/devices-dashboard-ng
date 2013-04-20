@@ -5,6 +5,7 @@ var clock = {
   id: '4',
   name: 'Connected Alarm Clock',
   type: { uri: 'http://api.lelylan.com/types/4', id: '4' },
+  categories: ['others'],
   physical: { uri: 'http://arduino.house.com/4' },
   pending: false,
   properties: [{

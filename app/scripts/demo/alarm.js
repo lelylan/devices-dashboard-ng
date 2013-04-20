@@ -5,6 +5,7 @@ var alarm = {
   id: '6',
   name: 'Connected Alarm System',
   type: { uri: 'http://api.lelylan.com/types/6', id: '6' },
+  categories: ['alarms'],
   physical: { uri: 'http://arduino.house.com/6' },
   pending: false,
   properties: [{

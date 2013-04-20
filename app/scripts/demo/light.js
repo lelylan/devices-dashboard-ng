@@ -5,6 +5,7 @@ var light = {
   id: '1',
   name: 'Connected Light',
   type: { uri: 'http://api.lelylan.com/types/1', id: '1' },
+  categories: ['lights'],
   physical: { uri: 'http://arduino.house.com/1' },
   pending: false,
   properties: [{

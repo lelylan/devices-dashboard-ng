@@ -2,9 +2,10 @@
 
 function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) {
   $scope.authorized = (!!AccessToken.get().access_token);
+
   if ($scope.authorized) {
     $rootScope.active = 'all';
-    $scope.devices = Device.query({ per: 100 }, function() {
+    $scope.devices = Device.query({ per: 250 }, function() {
       if ($scope.devices.length > 0) { $scope.selected = $scope.devices[0] }
     });
   };

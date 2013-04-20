@@ -4,6 +4,7 @@ var shutter = {
   uri: 'http://api.lelylan.com/devices/8',
   id: '8',
   name: 'Connected Rolling Shutter',
+  categories: ['windows'],
   type: { uri: 'http://api.lelylan.com/types/8', id: '8' },
   physical: { uri: 'http://arduino.house.com/8' },
   pending: false,

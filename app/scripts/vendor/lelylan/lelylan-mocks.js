@@ -7,7 +7,7 @@ test.run(function($httpBackend, LoggedUser) {
   /* Dashboard */
 
   $httpBackend.whenGET('http://api.lelylan.com/me').respond({ id: 1, email: 'alice@example.com' });
-  $httpBackend.whenGET('http://api.lelylan.com/devices?per=100').respond([device, device2, device3, device4]);
+  $httpBackend.whenGET('http://api.lelylan.com/devices?per=250').respond([device, device2, device3, device4]);
 
   /* Types */
 

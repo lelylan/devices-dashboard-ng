@@ -4,6 +4,7 @@ var kettle = {
   uri: 'http://api.lelylan.com/devices/10',
   id: '10',
   name: 'Connected Kettle',
+  categories: ['appliances'],
   type: { uri: 'http://api.lelylan.com/types/10', id: '10' },
   physical: { uri: 'http://arduino.house.com/10' },
   pending: false,
