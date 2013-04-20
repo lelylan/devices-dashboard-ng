@@ -50,7 +50,8 @@ device4.name = 'Kitchen Light'
 var type = {
   uri: 'http://api.lelylan.com/types/1',
   id: '1',
-  name: 'Basic Light',
+  name: 'Light',
+  description: '',
   created_at: '2012-09-01T15:01:22Z',
   updated_at: '2012-09-01T15:01:22Z',
   properties: [{
@@ -165,3 +166,7 @@ var type = {
     }]
   }]
 };
+
+var type2  = angular.copy(type);
+type2.id   = 2;
+type2.name = 'Lock';

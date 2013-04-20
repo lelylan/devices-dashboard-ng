@@ -1,10 +1,11 @@
 'use strict';
 
 // TODO set the correct authorization check and set the oauth2 on testing
-function CreateCtrl(Device, AccessToken, $scope, $rootScope, $location) {
+function CreateCtrl(NewDevice, Device, AccessToken, $scope, $rootScope, $location) {
   $rootScope.active = 'create';
+  $scope.select = false;
   $scope.authorized = (!!AccessToken.get().access_token);
-  $scope.device = new Device();
+  $scope.device = NewDevice.get();
 
   $scope.create = function() {
     $scope.device.$save(function() {
@@ -13,12 +14,10 @@ function CreateCtrl(Device, AccessToken, $scope, $rootScope, $location) {
     });
   };
 
-  $scope.$watch('device.type.id', function(value, old) {
-    if (value) {
-      $scope.device.type.id = '';
-      $scope.select = true
-    }
-  });
+  $scope.reset = function() {
+    $scope.device = null;
+    NewDevice.reset();
+  }
 };
 
-CreateCtrl.$inject = ['Device', 'AccessToken', '$scope', '$rootScope', '$location'];
+CreateCtrl.$inject = ['NewDevice', 'Device', 'AccessToken', '$scope', '$rootScope', '$location'];

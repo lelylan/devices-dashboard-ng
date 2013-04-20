@@ -199,6 +199,28 @@ body {
     @include buttonBackground($lelylanColor, $lelylanColor);
   }
 
+  /* Types list */
+
+  .types-view .types-list table th,
+  .types-view .types-list table td {
+    line-height: 26px;
+    font-weight: 200;
+  }
+
+  .types-view .types-list table th {
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 40px;
+  }
+
+  .types-view .types-list td.type-name {
+    font-size: 16px;
+  }
+
+  .types-view .types-list td.actions a {
+    margin-left: 15px;
+  }
+
 
   /* Prsesentation pages (general) */
 
@@ -348,3 +370,4 @@ body {
 
 
 @import "device_component.min";
+@import "type_component.min";

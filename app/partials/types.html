@@ -1,0 +1,49 @@
+<div class="types-view">
+  <div class="search">
+    <input class="search-query" type="text" ng-model="query" placeholder="Seach types (e.g light, lock)">
+  </div>
+
+  <hr class="search-divider"/>
+
+  <div class="types types-list" ng-show="authorized && types.length!=0">
+    <div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type Name</th>
+            <th>Creation Time</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="type type-{{type.id}}" ng-class="{active: type.id == selected.id}" ng-repeat="type in types | filter:query">
+            <td class="type-id">{{ type.id }}</td>
+            <td class="type-name"><a href="#" ng-click="select(type)">{{ type.name }}</a></td>
+            <td class="type-created-at">{{ type.created_at | date: 'longDate' }}</td>
+            <td class="actions">
+              <a href="#" ng-click="select(type)"><i class="icon-ok-circle"></i> Select</a>
+              <a href="#" ng-click="details(type)"><i class="icon-circle-arrow-right"></i> Details</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <!--<lelylan-type type-id="type.id"></lelylan-type>-->
+    </div>
+  </div>
+
+  <!-- Authorization needed -->
+  <div class="authorization alert alert-block" ng-show="!authorized">
+    <p class="lead">To see your types you first need to <strong>Sign In</strong>.</p>
+  </div>
+
+  <!-- No types found -->
+  <div class="empty alert alert-block" ng-show="authorized && types.length==0">
+    <p class="lead">
+    No types were found. <a href="//t.lelylan.com/">Learn how to</a> create a type.
+    </p>
+  </div>
+</div>

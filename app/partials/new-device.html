@@ -21,6 +21,7 @@
             </a>
           </div>
         </div>
+        <small class="help-inline muted">Move the mouse over the input field to select one</small>
       </div>
       <div class="device-physical control-group" ng-class="{error: form.physical.$invalid}">
         <div class="input-prepend">
@@ -31,6 +32,7 @@
         <small class="help-inline" ng-show="form.physical.$error.url">Not a URL</small>
       </div>
       <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid"><i class="icon-white icon-pencil"></i> Create</button>
+      <button class="reset btn" ng-click="reset()" ng-disabled="!device.name && !device.type && !device.physical"><i class="icon-repeat"></i> Clear</button>
     </form>
   </div>
 
