@@ -170,6 +170,16 @@ body {
     height: 122px;
   }
 
+  .new-view .control-group.error .input-prepend .add-on,
+  .new-view .control-group.error .input-append .add-on {
+    background-color: #eeeeee;
+    border: 1px solid #cccccc;
+  }
+
+  .new-view .control-group.error input {
+    border: 1px solid #cccccc;
+  }
+
   .btn-lelylan {
     @include buttonBackground($lelylanColor, $lelylanColor);
   }

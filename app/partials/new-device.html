@@ -10,22 +10,20 @@
           <span class="add-on">Name</span>
           <input class="input-xxlarge" type="text" name="name" ng-model="device.name" placeholder="Device name (required)" required><br/>
         </div>
-        <small class="help-inline muted">Device name</small>
       </div>
       <div class="device-type control-group" ng-class="{error: form.type.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Type ID</span>
           <input class="input-xxlarge" type="text" name="type" ng-model="device.type.id" placeholder="Type ID (required)" required><br/>
         </div>
-        <small class="help-inline muted">Serach the desired type on <a href="#">Lelylan Types</a></small>
       </div>
       <div class="device-physical control-group" ng-class="{error: form.physical.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Physical</span>
           <input class="input-xxlarge" type="url" name="physical" ng-model="device.physical.uri" placeholder="Physical Device URI (optional)"><br/>
         </div>
+        <small class="help-inline muted">Connect the physical device URI you want to control or <a href="http//dev.lelylan.com/api/physicals">learn how to create one</a></small>
         <small class="help-inline" ng-show="form.physical.$error.url">Not a URL</small>
-        <small class="help-inline muted">Connect the physical device URI you want to control. <a href="#">Learn more about</a></small>
       </div>
       <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid"><i class="icon-white icon-pencil"></i> Create</button>
     </form>
