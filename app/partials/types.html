@@ -3,7 +3,7 @@
     <input class="search-query" type="text" ng-model="query" placeholder="Seach types (e.g light, lock)">
   </div>
 
-  <ul class="nav nav-pills">
+  <ul class="nav nav-pills nav-type-menu">
     <li class="pull-right"><a href="#" class="back" ng-click="back();"><span class="icon-chevron-left"></span> Back</a></li>
     <li><a href="#" class="populars" ng-class="{active: typesMenu=='populars'}" ng-click="getPopular()"><span class="icon-star"></span> Popular</a></li>
     <li><a href="#" class="yours" ng-class="{active: typesMenu=='yours'}" ng-click="getYours()"><span class="icon-user"></span> Yours</a></li>
@@ -29,13 +29,11 @@
             <td class="type-name"><a href="#" ng-click="select(type)">{{ type.name }}</a></td>
             <td class="type-created-at">{{ type.created_at | date: 'longDate' }}</td>
             <td class="actions">
-              <a href="#" ng-click="details(type)"><i class="icon-circle-arrow-right"></i> Details</a>
+              <a href="/types/{{type.id}}"><i class="icon-circle-arrow-right"></i> Details</a>
             </td>
           </tr>
         </tbody>
       </table>
-
-      <!--<lelylan-type type-id="type.id"></lelylan-type>-->
     </div>
   </div>
 

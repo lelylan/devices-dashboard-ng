@@ -8,7 +8,8 @@
       <div class="device-type control-group" ng-class="{error: form.type.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Type</span>
-          <input class="input-xxlarge" type="text" name="type" ng-model="device.type.id" placeholder="Type" required  ng-show="!select" ng-mouseenter="select=true"><br/>
+          <input class="input-xxlarge" type="hidden" name="type" ng-model="device.type.id" placeholder="Type ID" required ng-show="!select" ng-mouseenter="select=true">
+          <input class="input-xxlarge" type="text" name="type" ng-model="device.type.name" placeholder="Type Name" required ng-show="!select" ng-mouseenter="select=true"><br/>
           <div class="type-select" ng-show="select" ng-mouseleave="toggle();">
             <a href="/types">
               <img src="/images/select-type.png">

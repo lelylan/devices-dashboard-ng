@@ -235,7 +235,7 @@ body {
     margin-bottom: 0;
   }
 
-  .types-view .nav-pills {
+  .types-view .nav-type-menu {
     margin-top: 20px;
     border: 1px solid #e8e8e8;
     border-left: none;
@@ -244,13 +244,14 @@ body {
     padding-left: 10px;
   }
 
-  .types-view .nav-pills > li > a {
+  .types-view .nav-type-menu > li > a {
+    background-color: transparent;
+    font-weight: 200;
     padding-right: 24px;
     padding-left: 0;
-    background-color: transparent;
   }
 
-  .types-view .nav-pills > li > a.active {
+  .types-view .nav-type-menu > li > a.active {
     color: $linkColorHover;
   }
 
@@ -361,20 +362,24 @@ body {
   }
 }
 
+@import "device_component.min";
+@import "type_component.min";
+
+
 /* Device component overriding */
 
 .devices .device-component {
-  margin: 0 !important;
+  margin: 0;
 }
 
 .devices .detail .device-component hr,
 .devices .preview .device-component {
-  border-top: none !important;
-  border-color: $lineColor !important;
+  border-top: none;
+  border-color: $lineColor;
 }
 
 .devices .preview .device-component {
-  height: 55px !important;
+  height: 59px;
 }
 
 .devices .preview .device-component .dc-main {
@@ -386,7 +391,7 @@ body {
 }
 
 .devices .preview .active .device-component {
-  border-right: none !important
+  border-right: none
 }
 
 .devices .preview .active .device-component .dc-main {
@@ -394,13 +399,19 @@ body {
 }
 
 .devices .detail .device-component {
-  border: none !important;
-  margin-left: 15px !important;
+  border: none;
+  margin-left: 10px;
 }
 
 .devices .detail .device-component hr{
 }
 
+/* Type component overriding */
 
-@import "device_component.min";
-@import "type_component.min";
+.type-component .tc-header {
+  padding-top: 0;
+}
+
+.type-component .tc-description .lead {
+  margin-top: 20px;
+}

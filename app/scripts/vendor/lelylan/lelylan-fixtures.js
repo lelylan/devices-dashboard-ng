@@ -47,26 +47,30 @@ var device4 = angular.copy(device)
 device4.id = 4
 device4.name = 'Kitchen Light'
 
+
 var type = {
   uri: 'http://api.lelylan.com/types/1',
   id: '1',
-  name: 'Light',
-  description: '',
+  name: 'Basic Light',
+  description: 'The **Basic Light** type represents the most basic light structure.',
+  categories: ['lights'],
   created_at: '2012-09-01T15:01:22Z',
   updated_at: '2012-09-01T15:01:22Z',
+  owner_id: 1,
+  creator_id: 1,
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
     name: 'Status',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
-    type: 'text'
+    type: 'string'
   }, {
     uri: 'http://api.lelylan.com/properties/2',
     id: '2',
     name: 'Intensity',
     default: '0',
-    suggested: {},
+    suggested: null,
     type: 'range',
     range: { min: 0, max: 100, step: 1 }
   }, {
@@ -74,21 +78,21 @@ var type = {
     id: '3',
     name: 'Color',
     default: '#654321',
-    suggested: {},
+    suggested: null,
     type: 'color'
   }, {
     uri: 'http://api.lelylan.com/properties/4',
     id: '4',
     name: 'Blinking times',
     default: '0',
-    suggested: {},
+    suggested: null,
     type: 'number'
   }, {
     uri: 'http://api.lelylan.com/properties/5',
     id: '5',
     name: 'Blinking frequency',
     default: '1.0',
-    suggested: {},
+    suggested: null,
     type: 'range',
     range: { min: 0, max: 10, step: 0.1 }
   }],

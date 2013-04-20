@@ -21,12 +21,8 @@ function TypesCtrl(NewDevice, AccessToken, Type, $scope, $rootScope, $http, $loc
   };
 
   $scope.select = function(type) {
-    NewDevice.set({ type: { id: type.id }});
+    NewDevice.set({ type: { id: type.id, name: type.name }});
     $location.path('/new');
-  };
-
-  $scope.details = function(type) {
-    $location.path('/types/' + type.id);
   };
 
   $scope.back = function() {
