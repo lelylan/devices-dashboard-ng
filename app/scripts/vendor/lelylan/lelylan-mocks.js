@@ -33,6 +33,11 @@ test.run(function($httpBackend, LoggedUser) {
     return resource;
   }
 
+  /* Categories */
+
+  $httpBackend.whenGET('http://api.lelylan.com/devices?category=lights&per=250').respond([device, device2, device3, device4]);
+  $httpBackend.whenGET(/http:\/\/api.lelylan.com\/devices?category=/).respond([]);
+
   /* Pass through */
 
   $httpBackend.whenGET(/partials/).passThrough();
