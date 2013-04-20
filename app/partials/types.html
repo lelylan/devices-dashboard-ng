@@ -1,39 +1,57 @@
 <div class="types-view">
   <div class="search">
-    <input class="search-query" type="text" ng-model="query" placeholder="Seach types (e.g light, lock)">
+    <input class="search-query" type="text" ng-model="query" placeholder="Seach types (e.g light, lock)" ng-disabled="typesMenu=='all'">
   </div>
 
+  <!-- type list menu -->
   <ul class="nav nav-pills nav-type-menu">
     <li class="pull-right"><a href="#" class="back" ng-click="back();"><span class="icon-chevron-left"></span> Back</a></li>
     <li><a href="#" class="populars" ng-class="{active: typesMenu=='populars'}" ng-click="getPopular()"><span class="icon-star"></span> Popular</a></li>
     <li><a href="#" class="yours" ng-class="{active: typesMenu=='yours'}" ng-click="getYours()"><span class="icon-user"></span> Yours</a></li>
-    <li><a href="#" class="all" ng-class="{active: all}" ng-click="all()"><span class="icon-list"></span> All</a></li>
+    <li><a href="#" class="all" ng-class="{active: typesMenu=='all'}" ng-click="getAll()"><span class="icon-list"></span> All</a></li>
   </ul>
 
+  <!-- types list-->
+  <div class="types types-list" ng-show="authorized && types.length!=0 && typesMenu!='all'">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type Name</th>
+          <th>Creation Time</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="type type-{{type.id}}" ng-click="select(type)" ng-class="{active: type.id == selected.id}" ng-repeat="type in types | filter:query">
+          <td class="type-id">{{ type.id }}</td>
+          <td class="type-name"><a href="#" ng-click="select(type)">{{ type.name }}</a></td>
+          <td class="type-created-at">{{ type.created_at | date: 'longDate' }}</td>
+          <td class="actions">
+            <a href="/types/{{type.id}}?name={{type.name}}"><i class="icon-circle-arrow-right"></i> Details</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <div class="types types-list" ng-show="authorized && types.length!=0">
-    <div>
-
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Type Name</th>
-            <th>Creation Time</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="type type-{{type.id}}" ng-click="select(type)" ng-class="{active: type.id == selected.id}" ng-repeat="type in types | filter:query">
-            <td class="type-id">{{ type.id }}</td>
-            <td class="type-name"><a href="#" ng-click="select(type)">{{ type.name }}</a></td>
-            <td class="type-created-at">{{ type.created_at | date: 'longDate' }}</td>
-            <td class="actions">
-              <a href="/types/{{type.id}}?name={{type.name}}"><i class="icon-circle-arrow-right"></i> Details</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- types through id-->
+  <div class="types types-all" ng-show="authorized && types.length!=0 && typesMenu=='all'">
+    <div class="type-id">
+      <form class="compact" name="form">
+        <div class="device-name control-group" ng-class="{error: form.id.$invalid}">
+          <div class="input-prepend">
+            <span class="add-on">Type ID</span>
+            <input class="xx-large" type="text" name="id" ng-model="id" placeholder="5042344b95fc441000000001" required minlength="24" maxlength="24">
+            <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid">Select</button>
+          </div>
+        </div>
+          <small class="help-inline muted">
+            ID {{form.id.$invalid}} Form {{form.$invalid}}
+            You didn't find the desired type? Search on <a href="//t.lelylan.com/">Lelylan Types</a> and
+            place here the desired Type ID.
+          </small>
+      </form>
     </div>
   </div>
 

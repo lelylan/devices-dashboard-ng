@@ -20,6 +20,10 @@ function TypesCtrl(NewDevice, AccessToken, Type, $scope, $rootScope, $http, $loc
     }
   };
 
+  $scope.getAll = function() {
+    $rootScope.typesMenu = 'all'
+  };
+
   $scope.select = function(type) {
     NewDevice.set({ type: { id: type.id, name: type.name }});
     $location.path('/new');

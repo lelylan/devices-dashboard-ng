@@ -144,7 +144,6 @@ body {
 
   .new-view .control-group {
     padding: 3px 0;
-    margin-top: 15px !important;
   }
 
   .new-view .control-group .muted {
@@ -156,20 +155,23 @@ body {
     padding-left: 0;
   }
 
+  .types-view input,
   .new-view input {
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 200;
-    line-height: 32px;
+    line-height: 36px;
     margin-bottom: 0;
     height: 40px;
     padding-left: 13px;
   }
 
+  .types-view .add-on,
   .new-view .add-on {
-    font-size: 18px;
+    font-size: 24px;
     height: 30px;
     padding-top: 14px;
-    width: 100px;
+    width: 120px;
+    color: #666;
   }
 
   .new-view .device-description .add-on {
@@ -180,12 +182,19 @@ body {
     padding-left: 5px;
   }
 
+  .new-view .control-group.error .help-inline {
+    color: rgba(221,44,41,0.6);
+  }
+
+  .types-view .control-group.error .input-prepend .add-on,
   .new-view .control-group.error .input-prepend .add-on,
   .new-view .control-group.error .input-append .add-on {
+    color: #666;
     background-color: #eeeeee;
     border: 1px solid #cccccc;
   }
 
+  .types-view .control-group.error input,
   .new-view .control-group.error input {
     border: 1px solid #cccccc;
   }
@@ -198,7 +207,7 @@ body {
     border: 1px solid #cccccc;
     color: #333;
     height: 48px;
-    left: 110px;
+    left: 130px;
     position: absolute;
     width: 549px;
     top: 3px;
@@ -240,7 +249,7 @@ body {
     border: 1px solid #e8e8e8;
     border-left: none;
     border-right: none;
-    background-color: #f4f4f4;
+    //background-color: #f4f4f4;
     padding-left: 10px;
   }
 
@@ -253,6 +262,23 @@ body {
 
   .types-view .nav-type-menu > li > a.active {
     color: $linkColorHover;
+  }
+
+  .types-view .types-all {
+    margin-top: 30px;
+  }
+
+  .types-view .types-all .type-id input {
+    width: 333px;
+  }
+
+  .types-view .types-all .type-id button {
+    width: 115px;
+    height: 50px;
+    font-size: 26px;
+    line-height:40px;
+    margin-top: 0px;
+    margin-left: 15px;
   }
 
 
