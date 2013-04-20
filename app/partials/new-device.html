@@ -9,29 +9,29 @@
         <div class="input-prepend">
           <span class="add-on">Type</span>
           <input class="input-xxlarge" type="hidden" name="type" ng-model="device.type.id" placeholder="Type ID" required ng-show="!select" ng-mouseenter="select=true">
-          <input class="input-xxlarge" type="text" name="type" ng-model="device.type.name" placeholder="Type Name" required ng-show="!select" ng-mouseenter="select=true"><br/>
+          <input class="input-xxlarge" type="text" ng-model="device.type.name" placeholder="Type Name" required ng-show="!select" ng-mouseenter="select=true">
           <div class="type-select" ng-show="select" ng-mouseleave="toggle();">
             <a href="/types">
               <img src="/images/select-type.png">
             </a>
           </div>
         </div>
-        <small class="help-inline" ng-show="form.type.$error.required">Type is required</small>
+        <small class="help-inline validation" ng-show="form.type.$error.required">Type is required</small>
       </div>
       <div class="device-name control-group" ng-class="{error: form.name.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Name</span>
-          <input class="input-xxlarge" type="text" name="name" ng-model="device.name" placeholder="Name" required><br/>
+          <input class="input-xxlarge" type="text" name="name" ng-model="device.name" placeholder="Name" required>
         </div>
-        <small class="help-inline" ng-show="form.name.$error.required">Name is required</small>
+        <small class="help-inline validation" ng-show="form.name.$error.required">Name is required</small>
       </div>
       <div class="device-physical control-group" ng-class="{error: form.physical.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Physical</span>
-          <input class="input-xxlarge" type="url" name="physical" ng-model="device.physical.uri" placeholder="Physical Device URI (optional)"><br/>
+          <input class="input-xxlarge" type="url" name="physical" ng-model="device.physical.uri" placeholder="Physical Device URI (optional)">
         </div>
-        <small class="help-inline" ng-show="form.physical.$error.url">Not a URL</small>
-        <small class="help-inline muted">Connect the physical device URI you want to control or <a href="http//dev.lelylan.com/api/physicals">learn how to create one</a>. Leave it empty to simulate a device.</small>
+        <small class="help-inline validation" ng-show="form.physical.$error.url">Not a URL</small>
+        <small class="help-inline muted">Connect the physical device URI to control or <a href="http//dev.lelylan.com/api/physicals">learn how to create one</a> (leave it empty to simulate the device).</small>
       </div>
       <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid"><i class="icon-white icon-pencil"></i> Create</button>
       <button class="reset btn" ng-click="reset()" ng-disabled="!device.name && !device.type && !device.physical"><i class="icon-repeat"></i> Clear</button>
