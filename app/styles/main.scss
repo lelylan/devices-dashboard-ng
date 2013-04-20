@@ -139,7 +139,7 @@ body {
   }
 
   .new-view hr {
-    margin: 25px 0;
+    margin: 20px 0;
   }
 
   .new-view .control-group {
@@ -208,11 +208,12 @@ body {
     @include buttonBackground($lelylanColor, $lelylanColor);
   }
 
+
   /* Types list */
 
   .types-view .types-list table th,
   .types-view .types-list table td {
-    line-height: 26px;
+    line-height: 16px;
     font-weight: 200;
   }
 
@@ -222,12 +223,35 @@ body {
     line-height: 40px;
   }
 
-  .types-view .types-list td.type-name {
-    font-size: 16px;
+  .types-view .types-list table td{
+    cursor: pointer;
   }
 
   .types-view .types-list td.actions a {
     margin-left: 15px;
+  }
+
+  .types-view hr {
+    margin-bottom: 0;
+  }
+
+  .types-view .nav-pills {
+    margin-top: 20px;
+    border: 1px solid #e8e8e8;
+    border-left: none;
+    border-right: none;
+    background-color: #f4f4f4;
+    padding-left: 10px;
+  }
+
+  .types-view .nav-pills > li > a {
+    padding-right: 24px;
+    padding-left: 0;
+    background-color: transparent;
+  }
+
+  .types-view .nav-pills > li > a.active {
+    color: $linkColorHover;
   }
 
 

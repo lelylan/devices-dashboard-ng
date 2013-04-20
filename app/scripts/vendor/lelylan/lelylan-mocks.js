@@ -12,7 +12,7 @@ test.run(function($httpBackend, LoggedUser) {
   /* Types */
 
   $httpBackend.whenGET('http://api.lelylan.com/types/popular?per=250').respond([type, type2]);
-  $httpBackend.whenGET('http://api.lelylan.com/types/types?per=250').respond([type, type2]);
+  $httpBackend.whenGET('http://api.lelylan.com/types?per=250').respond([type]);
   $httpBackend.whenGET('http://api.lelylan.com/types/1').respond(type);
   $httpBackend.whenGET('http://api.lelylan.com/types/2').respond(type2);
 

@@ -23,6 +23,10 @@ function CreateCtrl(NewDevice, Device, AccessToken, $scope, $rootScope, $locatio
     $scope.device = null;
     NewDevice.reset();
   }
+
+  $scope.toggle = function() {
+    if ($scope.device.type) { $scope.select = false }
+  };
 };
 
 CreateCtrl.$inject = ['NewDevice', 'Device', 'AccessToken', '$scope', '$rootScope', '$location'];

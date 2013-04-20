@@ -8,29 +8,26 @@
       <div class="device-type control-group" ng-class="{error: form.type.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Type</span>
-          <input class="input-xxlarge" type="text" name="type" ng-model="device.type.id" placeholder="Type ID (required)" required  ng-show="!select" ng-mouseenter="select=true"><br/>
-          <div class="type-select" ng-show="select" ng-mouseleave="select=false">
+          <input class="input-xxlarge" type="text" name="type" ng-model="device.type.id" placeholder="Type" required  ng-show="!select" ng-mouseenter="select=true"><br/>
+          <div class="type-select" ng-show="select" ng-mouseleave="toggle();">
             <a href="/types">
               <img src="/images/select-type.png">
             </a>
           </div>
         </div>
-        <small class="help-inline muted">Move the mouse over the input field to select one.</small>
       </div>
       <div class="device-name control-group" ng-class="{error: form.name.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Name</span>
-          <input class="input-xxlarge" type="text" name="name" ng-model="device.name" placeholder="Device name (required)" required><br/>
+          <input class="input-xxlarge" type="text" name="name" ng-model="device.name" placeholder="Name" required><br/>
         </div>
-        <small class="help-inline muted">Set a meaningful name for your device.</small>
       </div>
       <div class="device-physical control-group" ng-class="{error: form.physical.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Physical</span>
           <input class="input-xxlarge" type="url" name="physical" ng-model="device.physical.uri" placeholder="Physical Device URI (optional)"><br/>
         </div>
-        <small class="help-inline muted">Connect the physical device URI you want to control or <a href="http//dev.lelylan.com/api/physicals">learn how to create one</a>.</small>
-        <small class="help-inline muted">If left empty you will create a device that will simulate a real behaviour.</small>
+        <small class="help-inline muted">Connect the physical device URI you want to control or <a href="http//dev.lelylan.com/api/physicals">learn how to create one</a>. Leave it empty to simulate a device.</small>
         <small class="help-inline" ng-show="form.physical.$error.url">Not a URL</small>
       </div>
       <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid"><i class="icon-white icon-pencil"></i> Create</button>
