@@ -38,7 +38,7 @@
             </div>
             <div class="sidebar-nav">
               <ul class="nav nav-list">
-                <li ng-class="{active: active=='create'}"><a class="create" href="/new"><i class="icon-plus"></i> Create Device</a></li>
+                <li ng-class="{active: active=='create'}"><a class="create" href="/new" ng-click="NewDevice.reset()"><i class="icon-plus"></i> Create Device</a></li>
                 <li class="divider"></li>
                 <li class="nav-header">Devices</li>
                 <li ng-class="{active: active=='all'}"><a class="all" href="/all"><i class="icon-star"></i> All</a></li>

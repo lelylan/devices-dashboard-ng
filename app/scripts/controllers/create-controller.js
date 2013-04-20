@@ -11,8 +11,13 @@ function CreateCtrl(NewDevice, Device, AccessToken, $scope, $rootScope, $locatio
     $scope.device.$save(function() {
       $rootScope.active = 'all';
       $location.url('/all');
+      $scope.reset();
     });
   };
+
+  $scope.$watch('device.type.id', function(value, old) {
+    if (!value) { $scope.select = true }
+  });
 
   $scope.reset = function() {
     $scope.device = null;

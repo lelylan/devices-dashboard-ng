@@ -25,7 +25,7 @@ app.service( 'NewDevice', ['Device', function(Device) {
       angular.extend(device, _device);
       return device
     },
-    reset: function(_device) {
+    reset: function() {
       return device = null;
     }
   };

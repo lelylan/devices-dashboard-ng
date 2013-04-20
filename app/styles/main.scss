@@ -138,8 +138,13 @@ body {
     font-weight: 200;
   }
 
+  .new-view hr {
+    margin: 25px 0;
+  }
+
   .new-view .control-group {
     padding: 3px 0;
+    margin-top: 15px !important;
   }
 
   .new-view .control-group .muted {
@@ -169,6 +174,10 @@ body {
 
   .new-view .device-description .add-on {
     height: 122px;
+  }
+
+  .new-view .control-group .help-inline {
+    padding-left: 5px;
   }
 
   .new-view .control-group.error .input-prepend .add-on,
