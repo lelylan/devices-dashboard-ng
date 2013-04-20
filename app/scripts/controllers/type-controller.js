@@ -2,7 +2,7 @@
 
 function TypeCtrl(NewDevice, $scope, $routeParams, $location) {
   $scope.select = function(type) {
-    NewDevice.set({ type: { id: typeId, name: typeName }});
+    NewDevice.set({ type: { id: $scope.typeId, name: $location.search().name }});
     $location.path('/new');
   };
 

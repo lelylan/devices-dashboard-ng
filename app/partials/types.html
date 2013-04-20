@@ -29,7 +29,7 @@
             <td class="type-name"><a href="#" ng-click="select(type)">{{ type.name }}</a></td>
             <td class="type-created-at">{{ type.created_at | date: 'longDate' }}</td>
             <td class="actions">
-              <a href="/types/{{type.id}}"><i class="icon-circle-arrow-right"></i> Details</a>
+              <a href="/types/{{type.id}}?name={{type.name}}"><i class="icon-circle-arrow-right"></i> Details</a>
             </td>
           </tr>
         </tbody>
