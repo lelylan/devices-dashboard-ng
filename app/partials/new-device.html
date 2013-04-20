@@ -14,7 +14,12 @@
       <div class="device-type control-group" ng-class="{error: form.type.$invalid}">
         <div class="input-prepend">
           <span class="add-on">Type ID</span>
-          <input class="input-xxlarge" type="text" name="type" ng-model="device.type.id" placeholder="Type ID (required)" required><br/>
+          <input class="input-xxlarge" type="text" name="type" ng-model="device.type.id" placeholder="Type ID (required)" required  ng-show="!select" ng-mouseenter="select=true"><br/>
+          <div class="type-select" ng-show="select" ng-mouseleave="select=false">
+            <a href="/types">
+              <img src="/images/select-type.png">
+            </a>
+          </div>
         </div>
       </div>
       <div class="device-physical control-group" ng-class="{error: form.physical.$invalid}">

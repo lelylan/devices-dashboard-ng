@@ -181,6 +181,20 @@ body {
     border: 1px solid #cccccc;
   }
 
+  .new-view .device-type {
+    position: relative;
+  }
+
+  .new-view .type-select {
+    border: 1px solid #cccccc;
+    color: #333;
+    height: 48px;
+    left: 110px;
+    position: absolute;
+    width: 549px;
+    top: 3px;
+  }
+
   .btn-lelylan {
     @include buttonBackground($lelylanColor, $lelylanColor);
   }

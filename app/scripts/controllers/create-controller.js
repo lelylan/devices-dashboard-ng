@@ -12,6 +12,13 @@ function CreateCtrl(Device, AccessToken, $scope, $rootScope, $location) {
       $location.url('/all');
     });
   };
+
+  $scope.$watch('device.type.id', function(value, old) {
+    if (value) {
+      $scope.device.type.id = '';
+      $scope.select = true
+    }
+  });
 };
 
 CreateCtrl.$inject = ['Device', 'AccessToken', '$scope', '$rootScope', '$location'];
