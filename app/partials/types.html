@@ -43,13 +43,12 @@
           <div class="input-prepend">
             <span class="add-on">Type ID</span>
             <input class="xx-large" type="text" name="id" ng-model="id" placeholder="5042344b95fc441000000001" required minlength="24" maxlength="24">
-            <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid">Select</button>
+            <button class="create btn btn-lelylan" ng-click="load(form.id.$modelValue)" ng-disabled="form.$invalid">Select</button>
           </div>
         </div>
           <small class="help-inline muted">
-            ID {{form.id.$invalid}} Form {{form.$invalid}}
-            You didn't find the desired type? Search on <a href="//t.lelylan.com/">Lelylan Types</a> and
-            place here the desired Type ID.
+            <a href="//t.lelylan.com/">Search on Lelylan Types</a> and place here the desired
+            Type ID.
           </small>
       </form>
     </div>

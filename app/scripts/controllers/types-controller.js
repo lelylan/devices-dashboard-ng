@@ -29,6 +29,13 @@ function TypesCtrl(NewDevice, AccessToken, Type, $scope, $rootScope, $http, $loc
     $location.path('/new');
   };
 
+  $scope.load = function(id) {
+    $scope.type = Type.get({ id: id }, function() {
+      $scope.select($scope.type);
+      $location.path('/new');
+    });
+  };
+
   $scope.back = function() {
     $location.path('/new');
   };
