@@ -3,22 +3,22 @@
 var sprinkler = {
   uri: 'http://api.lelylan.com/devices/9',
   id: '9',
-  name: 'Connected Sprinkler System',
+  name: 'Sprinkler System',
   categories: ['gardenings'],
   type: { uri: 'http://api.lelylan.com/types/9', id: '9' },
   physical: { uri: 'http://arduino.house.com/9' },
   pending: false,
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
-    id: '1', value: 'off', expected: 'off', pending: false,
-    suggested: {'on': 'On', 'off': 'Off'}
+    id: '1', value: 'on', expected: 'on', pending: false,
+    suggested: {'on': 'Power On', 'off': 'Power Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/2',
-    id: '2', value: 'off', expected: 'off', pending: false,
+    id: '2', value: 'on', expected: 'on', pending: false,
     suggested: {}
   }, {
     uri: 'http://api.lelylan.com/properties/3',
-    id: '3', value: '50', expected: '', pending: false,
+    id: '3', value: '50', expected: '50', pending: false,
     suggested: {}
   }],
   creator_id: '1',
@@ -37,7 +37,7 @@ var sprinklerType = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Status',
+    name: 'Power',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
     type: 'text'
@@ -114,7 +114,7 @@ var sprinklerType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The sprinkler system is watering',
+    name: 'Watering',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',
@@ -125,7 +125,7 @@ var sprinklerType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The sprinkler system is not watering',
+    name: 'Idle',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',

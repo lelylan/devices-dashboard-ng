@@ -19,7 +19,7 @@
               <login class="nav pull-right" text="Sign In" client="devices-dashboard-id" redirect="redirect" scope="resources+privates"></login>
               <ul class="nav pull-right">
                 <li><a href="http://d.lelylan.com/demo">Play demo</a></li>
-                <li><a href="/learn">Learn more</a></li>
+                <li><a ng-class="{ active: active == 'learn' }" href="/learn">Learn more</a></li>
               </ul>
             </div>
           </div>
@@ -33,7 +33,7 @@
 
           <div class="span3">
             <div class="navbar clearfix">
-              <a class="brand home" href="/"><strong>Lelylan</strong> Dashboard</a>
+              <a class="brand home" href="/home"><strong>Lelylan</strong> Dashboard</a>
               <div id="lelylan-request-loading"></div>
             </div>
             <div class="sidebar-nav">

@@ -3,18 +3,22 @@
 var shutter = {
   uri: 'http://api.lelylan.com/devices/8',
   id: '8',
-  name: 'Connected Rolling Shutter',
+  name: 'Rolling Shutter',
   categories: ['windows'],
   type: { uri: 'http://api.lelylan.com/types/8', id: '8' },
   physical: { uri: 'http://arduino.house.com/8' },
   pending: false,
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
-    id: '1', value: 'halt', expected: 'halt', pending: false,
-    suggested: {'open': 'Open', 'close': 'Close', 'halt': 'Halt'}
+    id: '1', value: 'on', expected: 'on', pending: false,
+    suggested: {'on': 'Power On', 'off': 'Power Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/2',
-    id: '2', value: '0', expected: '0', pending: false,
+    id: '2', value: 'idle', expected: 'idle', pending: false,
+    suggested: {'open': 'Open', 'close': 'Close', 'idle': 'Idle'}
+  }, {
+    uri: 'http://api.lelylan.com/properties/3',
+    id: '3', value: '0', expected: '0', pending: false,
     suggested: {}
   }],
   creator_id: '1',
@@ -33,13 +37,20 @@ var shutterType = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Activity',
-    default: 'halt',
-    suggested: {'open': 'Opening', 'close': 'Closing', 'halt': 'Halt'},
+    name: 'Power',
+    default: 'idle',
+    suggested: {'on': 'On', 'off': 'Off'},
     type: 'text'
   }, {
     uri: 'http://api.lelylan.com/properties/2',
     id: '2',
+    name: 'Status',
+    default: 'idle',
+    suggested: {'open': 'Opening', 'close': 'Closing', 'idle': 'Idle'},
+    type: 'text'
+  }, {
+    uri: 'http://api.lelylan.com/properties/3',
+    id: '3',
     name: 'Aperture',
     default: '0',
     suggested: {},
@@ -51,8 +62,8 @@ var shutterType = {
     id: '1',
     name: 'Open',
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       value: 'open'
     }]
   }, {
@@ -60,18 +71,18 @@ var shutterType = {
     id: '2',
     name: 'Close',
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       value: 'close'
     }]
   }, {
     uri: 'http://api.lelylan.com/functions/3',
     id: '3',
-    name: 'Halt',
+    name: 'Idle',
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
-      value: 'halt'
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
+      value: 'idle'
     }]
   }, {
     uri: 'http://api.lelylan.com/functions/4',
@@ -95,34 +106,34 @@ var shutterType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The rolling shutter is opening',
+    name: 'Opening',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['open'],
       pending: null,
     }]
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The rolling shutter is closing',
+    name: 'Closing',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
       values: ['close'],
       pending: null,
     }]
   }, {
     uri: 'http://api.lelylan.com/statuses/3',
     id: '3',
-    name: 'The rolling shutter is halted',
+    name: 'Idle',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
-      uri: 'http://api.lelylan.com/properties/1',
-      id: '1',
-      values: ['halt'],
+      uri: 'http://api.lelylan.com/properties/2',
+      id: '2',
+      values: ['idle'],
       pending: null,
     }]
   }]

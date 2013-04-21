@@ -3,7 +3,7 @@
 var kettle = {
   uri: 'http://api.lelylan.com/devices/10',
   id: '10',
-  name: 'Connected Kettle',
+  name: 'Kettle',
   categories: ['appliances'],
   type: { uri: 'http://api.lelylan.com/types/10', id: '10' },
   physical: { uri: 'http://arduino.house.com/10' },
@@ -11,10 +11,10 @@ var kettle = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1', value: 'on', expected: 'on', pending: false,
-    suggested: {'on': 'On', 'off': 'Off'}
+    suggested: {'on': 'Power On', 'off': 'Power Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/2',
-    id: '2', value: 'off', expected: 'off', pending: false,
+    id: '2', value: 'on', expected: 'on', pending: false,
     suggested: {}
   }, {
     uri: 'http://api.lelylan.com/properties/3',
@@ -37,21 +37,21 @@ var kettleType = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Status',
+    name: 'Power',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
     type: 'text'
   }, {
     uri: 'http://api.lelylan.com/properties/2',
     id: '2',
-    name: 'Heating water',
+    name: 'Heating',
     default: 'off',
     suggested: {'on': 'Activated', 'off': 'Deactivated'},
     type: 'text'
   }, {
     uri: 'http://api.lelylan.com/properties/3',
     id: '3',
-    name: 'Water temperature',
+    name: 'Water Temperature',
     default: '18',
     suggested: {},
     type: 'range',
@@ -105,7 +105,7 @@ var kettleType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The kettle is heating water',
+    name: 'Heating water',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',
@@ -116,7 +116,7 @@ var kettleType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The kettle is not heating water',
+    name: 'Idle',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',

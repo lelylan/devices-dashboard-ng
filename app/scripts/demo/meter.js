@@ -3,7 +3,7 @@
 var meter = {
   uri: 'http://api.lelylan.com/devices/7',
   id: '7',
-  name: 'Connected Meter',
+  name: 'Meter',
   categories: ['meters'],
   type: { uri: 'http://api.lelylan.com/types/7', id: '7' },
   physical: { uri: 'http://arduino.house.com/7' },
@@ -45,7 +45,7 @@ var meterType = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Status',
+    name: 'Power',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
     type: 'text'
@@ -100,7 +100,7 @@ var meterType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The meter is on',
+    name: 'Meter On',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -111,7 +111,7 @@ var meterType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The meter is off',
+    name: 'Meter Off',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',

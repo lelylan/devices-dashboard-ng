@@ -9,7 +9,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location) {
     state:    '<state>'
   };
 
-  $scope.$on('lelylan:logout', function(event) { $location.path('/'); });
+  $scope.$on('lelylan:logout', function(event) { $location.path('/home'); });
 };
 
 DashboardCtrl.$inject = ['AccessToken', '$scope', '$rootScope', '$http', '$location'];

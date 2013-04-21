@@ -3,7 +3,7 @@
 var clock = {
   uri: 'http://api.lelylan.com/devices/4',
   id: '4',
-  name: 'Connected Alarm Clock',
+  name: 'Alarm Clock',
   type: { uri: 'http://api.lelylan.com/types/4', id: '4' },
   categories: ['others'],
   physical: { uri: 'http://arduino.house.com/4' },
@@ -53,7 +53,7 @@ var clockType = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Status',
+    name: 'Power',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
     type: 'text'
@@ -185,7 +185,7 @@ var clockType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The alarm is activated',
+    name: 'Alarm Activated',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',
@@ -196,7 +196,7 @@ var clockType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The alarm is deactivated',
+    name: 'Alarm Deactivated',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',

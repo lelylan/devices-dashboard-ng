@@ -3,7 +3,7 @@
 var light = {
   uri: 'http://api.lelylan.com/devices/1',
   id: '1',
-  name: 'Connected Light',
+  name: 'Light',
   type: { uri: 'http://api.lelylan.com/types/1', id: '1' },
   categories: ['lights'],
   physical: { uri: 'http://arduino.house.com/1' },
@@ -133,7 +133,7 @@ var lightType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The light is on',
+    name: 'Light On',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -144,7 +144,7 @@ var lightType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The light is off',
+    name: 'Light Off',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',

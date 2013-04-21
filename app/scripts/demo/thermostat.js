@@ -3,7 +3,7 @@
 var thermostat = {
   uri: 'http://api.lelylan.com/devices/3',
   id: '3',
-  name: 'Connected Thermostat',
+  name: 'Thermostat',
   categories: ['thermostats'],
   type: { uri: 'http://api.lelylan.com/types/3', id: '3' },
   physical: { uri: 'http://arduino.house.com/3' },
@@ -15,7 +15,7 @@ var thermostat = {
   }, {
     uri: 'http://api.lelylan.com/properties/2',
     id: '2', value: 'off', expected: 'off', pending: false,
-    suggested: {'on': 'On', 'off': 'Off'}
+    suggested: {'on': 'Operative', 'off': 'Idle'}
   }, {
     uri: 'http://api.lelylan.com/properties/3',
     id: '3', value: 'cool', expected: 'cool', pending: false,
@@ -49,21 +49,21 @@ var ThermostatType = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Status',
+    name: 'Power',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
     type: 'string'
   }, {
     uri: 'http://api.lelylan.com/properties/2',
     id: '2',
-    name: 'Mode',
-    default: 'warm',
-    suggested: {'on': 'Activated', 'off': 'Deactivated'},
+    name: 'Activity',
+    default: 'off',
+    suggested: {'on': 'Operative', 'off': 'Idle'},
     type: 'string'
   }, {
     uri: 'http://api.lelylan.com/properties/3',
     id: '3',
-    name: 'Activity',
+    name: 'Mode',
     default: 'warm',
     suggested: {'warm': 'Warming', 'cool': 'Cooling'},
     type: 'string'
@@ -191,7 +191,7 @@ var ThermostatType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The thermostat is active',
+    name: 'Operative',
     function: { uri: 'http://api.lelylan.com/functions/6', id: '6' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',
@@ -202,7 +202,7 @@ var ThermostatType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The thermostat is paused',
+    name: 'Idle',
     function: { uri: 'http://api.lelylan.com/functions/5', id: '5' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',

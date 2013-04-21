@@ -49,6 +49,10 @@ body {
     color: $linkColor !important;
   }
 
+  .navbar-fixed-top a.active {
+    color: $linkColorHover !important;
+  }
+
   .navbar-fixed-top a:hover {
     color: $linkColorHover !important;
   }
@@ -274,7 +278,6 @@ body {
     border: 1px solid #e8e8e8;
     border-left: none;
     border-right: none;
-    //background-color: #f4f4f4;
     padding-left: 10px;
   }
 
@@ -395,7 +398,7 @@ body {
   .home h2.payoff {
     padding: 0 10px 20px;
     font-size: 32px;
-    color: #666;
+    color: #333;
     font-weight: 200;
     line-height: 36px;
   }
@@ -410,6 +413,21 @@ body {
     line-height: 24px;
     font-size: 18px;
     line-height: 28px;
+  }
+
+  /* Presentation demo home page*/
+
+  .demo-home .demo-image {
+    margin: 30px 0 20px;
+  }
+
+  .demo-home .payoff {
+    margin: 30px 0 0;
+  }
+
+  .demo-home .description {
+    margin-left: 0;
+    padding:0 65px;
   }
 }
 

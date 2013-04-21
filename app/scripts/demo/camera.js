@@ -3,7 +3,7 @@
 var camera = {
   uri: 'http://api.lelylan.com/devices/5',
   id: '5',
-  name: 'Connected IP Camera',
+  name: 'IP Camera',
   type: { uri: 'http://api.lelylan.com/types/5', id: '5' },
   categories: ['cameras'],
   physical: { uri: 'http://arduino.house.com/5' },
@@ -61,7 +61,7 @@ var cameraType = {
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Status',
+    name: 'Power',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
     type: 'text'
@@ -208,7 +208,7 @@ var cameraType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The camera is on',
+    name: 'Recording',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',
@@ -219,7 +219,7 @@ var cameraType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The camera is off',
+    name: 'Off',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/1',

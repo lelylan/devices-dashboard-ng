@@ -3,18 +3,18 @@
 var alarm = {
   uri: 'http://api.lelylan.com/devices/6',
   id: '6',
-  name: 'Connected Alarm System',
+  name: 'Alarm System',
   type: { uri: 'http://api.lelylan.com/types/6', id: '6' },
   categories: ['alarms'],
   physical: { uri: 'http://arduino.house.com/6' },
   pending: false,
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
-    id: '1', value: 'off', expected: 'off', pending: false,
+    id: '1', value: 'on', expected: 'on', pending: false,
     suggested: {'on': 'On', 'off': 'Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/2',
-    id: '2', value: 'off', expected: 'off', pending: false,
+    id: '2', value: 'on', expected: 'on', pending: false,
     suggested: {'on': 'Alarm On', 'off': 'Alarm Off'}
   }, {
     uri: 'http://api.lelylan.com/properties/3',
@@ -35,13 +35,13 @@ var alarm = {
 var alarmType = {
   uri: 'http://api.lelylan.com/types/6',
   id: '6',
-  name: 'Alarm Syste,',
+  name: 'Alarm System',
   created_at: '2012-09-01T15:01:22Z',
   updated_at: '2012-09-01T15:01:22Z',
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
-    name: 'Status',
+    name: 'Power',
     default: 'off',
     suggested: {'on': 'On', 'off': 'Off'},
     type: 'text'
@@ -123,7 +123,7 @@ var alarmType = {
   statuses: [{
     uri: 'http://api.lelylan.com/statuses/1',
     id: '1',
-    name: 'The alarm is on',
+    name: 'Activated',
     function: { uri: 'http://api.lelylan.com/functions/2', id: '2' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',
@@ -134,7 +134,7 @@ var alarmType = {
   }, {
     uri: 'http://api.lelylan.com/statuses/2',
     id: '2',
-    name: 'The alarm is off',
+    name: 'Deactivated',
     function: { uri: 'http://api.lelylan.com/functions/1', id: '1' },
     properties: [{
       uri: 'http://api.lelylan.com/properties/2',
