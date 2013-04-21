@@ -9,6 +9,7 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/home', { templateUrl: '/partials/home.html', controller: DashboardCtrl }).
     when('/new', { templateUrl: '/partials/new-device.html', controller: CreateCtrl }).
+    when('/learn', { templateUrl: '/partials/learn.html', controller: DashboardCtrl }).
     when('/all', { templateUrl: '/partials/devices.html', controller: DevicesCtrl }).
     when('/categories/:category', { templateUrl: '/partials/devices.html', controller: CategoryCtrl }).
     when('/types/:typeId', { templateUrl: '/partials/type.html',  controller: TypeCtrl }).

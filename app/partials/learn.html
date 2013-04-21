@@ -1,0 +1,386 @@
+<div class="how presentation">
+
+  <h1 class="title">Lelylan Dashboard</h1>
+
+  <div class="description">
+
+    <p>
+    Lelylan Dashboard comes to life to give you a simple and easy to use way to monitor and
+    control any device in your house. <a href="//d.lelylan.com/demo">Try the demo out</a>
+    (no login required) to understand what this means.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item oo-item-create">
+        <div class="ao-preview">
+          <img src="/images/demo.png">
+          <div class="ao-annotations">
+            <span style="top: 3.5%; left: 65%; width: 140px;" class="from-right">Search box</span>
+            <span style="top: 15.5%; left: -27%; width: 140px;">Categories</span>
+            <span style="top: 45%; left: 87%; width: 140px;" class="from-right">Detailed view</span>
+            <span style="top: 71%; left: 2%; width: 140px;">Devices list</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <h2>Creating a Device</h2>
+
+    <p>
+    Now lets focus to the type properties. A property is whatever vary in a device during time.
+    It can be the intensity in a dimmer, the temperature in a cooling system or the volume in a
+    television.
+
+    Supposing we want to create a basic light where I can change it status (on/off) and where
+    I can decide the light intensity, we are defining a light with two properties:
+    <code>status</code> and <code>intensity</code>.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/property-create.png">
+          <div class="ao-annotations">
+            <span style="top: 77%; left: 26%; width: 170px;" class="from-right">Create property link</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    To create a property click <code>create property</code> and fill the form with the required
+    field.
+    </p>
+
+    <ul>
+      <li>Name - property name.</li>
+      <li>Type - accepted property value type (strings, colors, numbers and ranges).</li>
+      <li>Default - property value assigned to the device when initialized.</li>
+      <li>Accepts - accepted value/description pairs (visible when type is <code>string</code>). <a href="http://dev.lelylan.com/community/faq#suggested-values">Learn more</a></li>
+      <li>Range - accepted values defined between a min, max and step value. Visible when type is <code>range</code>.</li>
+    </ul>
+
+    <p>
+    Going back to our basic light example, the property <code>status</code> accepts string
+    values <code>on</code> and <code>off</code> (which pairs with <code>On</code> and
+    <code>Off</code> in visualization) and by default sets the device property to
+    <code>on</code> when a device is initialized with this type.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/property-status.png">
+          <div class="ao-annotations">
+            <span style="top: 30%; left: -68%; width: 220px;">Status accepts string values</span>
+            <span style="top: 42.5%; left: 40%; width: 180px;" class="from-right">Default value to on</span>
+            <span style="top: 55%; left: -50.5%; width: 150px;">Accepted values</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    Another example is the property <code>intensity</code> where the main difference is that
+    it does not accept string values but a range value from 0 to 100 with a step of 1.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/property-intensity.png">
+          <div class="ao-annotations">
+            <span style="top: 32%; left: -70.5%; width: 230px;">Intensity accepts string values</span>
+            <span style="top: 46%; left: 40%; width: 180px;" class="from-right">Default value to 100</span>
+            <span style="top: 59.5%; left: -60.5%; width: 190px;">Accepted range values</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="notice">
+    <span class="label label-info">NOTICE</span>
+    To better understand how properties work check out <a href="http://dev.lelylan.com/api/types/properties">Lelylan Property API</a>.
+    </p>
+
+
+
+    <h2>Functions</h2>
+
+    <p>
+    Once defined the properties lets move to the functions. Functions defines the daily
+    interactions you have with the devices in your house like turning on a light, closing
+    a door or raising the temperature in your room. With functions you can control any
+    device in the same way you do everyday of your life.
+    </p>
+
+    <p>
+    With a function you can update one or more properties by setting a fixed value or
+    by leaving the value empty. In the last case, when the function is executed, the value
+    is asked to the user. For example, our basic light has three functions.
+    </p>
+
+    <ul>
+      <li>Turn on - set the property <code>status</code> to <code>on</code></li>
+      <li>Turn off - set the property <code>status</code> to <code>off</code></li>
+      <li>Set intensity - set the property <code>intensity</code> with a value given by the user</li>
+    </ul>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/function-create.png">
+          <div class="ao-annotations">
+            <span style="top: 17%; left: 33%; width: 190px;" class="from-right">Go to functions section</span>
+            <span style="top: 76%; left: 26%; width: 170px;" class="from-right">Create new function</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    To create a function go into the function section and click <code>create new function</code>.
+    A form will pop up and the following fields will be required.
+    </p>
+
+    <ul>
+      <li>Name - function name.</li>
+      <li>Property - value associated to the property (when empty the value must be filled by the user)</li>
+    </ul>
+
+    <p>
+    Going back to our basic light example, the function <code>turn on</code> sets the property
+    status to <code>on</code>. This means that no interactions with the user are required when
+    executing the function.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/function-turn-on.png">
+          <div class="ao-annotations">
+            <span style="top: 41%; left: 101.5%; width: 180px;" class="from-right">Set status value to on</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    Another example is the function <code>set intensity</code> where the main difference is that
+    the property intensity is not set to any value. This convention means that an interactions
+    with the user is required to set the light intensity before executing the function.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/function-set-intensity.png">
+          <div class="ao-annotations">
+            <span style="top: 41%; left: 101.5%; width: 200px;" class="from-right">Leave intensity value empty</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="notice">
+    <span class="label label-info">NOTICE</span>
+    To better understand how functions work check out <a href="http://dev.lelylan.com/api/types/functions">Lelylan Function API</a>.
+    </p>
+
+
+
+    <h2>Statuses</h2>
+
+    <p>
+    Properties are not always enough to describe the status of a device. Think at a roller
+    shutter for example. It could have the property <code>aperture</code> to <code>100</code>
+    when open and <code>0</code> when closed. But what if the roller shutter is opening? It
+    is nether open or close. To have a complete control over the device status in a specific
+    moment of its life is to use the status API. Our basic light, for example, has the statuses
+    <code>light ON</code> and <code>light OFF</code>.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/status-create.png">
+          <div class="ao-annotations">
+            <span style="top: 17%; left: 46%; width: 190px;" class="from-right">Go to status section</span>
+            <span style="top: 76%; left: 26%; width: 170px;" class="from-right">Create new status</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    To create a status go into the status section and click <code>create new status</code>.
+    A form will pop up and the following fields will be required.
+    </p>
+
+    <ul>
+      <li>Name - status name.</li>
+      <li>Default function - The default function associated to the status.</li>
+      <li>Property - values (comma separated list) causing the property match.</li>
+    </ul>
+
+    <p class="notice">
+    <span class="label label-info">NOTICE</span>
+    The default function can be really useful to define a "one click function". For example
+    when the light is on the default function is turn off, whereas when the light is off the
+    default function is turn on.
+    </p>
+
+    <p>
+    Going back to our basic light example, the <code>light ON</code> status is active when the
+    property <code>status</code> is <code>on</code>. The default action that we associate to the
+    <code>Light On</code> status is <code>Turn Off</code>.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/status-light-on.png">
+          <div class="ao-annotations">
+            <span style="top: 49%; left: 101.5%; width: 180px;" class="from-right">Set status value to on</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="notice">
+    <span class="label label-info">NOTICE</span>
+    Type status is still work in progress, use it for simple scenarios.
+    To better understand how properties work check out <a href="http://dev.lelylan.com/api/types/statuses">Lelylan Status API</a>.
+    </p>
+
+
+
+    <h2>Categories</h2>
+
+    <p>
+    Categories (e.g. lights, locks, appliances, etc.) are used to group together similar
+    devices. For example a <code>standard light</code> (on/off) and an <code>RGB light</code>
+    (with color settings) are two different types, but they still belongs to the same category.
+
+    To associate one or more categories to a type go into the categories section and click on
+    the desired categories. Click again to deselect it.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/category-create.png">
+          <div class="ao-annotations">
+            <span style="top: 12.5%; left: 63%; width: 190px;" class="from-right">Go to category section</span>
+            <span style="top: 76%; left: 83%; width: 170px;" class="from-right">Select categories</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="notice">
+    <span class="label label-info">NOTICE</span>
+    Categories are really important to organize your devices. Give them some love. And if you
+    think we are missing an important one don't hesitate to
+    <a href="mailto:touch@lelylan.com">Mail</a> or <a href="http://twitter.com/lelylan">Tweet</a> us.
+    </p>
+
+
+
+    <h2>Device Simulation</h2>
+
+    <p>
+    Once you have completed the type definition you can simulate the control of a device using
+    your type. Here you can test if the type behaviour is the desired one going back and forward
+    until you reach the desired result. To simulate the interaction click on the simulate link.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/more.png">
+          <div class="ao-annotations">
+            <span style="top: 44%; left: 93%; width: 190px;" class="from-right">Go to simulation section</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    Here you can now interact with a simulated device that uses your brand new type.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/simulation.png">
+          <div class="ao-annotations">
+            <span style="top: 11%; left: 76%; width: 150px;" class="from-right">Device status</span>
+            <span style="top: 13%; left: -111%; width: 260px;">Default status function execution</span>
+            <span style="top: 27%; left: 76%; width: 150px;" class="from-right">Functions list</span>
+            <span style="top: 67.5%; left: 76%; width: 150px;" class="from-right">Properties list</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <h2>Deleting a type</h2>
+
+    <p>
+    Deleting a type can be dangerous whenever you have previously released any physical device
+    using it. The physical device is mutually connected to a type, meaning that if the type is
+    deleted the physical device will not be accessible (unless you update its logics).
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/more.png">
+          <div class="ao-annotations">
+            <span style="top: 62%; left: 93%; width: 190px;" class="from-right">Go to delete section</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+    To delete your type first insert the type name and then click the delete button.
+    </p>
+
+    <div class="overlay">
+      <div class="ao-item">
+        <div class="ao-preview oo-item-property-create">
+          <img src="/images/how/delete.png">
+          <div class="ao-annotations">
+            <span style="top: 79%; left: -42%; width: 170px;">Confirm type name</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <h2>Get started</h2>
+
+    <div class="summary">
+
+      <p>
+      Now go and <a href="/new">create your first type</a>!
+      We also leave you with a few links that might be of your interest. If you
+      have any open question do not hesitate to <a href="mailto:touch@lelylan.com">Mail</a>
+      or <a href="http://twitter.com/lelylan">Tweet</a> us.
+      </p>
+
+      <ul>
+        <li><a href="http://dev.lelylan.com/start/first-physical">Connect your first physical device</a></li>
+        <li><a href="http://dev.lelylan.com/api/physicals">Lelylan Physical API</a></li>
+        <li><a href="http://dev.lelylan.com/api/physicals">Lelylan Types on Github</a></li>
+        <li><a href="http://dev.lelylan.com/">Lelylan Dev Center</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
