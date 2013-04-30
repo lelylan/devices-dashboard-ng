@@ -6,36 +6,42 @@
   <div class="tc-main" ng-show="!destroyed && loaded">
     <div class="tc-header">
       <div class="tc-name">
-        <p class="lead tc-editable" ng-show="config.inplace.name && (user.id == type.owner_id)" ng-click="config.inplace.name=false">{{type.name}}</p>
-        <p class="lead tc-not-editable" ng-show="config.inplace.name && (user.id != type.owner_id)">{{type.name}}</p>
+        <p class="lead tc-editable" ng-show="config.inplace.name && (user.id == type.owner.id)" ng-click="config.inplace.name=false">{{type.name}}</p>
+        <p class="lead tc-not-editable" ng-show="config.inplace.name && (user.id != type.owner.id)">{{type.name}}</p>
+        <div class="tc-twitter pull-right">
+          <iframe allowtransparency="true" frameborder="0" scrolling="no"
+            src="https://platform.twitter.com/widgets/tweet_button.html?text=Building the connected home using the {{type.name | lowercase}}&hashtags=lelylan&url=http://t.lelylan.com/types/{{typeId}}&counturl=http://t.lelylan.com&related=lelylan:Building The Connected Home"
+            style="width:100px; height:30px;"></iframe>
+        </div>
+
         <form class="tc-inplace tc-name-form" name="nameForm" ng-show="!config.inplace.name">
           <input type="text" name="name" ng-model="type.name" required>
-          <button class="update btn btn-lelylan" ng-click="type.$update(init); config.inplace.name=true; nameForm.$setPristine();" ng-disabled="nameForm.$invalid || nameForm.$pristine">Update</button>
+          <button class="update btn btn-lelylan" ng-click="updateName()" ng-disabled="nameForm.$invalid || nameForm.$pristine">Update</button>
           <button class="cancel btn" ng-click="type.name=original.name; config.inplace.name=true">Cancel</button>
         </form>
       </div>
       <div class="tc-options">
         <ul class="nav nav-pills">
-          <li><a href="#" class="show-properties" ng-class="{tcactive: show.properties}" ng-click="showProperties()"><span class="badge badge-info">{{type.properties.length}}</span> Properties</a></li>
-          <li><a href="#" class="show-functions" ng-class="{tcactive: show.functions}" ng-click="showFunctions()"><span class="badge badge-info">{{type.functions.length}}</span> Functions</a></li>
-          <li><a href="#" class="show-statuses" ng-class="{tcactive: show.statuses}" ng-click="showStatuses()"><span class="badge badge-info">{{type.statuses.length}}</span> Statuses</a></li>
-          <li><a href="#" class="show-categories" ng-class="{tcactive: show.categories}" ng-click="showCategories()"><span class="badge badge-info">{{type.categories.length || 0}}</span> Categories</a></li>
+          <li><a href="javascript:" class="show-properties" ng-class="{tcactive: show.properties}" ng-click="showProperties()"><span class="badge badge-info">{{type.properties.length}}</span> Properties</a></li>
+          <li><a href="javascript:" class="show-functions" ng-class="{tcactive: show.functions}" ng-click="showFunctions()"><span class="badge badge-info">{{type.functions.length}}</span> Functions</a></li>
+          <li><a href="javascript:" class="show-statuses" ng-class="{tcactive: show.statuses}" ng-click="showStatuses()"><span class="badge badge-info">{{type.statuses.length}}</span> Statuses</a></li>
+          <li><a href="javascript:" class="show-categories" ng-class="{tcactive: show.categories}" ng-click="showCategories()"><span class="badge badge-info">{{type.categories.length || 0}}</span> Categories</a></li>
           <li class="dropdown">
-          <a href="#" class="show-more dropdown-toggle" ng-class="{tcactive: show.settings}"> More » </a>
+          <a href="javascript:" class="show-more dropdown-toggle" ng-class="{tcactive: show.settings}"> More » </a>
           <ul class="dropdown-menu">
-            <li><a href="#" class="show-simulation" ng-class="{atcctive: show.simulation}" ng-click="showSimulation()"><span class="icon-eye-open"></span> Simulate</a></li>
-            <li><a href="#" class="show-delete" ng-class="{tcactive: show.delete}" ng-click="showDelete()" ng-show="user.id == type.owner_id"><span class="icon-remove"></span> Delete</a></li>
+            <li><a href="javascript:" class="show-simulation" ng-class="{atcctive: show.simulation}" ng-click="showSimulation()"><span class="icon-eye-open"></span> Simulate</a></li>
+            <li><a href="javascript:" class="show-delete" ng-class="{tcactive: show.delete}" ng-click="showDelete()" ng-show="user.id == type.owner.id"><span class="icon-remove"></span> Delete</a></li>
           </ul>
           </li>
         </ul>
       </div>
       <div class="tc-description">
-        <p class="lead tc-editable" ng-show="config.inplace.description && (user.id == type.owner_id)" ng-click="config.inplace.description=false" ng-bind-html-unsafe="type.shadowDescription"></p>
-        <p class="lead tc-not-editable" ng-show="config.inplace.description && (user.id != type.owner_id)" ng-bind-html-unsafe="type.shadowDescription"></p>
+        <p class="lead tc-editable" ng-show="config.inplace.description && (user.id == type.owner.id)" ng-click="config.inplace.description=false" ng-bind-html-unsafe="type.shadowDescription"></p>
+        <p class="lead tc-not-editable" ng-show="config.inplace.description && (user.id != type.owner.id)" ng-bind-html-unsafe="type.shadowDescription"></p>
         <form class="tc-inplace tc-description-form" name="descriptionForm" ng-show="!config.inplace.description">
-          <textarea rows="2" name="description" ng-model="type.description" placeholder="Type description" required></textarea>
+          <textarea rows="2" name="description" ng-model="type.description" placeholder="Type description"></textarea>
           <div>
-            <button class="update btn btn-lelylan" ng-click="type.$update(init); config.inplace.description=true; descriptionForm.$setPristine();" ng-disabled="descriptionForm.$invalid || descriptionForm.$pristine">Update</button>
+            <button class="update btn btn-lelylan" ng-click="updateDescription();" ng-disabled="descriptionForm.$invalid || descriptionForm.$pristine">Update</button>
             <button class="cancel btn" ng-click="type.description=original.description; config.inplace.description=true">Cancel</button>
           </div>
         </form>
@@ -55,11 +61,11 @@
         <div class="tc-header">
           <hr/>
           <div class="tc-options">
-            <ul class="nav nav-pills" ng-show="user.id == type.owner_id">
-              <li><a href="#" class="add-property" ng-click="newProperty()"><i class="icon-plus"></i> Create new property</a></li>
+            <ul class="nav nav-pills" ng-show="user.id == type.owner.id">
+              <li><a href="javascript:" class="add-property" ng-click="newProperty()"><i class="icon-plus"></i> Create new property</a></li>
             </ul>
           </div>
-          <hr/ ng-show="user.id == type.owner_id">
+          <hr/ ng-show="user.id == type.owner.id">
         </div>
 
         <!-- Property items -->
@@ -71,9 +77,9 @@
             <div class="tc-property-view">
               <div class="tc-property-name">
                 <p class="tc-name tc-title">{{property.name}}</p>
-                <div class="pull-right" ng-show="user.id == type.owner_id">
-                  <a href="#" class="tc-edit" ng-click="open(property, 'edit', 'Edit')"><i class="icon-pencil"></i> Edit</a>
-                  <a href="#" class="tc-delete" ng-click="open(property, 'delete')"><i class="icon-remove"></i> Delete</a>
+                <div class="pull-right" ng-show="user.id == type.owner.id">
+                  <a href="javascript:" class="tc-edit" ng-click="open(property, 'edit', 'Edit')"><i class="icon-pencil"></i> Edit</a>
+                  <a href="javascript:" class="tc-delete" ng-click="open(property, 'delete')"><i class="icon-remove"></i> Delete</a>
                 </div>
               </div>
               <div class="tc-property-info">
@@ -81,7 +87,8 @@
                   <thead>
                     <tr>
                       <td class="tc-description-name">Property ID</td>
-                      <td><code>{{property.id}}</code></td>
+                      <td ng-show="property.id == config.saving.message"><strong>{{config.saving.message}}</strong></td>
+                      <td ng-show="property.id != config.saving.message"><code>{{property.id}}</code></td>
                     </tr>
                     <tr>
                       <td class="tc-description-name">Type values</td>
@@ -89,15 +96,15 @@
                     </tr>
                     <tr>
                       <td class="tc-description-name">Accepted values</td>
-                      <td ng-show="property.type!='range' && property.suggested">See <a href="#" ng-click="open(property, 'list')">list of values</a></td>
-                      <td ng-show="property.type!='range' && !property.suggested">Any {{property.type}} value</td>
+                      <td ng-show="property.type!='range' && property.accepted">See <a href="javascript:" ng-click="open(property, 'list')">list of values</a></td>
+                      <td ng-show="property.type!='range' && !property.accepted">Any {{property.type}} value</td>
                       <td ng-show="property.type=='range'">Values between <code>{{property.range.min}}</code> and <code>{{property.range.max}}</code> with an interval of <code>{{property.range.step}}</code></td>
                     </tr>
                     <tr>
                       <td class="tc-description-name">Default</td>
                       <td>
                         <p ng-show="!!property.default"><code>{{property.default}}</code></p>
-                        <p ng-show="!property.default">Undefined</p>
+                        <p ng-show="!property.default">Not defined</p>
                       </td>
                     </tr>
                   </thead>
@@ -118,7 +125,7 @@
                     <div class="tc-property-name control-group" ng-class="{error: form.name.$invalid}">
                       <div class="input-prepend">
                         <span class="add-on">Name</span>
-                        <input class="input-xlarge" type="text" name="name" ng-model="property.name" placeholder="Property name" required><br/>
+                        <input class="input-xlarge" type="text" name="name" ng-model="property.name" placeholder="Property name" autofocus required><br/>
                       </div>
                     </div>
                     <div class="tc-property-type control-group" ng-class="{error: form.type.$invalid}">
@@ -134,14 +141,14 @@
                         <input class="input-xlarge" type="text" name="default" ng-model="property.default" placeholder="{{property.placeholders.default}}"><br/>
                       </div>
                     </div>
-                    <div class="tc-property-suggested control-group" ng-class="{error: form.suggested.$invalid}" ng-show="property.placeholders.suggested">
+                    <div class="tc-property-accepted control-group" ng-class="{error: form.accepted.$invalid}" ng-show="property.type != 'range'">
                       <div class="input-prepend">
-                        <span class="add-on">Suggested</span>
-                        <input class="input-xlarge" type="text" name="default" ng-model="property.suggested" placeholder="{{property.placeholders.suggested}}"><br/>
+                        <span class="add-on">Accepted</span>
+                        <input class="input-xlarge" type="text" name="default" ng-model="property.acceptedString" placeholder="{{property.placeholders.accepted}}"><br/>
                       </div>
-                      <small class="help-inline muted">Suggested property must be a valid JSON object</small>
+                      <small class="help-inline muted">Accepted property must be a valid JSON object</small>
                     </div>
-                    <div class="tc-property-range control-group" ng-class="{error: form.min.$invalid || form.max.$invalid || form.step.$invalid}" ng-show="!property.placeholders.suggested">
+                    <div class="tc-property-range control-group" ng-class="{error: form.min.$invalid || form.max.$invalid || form.step.$invalid}" ng-show="property.type == 'range'">
                       <div class="input-prepend">
                         <span class="add-on">Range</span>
                         <span class="add-on tc-intern">Min</span><input class="tc-intern" type="text" name="min" ng-model="property.range.min" placeholder="{{property.placeholders.range.min}}" ng-required="property.type=='range'">
@@ -182,11 +189,11 @@
               </div>
             </div>
 
-            <!-- Property suggested values -->
+            <!-- Property accepted values -->
 
             <!-- property.list to property.show.list (every form should follow this rule) -->
             <div modal="property.list" close="close(property, 'list')">
-              <div class="tc-property-suggested">
+              <div class="tc-property-accepted">
                 <div class="modal-header">
                   <button class="pull-right close" type="button" ng-click="close(property, 'list')">&times;</button>
                   <input type="text" ng-model="search" class="search-query" placeholder="Search">
@@ -196,13 +203,13 @@
                     <thead>
                       <tr>
                         <th class="muted">Key</th>
-                        <th>Value</th>
+                        <th>Label</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="suggestion in property._suggested | filter:search">
-                        <td class="muted">{{suggestion.key}}</td>
-                        <td>{{suggestion.value}}</td>
+                      <tr ng-repeat="item in property.acceptedList | filter:search">
+                        <td class="muted">{{item.key}}</td>
+                        <td>{{item.value}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -223,11 +230,11 @@
         <div class="tc-header">
           <hr/>
           <div class="tc-options">
-            <ul class="nav nav-pills" ng-show="user.id == type.owner_id">
-              <li><a href="#" class="add-function" ng-click="newFunction()"><i class="icon-plus"></i> Create new function</a></li>
+            <ul class="nav nav-pills" ng-show="user.id == type.owner.id">
+              <li><a href="javascript:" class="add-function" ng-click="newFunction()"><i class="icon-plus"></i> Create new function</a></li>
             </ul>
           </div>
-          <hr/ ng-show="user.id == type.owner_id">
+          <hr/ ng-show="user.id == type.owner.id">
         </div>
 
         <!-- Function items -->
@@ -239,9 +246,9 @@
             <div class="tc-function-view">
               <div class="tc-function-name">
                 <p class="tc-name tc-title">{{function.name}}</p>
-                <div class="pull-right" ng-show="user.id == type.owner_id">
-                  <a href="#" class="tc-edit" ng-click="open(function, 'edit', 'Edit')"><i class="icon-pencil"></i> Edit</a>
-                  <a href="#" class="tc-delete" ng-click="open(function, 'delete')"><i class="icon-remove"></i> Delete</a>
+                <div class="pull-right" ng-show="user.id == type.owner.id">
+                  <a href="javascript:" class="tc-edit" ng-click="open(function, 'edit', 'Edit')"><i class="icon-pencil"></i> Edit</a>
+                  <a href="javascript:" class="tc-delete" ng-click="open(function, 'delete')"><i class="icon-remove"></i> Delete</a>
                 </div>
               </div>
               <div class="tc-function-info">
@@ -249,7 +256,8 @@
                   <thead>
                     <tr>
                       <td class="tc-description-name">Function ID</td>
-                      <td><code>{{function.id}}</code></td>
+                      <td ng-show="function.id == config.saving.message"><strong>{{config.saving.message}}</strong></td>
+                      <td ng-show="function.id != config.saving.message"><code>{{function.id}}</code></td>
                     </tr>
                     <tr>
                       <td class="tc-description-name" row-span="{{function.properties.length}}">Properties update</td>
@@ -278,7 +286,7 @@
                     <div class="tc-function-name control-group" ng-class="{error: form.name.$invalid}">
                       <div class="input-prepend">
                         <span class="add-on">Name</span>
-                        <input class="input-xlarge" type="text" name="name" ng-model="function.name" placeholder="Function name" required><br/>
+                        <input class="input-xlarge" type="text" name="name" ng-model="function.name" placeholder="Function name" autofocus required><br/>
                       </div>
                     </div>
                     <div class="tc-function-property function-property-{{property.id}} control-group" ng-repeat="property in function.properties" ng-class="{error: !property.id}">
@@ -288,7 +296,7 @@
                         <span class="add-on intern">Value</span><input class="intern" type="text" name="function-property-value" ng-model="property.value" placeholder="User input">
                       </div>
                     </div>
-                    <small class="help-inline"><a href="#" class="add-function-property" ng-click="addFunctionProperty(function)">Add new property</a></small>
+                    <small class="help-inline"><a href="javascript:" class="add-function-property" ng-click="addFunctionProperty(function)">Add new property</a></small>
                   </div>
                   <div class="modal-footer">
                     <button class="tc-update btn btn-lelylan" ng-show="!function.temp" ng-click="updateFunction(function, form)" ng-disabled="form.$invalid || form.$pristine"><i class="icon-white icon-pencil"></i> Update</button>
@@ -332,11 +340,11 @@
         <div class="tc-header">
           <hr/>
           <div class="tc-options">
-            <ul class="nav nav-pills" ng-show="user.id == type.owner_id">
-              <li><a href="#" class="add-status" ng-click="newStatus()"><i class="icon-plus"></i> Create new status</a></li>
+            <ul class="nav nav-pills" ng-show="user.id == type.owner.id">
+              <li><a href="javascript:" class="add-status" ng-click="newStatus()"><i class="icon-plus"></i> Create new status</a></li>
             </ul>
           </div>
-          <hr/ ng-show="user.id == type.owner_id">
+          <hr/ ng-show="user.id == type.owner.id">
         </div>
 
         <!-- Statuses items -->
@@ -349,9 +357,9 @@
             <div class="tc-status-view">
               <div class="tc-status-name">
                 <p class="tc-name tc-title">{{status.name}}</p>
-                <div class="pull-right" ng-show="user.id == type.owner_id">
-                  <a href="#" class="tc-edit" ng-click="open(status, 'edit', 'Edit')"><i class="icon-pencil"></i> Edit</a>
-                  <a href="#" class="tc-delete" ng-click="open(status, 'delete')"><i class="icon-remove"></i> Delete</a>
+                <div class="pull-right" ng-show="user.id == type.owner.id">
+                  <a href="javascript:" class="tc-edit" ng-click="open(status, 'edit', 'Edit')"><i class="icon-pencil"></i> Edit</a>
+                  <a href="javascript:" class="tc-delete" ng-click="open(status, 'delete')"><i class="icon-remove"></i> Delete</a>
                 </div>
               </div>
               <div class="tc-status-info">
@@ -359,7 +367,8 @@
                   <thead>
                     <tr class="tc-status-id">
                       <td class="tc-description-name">Status ID</td>
-                      <td><code>{{status.id}}</code></td>
+                      <td ng-show="status.id == config.saving.message"><strong>{{config.saving.message}}</strong></td>
+                      <td ng-show="status.id != config.saving.message"><code>{{status.id}}</code></td>
                     </tr>
                     <tr class="tc-status-id">
                       <td class="tc-description-name">Default Function</td>
@@ -370,7 +379,7 @@
                       <td class="tc-description-name" row-span="{{status.properties.length}}">Properties</td>
                       <td>
                         <div ng-repeat="property in status.properties">
-                          <p>When <code>{{property.name}}</code> is <code>{{property.values}}</code>.</p>
+                          <p>Active when <code>{{property.name}}</code> is any value<span ng-show="property.values"> in <code>{{property.values}}</code></span>.</p>
                         </div>
                       </td>
                     </tr>
@@ -392,7 +401,7 @@
                     <div class="tc-status-name control-group" ng-class="{error: form.name.$invalid}">
                       <div class="input-prepend">
                         <span class="add-on">Name</span>
-                        <input class="input-xlarge" type="text" name="name" ng-model="status.name" placeholder="Status name" required><br/>
+                        <input class="input-xlarge" type="text" name="name" ng-model="status.name" placeholder="Status name" autofocus required><br/>
                       </div>
                     </div>
                     <div class="tc-status-function tc-status-function-{{property.id}} control-group">
@@ -408,7 +417,7 @@
                         <span class="add-on intern">Values</span><input class="intern" type="text" name="status-property-value" ng-model="property.values" ng-list="property.values" placeholder="on, off">
                       </div>
                     </div>
-                    <small class="help-inline"><a href="#" class="add-status-property" ng-click="addStatusProperty(status)">Add new property</a></small>
+                    <small class="help-inline"><a href="javascript:" class="add-status-property" ng-click="addStatusProperty(status)">Add new property</a></small>
                   </div>
                   <div class="modal-footer">
                     <button class="tc-update btn btn-lelylan" ng-show="!status.temp" ng-click="updateStatus(status, form)" ng-disabled="form.$invalid || form.$pristine"><i class="icon-white icon-pencil"></i> Update</button>
@@ -445,15 +454,15 @@
       <!-- Categories -->
 
       <div class="tc-categories" ng-show="show.categories">
-        <ul class="editable" ng-show="user.id == type.owner_id">
+        <ul class="editable" ng-show="user.id == type.owner.id">
           <li class="tc-category" ng-repeat="category in config.categories">
-          <a href="#" class="btn btn-lelylan tc-category-{{category.name}}" ng-class="{tcactive: category.active}" ng-click="toggleCategory(category)">
+          <a href="javascript:" class="btn btn-lelylan tc-category-{{category.name}}" ng-class="{tcactive: category.active}" ng-click="toggleCategory(category)">
             <span class="icon-star"></span><br/>{{category.name}}
           </a>
           </li>
         </ul>
 
-        <ul class="tc-not-editable" ng-show="user.id != type.owner_id">
+        <ul class="tc-not-editable" ng-show="user.id != type.owner.id">
           <li class="tc-category" ng-repeat="category in type.categories">
           <a class="btn btn-lelylan tcactive tc-category-{{category}}">
             <span class="icon-star"></span><br/>{{category}}
@@ -466,16 +475,16 @@
 
       <div class="tc-more tc-simulation" ng-show="show.simulation">
         <device device-type="simulatedType" device-options="false" device-json="simulatedDevice" style="width:300px;"></device>
+        <div class="clearfix"></div>
       </div>
 
       <!-- Type Delete -->
 
-      <div class="tc-more tc-delete" ng-show="show.delete && (user.id == type.owner_id)">
+      <div class="tc-more tc-delete" ng-show="show.delete && (user.id == type.owner.id)">
         <hr>
 
         <div class="tc-header">
-          <p class="lead">Delete Type</p>
-          <p class="tc-description">Deleting your type is irreversible. Enter your device name  to confirm you want to permanently delete it.</p>
+          <p class="tc-description">Deleting a type is irreversible. Enter your device name  to confirm you want to permanently delete it.</p>
         </div>
 
         <div class="tc-content">
@@ -483,7 +492,7 @@
             <div class="control-group" ng-class="{error: confirm!=type.name}">
               <div class="input-prepend">
                 <span class="add-on">Type name</span>
-                <input class="input-medium" type="text" name="name" ng-model="confirm">
+                <input class="input-medium" type="text" name="name" ng-model="confirm" autofocus>
                 <button class="tc-destroy btn btn-danger" ng-click="destroy()" ng-disabled="confirm!=type.name">Delete</button>
               </div>
             </div>

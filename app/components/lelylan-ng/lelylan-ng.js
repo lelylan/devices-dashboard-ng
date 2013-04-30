@@ -1,3 +1,5 @@
+/* lelylan-ng - v0.1.0 - 2013-04-30 */
+
 'use strict';
 
 angular.module('lelylan', [
@@ -595,10 +597,10 @@ directives.directive('login', ['AccessToken', 'ImplicitFlow', 'Profile', 'Logged
   var template =
     '<ul class="nav pull-right">' +
       '<li ng-show="show==\'out\'" class="login">' +
-        '<a href="#" ng-href="{{endpoint}}">{{text || \'Sign In\'}}</a>' +
+        '<a ng-href="{{endpoint}}">{{value || \'Sign In\'}}</a>' +
       '</li>' +
       '<li ng-show="show==\'in\'" class="logout">' +
-        '<a href="#" ng-click="logout()">Logout {{profile.email}}</a>' +
+        '<a ng-click="logout()">Logout {{profile.email}}</a>' +
       '</li>' +
     '</ul>';
 
@@ -614,7 +616,7 @@ directives.directive('login', ['AccessToken', 'ImplicitFlow', 'Profile', 'Logged
       scope: '@',
       state: '@',
       flow: '@',
-      text: '@'
+      value: '@'
     }
   };
 
@@ -684,8 +686,8 @@ directives.directive('login', ['AccessToken', 'ImplicitFlow', 'Profile', 'Logged
 
 
     var fireLoginEvent  = function() { $rootScope.$broadcast('lelylan:login', AccessToken.get()); }
+    var fireDeniedEvent = function() { $rootScope.$broadcast('lelylan:login:denied'); }
     var fireLogoutEvent = function() { $rootScope.$broadcast('lelylan:logout'); }
-    var fireDeniedEvent = function() { $rootScope.$broadcast('lelylan:logout:denied'); }
   };
 
   return definition
