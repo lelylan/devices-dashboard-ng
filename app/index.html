@@ -1,22 +1,33 @@
-<!DOCTYPE html>
-<html ng-app="lelylan.dashboards.devices">
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
+    <base href="/">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Lelylan Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <body>
+  <body ng-app="app" class="ng-cloak">
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+      <script src="components/es5-shim/es5-shim.js"></script>
+      <script src="components/json3/lib/json3.min.js"></script>
+    <![endif]-->
 
     <div class="dashboard" ng-controller="DashboardCtrl">
-
-      <!-- Top menu -->
-
       <div class="navbar navbar-fixed-top">
         <div class="navbar-inner-flat">
           <div class="container">
             <div class="nav-collapse collapse">
-              <login class="nav pull-right" text="Sign In" client="devices-dashboard-id" redirect="redirect" scope="resources+privates"></login>
+              <login class="nav pull-right" client="devices-dashboard-id" redirect="redirect" scope="resources+privates"></login>
               <ul class="nav pull-right">
                 <li><a href="/what">Play demo</a></li>
                 <li><a href="/what">Learn more</a></li>
@@ -73,22 +84,35 @@
       </div>
     </div>
 
-    <script src="scripts/vendor/angular/angular.js"></script>
-    <script src="scripts/vendor/angular/angular-resource.js"></script>
-    <script src="scripts/vendor/angular/angular-cookies.js"></script>
-
-    <script src="scripts/vendor/lelylan/lelylan.js"></script>
-    <script src="scripts/vendor/lelylan/device-component.js"></script>
-
-    <script src="scripts/vendor/utils/underscore-min.js"></script>
-    <script src="scripts/vendor/utils/ui-bootstrap-0.2.0.js"></script>
-    <script src="scripts/vendor/utils/showdown.js"></script>
+    <script src="components/unstable-angular-complete/angular.js"></script>
+    <script src="components/unstable-angular-complete/angular-resource.js"></script>
+    <script src="components/unstable-angular-complete/angular-cookies.js"></script>
 
     <!-- build:js scripts/scripts.js -->
+    <script src="components/underscore/underscore.js"></script>
+    <script src="components/lelylan-ng/lelylan-ng.js"></script>
+    <script src="components/type-component-ng/type-component-ng.js"></script>
+    <script src="components/device-component-ng/device-component-ng.js"></script>
+
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/category-controller.js"></script>
     <script src="scripts/controllers/create-controller.js"></script>
     <script src="scripts/controllers/dashboard-controller.js"></script>
     <!-- endbuild -->
+
+    <script>
+      angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
+        .config(['$locationProvider', function($locationProvider) {
+          $locationProvider.html5Mode(true).hashPrefix('!');
+        }]);
+    </script>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
   </body>
 </html>

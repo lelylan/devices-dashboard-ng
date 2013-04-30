@@ -6,8 +6,12 @@ function CategoryCtrl(Device, AccessToken, $scope, $routeParams, $rootScope) {
 
   if ($scope.authorized) {
     $scope.devices = null;
+    $scope.loading = true;
+
     $scope.devices = Device.query({ category: category, per: 250 }, function() {
-      if ($scope.devices.length > 0) { $scope.selected = $scope.devices[0] }
+      $scope.loading = false;
+      if ($scope.devices.length > 0)
+        $scope.selected = $scope.devices[0]
     });
   };
 };

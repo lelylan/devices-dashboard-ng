@@ -1,11 +1,14 @@
+$linkColor:       #239cbb !default;
+$linkColorHover:  #01cf9e !default;
+
+$lelylanColor:    #239cbb !default;
+$typeBorderColor: #ddd    !default;
+$lineColor:       #e8e8e8 !default;
+
 @import "compass_twitter_bootstrap";
 @import "compass_twitter_bootstrap_responsive";
 @import "overlay";
 @import "circles";
-
-$lelylanColor: #239cbb !default;
-$lelylanBorderColor: #ddd !default;
-$lineColor: #e8e8e8 !default;
 
 
 /* Dashboard (generic) */
@@ -19,7 +22,7 @@ body {
 }
 
 .dashboard input {
-  @include placeholder(#ccc);
+  @include ctb-placeholder(#ccc);
 }
 
 .dashboard a:hover {
@@ -115,7 +118,7 @@ body {
     width: 360px;
     font-size: 26px;
     line-height: 32px;
-    @include border-radius(30px);
+    @include ctb-border-radius(30px);
   }
 
 
@@ -243,7 +246,7 @@ body {
   }
 
   .btn-lelylan {
-    @include buttonBackground($lelylanColor, $lelylanColor);
+    @include ctb-buttonBackground($lelylanColor, $lelylanColor);
   }
 
 
@@ -350,15 +353,17 @@ body {
     font-weight: 200;
   }
 
+  .presentation .description li,
   .presentation .description p {
-    font-size: 15px;
-    line-height: 24px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 28px;
+    color: #555;
   }
 
-  .presentation .description li {
-    font-size: 15px;
-    line-height: 24px;
+  .presentation .description ul,
+  .presentation .description p {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   .presentation .description .btn {
@@ -399,6 +404,10 @@ body {
     text-align: center;
   }
 
+  .home hr {
+    margin: 40px 0;
+  }
+
   .home h1.title {
     margin-top: 25px;
     font-size: 72px;
@@ -414,7 +423,7 @@ body {
   }
 
   .home .description {
-    margin-top: 30px;
+    margin-top: 55px;
     padding: 0px 30px;
   }
 

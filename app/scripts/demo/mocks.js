@@ -11,7 +11,6 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
   LoggedUser.set({ id: 1, name: 'try@lelylan.com' });
   $httpBackend.whenGET('http://api.lelylan.com/me').respond({ id: 1, email: 'try@lelylan.com' });
 
-
   /* Device List */
 
   var devices = [
@@ -130,6 +129,6 @@ test.run(['$httpBackend', 'LoggedUser', 'AccessToken',
 
   /* Pass through */
 
-  $httpBackend.whenGET(/partials/).passThrough();
+  $httpBackend.whenGET(/views/).passThrough();
   $httpBackend.whenGET(/templates/).passThrough();
 }]);

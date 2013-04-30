@@ -6,11 +6,12 @@ function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) 
 
   if ($scope.authorized) {
     $scope.devices = null;
+    $scope.loading = true;
 
     $scope.devices = Device.query({ per: 250 }, function() {
-      if ($scope.devices.length > 0) {
+      $scope.loading = false;
+      if ($scope.devices.length > 0)
         $scope.selected = $scope.devices[0]
-      }
     });
   }
   $scope.$on('lelylan:device:open', function(event, device) {

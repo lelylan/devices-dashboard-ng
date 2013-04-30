@@ -24,6 +24,12 @@ docs/
 # Temporary files
 .sass-cache/
 
-# Builds
-temp/
-dist/
+# Yeoman
+.bowerrc
+.editorconfig
+.gitattributes
+.jshintrc
+.tmp/
+
+# Development
+app/index-dev-local.html
