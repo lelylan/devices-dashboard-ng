@@ -79,8 +79,37 @@
       </div>
     </div>
 
+    <!-- build:js scripts/scripts.js -->
+    <script src="/components/unstable-angular-complete/angular.js"></script>
+    <script src="/components/unstable-angular-complete/angular-resource.js"></script>
+    <script src="/components/unstable-angular-complete/angular-cookies.js"></script>
 
-    <script src="scripts/84ad9c22.scripts.js"></script>
+    <script src="/components/underscore/underscore.js"></script>
+    <script src="/components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+    <script src="/components/lelylan-ng/lelylan-ng.js"></script>
+    <script src="/components/device-component-ng/device-component-ng.js"></script>
+    <script src="/components/type-component-ng/type-component-ng.js"></script>
+
+    <script src="/scripts/demo.js"></script>
+    <script src="/scripts/controllers/dashboard-controller.js"></script>
+    <script src="/scripts/controllers/create-controller.js"></script>
+    <script src="/scripts/controllers/devices-controller.js"></script>
+    <script src="/scripts/controllers/category-controller.js"></script>
+
+    <script src="/components/unstable-angular-complete/angular-mocks.js"></script>
+    <script src="/scripts/demo/mocks.js"></script>
+    <script src="/scripts/demo/light.js"></script>
+    <script src="/scripts/demo/lock.js"></script>
+    <script src="/scripts/demo/thermostat.js"></script>
+    <script src="/scripts/demo/clock.js"></script>
+    <script src="/scripts/demo/camera.js"></script>
+    <script src="/scripts/demo/alarm.js"></script>
+    <script src="/scripts/demo/meter.js"></script>
+    <script src="/scripts/demo/shutter.js"></script>
+    <script src="/scripts/demo/sprinkler.js"></script>
+    <script src="/scripts/demo/kettle.js"></script>
+    <!-- endbuild -->
+    <!--<script src="scripts/84ad9c22.scripts.js"></script>-->
 
     <script>
       angular.module('lelylan.dashboards.devices.demo').config(['$locationProvider', function($locationProvider) {
