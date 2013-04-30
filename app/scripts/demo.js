@@ -1,8 +1,8 @@
 'use strict';
 
-var app = angular.module('lelylan.dashboards.devices.demo', ['lelylan.components.device']);
+angular.module('lelylan.dashboards.devices.demo', ['lelylan.components.device']);
 
-app.config(['$routeProvider', function($routeProvider) {
+angular.module('lelylan.dashboards.devices.demo').config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', { templateUrl: 'views/home-demo.html', controller: DashboardCtrl }).
     when('/all', { templateUrl: 'views/devices.html', controller: DevicesCtrl }).
