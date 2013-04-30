@@ -3,10 +3,9 @@
 function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location) {
   $rootScope.active = '';
   $scope.oauth = {
-    client:   '<client-id>',
-    redirect: '<redirect>',
-    scope:    '<scope>',
-    state:    '<state>'
+    redirect: 'http://d.lelylan.com',
+    client:   '017b9f702a904869a80a0f9fd8ed88838f6e52bd39b147b19e69fed705e1b912',
+    scope:    'resources+privates'
   };
 
   $scope.$on('lelylan:logout', function(event) { $location.path('/home'); });

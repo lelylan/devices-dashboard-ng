@@ -11,6 +11,10 @@ class App < Sinatra::Base
     send_file File.join(settings.public_folder, 'index-dev.html')
   end
 
+  get '/demo/*', provides: 'html' do
+    send_file File.join(settings.public_folder, 'demo.html')
+  end
+
   get '/*', provides: 'html' do
     send_file File.join(settings.public_folder, 'index.html')
   end
