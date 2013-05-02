@@ -1,12 +1,14 @@
-$linkColor:       #239cbb !default;
-$linkColorHover:  #01cf9e !default;
+$linkColor:          #239cbb !default;
+$linkColorHover:     #01cf9e !default;
+$lelylanColor:       #239cbb !default;
+$lelylanBorderColor: #e8e8e8 !default;
 
-$lelylanColor:    #239cbb !default;
-$typeBorderColor: #ddd    !default;
-$lineColor:       #e8e8e8 !default;
+@import "device-component-ng.min";
+@import "type-component-ng.min";
 
 @import "compass_twitter_bootstrap";
 @import "compass_twitter_bootstrap_responsive";
+
 @import "overlay";
 @import "circles";
 
@@ -14,7 +16,7 @@ $lineColor:       #e8e8e8 !default;
 /* Dashboard (generic) */
 
 body {
-  background-color: $lineColor !important;
+  background-color: $lelylanBorderColor !important;
 }
 
 .dashboard {
@@ -108,7 +110,7 @@ body {
 
   .dashboard-content {
     background-color: #fff;
-    border: 1px solid $lineColor;
+    border: 1px solid $lelylanBorderColor;
     min-height: 760px;
     padding: 20px;
   }
@@ -133,8 +135,8 @@ body {
   /* Dashboard messages */
 
   .alert-block {
-    background-color: $lineColor;
-    border-color: $lineColor;
+    background-color: $lelylanBorderColor;
+    border-color: $lelylanBorderColor;
     color: #333;
   }
 
@@ -433,27 +435,7 @@ body {
     font-size: 18px;
     line-height: 28px;
   }
-
-
-
-  /* Presentation demo home page*/
-
-  .demo-home .demo-image {
-    margin: 30px 0 20px;
-  }
-
-  .demo-home .payoff {
-    margin: 30px 0 0;
-  }
-
-  .demo-home .description {
-    margin-left: 0;
-    padding:0 65px;
-  }
 }
-
-@import "device-component-ng.min";
-@import "type-component-ng.min";
 
 
 /* Device component overriding */
@@ -465,7 +447,7 @@ body {
 .devices .detail .device-component hr,
 .devices .preview .device-component {
   border-top: none;
-  border-color: $lineColor;
+  border-color: $lelylanBorderColor;
 }
 
 .devices .preview .device-component {
@@ -495,6 +477,7 @@ body {
 
 .devices .detail .device-component hr{
 }
+
 
 /* Type component overriding */
 
