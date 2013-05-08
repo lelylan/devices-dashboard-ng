@@ -303,7 +303,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
     }
 
     var setRelativeTime = function() {
-      scope.device.updated_at_relative = new Date(scope.device.updated_at).toRelativeTime(5000);
+      scope.device.updated_at_relative = new Date(scope.device.updated_at).toRelativeTime(60000);
       if (scope.relative) return false
       scope.relative = true
       $timeout(setRelativeTime, 60000);

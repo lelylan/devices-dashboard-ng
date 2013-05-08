@@ -8,7 +8,7 @@ function CategoryCtrl(Device, AccessToken, $scope, $routeParams, $rootScope) {
     $scope.devices = null;
     $scope.loading = true;
 
-    $scope.devices = Device.query({ category: category, per: 250 }, function() {
+    $scope.devices = Device.query({ categories: category, per: 250 }, function() {
       $scope.loading = false;
       if ($scope.devices.length > 0)
         $scope.selected = $scope.devices[0]
