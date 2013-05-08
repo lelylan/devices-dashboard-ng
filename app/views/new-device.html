@@ -33,7 +33,7 @@
         <small class="help-inline validation" ng-show="form.physical.$error.url">Not a URL</small>
         <small class="help-inline muted">Connect the physical device URI to control or <a href="http//dev.lelylan.com/api/physicals">learn how to create one</a> (leave it empty to simulate the device).</small>
       </div>
-      <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid"><i class="icon-white icon-pencil"></i> Create</button>
+      <button class="create btn btn-lelylan" ng-click="create()" ng-disabled="form.$invalid || disabled"><i class="icon-white icon-pencil"></i> Create</button>
       <button class="reset btn" ng-click="reset()" ng-disabled="!device.name && !device.type && !device.physical"><i class="icon-repeat"></i> Clear</button>
     </form>
   </div>

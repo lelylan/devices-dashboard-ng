@@ -8,10 +8,13 @@ function CreateCtrl(NewDevice, Device, AccessToken, $scope, $rootScope, $locatio
   $scope.device = NewDevice.get();
 
   $scope.create = function() {
+    $scope.disabled = true
+
     $scope.device.$save(function() {
       $rootScope.active = 'all';
       $location.url('/all');
       $scope.reset();
+      $scope.disabled = false;
     });
   };
 
