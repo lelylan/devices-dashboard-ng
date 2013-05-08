@@ -7,7 +7,7 @@ function TypesCtrl(NewDevice, AccessToken, Type, $scope, $rootScope, $http, $loc
     if ($rootScope.populars) {
       $scope.types = $rootScope.populars;
     } else {
-      $rootScope.populars = $scope.types = Type.popular({ per: 250 });
+      $rootScope.populars = $scope.types = popularTypes;
     }
   };
 

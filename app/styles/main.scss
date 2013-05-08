@@ -3,12 +3,8 @@ $linkColorHover:     #01cf9e !default;
 $lelylanColor:       #239cbb !default;
 $lelylanBorderColor: #e8e8e8 !default;
 
-@import "device-component-ng.min";
-@import "type-component-ng.min";
-
 @import "compass_twitter_bootstrap";
 @import "compass_twitter_bootstrap_responsive";
-
 @import "overlay";
 @import "circles";
 
@@ -68,6 +64,12 @@ body {
 
   .clearfix {
     margin-bottom: 0 !important;
+  }
+
+  .notifications .alert {
+    margin: 10px 0;
+    font-weight: 200;
+    font-size: 16px;
   }
 
 
@@ -357,7 +359,7 @@ body {
 
   .presentation .description li,
   .presentation .description p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 28px;
     color: #555;
   }

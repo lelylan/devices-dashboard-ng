@@ -1,4 +1,4 @@
-/* type-component-ng - v0.1.0 - 2013-04-30 */
+/* type-component-ng - v0.1.0 - 2013-05-02 */
 
 'use strict';
 

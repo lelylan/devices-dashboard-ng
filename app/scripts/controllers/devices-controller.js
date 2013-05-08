@@ -17,6 +17,11 @@ function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) 
   $scope.$on('lelylan:device:open', function(event, device) {
     $scope.selected = _.findWhere($scope.devices, { id: device.id });
   });
+
+  // BUG - If I do not apply the following functions the `pending` property gets lost.
+  // As far as I know this shouldn't happen and it's a bug that need to be solved.
+  $scope.$on('lelylan:device:request:start', function(event, device) { var resource = _.findWhere($scope.devices, { id: device.id }); resource= device.pending; });
+  $scope.$on('lelylan:device:request:end', function(event, device)   { var resource = _.findWhere($scope.devices, { id: device.id }); resource.pending = device.pending; });
 };
 
 DevicesCtrl.$inject = ['AccessToken', 'Device', '$scope', '$rootScope', '$http', '$location'];

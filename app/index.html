@@ -10,6 +10,8 @@
     <title>Lelylan Dashboard</title>
     <meta name="description" content="Lelylan Types">
     <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/device-component-ng.min.css">
+    <link rel="stylesheet" href="styles/type-component-ng.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="app" class="ng-cloak">
@@ -30,7 +32,8 @@
               <login class="nav pull-right"
                 client="{{oauth.client}}"
                 redirect="{{oauth.redirect}}"
-                scope="{{oauth.scope}}"></login>
+                scope="{{oauth.scope}}">
+              </login>
               <ul class="nav pull-right">
                 <li><a href="http://try.lelylan.com">Demo</a></li>
                 <li><a ng-class="{active: active=='learn'}" href="/learn">Learn more</a></li>
