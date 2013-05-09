@@ -15,6 +15,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     $location.path('/home');
   });
 
+
   $scope.$on('lelylan:device:delete', function(event, device) {
     $rootScope.active = '';
     $location.path('/');
