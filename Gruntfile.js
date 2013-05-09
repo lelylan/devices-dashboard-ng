@@ -75,6 +75,15 @@ module.exports = function (grunt) {
             ];
           }
         }
+      },
+      dist: {
+        options: {
+          middleware: function (connect) {
+            return [
+              mountFolder(connect, yeomanConfig.dist)
+            ];
+          }
+        }
       }
     },
     open: {
@@ -275,6 +284,13 @@ module.exports = function (grunt) {
     'compass:server',
     'livereload-start',
     'connect:livereload',
+    'open',
+    'watch'
+  ]);
+
+  grunt.registerTask('dist', [
+    'clean:server',
+    'connect:dist',
     'open',
     'watch'
   ]);
