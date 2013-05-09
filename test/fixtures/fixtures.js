@@ -28,8 +28,8 @@ var device = {
     id: '5', value: '0.5', expected: '0.5', pending: false,
     suggested: {}
   }],
-  creator_id: '1',
-  owner_id: '1',
+  maker: { id: '1' },
+  owner: { id: '1' },
   created_at: '2012-09-01T16:00:32Z',
   updated_at: '2013-04-10T16:19:20Z',
   updated_from: 'Andrea Reginato'
@@ -56,8 +56,7 @@ var type = {
   categories: ['lights'],
   created_at: '2012-09-01T15:01:22Z',
   updated_at: '2012-09-01T15:01:22Z',
-  owner_id: 1,
-  creator_id: 1,
+  owner: { id: 1 },
   properties: [{
     uri: 'http://api.lelylan.com/properties/1',
     id: '1',
@@ -174,3 +173,18 @@ var type = {
 var type2  = angular.copy(type);
 type2.id   = 2;
 type2.name = 'Lock';
+
+
+var categories = [
+  { name: 'lights' },
+  { name: 'locks' },
+  { name: 'thermostats' },
+  { name: 'alarms' },
+  { name: 'meters' },
+  { name: 'cameras' },
+  { name: 'windows' },
+  { name: 'appliances' },
+  { name: 'garddenings' },
+  { name: 'sensors' },
+  { name: 'others' }
+]

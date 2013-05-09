@@ -4,6 +4,7 @@
   </div>
 
   <!-- type list menu -->
+
   <ul class="nav nav-pills nav-type-menu">
     <li class="pull-right"><a href="javascript:" class="back" ng-click="back();"><span class="icon-chevron-left"></span> Back</a></li>
     <li><a href="javascript:" class="populars" ng-class="{active: typesMenu=='populars'}" ng-click="getPopular()"><span class="icon-star"></span> Popular</a></li>
@@ -11,28 +12,14 @@
     <li><a href="javascript:" class="all" ng-class="{active: typesMenu=='all'}" ng-click="getAll()"><span class="icon-list"></span> All</a></li>
   </ul>
 
-  <!-- types list-->
-  <div class="types types-list" ng-show="authorized && types.length!=0 && typesMenu!='all'">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Type Name</th>
-          <th>Creation Time</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="type type-{{type.id}}" ng-click="select(type)" ng-class="{active: type.id == selected.id}" ng-repeat="type in types | filter:query">
-          <td class="type-id">{{ type.id }}</td>
-          <td class="type-name"><a href="javascript:" ng-click="select(type)">{{ type.name }}</a></td>
-          <td class="type-created-at">{{ type.created_at | date: 'longDate' }}</td>
-          <td class="actions">
-            <a href="/types/{{type.id}}?name={{type.name}}"><i class="icon-circle-arrow-right"></i> Details</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- types list (popular and yours)-->
+
+  <div class="types types-list"  ng-show="authorized && types.length!=0 && typesMenu!='all'">
+    <div class="type type-{{type.id}}" ng-repeat="type in types | filter:query">
+      <a class="name" href="javascript:" ng-click="select(type)" >{{type.name}}</a>
+      <a class="details pull-right" href="/types/{{type.id}}?name={{type.name}}"><i class="icon-circle-arrow-right"></i> Details</a>
+      <hr class="clearfix"/>
+    </div>
   </div>
 
   <!-- types through id-->
@@ -43,12 +30,11 @@
           <div class="input-prepend">
             <span class="add-on">Type ID</span>
             <input class="xx-large" type="text" name="id" ng-model="id" placeholder="5042344b95fc441000000001" required minlength="24" maxlength="24">
-            <button class="create btn btn-lelylan" ng-click="load(form.id.$modelValue)" ng-disabled="form.$invalid">Select</button>
+            <button class="create btn btn-lelylan lelylan-big" ng-click="load(form.id.$modelValue)" ng-disabled="form.$invalid">Select</button>
           </div>
         </div>
           <small class="help-inline muted">
-            <a href="//t.lelylan.com/">Search on Lelylan Types</a> and place here the desired
-            Type ID.
+            Search the desired type on <a href="//t.lelylan.com/">Lelylan Types</a> and place its ID here.
           </small>
       </form>
     </div>

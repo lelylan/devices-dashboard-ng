@@ -163,7 +163,7 @@ button.lelylan-big {
 
   .new-view .control-group .muted {
     color: #666;
-    padding: 10px 0;
+    padding: 10px 0 7px;
     font-size: 16px;
     font-weight: 200;
   }
@@ -189,6 +189,10 @@ button.lelylan-big {
 
   .new-view .device-description .add-on {
     height: 122px;
+  }
+
+  .new-view input {
+    margin-bottom: 10px;
   }
 
   .new-view input.selector {
@@ -222,30 +226,14 @@ button.lelylan-big {
   }
 
 
-  /* Types list */
+  /* Type list */
 
-  .types-view .types-list table th,
-  .types-view .types-list table td {
-    line-height: 16px;
+  .types-view {
     font-weight: 200;
   }
 
-  .types-view .types-list table th {
-    font-weight: 200;
-    font-size: 20px;
-    line-height: 40px;
-  }
-
-  .types-view .types-list table td{
-    cursor: pointer;
-  }
-
-  .types-view .types-list td.actions a {
-    margin-left: 15px;
-  }
-
-  .types-view hr {
-    margin-bottom: 0;
+  .type hr {
+    margin-top: 10px;
   }
 
   .types-view .nav-type-menu {
@@ -253,35 +241,70 @@ button.lelylan-big {
     border: 1px solid #e8e8e8;
     border-left: none;
     border-right: none;
-    padding-left: 10px;
   }
 
   .types-view .nav-type-menu > li > a {
     background-color: transparent;
     font-weight: 200;
-    padding-right: 24px;
     padding-left: 0;
   }
+
+  .types-view .nav-type-menu > li > a.back {
+    padding-right: 0;
+  }
+
 
   .types-view .nav-type-menu > li > a.active {
     color: $linkColorHover;
   }
 
-  .types-view .types-all {
+  .types-view .types {
     margin-top: 30px;
   }
 
-  .types-view .types-all .type-id input {
-    width: 333px;
+  .types-view .type {
+    padding-top: 10px;
   }
 
-  .types-view .types-all .type-id button {
-    width: 115px;
-    height: 50px;
-    font-size: 26px;
-    line-height:40px;
-    margin-top: 0px;
-    margin-left: 15px;
+  .types-view .type a {
+    background-color: transparent;
+    padding-right: 0;
+  }
+
+  .types-view .type a.name {
+    font-size: 28px;
+    font-weight: 200;
+    line-height: 28px;
+    margin: 5px 0 0;
+    padding: 0;
+    text-transform: uppercase;
+  }
+
+  .types-view .type a.name:hover {
+    background: url(/images/icon-arrow-right-lg.png) no-repeat left 45%;
+    padding-left: 50px;
+  }
+
+  .types-view .type a.details {
+    margin-top: 7px;
+    margin-right: 2px
+  }
+
+  .types-view .types-all input {
+    width: 330px;
+  }
+
+  .types-view .types-all .create {
+    margin-left: 20px;
+    width: 120px;
+  }
+
+  .types-view .types-all .device-name {
+    margin-bottom: 5px;
+  }
+
+  .types-view .types-all small {
+    padding-left: 0;
   }
 
 

@@ -15,6 +15,7 @@ test.run(function($httpBackend, LoggedUser) {
   $httpBackend.whenGET('http://api.lelylan.com/types?per=250').respond([type]);
   $httpBackend.whenGET('http://api.lelylan.com/types/1').respond(type);
   $httpBackend.whenGET('http://api.lelylan.com/types/2').respond(type2);
+  $httpBackend.whenGET('http://api.lelylan.com/categories').respond(categories);
 
   /* Devices */
 
