@@ -1,4 +1,4 @@
-/* type-component-ng - v0.1.0 - 2013-04-30 */
+/* type-component-ng - v0.1.0 - 2013-05-09 */
 
 'use strict';
 
@@ -496,7 +496,7 @@ service.factory('Simulation', ['Device', function(Device) {
       properties: [],
       created_at: new Date(),
       updated_at: new Date(),
-      updated_from: { uri: 'http://api.lelylan.com/users/1', name: 'Lelylan' } };
+      updated_from: 'Lelylan' };
 
     _.each(type.properties, function(property) {
       var _property = {

@@ -10,7 +10,9 @@
     <title>Lelylan Dashboard</title>
     <meta name="description" content="Lelylan Types">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/c30bf17e.main.css">
+    <link rel="stylesheet" href="styles/device-component-ng.min.css">
+    <link rel="stylesheet" href="styles/type-component-ng.min.css">
+    <link rel="stylesheet" href="styles/3b10903a.main.css">
   </head>
   <body ng-app="app" class="ng-cloak">
     <!--[if lt IE 7]>
@@ -29,7 +31,7 @@
             <div class="nav-collapse collapse">
               <login class="nav pull-right" redirect="http://localhost:3100/index-dev.html" client="4487de6836551445653041e0ecdcc2ad6e0fe98ca1a958295d72097f5a97f76f" scope="resources+privates"></login>
               <ul class="nav pull-right">
-                <li><a href="http://d.lelylan.com/demo">Demo</a></li>
+                <li><a href="http://try.lelylan.com">Try Demo</a></li>
                 <li><a ng-class="{active: active=='learn'}" href="/learn">Learn more</a></li>
               </ul>
             </div>
@@ -78,13 +80,13 @@
         <!-- Footer  -->
 
         <footer class="pull-right">
-          <p>&copy; Lelylan 2013</p>
+          <p>&copy; <a href="http://lelylan.com">Lelylan</a> 2013</p>
         </footer>
       </div>
     </div>
 
 
-    <script src="scripts/84ad9c22.scripts.js"></script>
+    <script src="scripts/853a9774.scripts.js"></script>
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])

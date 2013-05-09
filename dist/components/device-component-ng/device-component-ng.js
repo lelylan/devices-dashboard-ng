@@ -1,4 +1,433 @@
-/* device-component-ng - v0.1.0 - 2013-04-30 */
+/* device-component-ng - v0.1.0 - 2013-05-08 */
+
+'use strict';
+
+angular.module('lelylan.components.device', [
+  'lelylan',
+  'lelylan.components.device.directive'
+]);
+
+'use strict';
+
+// TODO(reggie) Apply a whole code refactoring to the javascript
+// TODO(reggie) Set all classes to be independent using the prefix dc (*d*evice *c*omponent)
+var directives = angular.module('lelylan.components.device.directive', [])
+
+directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$timeout',
+  function(Device, Type, LoggedUser, $rootScope, $timeout) {
+
+  var template =
+    '<div class="device-component device-{{device.id}} type-{{type.id}}">' +
+      '<div class="dc-main" ng-show="loaded">' +
+        // Device header
+        '<div class="dc-header">' +
+          '<p class="dc-title lead" ng-show="!list">{{device.name}}</p>' +
+          // Top menu
+          '<div class="dc-menu" ng-show="menu">' +
+            '<ul class="nav nav-pills">' +
+              '<li><a href="javascript:" class="action-refresh" ng-click="refresh()"><i class="icon-repeat"></i> Refresh</a></li>' +
+              '<li><a href="javascript:" class="action-extend" ng-show="!extended" ng-click="extend()"><i class="icon-chevron-down"></i> Extended</a></li>' +
+              '<li><a href="javascript:" class="action-compact" ng-show="extended" ng-click="compact()"><i class="icon-chevron-up"></i> Compact</a></li>' +
+              '<li><a href="javascript:" class="action-main" ng-show="action.settings" ng-click="showMain()"><i class="icon-chevron-left"></i> Back</a></li>' +
+              '<li><a href="javascript:" class="action-settings" ng-show="action.main" ng-click="showSettings()"><i class="icon-pencil"></i> Settings</a></li>' +
+            '</ul>' +
+          '</div>' +
+          // Default status
+          '<div class="dc-function function-{{status.function.id}} row-fluid">' +
+            '<div class="dc-action">' +
+              '<a href="javascript:" class="execute" title="{{status.function.name}}" ng-click="execute(status.function)"><span class="icon-lelylan-execute-big"></span></a>' +
+              '<div ng-show="device.pending" id="pending-{{$id}}-{{device.id}}" class="pending"></div>' +
+            '</div>' +
+            '<div class="dc-description" ng-show="!list">' +
+              '<p class="status lead">{{status.name}}</p>' +
+              '<small class="dc-updated-from muted">{{device.updated_at_relative}} from {{device.updated_from}}</small>' +
+            '</div>' +
+            '<div class="dc-list-description" ng-show="list" ng-click="fireOpen()" ng-mouseover="entry=true" ng-mouseleave="entry=false">' +
+              '<p class="lead color dc-name">{{device.name}}</p>' +
+              '<p class="lead dc-status-name"><em>{{status.name}}</em></p>' +
+              '<a ng-show="!entry" class="dc-open" href="javascript:"><span class="dc-details icon-lelylan-chevron"></span></a>' +
+              '<a ng-show="entry" class="dc-open" href="javascript:"><span class="dc-details icon-lelylan-chevron-hover"></span></a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        // Device main information
+        '<div class="dc-main" ng-show="action.main && extended">' +
+          // Functions
+          '<div class="dc-functions">' +
+            '<hr/>' +
+            '<div class="dc-function function-{{function.id}}" ng-repeat="function in functions">' +
+              '<div class="row-fluid">' +
+                '<div class="action">' +
+                  '<a href="javascript:" class="execute" title="Execute {{function.name}}" ng-click="execute(function)">'+
+                    '<span class="icon-lelylan-execute-small" ng-show="!function.hover"></span>' +
+                    '<span class="icon-lelylan-execute-small-hover" ng-show="function.hover"></span>' +
+                  '</a>' +
+                  '<div class="dc-description">' +
+                    '<p class="name lead"><a href="javascript:" ng-click="execute(function)" ng-mouseover="function.hover=true" ng-mouseleave="function.hover=false">{{function.name}}</a></p>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          // Properties
+          '<div class="dc-properties">' +
+            '<hr/>' +
+            //'<p class="lead">Device Properties</p>' +
+            '<div class="dc-property property-{{property.id}}" ng-repeat="property in device.properties">' +
+              '<span class="name"><i class="icon-chevron-right"></i> {{property.name}}</span> ' +
+              '<span class="value color">{{property.accepted[property.expected] || property.expected}}</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        // Function forms
+        '<div class="dc-function-forms">' +
+          '<div class="dc-function-form function-form-{{function.id}}" ng-show="function.visible" ng-repeat="function in functions">' +
+            '<div class="row-fluid">' +
+              '<div>' +
+                '<p class="title lead">{{function.name}}</p>' +
+                '<small class="name muted">Fill the required params and execute your function</small>' +
+                '<hr/>' +
+                '<form>' +
+                  '<div ng-repeat="property in function.properties" ng-show="property.visible" class="property property-{{property.id}}">' +
+                    '<div>' +
+                      '<small class="muted">Set {{property.name}} to {{property.value}}</small><br/>' +
+                      '<input type="{{property.type}}" min="{{property.range.min}}" max="{{property.range.max}}" step="{{property.range.step}}" ng-model="property.value"></input>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div>' +
+                    '<button ng-click="updateProperties(function.properties)" class="update btn"><i class="icon-ok-sign"></i> Execute</button>' +
+                    '<button ng-click="function.visible=false" class="destroy btn"><i class="icon icon-remove"></i> Cancel</button>' +
+                  '</div>' +
+                '</form>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        // Settings
+        '<div class="dc-settings" ng-show="action.settings">' +
+
+          // Edit
+          '<div class="dc-edit">' +
+            '<hr/>' +
+            '<div>' +
+              '<p class="lead">Edit Device</p>' +
+              '<form name="editForm">' +
+                '<div class="control-group" ng-class="{error: editForm.name.$invalid}">' +
+                  '<div class="input-prepend">' +
+                    '<span class="add-on">Name &nbsp; &nbsp;</span>' +
+                    '<input type="text" name="name" ng-model="device.name" required><br/>' +
+                  '</div>' +
+                  '<small ng-show="editForm.name.$error.required" class="help-inline">Required</small>' +
+                '</div>' +
+                '<div class="control-group" ng-class="{error: editForm.physical.$invalid}" ng-show="user.id == device.maker.id">' +
+                  '<div class="input-prepend">' +
+                    '<span class="add-on">Physical</span>' +
+                    '<input type="url" name="physical" ng-model="device.physical"><br/>' +
+                  '</div>' +
+                  '<small ng-show="!editForm.physical.$error.url" class="help-inline">Set the physical device URI to connect</small>' +
+                  '<small ng-show="editForm.physical.$error.url" class="help-inline">Not a URL</small>' +
+                '</div>' +
+                '<div>' +
+                  '<button ng-click="update()" ng-disabled="editForm.$invalid || editForm.$pristine" class="update btn"><i class="icon-pencil"></i> Update</button>' +
+                  '<button ng-click="clear()" ng-disabled="editForm.$pristine" class="cancel btn"><i class="icon-refresh"></i> Reset</button>' +
+                '</div>' +
+              '</form>' +
+            '</div>' +
+          '</div>' +
+
+          // Destroy device
+          '<div class="dc-destroy" ng-show="user.id == device.maker.id">' +
+            '<hr/>' +
+            '<div>' +
+              '<p class="lead">Delete Device</p>' +
+              '<form name="destroyForm">' +
+                '<div class="control-group" ng-class="{error: confirm!=device.name}">' +
+                  '<div class="input-prepend">' +
+                    '<span class="add-on">Device name</span>' +
+                    '<input class="input-medium" type="text" name="name" ng-model="confirm"><br/>' +
+                  '</div>' +
+                  '<small class="help-inline">Deleting your device is irreversible. Enter your device name to confirm you want to permanently delete it.</small>' +
+                '</div>' +
+                '<div>' +
+                  '<button ng-click="destroy()" ng-disabled="confirm!=device.name" class="destroy btn btn-danger"><i class="icon-white icon-remove"></i> Delete Device</button>' +
+                '</div>' +
+              '</form>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  var definition = {
+    restrict: 'EA',
+    replace: true,
+    template: template,
+    scope: {
+      deviceId: '=',
+      deviceJson: '=',
+      deviceType: '=',
+      deviceView: '@',
+      deviceMenu: '@',
+    }
+  };
+
+  definition.link = function postLink(scope, element, attrs) {
+
+    scope.action = { main: true };
+    scope.loaded = false;
+    scope.user   = LoggedUser.get();
+
+    /* Watchers */
+    scope.$watch('deviceId', function(value) {
+      if (scope.deviceId)
+        scope.device = Device.get({ id: scope.deviceId }, initialize);
+    });
+
+    scope.$watch('deviceJson', function(value, old) {
+      if (scope.deviceJson) {
+        scope.type   = null;
+        scope.device = scope.deviceJson;
+        initialize();
+      }
+    });
+
+    scope.$watch('deviceType', function(value, old) {
+      if (scope.deviceType) { scope.type = scope.deviceType; }
+      if (value != old) { initFunctionForms(); initResources(); } // HACK to reload the type when it changes (and device is already loaded)
+    });
+
+    scope.$watch('deviceView', function(value) {
+      scope.list = (scope.deviceView == 'list');
+      scope.extended = (scope.deviceView == 'compact') ? false : true
+      scope.extended = (scope.deviceView == 'list') ? false : scope.extended
+    });
+
+    scope.$watch('deviceMenu', function(value) {
+      scope.menu = (scope.deviceMenu) ? scope.deviceMenu : true
+      if (scope.deviceView == 'list' && !scope.deviceMenu) scope.menu = false;
+    });
+
+    // Component initialization.
+    var initialize = function() {
+      if (scope.deviceType) { scope.type = scope.deviceType } // HACK due to the fact that the type component could not be loaded yet
+      (scope.type) ? initComponent() : scope.type = Type.get({ id: scope.device.type.id }, initComponent);
+    };
+
+    var initComponent = function() {
+      initFunctionForms();       // define the function form logic
+      initResources();           // extend device.properties and function.each.properties
+      $timeout(setPreloader, 0); // define the preloader
+      scope.loaded = true;       // until the initialization part is not ended the component is not visible
+    };
+
+    // Extend device.properties and function.each.properties binding values.
+    var initResources = function(internal) {
+      if (scope.loaded && !internal)   // send an event when properties are updated
+        fireRequestEnd();
+
+      extendDeviceProperties();       // extende device properties with type properties
+      extendFunctionsProperties();    // extende type functions properties with type properties
+      setDeviceStatus();              // find the device status
+      hideFunctionForms();
+    };
+
+    // Menu options
+    scope.showSettings = function() { scope.action = { settings: true }; };
+    scope.showMain     = function() { scope.action = { main: true }; };
+    scope.compact      = function() { scope.extended = false; scope.action = { main: true }; };
+    scope.extend       = function() { scope.extended = true; scope.action = { main: true }; };
+
+    // Execute the device function. If the function form is visible it first shows it.
+    scope.execute = function(_function) {
+      (!_function.hasForm) ? scope.updateProperties(_function.properties) : _function.visible = !_function.visible;
+      hideFunctionForms(_function.id);
+    };
+
+    // Update the device
+    scope.update = function() {
+      scope.device.$update(function() {
+        initResources();
+        scope.showMain();
+        scope.editForm.$setPristine();
+      });
+    };
+
+    // Update the device properties
+    scope.updateProperties = function(properties) {
+      var device = new Device({ id: scope.device.id, properties: properties});
+      device.$properties({}, function() {
+        scope.device = device;
+        initResources()
+      });
+
+      extendResources(scope.device.properties, properties);
+      scope.device.pending = true;
+      fireRequestStart();
+    };
+
+    // Reload the device
+    scope.refresh = function() {
+      scope.device.pending = true;
+      fireRequestStart();
+      scope.refreshing = Device.get({ id: scope.device.id }, function() {
+        scope.device = scope.refreshing;
+        initResources();
+      });
+    };
+
+    // Destroy the resource and hide the component
+    scope.destroy = function() {
+      scope.device.$delete(function() {
+        fireDelete();
+      })
+    }
+
+    scope.clear = function() {
+      scope.device.name = scope.original.name;
+      scope.device.physical = scope.original.physical;
+      scope.editForm.$setPristine();
+    }
+
+    // ----------------
+    // Helper methods
+    // ----------------
+
+    // Extends the device properties injecting the type properties attributes
+    var extendDeviceProperties = function(device) {
+      setRelativeTime();                                                // set a 'time ago' date format
+      if (scope.device.physical && scope.device.physical.uri)
+        scope.device.physical = scope.device.physical.uri;              // set the physical value that is used from the edit form
+      extendResources(scope.device.properties, scope.type.properties);  // extend device properties with type properties
+      scope.original = angular.copy(scope.device);                      // device copy used for the edit clear form
+    }
+
+    var setRelativeTime = function() {
+      scope.device.updated_at_relative = new Date(scope.device.updated_at).toRelativeTime(60000);
+      if (scope.relative) return false
+      scope.relative = true
+      $timeout(setRelativeTime, 60000);
+    }
+
+    // Extends the type functions properties injecting type properties
+    var extendFunctionsProperties = function() {
+      _.each(scope.functions, function(_function) {
+        extendResources(_function.properties, scope.type.properties); // extends function.properties with type.properties
+        _.each(_function.properties, function(property) {             // extends function.properties value with the device property value
+          if (property.visible)                                       // if property is not visible it already has a default value
+            property.value = findResource(property.id, scope.device.properties).value;
+        });
+      });
+    };
+
+    // Extends the type functions properties injecting the device value
+    var initFunctionForms = function() {
+      scope.functions = angular.copy(scope.type.functions); // copy all type functions in a local var (do not update type)
+      _.each(scope.functions, function(_function) {
+        // check which function properties need to be set as visible (if property value is empty)
+        _.each(_function.properties, function(property) { property.visible = (property.value == null) });
+        // check which functions need to be set as visible (if one property is visible)
+        _function.hasForm = _.reduce(_function.properties, function(result, property) { return result || property.visible; }, false);
+      });
+    }
+
+    // Extend a list of resources with an extended version.
+    var extendResources = function(resources, fromResources) {
+      _.each(resources, function(resource) {
+        angular.extend(resource, findResource(resource.id, fromResources));
+      });
+    };
+
+    // Returns the desired resource through its ID
+    var findResource = function(id, resources) {
+      var result = { id: 'undefined', name: 'Undefined' };
+      result = _.find(resources, function(resource) { return resource.id == id })
+      return result
+    };
+
+    // Find the device status
+    // TODO Improve with a check on pending, value and expected
+    var setDeviceStatus = function() {
+      scope.status = { name: 'undefined' }
+      _.each(scope.type.statuses, function(status) {
+        _.each(status.properties, function(property) {
+          var list   = property.values;
+          var object = findResource(property.id, scope.device.properties).value;
+          if (_.contains(list, object)) setStatus(status);
+        });
+      });
+    };
+
+    // Set the device status
+    var setStatus = function(status) {
+      scope.status = status;
+      scope.status.function = findResource(scope.status.function.id, scope.functions);
+    }
+
+    // Close all open function forms
+    var hideFunctionForms = function(exception_id) {
+      _.each(scope.functions, function(_function) {
+        if (_function.id != exception_id) _function.visible = false;
+      });
+    }
+
+
+    /* Events Emitter */
+
+    scope.fireOpen = function() {
+      $rootScope.$broadcast('lelylan:device:open', scope.device);
+    };
+
+    var fireDelete = function() {
+      $rootScope.$broadcast('lelylan:device:delete', scope.device);
+    };
+
+    var fireRequestStart = function() {
+      $rootScope.$broadcast('lelylan:device:request:start', scope.device);
+    };
+
+    var fireRequestEnd = function() {
+      $rootScope.$broadcast('lelylan:device:request:end', scope.device);
+    };
+
+
+    /* Events Listener */
+
+    scope.$on('lelylan:device:request:start', function(event, device) {
+      syncProperties(device)
+    });
+
+    scope.$on('lelylan:device:request:end', function(event, device) {
+      syncProperties(device)
+    });
+
+    var syncProperties = function(device) {
+      if (device.id == scope.device.id) {
+        scope.device = device;
+        initResources(true);
+      }
+    }
+
+
+    /* Preloader */
+
+    var setPreloader = function() {
+      if (scope.preloader) return null;
+      scope.preloader = true;
+
+      var cl = new CanvasLoader('pending-' + scope.$id + '-' + scope.device.id);
+      cl.setColor('#01cf9e');
+      cl.setDiameter(20);
+      cl.setDensity(70);
+      cl.setRange(0.7);
+      cl.setSpeed(2);
+      cl.setFPS(35);
+      cl.show();
+    }
+  };
+
+  return definition
+}]);
 
 (function(w){var k=function(b,c){typeof c=="undefined"&&(c={});this.init(b,c)},a=k.prototype,o,p=["canvas","vml"],f=["oval","spiral","square","rect","roundRect"],x=/^\#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/,v=navigator.appVersion.indexOf("MSIE")!==-1&&parseFloat(navigator.appVersion.split("MSIE")[1])===8?true:false,y=!!document.createElement("canvas").getContext,q=true,n=function(b,c,a){var b=document.createElement(b),d;for(d in a)b[d]=a[d];typeof c!=="undefined"&&c.appendChild(b);return b},m=function(b,
 c){for(var a in c)b.style[a]=c[a];return b},t=function(b,c){for(var a in c)b.setAttribute(a,c[a]);return b},u=function(b,c,a,d){b.save();b.translate(c,a);b.rotate(d);b.translate(-c,-a);b.beginPath()};a.init=function(b,c){if(typeof c.safeVML==="boolean")q=c.safeVML;try{this.mum=document.getElementById(b)!==void 0?document.getElementById(b):document.body}catch(a){this.mum=document.body}c.id=typeof c.id!=="undefined"?c.id:"canvasLoader";this.cont=n("div",this.mum,{id:c.id});if(y)o=p[0],this.can=n("canvas",
@@ -133,425 +562,3 @@ a.hide=function(){typeof this.timer==="number"&&(clearInterval(this.timer),delet
 Date.fromString = function(str) {
   return new Date(Date.parse(str));
 };
-
-'use strict';
-
-angular.module('lelylan.components.device', [
-  'lelylan',
-  'lelylan.components.device.directive'
-]);
-
-'use strict';
-
-// TODO(reggie) Apply a whole code refactoring to the javascript
-// TODO(reggie) Set all classes to be independent using the prefix dc (*d*evice *c*omponent)
-var directives = angular.module('lelylan.components.device.directive', [])
-
-directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$timeout',
-  function(Device, Type, LoggedUser, $rootScope, $timeout) {
-
-  var template =
-    '<div class="device-component device-{{device.id}} type-{{type.id}}">' +
-      '<div class="dc-message" ng-show="destroyed && loaded">' +
-        '<p class="lead">The device <strong>{{type.name}}</strong> has been successfully deleted</p>' +
-      '</div>' +
-      '<div class="dc-main" ng-show="!destroyed && loaded">' +
-        // Device header
-        '<div class="dc-header">' +
-          '<p class="dc-title lead" ng-show="!list">{{device.name}}</p>' +
-          // Top menu
-          '<div class="dc-menu" ng-show="menu">' +
-            '<ul class="nav nav-pills">' +
-              '<li><a href="javascript:" class="action-refresh" ng-click="refresh()"><i class="icon-repeat"></i> Refresh</a></li>' +
-              '<li><a href="javascript:" class="action-extend" ng-show="!extended" ng-click="extend()"><i class="icon-chevron-down"></i> Extended</a></li>' +
-              '<li><a href="javascript:" class="action-compact" ng-show="extended" ng-click="compact()"><i class="icon-chevron-up"></i> Compact</a></li>' +
-              '<li><a href="javascript:" class="action-main" ng-show="action.settings" ng-click="showMain()"><i class="icon-chevron-left"></i> Back</a></li>' +
-              '<li><a href="javascript:" class="action-settings" ng-show="action.main" ng-click="showSettings()"><i class="icon-pencil"></i> Settings</a></li>' +
-            '</ul>' +
-          '</div>' +
-          // Default status
-          '<div class="dc-function function-{{status.function.id}} row-fluid">' +
-            '<div class="action">' +
-              '<a href="javascript:" ng-click="execute(status.function)" class="execute" title="{{status.function.name}}"></a>' +
-              '<div ng-show="device.pending" id="pending-{{$id}}-{{device.id}}" class="pending"></div>' +
-            '</div>' +
-            '<div class="dc-description" ng-show="!list">' +
-              '<p class="status lead">{{status.name}}</p>' +
-              '<small class="dc-updated-from muted">{{device.updated_at_relative}} from {{device.updated_from.name}}</small>' +
-            '</div>' +
-            '<div class="dc-list-description" ng-show="list" ng-click="fireOpen()" ng-mouseover="entry=true" ng-mouseleave="entry=false">' +
-              '<p class="lead color dc-name">{{device.name}}</p>' +
-              '<p class="lead dc-status-name"><em>{{status.name}}</em></p>' +
-              '<a ng-show="!entry" class="dc-open" href="javascript:"><img class="dc-details" src="/images/chevron-right.png"></a>' +
-              '<a ng-show="entry" class="dc-open" href="javascript:"><img class="dc-details" src="/images/chevron-right-hover.png"></a>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        // Device main information
-        '<div class="dc-main" ng-show="action.main && extended">' +
-          // Functions
-          '<div class="dc-functions">' +
-            '<hr/>' +
-            '<div class="dc-function function-{{function.id}}" ng-repeat="function in functions">' +
-              '<div class="row-fluid">' +
-                '<div class="action">' +
-                  '<a href="javascript:" ng-click="execute(function)" title="Execute {{function.name}}" class="execute"></a>' +
-                '</div>' +
-                '<div class="dc-description">' +
-                  '<p class="name lead"><a href="javascript:" ng-click="execute(function)">{{function.name}}</a></p>' +
-                '</div>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          // Properties
-          '<div class="dc-properties">' +
-            '<hr/>' +
-            '<p class="lead">Device Properties</p>' +
-            '<div class="dc-property property-{{property.id}}" ng-repeat="property in device.properties">' +
-              '<span class="name"><i class="icon-chevron-right"></i> {{property.name}}</span> ' +
-              '<span class="value color">{{property.accepted[property.expected] || property.expected}}</span>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        // Function forms
-        '<div class="dc-function-forms">' +
-          '<div class="dc-function-form function-form-{{function.id}}" ng-show="function.visible" ng-repeat="function in functions">' +
-            '<div class="row-fluid">' +
-              '<div>' +
-                '<p class="title lead">{{function.name}}</p>' +
-                '<small class="name muted">Fill the required params and execute your function</small>' +
-                '<hr/>' +
-                '<form>' +
-                  '<div ng-repeat="property in function.properties" ng-show="property.visible" class="property property-{{property.id}}">' +
-                    '<div>' +
-                      '<small class="muted">Set {{property.name}} to {{property.value}}</small><br/>' +
-                      '<input type="{{property.type}}" min="{{property.range.min}}" max="{{property.range.max}}" step="{{property.range.step}}" ng-model="property.value"></input>' +
-                    '</div>' +
-                  '</div>' +
-                  '<div>' +
-                    '<button ng-click="updateProperties(function.properties)" class="update btn"><i class="icon-ok-sign"></i> Execute</button>' +
-                    '<button ng-click="function.visible=false" class="destroy btn"><i class="icon icon-remove"></i> Cancel</button>' +
-                  '</div>' +
-                '</form>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-
-        // Settings
-        '<div class="dc-settings" ng-show="action.settings">' +
-
-          // Edit
-          '<div class="dc-edit">' +
-            '<hr/>' +
-            '<div>' +
-              '<p class="lead">Edit Device</p>' +
-              '<form name="editForm">' +
-                '<div class="control-group" ng-class="{error: editForm.name.$invalid}">' +
-                  '<div class="input-prepend">' +
-                    '<span class="add-on">Name &nbsp; &nbsp;</span>' +
-                    '<input type="text" name="name" ng-model="device.name" required><br/>' +
-                  '</div>' +
-                  '<small ng-show="editForm.name.$error.required" class="help-inline">Required</small>' +
-                '</div>' +
-                '<div class="control-group" ng-class="{error: editForm.physical.$invalid}" ng-show="user.id == device.creator_id">' +
-                  '<div class="input-prepend">' +
-                    '<span class="add-on">Physical</span>' +
-                    '<input type="url" name="physical" ng-model="device.physical"><br/>' +
-                  '</div>' +
-                  '<small ng-show="!editForm.physical.$error.url" class="help-inline">Set the physical device URI to connect</small>' +
-                  '<small ng-show="editForm.physical.$error.url" class="help-inline">Not a URL</small>' +
-                '</div>' +
-                '<div>' +
-                  '<button ng-click="update()" ng-disabled="editForm.$invalid || editForm.$pristine" class="update btn"><i class="icon-pencil"></i> Update</button>' +
-                  '<button ng-click="clear()" ng-disabled="editForm.$pristine" class="cancel btn"><i class="icon-refresh"></i> Reset</button>' +
-                '</div>' +
-              '</form>' +
-            '</div>' +
-          '</div>' +
-
-          // Destroy device
-          '<div class="dc-destroy" ng-show="user.id == device.creator_id">' +
-            '<hr/>' +
-            '<div>' +
-              '<p class="lead">Delete Device</p>' +
-              '<form name="destroyForm">' +
-                '<div class="control-group" ng-class="{error: confirm!=device.name}">' +
-                  '<div class="input-prepend">' +
-                    '<span class="add-on">Device name</span>' +
-                    '<input class="input-medium" type="text" name="name" ng-model="confirm"><br/>' +
-                  '</div>' +
-                  '<small class="help-inline">Deleting your device is irreversible. Enter your device name to confirm you want to permanently delete it.</small>' +
-                '</div>' +
-                '<div>' +
-                  '<button ng-click="destroy()" ng-disabled="confirm!=device.name" class="destroy btn btn-danger"><i class="icon-white icon-remove"></i> Delete Device</button>' +
-                '</div>' +
-              '</form>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
-
-  var definition = {
-    restrict: 'EA',
-    replace: true,
-    template: template,
-    scope: {
-      deviceId: '=',
-      deviceJson: '=',
-      deviceType: '=',
-      deviceView: '@',
-      deviceMenu: '@',
-    }
-  };
-
-  definition.link = function postLink(scope, element, attrs) {
-
-    scope.action = { main: true };
-    scope.loaded = false;
-    scope.user   = LoggedUser.get();
-
-    /* Watchers */
-    scope.$watch('deviceId', function(value) {
-      if (scope.deviceId)
-        scope.device = Device.get({ id: scope.deviceId }, initialize);
-    });
-
-    scope.$watch('deviceJson', function(value, old) {
-      if (scope.deviceJson) {
-        scope.type   = null;
-        scope.device = scope.deviceJson;
-        initialize();
-      }
-    });
-
-    scope.$watch('deviceType', function(value, old) {
-      if (scope.deviceType) { scope.type = scope.deviceType; }
-      if (value != old) { initFunctionForms(); initResources(); } // HACK to reload the type when it changes (and device is already loaded)
-    });
-
-    scope.$watch('deviceView', function(value) {
-      scope.list = (scope.deviceView == 'list');
-      scope.extended = (scope.deviceView == 'compact') ? false : true
-      scope.extended = (scope.deviceView == 'list') ? false : scope.extended
-    });
-
-    scope.$watch('deviceMenu', function(value) {
-      scope.menu = (scope.deviceMenu) ? scope.deviceMenu : true
-      if (scope.deviceView == 'list' && !scope.deviceMenu) scope.menu = false;
-    });
-
-    // Component initialization.
-    var initialize = function() {
-      if (scope.deviceType) { scope.type = scope.deviceType } // HACK due to the fact that the type component could not be loaded yet
-      (scope.type) ? initComponent() : scope.type = Type.get({ id: scope.device.type.id }, initComponent);
-    };
-
-    var initComponent = function() {
-      initFunctionForms();       // define the function form logic
-      initResources();           // extend device.properties and function.each.properties
-      $timeout(setPreloader, 0); // define the preloader
-      scope.loaded = true;       // until the initialization part is not ended the component is not visible
-    };
-
-    // Extend device.properties and function.each.properties binding values.
-    var initResources = function(internal) {
-      if (scope.loaded && !internal)   // send an event when properties are updated
-        fireRequestEnd();
-
-      extendDeviceProperties();       // extende device properties with type properties
-      extendFunctionsProperties();    // extende type functions properties with type properties
-      setDeviceStatus();              // find the device status
-      hideFunctionForms();
-    };
-
-    // Menu options
-    scope.showSettings = function() { scope.action = { settings: true }; };
-    scope.showMain     = function() { scope.action = { main: true }; };
-    scope.compact      = function() { scope.extended = false; scope.action = { main: true }; };
-    scope.extend       = function() { scope.extended = true; scope.action = { main: true }; };
-
-    // Execute the device function. If the function form is visible it first shows it.
-    scope.execute = function(_function) {
-      (!_function.hasForm) ? scope.updateProperties(_function.properties) : _function.visible = !_function.visible;
-      hideFunctionForms(_function.id);
-    };
-
-    // Update the device
-    scope.update = function() {
-      scope.device.$update(function() {
-        initResources();
-        scope.showMain();
-        scope.editForm.$setPristine();
-      });
-    };
-
-    // Update the device properties
-    scope.updateProperties = function(properties) {
-      var device = new Device({ id: scope.device.id, properties: properties});
-      device.$properties({}, function() {
-        scope.device = device;
-        initResources()
-      });
-
-      extendResources(scope.device.properties, properties);
-      scope.device.pending = true;
-      fireRequestStart();
-    };
-
-    // Reload the device
-    scope.refresh = function() {
-      scope.device.pending = true;
-      scope.refreshing = Device.get({ id: scope.device.id }, initResources);
-    };
-
-    // Destroy the resource and hide the component
-    scope.destroy = function() {
-      scope.device.$delete(function() {
-        scope.destroyed = true;
-        fireDelete();
-      })
-    }
-
-    scope.clear = function() {
-      scope.device.name = scope.original.name;
-      scope.device.physical = scope.original.physical;
-      scope.editForm.$setPristine();
-    }
-
-    // ----------------
-    // Helper methods
-    // ----------------
-
-    // Extends the device properties injecting the type properties attributes
-    var extendDeviceProperties = function(device) {
-      if (scope.refreshing) scope.device = scope.refreshing;                         // [hack] to not make the UI change while waiting for the response
-      setRelativeTime();                                                             // set a 'time ago' date format
-      if (scope.device.physical) scope.device.physical = scope.device.physical.uri;  // set the physical value that is used from the edit form
-      extendResources(scope.device.properties, scope.type.properties);               // extend device properties with type properties
-      scope.original = angular.copy(scope.device);                                   // device copy used for the edit clear form
-    }
-
-    var setRelativeTime = function() {
-      scope.device.updated_at_relative = new Date(scope.device.updated_at).toRelativeTime(5000);
-      $timeout(setRelativeTime, 60000);
-    }
-
-    // Extends the type functions properties injecting type properties
-    var extendFunctionsProperties = function() {
-      _.each(scope.functions, function(_function) {
-        extendResources(_function.properties, scope.type.properties); // extends function.properties with type.properties
-        _.each(_function.properties, function(property) {             // extends function.properties value with the device property value
-          if (property.visible)                                       // if property is not visible it already has a default value
-            property.value = findResource(property.id, scope.device.properties).value;
-        });
-      });
-    };
-
-    // Extends the type functions properties injecting the device value
-    var initFunctionForms = function() {
-      scope.functions = angular.copy(scope.type.functions); // copy all type functions in a local var (do not update type)
-      _.each(scope.functions, function(_function) {
-        // check which function properties need to be set as visible (if property value is empty)
-        _.each(_function.properties, function(property) { property.visible = (property.value == null) });
-        // check which functions need to be set as visible (if one property is visible)
-        _function.hasForm = _.reduce(_function.properties, function(result, property) { return result || property.visible; }, false);
-      });
-    }
-
-    // Extend a list of resources with an extended version.
-    var extendResources = function(resources, fromResources) {
-      _.each(resources, function(resource) {
-        angular.extend(resource, findResource(resource.id, fromResources));
-      });
-    };
-
-    // Returns the desired resource through its ID
-    var findResource = function(id, resources) {
-      var result = { id: 'undefined', name: 'Undefined' };
-      result = _.find(resources, function(resource) { return resource.id == id })
-      return result
-    };
-
-    // Find the device status
-    // TODO Improve with a check on pending, value and expected
-    var setDeviceStatus = function() {
-      scope.status = { name: 'undefined' }
-      _.each(scope.type.statuses, function(status) {
-        _.each(status.properties, function(property) {
-          var list   = property.values;
-          var object = findResource(property.id, scope.device.properties).value;
-          if (_.contains(list, object)) setStatus(status);
-        });
-      });
-    };
-
-    // Set the device status
-    var setStatus = function(status) {
-      scope.status = status;
-      scope.status.function = findResource(scope.status.function.id, scope.functions);
-    }
-
-    // Close all open function forms
-    var hideFunctionForms = function(exception_id) {
-      _.each(scope.functions, function(_function) {
-        if (_function.id != exception_id) _function.visible = false;
-      });
-    }
-
-
-    /* Events Emitter */
-
-    scope.fireOpen = function() {
-      $rootScope.$broadcast('lelylan:device:open', scope.device);
-    };
-
-    var fireDelete = function() {
-      $rootScope.$broadcast('lelylan:device:delete', scope.device);
-    };
-
-    var fireRequestStart = function() {
-      $rootScope.$broadcast('lelylan:device:request:start', scope.device);
-    };
-
-    var fireRequestEnd = function() {
-      $rootScope.$broadcast('lelylan:device:request:end', scope.device);
-    };
-
-
-    /* Events Listener */
-
-    scope.$on('lelylan:device:request:start', function(event, device) {
-      syncProperties(device)
-    });
-
-    scope.$on('lelylan:device:request:end', function(event, device) {
-      syncProperties(device)
-    });
-
-    var syncProperties = function(device) {
-      if (device.id == scope.device.id) {
-        scope.device.properties = device.properties;
-        scope.device.pending = device.pending;
-        initResources(true);
-      }
-    }
-
-
-    /* Preloader */
-
-    var setPreloader = function() {
-      var cl = new CanvasLoader('pending-' + scope.$id + '-' + scope.device.id);
-      cl.setColor('#01cf9e');
-      cl.setDiameter(20);
-      cl.setDensity(70);
-      cl.setRange(0.7);
-      cl.setSpeed(2);
-      cl.setFPS(35);
-      cl.show();
-    }
-  };
-
-  return definition
-}]);
