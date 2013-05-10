@@ -1,6 +1,6 @@
 'use strict';
 
-var popularTypesList =
+var popularTypes =
 [{
 	"id": "518be107ef539711af000001",
 	"uri": "http://api.lelylan.com/types/518be107ef539711af000001",
