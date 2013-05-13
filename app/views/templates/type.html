@@ -263,8 +263,8 @@
                       <td class="tc-description-name" row-span="{{function.properties.length}}">Properties update</td>
                       <td>
                         <div ng-repeat="property in function.properties">
-                          <p class="tc-defined" ng-show="!!property.value"><code>{{property.name}}</code> to <code>{{property.value}}</code>
-                          <p class="tc-to-define" ng-show="!property.value"><code>{{property.name}}</code> will be asked to the user
+                          <p class="tc-defined" ng-show="!!property.expected"><code>{{property.name}}</code> to <code>{{property.expected}}</code>
+                          <p class="tc-to-define" ng-show="!property.expected"><code>{{property.name}}</code> will be asked to the user
                         </div>
                       </td>
                     </tr>
@@ -293,7 +293,7 @@
                       <div class="input-prepend">
                         <span class="add-on">Property {{form.property}}</span>
                         <select ng-options="value.id as value.name for value in type.properties" name="function-property-id" ng-model="property.id" required></select>
-                        <span class="add-on intern">Value</span><input class="intern" type="text" name="function-property-value" ng-model="property.value" placeholder="User input">
+                        <span class="add-on intern">Value</span><input class="intern" type="text" name="function-property-value" ng-model="property.expected" placeholder="User input">
                       </div>
                     </div>
                     <small class="help-inline"><a href="javascript:" class="add-function-property" ng-click="addFunctionProperty(function)">Add new property</a></small>
