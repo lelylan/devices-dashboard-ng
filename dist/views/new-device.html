@@ -23,13 +23,13 @@
           <input class="input-xxlarge" type="text" name="name" ng-model="device.name" placeholder="Bedroom Light" required>
         </div>
       </div>
-      <div class="device-physical control-group" ng-class="{error: form.physical.$invalid}">
+      <div class="device-physical control-group" ng-class="{error: form.physical.uri.$invalid}">
         <small class="help-inline muted"><span class="badge">3</span>Connect the physical device URI <a href="//dev.lelylan.com/api/physicals">(learn how to create one)</a>  or leave it empty to simulate one</small>
         <div class="input-prepend">
           <span class="add-on">Physical</span>
           <input class="input-xxlarge" type="url" name="physical" ng-model="device.physical.uri" placeholder="Physical Device URI (optional)">
         </div>
-        <small class="help-inline validation" ng-show="form.physical.$error.url">Not a URL</small>
+        <small class="help-inline validation" ng-show="form.physical.uri.$error.url">Not a URL</small>
       </div>
       <br/>
       <button class="create btn btn-lelylan lelylan-big" ng-click="create()" ng-disabled="form.$invalid || disabled">Create</button>

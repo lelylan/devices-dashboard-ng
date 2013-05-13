@@ -1,4 +1,4 @@
-/* device-component-ng - v0.1.0 - 2013-05-08 */
+/* device-component-ng - v0.1.0 - 2013-05-13 */
 
 'use strict';
 
@@ -11,9 +11,9 @@ angular.module('lelylan.components.device', [
 
 // TODO(reggie) Apply a whole code refactoring to the javascript
 // TODO(reggie) Set all classes to be independent using the prefix dc (*d*evice *c*omponent)
-var directives = angular.module('lelylan.components.device.directive', [])
+angular.module('lelylan.components.device.directive', [])
 
-directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$timeout',
+angular.module('lelylan.components.device.directive').directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$timeout',
   function(Device, Type, LoggedUser, $rootScope, $timeout) {
 
   var template =
@@ -75,7 +75,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
             //'<p class="lead">Device Properties</p>' +
             '<div class="dc-property property-{{property.id}}" ng-repeat="property in device.properties">' +
               '<span class="name"><i class="icon-chevron-right"></i> {{property.name}}</span> ' +
-              '<span class="value color">{{property.accepted[property.expected] || property.expected}}</span>' +
+              '<span class="expected color">{{property.accepted[property.expected] || property.expected}}</span>' +
             '</div>' +
           '</div>' +
         '</div>' +
@@ -90,8 +90,8 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
                 '<form>' +
                   '<div ng-repeat="property in function.properties" ng-show="property.visible" class="property property-{{property.id}}">' +
                     '<div>' +
-                      '<small class="muted">Set {{property.name}} to {{property.value}}</small><br/>' +
-                      '<input type="{{property.type}}" min="{{property.range.min}}" max="{{property.range.max}}" step="{{property.range.step}}" ng-model="property.value"></input>' +
+                      '<small class="muted">Set {{property.name}} to {{property.expected}}</small><br/>' +
+                      '<input type="{{property.type}}" min="{{property.range.min}}" max="{{property.range.max}}" step="{{property.range.step}}" ng-model="property.expected"></input>' +
                     '</div>' +
                   '</div>' +
                   '<div>' +
@@ -120,10 +120,10 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
                   '</div>' +
                   '<small ng-show="editForm.name.$error.required" class="help-inline">Required</small>' +
                 '</div>' +
-                '<div class="control-group" ng-class="{error: editForm.physical.$invalid}" ng-show="user.id == device.maker.id">' +
+                '<div class="control-group" ng-class="{error: editForm.physical.uri.$invalid}" ng-show="user.id == device.maker.id">' +
                   '<div class="input-prepend">' +
                     '<span class="add-on">Physical</span>' +
-                    '<input type="url" name="physical" ng-model="device.physical"><br/>' +
+                    '<input type="url" name="physical" ng-model="device.physical.uri"><br/>' +
                   '</div>' +
                   '<small ng-show="!editForm.physical.$error.url" class="help-inline">Set the physical device URI to connect</small>' +
                   '<small ng-show="editForm.physical.$error.url" class="help-inline">Not a URL</small>' +
@@ -255,6 +255,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
 
     // Update the device properties
     scope.updateProperties = function(properties) {
+      properties = prepareProperties(properties);
       var device = new Device({ id: scope.device.id, properties: properties});
       device.$properties({}, function() {
         scope.device = device;
@@ -284,7 +285,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
     }
 
     scope.clear = function() {
-      scope.device.name = scope.original.name;
+      scope.device.name     = scope.original.name;
       scope.device.physical = scope.original.physical;
       scope.editForm.$setPristine();
     }
@@ -296,8 +297,6 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
     // Extends the device properties injecting the type properties attributes
     var extendDeviceProperties = function(device) {
       setRelativeTime();                                                // set a 'time ago' date format
-      if (scope.device.physical && scope.device.physical.uri)
-        scope.device.physical = scope.device.physical.uri;              // set the physical value that is used from the edit form
       extendResources(scope.device.properties, scope.type.properties);  // extend device properties with type properties
       scope.original = angular.copy(scope.device);                      // device copy used for the edit clear form
     }
@@ -315,7 +314,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
         extendResources(_function.properties, scope.type.properties); // extends function.properties with type.properties
         _.each(_function.properties, function(property) {             // extends function.properties value with the device property value
           if (property.visible)                                       // if property is not visible it already has a default value
-            property.value = findResource(property.id, scope.device.properties).value;
+            property.expected = findResource(property.id, scope.device.properties).expected;
         });
       });
     };
@@ -325,7 +324,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
       scope.functions = angular.copy(scope.type.functions); // copy all type functions in a local var (do not update type)
       _.each(scope.functions, function(_function) {
         // check which function properties need to be set as visible (if property value is empty)
-        _.each(_function.properties, function(property) { property.visible = (property.value == null) });
+        _.each(_function.properties, function(property) { property.visible = (property.expected == null) });
         // check which functions need to be set as visible (if one property is visible)
         _function.hasForm = _.reduce(_function.properties, function(result, property) { return result || property.visible; }, false);
       });
@@ -352,7 +351,7 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
       _.each(scope.type.statuses, function(status) {
         _.each(status.properties, function(property) {
           var list   = property.values;
-          var object = findResource(property.id, scope.device.properties).value;
+          var object = findResource(property.id, scope.device.properties).expected;
           if (_.contains(list, object)) setStatus(status);
         });
       });
@@ -369,6 +368,11 @@ directives.directive('device', ['Device', 'Type', 'LoggedUser', '$rootScope', '$
       _.each(scope.functions, function(_function) {
         if (_function.id != exception_id) _function.visible = false;
       });
+    }
+
+    // Prepare properties to be sent with the correct values
+    var prepareProperties = function(properties) {
+      return _.map(properties, function(property) { return { id: property.id, pending: property.pending, expected: property.expected } });
     }
 
 
