@@ -1,4 +1,4 @@
-/* type-component-ng - v0.1.0 - 2013-05-09 */
+/* type-component-ng - v0.1.0 - 2013-05-13 */
 
 'use strict';
 
@@ -523,7 +523,7 @@ service.factory('Simulation', ['Device', function(Device) {
     if (data.physical) resource.physical.uri = data.physical;
     _.each(data.properties, function(property) {
       var result = _.find(resource.properties, function(_property){ return _property.id == property.id; });
-      result.expected = result.value = property.value;
+      result.expected = result.value = property.expected;
     });
     resource.updated_at = new Date();
     return resource;
