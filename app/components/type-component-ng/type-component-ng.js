@@ -1,4 +1,4 @@
-/* type-component-ng - v0.1.0 - 2013-05-13 */
+/* type-component-ng - v0.1.0 - 2013-05-28 */
 
 'use strict';
 
@@ -505,7 +505,7 @@ service.factory('Simulation', ['Device', function(Device) {
         value: property.default,
         expected: property.default,
         pending: false,
-        suggested: angular.fromJson(property.suggested) };
+        accepted: angular.fromJson(property.accepted) };
         device.properties.push(_property);
     });
 
@@ -519,12 +519,15 @@ service.factory('Simulation', ['Device', function(Device) {
   simulation.update = function(data) {
     data = angular.fromJson(data);
     var resource = simulation.get();
-    if (data.name) resource.name = data.name;
-    if (data.physical) resource.physical.uri = data.physical;
+
+    if (data.name)     resource.name = data.name;
+    if (data.physical) resource.physical = data.physical;
+
     _.each(data.properties, function(property) {
       var result = _.find(resource.properties, function(_property){ return _property.id == property.id; });
       result.expected = result.value = property.expected;
     });
+
     resource.updated_at = new Date();
     return resource;
   }
@@ -2454,8 +2457,9 @@ service.run(['$httpBackend', 'Simulation', 'lelylan.config', function($httpBacke
 
   var endpoint = config.endpoint.replace('\\:', ':').replace();
 
+  $httpBackend.whenGET(endpoint + '/devices/1/privates').respond({ secret: '1' });
   $httpBackend.whenPUT(endpoint + '/devices/1/properties')
-  .respond(function(method, url, data, headers){ return [200, Simulation.update(data), {}]; });
+    .respond(function(method, url, data, headers){ return [200, Simulation.update(data), {}]; });
 
   $httpBackend.whenGET(/.*/).passThrough();
   $httpBackend.whenPOST(/.*/).passThrough();
