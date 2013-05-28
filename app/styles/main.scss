@@ -20,7 +20,7 @@ body {
 }
 
 .dashboard {
-  padding-top: 40px;
+  padding-top: 60px;
 }
 
 .dashboard input {
@@ -52,6 +52,11 @@ button.lelylan-big {
 .dashboard  {
 
   /* Header */
+
+  .top-menu {
+    background-color: #239cbb;
+    margin-top: 24px
+  }
 
   .navbar {
     background-color: rgba(232, 232, 232, 0.9);
@@ -432,6 +437,31 @@ button.lelylan-big {
     font-size: 18px;
     line-height: 28px;
   }
+}
+
+
+/* Lelylan top header */
+
+.dashboard .lelylan-menu {
+  height: 25px;
+  background-color: #333;
+  margin-top: 0;
+}
+
+.dashboard .lelylan-menu li a {
+  padding: 2px 30px 0 0;
+  text-shadow: 0 0 0 #333;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.dashboard .lelylan-menu li a:hover {
+  color: $lelylanColor !important;
+}
+
+.dashboard .lelylan-menu li a.active {
+  color: #ccc !important;
+  font-weight: bold;
 }
 
 
