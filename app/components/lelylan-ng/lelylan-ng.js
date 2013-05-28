@@ -1,4 +1,4 @@
-/* lelylan-ng - v0.1.0 - 2013-04-30 */
+/* lelylan-ng - v0.1.0 - 2013-05-27 */
 
 'use strict';
 
@@ -597,10 +597,10 @@ directives.directive('login', ['AccessToken', 'ImplicitFlow', 'Profile', 'Logged
   var template =
     '<ul class="nav pull-right">' +
       '<li ng-show="show==\'out\'" class="login">' +
-        '<a ng-href="{{endpoint}}">{{value || \'Sign In\'}}</a>' +
+        '<a href=":javascript" ng-href="{{endpoint}}">{{value || \'Sign In\'}}</a>' +
       '</li>' +
       '<li ng-show="show==\'in\'" class="logout">' +
-        '<a ng-click="logout()">Logout {{profile.email}}</a>' +
+        '<a href=":javascript" ng-click="logout()">Logout {{profile.email}}</a>' +
       '</li>' +
     '</ul>';
 

@@ -23,7 +23,25 @@
     <![endif]-->
 
     <div class="dashboard" ng-controller="DashboardCtrl">
-      <div class="navbar navbar-fixed-top">
+
+      <div class="navbar navbar-fixed-top lelylan-menu">
+        <div class="navbar-inner-flat">
+          <div class="container">
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a class="home" href="http://beta.lelylan.com">Lelylan site</a></li>
+                <li><a class="active" href="/">Dashboard</a></li>
+                <li><a href="http://types.lelylan.com">Types</a></li>
+                <li><a href="http://dev.lelylan.com">Dev Center</a></li>
+                <li><a href="http://try.lelylan.com">Demo</a></li>
+                <li><a href="http://people.lelylan.com">Profile</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar navbar-fixed-top top-menu">
         <div class="navbar-inner-flat">
           <div class="container">
             <div class="nav-collapse collapse">
@@ -32,8 +50,7 @@
                 client="4487de6836551445653041e0ecdcc2ad6e0fe98ca1a958295d72097f5a97f76f"
                 scope="resources+privates"></login>
               <ul class="nav pull-right">
-                <li><a href="http://try.lelylan.com">Try Demo</a></li>
-                <li><a ng-class="{active: active=='learn'}" href="/learn">What is Lelylan Dashboard</a></li>
+                <li><a ng-class="{active: active=='learn'}" href="/learn">Learn more</a></li>
               </ul>
             </div>
           </div>

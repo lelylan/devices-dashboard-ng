@@ -13,7 +13,10 @@ function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) 
       if ($scope.devices.length > 0)
         $scope.selected = $scope.devices[0]
     });
+  } else {
+    $location.path('/home');
   }
+
   $scope.$on('lelylan:device:open', function(event, device) {
     $scope.selected = _.findWhere($scope.devices, { id: device.id });
   });

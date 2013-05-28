@@ -1,4 +1,4 @@
-/* device-component-ng - v0.1.0 - 2013-05-13 */
+/* device-component-ng - v0.1.0 - 2013-05-27 */
 
 'use strict';
 
@@ -108,14 +108,14 @@ angular.module('lelylan.components.device.directive').directive('device', ['Devi
         '<div class="dc-settings" ng-show="action.settings">' +
 
           // Edit
-          '<div class="dc-edit">' +
+          '<div class="dc-edit dc-form">' +
             '<hr/>' +
             '<div>' +
               '<p class="lead">Edit Device</p>' +
               '<form name="editForm">' +
                 '<div class="control-group" ng-class="{error: editForm.name.$invalid}">' +
                   '<div class="input-prepend">' +
-                    '<span class="add-on">Name &nbsp; &nbsp;</span>' +
+                    '<span class="add-on">Name</span>' +
                     '<input type="text" name="name" ng-model="device.name" required><br/>' +
                   '</div>' +
                   '<small ng-show="editForm.name.$error.required" class="help-inline">Required</small>' +
@@ -125,7 +125,6 @@ angular.module('lelylan.components.device.directive').directive('device', ['Devi
                     '<span class="add-on">Physical</span>' +
                     '<input type="url" name="physical" ng-model="device.physical.uri"><br/>' +
                   '</div>' +
-                  '<small ng-show="!editForm.physical.$error.url" class="help-inline">Set the physical device URI to connect</small>' +
                   '<small ng-show="editForm.physical.$error.url" class="help-inline">Not a URL</small>' +
                 '</div>' +
                 '<div>' +
@@ -136,8 +135,39 @@ angular.module('lelylan.components.device.directive').directive('device', ['Devi
             '</div>' +
           '</div>' +
 
+          // Device information
+          '<div class="dc-info dc-form" ng-show="user.id == device.maker.id">' +
+            '<hr/>' +
+            '<div>' +
+              '<p class="lead">Device Information</p>' +
+              '<form>' +
+                '<div class="control-group">' +
+                  '<div class="input-prepend">' +
+                    '<span class="add-on">Type</span>' +
+                    '<a ng-href="http://types.lelylan.com/types/{{type.id}}" target="blank">' +
+                      '<input class="disabled clickable" name="physical" ng-model="device.name" disabled >' +
+                    '</a><br/>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="control-group">' +
+                  '<div class="input-prepend">' +
+                    '<span class="add-on">URI</span>' +
+                    '<input class="disabled" name="device-uri" ng-model="device.uri" disabled><br/>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="control-group">' +
+                  '<div class="input-prepend">' +
+                    '<span class="add-on">Secret</span>' +
+                    '<input class="disabled" name="secret" ng-model="privates.secret" disabled><br/>' +
+                  '</div>' +
+                '</div>' +
+              '</form>' +
+            '</div>' +
+          '</div>' +
+
+
           // Destroy device
-          '<div class="dc-destroy" ng-show="user.id == device.maker.id">' +
+          '<div class="dc-destroy dc-form" ng-show="user.id == device.maker.id">' +
             '<hr/>' +
             '<div>' +
               '<p class="lead">Delete Device</p>' +
@@ -215,6 +245,7 @@ angular.module('lelylan.components.device.directive').directive('device', ['Devi
     };
 
     var initComponent = function() {
+      initPrivates();            // get the private device info
       initFunctionForms();       // define the function form logic
       initResources();           // extend device.properties and function.each.properties
       $timeout(setPreloader, 0); // define the preloader
@@ -293,6 +324,11 @@ angular.module('lelylan.components.device.directive').directive('device', ['Devi
     // ----------------
     // Helper methods
     // ----------------
+
+    // Get device private info
+    var initPrivates = function() {
+      scope.privates = Device.privates({ id: scope.device.id });
+    }
 
     // Extends the device properties injecting the type properties attributes
     var extendDeviceProperties = function(device) {
