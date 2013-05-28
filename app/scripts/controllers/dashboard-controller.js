@@ -6,7 +6,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
 
   $scope.oauth = {
     client:   '017b9f702a904869a80a0f9fd8ed88838f6e52bd39b147b19e69fed705e1b912',
-    redirect: 'http://d.lelylan.com',
+    redirect: 'http://manage.lelylan.com',
     scope:    'resources+privates'
   };
 

@@ -10,7 +10,7 @@
     <title>Lelylan Dashboard</title>
     <meta name="description" content="Lelylan Types">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/795f7d84.main.css">
+    <link rel="stylesheet" href="styles/3b3afa7c.main.css">
   </head>
   <body ng-app="app" class="ng-cloak">
     <!--[if lt IE 7]>
@@ -23,15 +23,32 @@
     <![endif]-->
 
     <div class="dashboard" ng-controller="DashboardCtrl">
-      <div class="navbar navbar-fixed-top">
+
+      <div class="navbar navbar-fixed-top lelylan-menu">
+        <div class="navbar-inner-flat">
+          <div class="container">
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a class="home" href="http://beta.lelylan.com">Lelylan site</a></li>
+                <li><a class="active" href="/">Dashboard</a></li>
+                <li><a href="http://types.lelylan.com">Types</a></li>
+                <li><a href="http://dev.lelylan.com">Dev Center</a></li>
+                <li><a href="http://try.lelylan.com">Demo</a></li>
+                <li><a href="http://people.lelylan.com">Profile</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar navbar-fixed-top top-menu">
         <div class="navbar-inner-flat">
           <div class="container">
             <div class="nav-collapse collapse">
               <login class="nav pull-right" client="{{oauth.client}}" redirect="{{oauth.redirect}}" scope="{{oauth.scope}}">
               </login>
               <ul class="nav pull-right">
-                <li><a href="http://try.lelylan.com">Try Demo</a></li>
-                <li><a ng-class="{active: active=='learn'}" href="/learn">What is Lelylan Dashboard</a></li>
+                <li><a ng-class="{active: active=='learn'}" href="/learn">Learn more</a></li>
               </ul>
             </div>
           </div>
@@ -85,7 +102,7 @@
     </div>
 
 
-    <script src="scripts/6c84a73a.scripts.js"></script>
+    <script src="scripts/1acc935c.scripts.js"></script>
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
