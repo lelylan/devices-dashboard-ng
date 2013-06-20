@@ -81,7 +81,11 @@
                 <li ng-class="{active: active=='gardenings'}"><a class="gardenings"  href="/categories/gardenings"><i class="icon-tag"></i> Gardenings</a></li>
                 <li ng-class="{active: active=='sensors'}"><a class="sensors"  href="/categories/sensors"><i class="icon-tag"></i> Sensors</a></li>
                 <li ng-class="{active: active=='others'}"><a class="others"  href="/categories/others"><i class="icon-tag"></i> Others</a></li>
+                <li class="divider"></li>
               </ul>
+            </div>
+            <div class="navbar clearfix">
+              <a class="brand home ng-cloak">{{ connection || 'Realtime disabled' }}</a>
             </div>
           </div>
 
@@ -104,6 +108,8 @@
     </div>
 
     <!-- build:js scripts/scripts.js -->
+    <script src="/components/socket.io/socket.io.js"></script>
+
     <script src="/components/unstable-angular-complete/angular.js"></script>
     <script src="/components/unstable-angular-complete/angular-resource.js"></script>
     <script src="/components/unstable-angular-complete/angular-cookies.js"></script>

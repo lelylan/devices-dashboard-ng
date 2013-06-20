@@ -15,7 +15,6 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     $location.path('/home');
   });
 
-
   $scope.$on('lelylan:device:delete', function(event, device) {
     $rootScope.active = '';
     $location.path('/');
@@ -25,6 +24,32 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
 
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
+  };
+
+  var authorized = (!!AccessToken.get().access_token);
+
+  if (authorized) {
+    var socket = io.connect('http://localhost:8003');
+
+    socket.on(AccessToken.get().access_token, function (event) {
+      $scope.fire(event.data);
+      $scope.$apply();
+    });
+
+    $scope.fire = function(device) {
+      console.log("DEBUG:", device);
+      $rootScope.$broadcast('lelylan:device:request:end', device);
+    };
+
+    socket.on('connected', function (event) {
+      $scope.connection = 'Realtime enabled';
+      $scope.$apply();
+    });
+
+    socket.on('disconnected', function (event) {
+      $scope.connection = 'Realtime disabled';
+      $scope.$apply();
+    });
   };
 };
 
