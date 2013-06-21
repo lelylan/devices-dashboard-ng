@@ -10,7 +10,7 @@
     <title>Lelylan Dashboard</title>
     <meta name="description" content="Lelylan Types">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/3b3afa7c.main.css">
+    <link rel="stylesheet" href="styles/b09a1148.main.css">
   </head>
   <body ng-app="app" class="ng-cloak">
     <!--[if lt IE 7]>
@@ -78,7 +78,11 @@
                 <li ng-class="{active: active=='gardenings'}"><a class="gardenings" href="/categories/gardenings"><i class="icon-tag"></i> Gardenings</a></li>
                 <li ng-class="{active: active=='sensors'}"><a class="sensors" href="/categories/sensors"><i class="icon-tag"></i> Sensors</a></li>
                 <li ng-class="{active: active=='others'}"><a class="others" href="/categories/others"><i class="icon-tag"></i> Others</a></li>
+                <li class="divider"></li>
               </ul>
+            </div>
+            <div class="navbar clearfix">
+              <a class="brand home realtime ng-cloak">{{ connection || '' }}</a>
             </div>
           </div>
 
@@ -100,11 +104,14 @@
       </div>
     </div>
 
+    <script src="http://lelylan-websockets.nodejitsu.com/socket.io/socket.io.js"></script>
 
-    <script src="scripts/03cf9e45.scripts.js"></script>
+
+    <script src="scripts/07fbc710.scripts.js"></script>
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
+        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.nodejitsu.com:80' })
         .config(['$locationProvider', function($locationProvider) {
           $locationProvider.html5Mode(true).hashPrefix('!');
         }]);

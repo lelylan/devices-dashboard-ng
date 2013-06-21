@@ -10,7 +10,7 @@
     <title>Lelylan Dashboard</title>
     <meta name="description" content="Lelylan Types">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/3b3afa7c.main.css">
+    <link rel="stylesheet" href="styles/b09a1148.main.css">
   </head>
   <body ng-app="app" class="ng-cloak">
     <!--[if lt IE 7]>
@@ -45,7 +45,7 @@
         <div class="navbar-inner-flat">
           <div class="container">
             <div class="nav-collapse collapse">
-              <login class="nav pull-right" client="b41d36413cb891fb11ab33e7f57771498cfa0b0e2dfa1421cc05fe7771bc2f6a" redirect="http://localhost:3100/index-dev-local.html" scope="resources+privates" site="http://localhost:3000"></login>
+              <login class="nav pull-right" client="d5cd812fdf9fee6e1ff1066e713a69b334ece49468b282f564460e94588a189f" redirect="http://localhost:3100/index-dev-local.html" scope="resources+privates" site="http://localhost:3000"></login>
               <ul class="nav pull-right">
                 <li><a ng-class="{active: active=='learn'}" href="/learn">Learn more</a></li>
               </ul>
@@ -78,7 +78,11 @@
                 <li ng-class="{active: active=='gardenings'}"><a class="gardenings" href="/categories/gardenings"><i class="icon-tag"></i> Gardenings</a></li>
                 <li ng-class="{active: active=='sensors'}"><a class="sensors" href="/categories/sensors"><i class="icon-tag"></i> Sensors</a></li>
                 <li ng-class="{active: active=='others'}"><a class="others" href="/categories/others"><i class="icon-tag"></i> Others</a></li>
+                <li class="divider"></li>
               </ul>
+            </div>
+            <div class="navbar clearfix">
+              <a class="brand home realtime ng-cloak">{{ connection || '' }}</a>
             </div>
           </div>
 
@@ -104,11 +108,11 @@
     </div>
 
 
-    <script src="scripts/03cf9e45.scripts.js"></script>
+    <script src="scripts/07fbc710.scripts.js"></script>
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
-        .value('lelylan.config', { endpoint: 'http://localhost\\:8000' })
+        .value('lelylan.config', { endpoint: 'http://localhost\\:8000', socket: 'http://localhost:8003' })
         .config(['$locationProvider', function($locationProvider) {
           $locationProvider.html5Mode(true).hashPrefix('!');
         }]);
