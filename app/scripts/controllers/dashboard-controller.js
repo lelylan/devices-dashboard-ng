@@ -1,6 +1,6 @@
 'use strict';
 
-function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeout) {
+function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeout, config) {
   $rootScope.active = '';
   $scope.alerts = [];
 
@@ -29,7 +29,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
   var authorized = (!!AccessToken.get().access_token);
 
   if (authorized) {
-    var socket = io.connect('http://localhost:8003');
+    var socket = io.connect(config.socket);
 
     socket.on(AccessToken.get().access_token, function (event) {
       $scope.fire(event.data);
@@ -37,7 +37,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     });
 
     $scope.fire = function(device) {
-      console.log("DEBUG:", device);
+      console.log('DEBUG:', 'Received the new data');
       $rootScope.$broadcast('lelylan:device:request:end', device);
     };
 
@@ -53,7 +53,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
   };
 };
 
-DashboardCtrl.$inject = ['AccessToken', '$scope', '$rootScope', '$http', '$location', '$timeout'];
+DashboardCtrl.$inject = ['AccessToken', '$scope', '$rootScope', '$http', '$location', '$timeout', 'lelylan.config'];
 
 var cl = new CanvasLoader('lelylan-request-loading');
 cl.setColor('#239cbb');
