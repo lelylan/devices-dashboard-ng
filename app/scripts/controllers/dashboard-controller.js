@@ -3,6 +3,7 @@
 function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeout, config) {
   $rootScope.active = '';
   $scope.alerts = [];
+  $scope.connection = 'Connecting...';
 
   $scope.oauth = {
     client:   '017b9f702a904869a80a0f9fd8ed88838f6e52bd39b147b19e69fed705e1b912',
@@ -37,7 +38,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     });
 
     $scope.fire = function(device) {
-      console.log('DEBUG:', 'Received the new data');
+      console.log('DEBUG:', 'device update received', device);
       $rootScope.$broadcast('lelylan:device:request:end', device);
     };
 

@@ -108,9 +108,9 @@
       </div>
     </div>
 
-    <script src="http://lelylan-websockets.nodejitsu.com/socket.io/socket.io.js"></script>
 
     <!-- build:js scripts/scripts.js -->
+    <script src="/components/socket.io/socket.io.js"></script>
     <script src="/components/unstable-angular-complete/angular.js"></script>
     <script src="/components/unstable-angular-complete/angular-resource.js"></script>
     <script src="/components/unstable-angular-complete/angular-cookies.js"></script>
@@ -133,7 +133,7 @@
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
-        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.nodejitsu.com' })
+        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.herokuapp.com:80' })
         .config(['$locationProvider', function($locationProvider) {
           $locationProvider.html5Mode(true).hashPrefix('!');
         }]);

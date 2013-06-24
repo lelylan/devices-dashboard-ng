@@ -105,14 +105,13 @@
       </div>
     </div>
 
-    <script src="http://lelylan-websockets.nodejitsu.com/socket.io/socket.io.js"></script>
 
 
-    <script src="scripts/07fbc710.scripts.js"></script>
+    <script src="scripts/af6bd94c.scripts.js"></script>
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
-        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.nodejitsu.com' })
+        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.herokuapp.com:80' })
         .config(['$locationProvider', function($locationProvider) {
           $locationProvider.html5Mode(true).hashPrefix('!');
         }]);

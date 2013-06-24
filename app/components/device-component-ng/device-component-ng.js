@@ -550,7 +550,9 @@ a.hide=function(){typeof this.timer==="number"&&(clearInterval(this.timer),delet
     // pluralize a unit when the difference is greater than 1.
     delta = Math.floor(delta);
     if (delta !== 1) { units += "s"; }
-    return [delta, units, future ? "from now" : "ago"].join(" ");
+    var time = [delta, units, future ? "from now" : "ago"].join(" ");
+    if (time == '1 minute from now') { time = 'Just now' }
+    return time
   };
 
   var processOptions = function(arg) {
