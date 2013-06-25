@@ -38,7 +38,6 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     });
 
     $scope.fire = function(device) {
-      console.log('DEBUG:', 'device update received', device);
       $rootScope.$broadcast('lelylan:device:request:end', device);
     };
 

@@ -107,11 +107,11 @@
 
 
 
-    <script src="scripts/af6bd94c.scripts.js"></script>
+    <script src="scripts/c5f286a3.scripts.js"></script>
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
-        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.herokuapp.com:80' })
+        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.nodejitsu.com:80' })
         .config(['$locationProvider', function($locationProvider) {
           $locationProvider.html5Mode(true).hashPrefix('!');
         }]);
