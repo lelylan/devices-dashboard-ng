@@ -39,7 +39,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     var socket = io.connect(config.socket);
 
     socket.on(token, function (event) {
-      $scope.openAlert(event.data.name + ' updated', 'success', 3000)
+      $scope.openAlert(event.data.name + ' updated', 'success')
       if (token != event.token) { $scope.fire(event.data); }
       $rootScope.$broadcast('dashboard:devices:list:update', event.data);
       $scope.$apply()
