@@ -27,14 +27,17 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     $scope.alerts.splice(index, 1);
   };
 
-  var authorized = (!!AccessToken.get().access_token);
+  var token = AccessToken.get().access_token;
+  var authorized = (!!token);
 
   if (authorized) {
     var socket = io.connect(config.socket);
 
-    socket.on(AccessToken.get().access_token, function (event) {
-      $scope.fire(event.data);
-      $scope.$apply();
+    socket.on(token, function (event) {
+      if (token != event.token) {
+        $scope.fire(event.data);
+        $scope.$apply()
+      }
     });
 
     $scope.fire = function(device) {
