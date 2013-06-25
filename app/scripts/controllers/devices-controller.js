@@ -21,6 +21,12 @@ function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) 
     $scope.selected = _.findWhere($scope.devices, { id: device.id });
   });
 
+  $scope.$on('dashboard:devices:list:update', function(event, device) {
+    var resource = _.findWhere($scope.devices, { id: device.id });
+    angular.extend(resource, device);
+    console.log("updated");
+  });
+
   // BUG - If I do not apply the following functions the `pending` property gets lost.
   // As far as I know this shouldn't happen and it's a bug that need to be solved.
   $scope.$on('lelylan:device:request:start', function(event, device) { var resource = _.findWhere($scope.devices, { id: device.id }); resource.pending = device.pending; resource.updated_at = device.updated_at });

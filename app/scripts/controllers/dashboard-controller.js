@@ -41,6 +41,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     });
 
     $scope.fire = function(device) {
+      $rootScope.$broadcast('dashboard:devices:list:update', device);
       $rootScope.$broadcast('lelylan:device:request:end', device);
     };
 
