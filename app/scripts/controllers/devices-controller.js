@@ -24,7 +24,6 @@ function DevicesCtrl(AccessToken, Device, $scope, $rootScope, $http, $location) 
   $scope.$on('dashboard:devices:list:update', function(event, device) {
     var resource = _.findWhere($scope.devices, { id: device.id });
     angular.extend(resource, device);
-    console.log("updated");
   });
 
   // BUG - If I do not apply the following functions the `pending` property gets lost.

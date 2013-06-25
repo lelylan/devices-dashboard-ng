@@ -19,13 +19,18 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
   $scope.$on('lelylan:device:delete', function(event, device) {
     $rootScope.active = '';
     $location.path('/');
-    $scope.alerts.push({ type: 'success', msg: device.name + ' successfully deleted' })
-    $timeout(function() { $scope.closeAlert($scope.alerts.length - 1) }, 10000);
+    $scope.openAlert(device.name + ' successfully deleted', 'success')
   });
 
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
+
+  $scope.openAlert = function(message, status, time) {
+    time = time ? time : 5000;
+    $scope.alerts.unshift({ type: status, msg: message })
+    $timeout(function() { $scope.closeAlert($scope.alerts.length - 1) }, time);
+  }
 
   var token = AccessToken.get().access_token;
   var authorized = (!!token);
@@ -34,14 +39,13 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     var socket = io.connect(config.socket);
 
     socket.on(token, function (event) {
-      if (token != event.token) {
-        $scope.fire(event.data);
-        $scope.$apply()
-      }
+      $scope.openAlert(event.data.name + ' updated', 'success', 3000)
+      if (token != event.token) { $scope.fire(event.data); }
+      $rootScope.$broadcast('dashboard:devices:list:update', event.data);
+      $scope.$apply()
     });
 
     $scope.fire = function(device) {
-      $rootScope.$broadcast('dashboard:devices:list:update', device);
       $rootScope.$broadcast('lelylan:device:request:end', device);
     };
 
