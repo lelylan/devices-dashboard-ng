@@ -454,7 +454,7 @@ button.lelylan-big {
 
 .dashboard .lelylan-menu {
   height: 25px;
-  background-color: #333;
+  background-color: $lelylanColor;
   margin-top: 0;
 }
 
@@ -463,15 +463,15 @@ button.lelylan-big {
   text-shadow: 0 0 0 #333;
   text-transform: uppercase;
   font-size: 11px;
+  color: rgb(36, 183, 211) !important;
 }
 
 .dashboard .lelylan-menu li a:hover {
-  color: $lelylanColor !important;
+  color: #eee !important;
 }
 
 .dashboard .lelylan-menu li a.active {
-  color: #ccc !important;
-  font-weight: bold;
+  color: #eee !important;
 }
 
 
