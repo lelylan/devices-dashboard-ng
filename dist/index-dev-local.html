@@ -10,7 +10,7 @@
     <title>Lelylan Dashboard</title>
     <meta name="description" content="Lelylan Types">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/b09a1148.main.css">
+    <link rel="stylesheet" href="styles/0ce2544f.main.css">
   </head>
   <body ng-app="app" class="ng-cloak">
     <!--[if lt IE 7]>
@@ -82,16 +82,25 @@
               </ul>
             </div>
             <div class="navbar clearfix">
-              <a class="brand home realtime ng-cloak">{{ connection || '' }}</a>
+              <div>
+                <a class="brand home realtime ng-cloak">{{ connection || '' }}</a>
+                <span class="clearfix"></span>
+              </div>
+            </div>
+            <div class="sidebar-nav" ng-show="alerts.length>0">
+              <ul class="nav nav-list">
+                <li class="divider"></li>
+                <li class="nav-header">Notifications</li>
+              </ul>
+            </div>
+            <div class="notifications">
+              <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
             </div>
           </div>
 
           <!-- Content  -->
 
           <div class="span9">
-            <div class="notifications">
-              <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
-            </div>
             <div class="dashboard-content">
               <div ng-view=""></div>
               <div class="clearfix"></div>
@@ -108,7 +117,7 @@
     </div>
 
 
-    <script src="scripts/b4679092.scripts.js"></script>
+    <script src="scripts/1d1b61fd.scripts.js"></script>
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
