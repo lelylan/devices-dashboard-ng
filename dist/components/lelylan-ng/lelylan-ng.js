@@ -588,7 +588,7 @@ angular.module('lelylan.config', []).value('lelylan.config', {
 var directives = angular.module('lelylan.login', ['ngCookies'])
 
 directives.config(['$locationProvider', function($locationProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');;
+  $locationProvider.html5Mode(true).hashPrefix('!');
 }]);
 
 directives.directive('login', ['AccessToken', 'ImplicitFlow', 'Profile', 'LoggedUser', '$location', '$cookies', '$rootScope',
