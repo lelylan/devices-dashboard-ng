@@ -6,7 +6,7 @@
   <div ng-show="authorized">
     <form class="compact" name="form">
       <div class="device-type control-group" ng-class="{error: form.type.$invalid}">
-        <small class="help-inline muted"><span class="badge">1</span>Select the desired type <a href="//types.lelylan.com/">(learn what a type is)</a></small>
+        <small class="help-inline muted"><span class="badge">1</span>Select the desired type <a href="//types.lelylan.com/learn" target="blank">(do you know what a type is?)</a></small>
         <div class="input-prepend">
           <span class="add-on">Type</span>
           <input class="input-xxlarge" type="hidden" name="type" ng-model="device.type.id" placeholder="Type ID" required>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="device-physical control-group" ng-class="{error: form.physical.uri.$invalid}">
-        <small class="help-inline muted"><span class="badge">3</span>Connect the physical device URI <a href="//dev.lelylan.com/api/physicals">(learn how to create one)</a>  or leave it empty to simulate one</small>
+        <small class="help-inline muted"><span class="badge">3</span>Connect the physical device URI <a href="//dev.lelylan.com/api/physicals">(learn how to create one)</a>  or leave it empty to simulate a device</small>
         <div class="input-prepend">
           <span class="add-on">Physical</span>
           <input class="input-xxlarge" type="url" name="physical" ng-model="device.physical.uri" placeholder="Physical Device URI (optional)">
