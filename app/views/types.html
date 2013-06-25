@@ -23,7 +23,7 @@
   </div>
 
   <!-- types through id-->
-  <div class="types types-all" ng-show="authorized && types.length!=0 && typesMenu=='all'">
+  <div class="types types-all" ng-show="authorized && typesMenu=='all'">
     <div class="type-id">
       <form class="compact" name="form">
         <div class="device-name control-group" ng-class="{error: form.id.$invalid}">
@@ -46,9 +46,9 @@
   </div>
 
   <!-- No types found -->
-  <div class="empty alert alert-block" ng-show="authorized && types.length==0">
+  <div class="empty alert alert-block" ng-show="authorized && types.length==0 && typesMenu!='all'">
     <p class="lead">
-    No types were found. <a href="//types.lelylan.com/">Learn how to</a> create a type.
+    No types were found. <a href="//types.lelylan.com/" target="blank">Learn how to</a> create a type.
     </p>
   </div>
 </div>
