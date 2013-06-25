@@ -3,7 +3,7 @@
 function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeout, config) {
   $rootScope.active = '';
   $scope.alerts = [];
-  $scope.connection = 'Connecting...';
+  $scope.connection = 'connecting...';
 
   $scope.oauth = {
     client:   '017b9f702a904869a80a0f9fd8ed88838f6e52bd39b147b19e69fed705e1b912',
@@ -50,12 +50,12 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
     };
 
     socket.on('connected', function (event) {
-      $scope.connection = 'Realtime enabled';
+      $scope.connection = 'on';
       $scope.$apply();
     });
 
     socket.on('disconnected', function (event) {
-      $scope.connection = 'Realtime disabled';
+      $scope.connection = 'off';
       $scope.$apply();
     });
   };

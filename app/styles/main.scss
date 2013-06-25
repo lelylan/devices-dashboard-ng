@@ -42,6 +42,11 @@ body {
   margin-right: 10px;
   background-color: #ddd;
   font-size: 14px;
+  font-weight: 400;
+}
+
+.dashboard .lelylan-badge {
+  margin-left: 5px;
 }
 
 #lelylan-request-loading {
@@ -99,11 +104,6 @@ button.lelylan-big {
     font-weight: 200;
     font-size: 14px;
     padding: 4px 29px 4px 7px;
-  }
-
-  .notifications .badge {
-    margin-left: 5px;
-    font-weight: 200;
   }
 
 

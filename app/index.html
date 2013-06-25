@@ -82,20 +82,19 @@
                 <li ng-class="{active: active=='gardenings'}"><a class="gardenings"  href="/categories/gardenings"><i class="icon-tag"></i> Gardenings</a></li>
                 <li ng-class="{active: active=='sensors'}"><a class="sensors"  href="/categories/sensors"><i class="icon-tag"></i> Sensors</a></li>
                 <li ng-class="{active: active=='others'}"><a class="others"  href="/categories/others"><i class="icon-tag"></i> Others</a></li>
-                <li class="divider"></li>
               </ul>
             </div>
-            <div class="navbar clearfix">
-              <div>
-                <a class="brand home realtime ng-cloak">{{ connection || '' }}</a>
-                <span class="clearfix"></span>
-              </div>
+            <div class="sidebar-nav">
+              <ul class="nav nav-list">
+                <li class="divider"></li>
+                <li class="nav-header">Realtime <span class="badge lelylan-badge" ng-show="connection">{{connection}}</span></li>
+              </ul>
             </div>
             <div class="notifications">
               <div class="sidebar-nav">
                 <ul class="nav nav-list">
                   <li class="divider"></li>
-                  <li class="nav-header">Notifications <span class="badge">{{alerts.length}}</span></li>
+                  <li class="nav-header">Notifications <span class="badge lelylan-badge">{{alerts.length}}</span></li>
                 </ul>
               </div>
               <div>
