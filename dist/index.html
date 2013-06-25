@@ -10,7 +10,7 @@
     <title>Lelylan Dashboard</title>
     <meta name="description" content="Lelylan Dashboard">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/0ce2544f.main.css">
+    <link rel="stylesheet" href="styles/6e4f8d33.main.css">
   </head>
   <body ng-app="app" class="ng-cloak">
     <!--[if lt IE 7]>
@@ -88,14 +88,16 @@
                 <span class="clearfix"></span>
               </div>
             </div>
-            <div class="sidebar-nav" ng-show="alerts.length>0">
-              <ul class="nav nav-list">
-                <li class="divider"></li>
-                <li class="nav-header">Notifications</li>
-              </ul>
-            </div>
             <div class="notifications">
-              <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+              <div class="sidebar-nav">
+                <ul class="nav nav-list">
+                  <li class="divider"></li>
+                  <li class="nav-header">Notifications <span class="badge">{{alerts.length}}</span></li>
+                </ul>
+              </div>
+              <div>
+                <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+              </div>
             </div>
           </div>
 
