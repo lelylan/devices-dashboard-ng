@@ -1,3 +1,5 @@
+// TODO refactoring
+
 'use strict';
 
 function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeout, config) {
@@ -38,7 +40,11 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
   if (authorized) {
     var socket = io.connect(config.socket);
 
-    socket.on(token, function (event) {
+    socket.on('connect', function() {
+      socket.emit('subscribe', token);
+    });
+
+    socket.on('update', function (event) {
       $scope.openAlert(event.data.name + ' updated', 'success')
       if (token != event.token) { $scope.fire(event.data); }
       $rootScope.$broadcast('dashboard:devices:list:update', event.data);
