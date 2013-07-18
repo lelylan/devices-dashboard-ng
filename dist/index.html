@@ -126,7 +126,7 @@
 
     <script>
       angular.module('app', ['lelylan.dashboards.devices', 'lelylan.components.device.simulate'])
-        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://lelylan-websockets.nodejitsu.com:80' })
+        .value('lelylan.config', { endpoint: 'http://api.lelylan.com', socket: 'http://96.126.109.170:80' })
         .config(['$locationProvider', function($locationProvider) {
           $locationProvider.html5Mode(true).hashPrefix('!');
         }]);
