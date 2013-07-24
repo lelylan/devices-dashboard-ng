@@ -5,7 +5,7 @@
 function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeout, config) {
   $rootScope.active = '';
   $scope.alerts = [];
-  $scope.connection = 'connecting...';
+  $scope.connection = 'off';
 
   $scope.oauth = {
     client:   '017b9f702a904869a80a0f9fd8ed88838f6e52bd39b147b19e69fed705e1b912',
@@ -15,7 +15,7 @@ function DashboardCtrl(AccessToken, $scope, $rootScope, $http, $location, $timeo
 
   $scope.$on('lelylan:logout', function(event) {
     $rootScope.active = '';
-    $location.path('/home');
+    if ($location.path() != '/learn') $location.path('/home'); // hack because logout is called when user is not logged in
   });
 
   $scope.$on('lelylan:device:delete', function(event, device) {

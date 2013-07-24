@@ -1,4 +1,4 @@
-/* device-component-ng - v0.1.0 - 2013-05-27 */
+/* device-component-ng - v0.1.0 - 2013-07-24 */
 
 'use strict';
 
@@ -151,6 +151,12 @@ angular.module('lelylan.components.device.directive').directive('device', ['Devi
                 '</div>' +
                 '<div class="control-group">' +
                   '<div class="input-prepend">' +
+                    '<span class="add-on">ID</span>' +
+                    '<input class="disabled" name="device-id" ng-model="device.id" disabled><br/>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="control-group">' +
+                  '<div class="input-prepend">' +
                     '<span class="add-on">URI</span>' +
                     '<input class="disabled" name="device-uri" ng-model="device.uri" disabled><br/>' +
                   '</div>' +
@@ -164,7 +170,6 @@ angular.module('lelylan.components.device.directive').directive('device', ['Devi
               '</form>' +
             '</div>' +
           '</div>' +
-
 
           // Destroy device
           '<div class="dc-destroy dc-form" ng-show="user.id == device.maker.id">' +
@@ -550,9 +555,7 @@ a.hide=function(){typeof this.timer==="number"&&(clearInterval(this.timer),delet
     // pluralize a unit when the difference is greater than 1.
     delta = Math.floor(delta);
     if (delta !== 1) { units += "s"; }
-    var time = [delta, units, future ? "from now" : "ago"].join(" ");
-    if (time == '1 minute from now') { time = 'Just now' }
-    return time
+    return [delta, units, future ? "from now" : "ago"].join(" ");
   };
 
   var processOptions = function(arg) {
