@@ -5,18 +5,12 @@ body {
 }
 
 .container {
-  max-width: 66em;
+  max-width: 72em;
   margin: 0 auto;
   overflow: hidden;
 }
 
-.container .fa {
-  font-size: 1.5em;
-}
-
 .header {
-  border: 1px solid #ccc;
-  border-bottom: none;
   background-color: #f6f6f6;
   padding: 1em;
 }
@@ -30,26 +24,58 @@ body {
   margin-right: 0 !important;
 }
 
-.content > div.column {
-  border: 1px solid #ccc;
-  padding: 0.5em;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-.content > div.categories {
-  background-color: #f6f6f6;
+.content > div.categories,
+.content > div.devices {
   border-right: none;
   margin-left: 0;
 }
 
-.content > div.devices {
-  background-color: #f6f6f6;
-  border-right: none;
+.content > div.column {
+  border: 1px solid #eee;
+  padding: 0 !important;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-right: 8px solid #f6f6f6;
 }
 
-.content > div.details {
-  background-color: #f6f6f6;
+.content > div.categories {
+  border-left: 8px solid #f6f6f6;
 }
+
+.device-item {
+ padding: 0 0.5em 0 0.3em;
+ border-left: 0.2em solid #fff;
+}
+
+.device-item:hover {
+ border-left: 0.2em solid #239cbb;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    background-color: #f6f6f6;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none;
+    background-color: #e6e6e6;
+}
+
+
+.ly-device,
+.ly-compact {
+  border: none;
+}
+
+.ly-compact .ly-status .ly-description .ly-name {
+  font-size: 1.5em;
+  line-height: 1.15em;
+}
+
+

@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('lelylan.dashboards.device').directive('resize', function ($window) {
+angular.module('lelylan.dashboards.device').directive('resize', function ($window, $timeout) {
 
   return function (scope, element) {
     var w = angular.element($window);
 
     scope.show      = { categories: true, devices: true, detail: true }
-    var breakpoints = { desktop: 56, tablet: 34 }
+    var breakpoints = { desktop: 66, tablet: 40 }
 
     scope.getWindowDimensions = function () {
       var factor = parseFloat($("body").css("font-size"));
@@ -52,13 +52,7 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
       if (scope.columns == 2) { scope.columns = 'two'   }
       if (scope.columns == 3) { scope.columns = 'three' }
 
-
-
-      /*
-       * Container height
-       */
-
-
+      scope.$broadcast('rebuild:me');
 
     }, true);
 

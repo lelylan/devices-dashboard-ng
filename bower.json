@@ -10,12 +10,17 @@
     "fontawesome": "~4.1.0",
     "semantic-ui": "~0.18.0",
     "underscore": "~1.6.0",
-    "iscroll": "~5.1.2",
-    "ng-iscroll": "v1.2b",
-    "angular-perfect-scrollbar": "~0.1.3"
+    "device-directive-ng": "~0.2.0-beta.4",
+    "angular-animate": "1.2.16"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
-    "angular-scenario": "1.2.6"
+    "angular-scenario": "1.2.6",
+    "jasmine-jquery": "~2.0.3",
+    "jasmine": "v1.3.1"
+  },
+  "resolutions": {
+    "angular": "1.2.16",
+    "jasmine": "v1.3.1"
   }
 }

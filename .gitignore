@@ -12,6 +12,9 @@
 # Ignore dependency libraries
 node_modules
 
+# Bower
+app/bower_components
+
 # Ignore logs
 *.log
 
@@ -32,4 +35,3 @@ docs/
 .tmp/
 
 # Development
-app/index-dev-local.html

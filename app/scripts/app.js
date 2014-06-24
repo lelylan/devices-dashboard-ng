@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device', [
-  'ngRoute',
-  'perfect_scrollbar'
+  'lelylan.directives.device',
+  'ngRoute'
 ])
   .config(function ($routeProvider) {
     $routeProvider

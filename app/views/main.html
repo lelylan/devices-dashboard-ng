@@ -24,21 +24,21 @@
     <p>Categories</p>
     <p>Categories</p>
     <p>Categories</p>
-    <p>Categories</p>
-    <p>Categories</p>
-    <p>Categories</p>
-    <p>Categories</p>
-    <p>Categories</p>
-    <p>Categories</p>
-    <p>Categories</p>
     <p>Categories Last</p>
     </div>
   </div>
-  <div class="devices column" style="height: {{windowHeight}}em" ng-if="show.devices">
-    <p>Devices</p>
+  <div class="devices column" style="height: {{windowHeight-3.5}}em" ng-if="show.devices">
+    <div class="device-item" ng-repeat="id in [1, 2, 3, 4, 5, 6]">
+      <device
+        device-id="{{id}}"
+        device-template="bower_components/device-directive-ng/dist/views/templates/compact.html">
+      </device>
+    </div>
   </div>
-  <div class="details column" style="height: {{windowHeight}}em" ng-if="show.details">
-    <p>Detail</p>
+  <div class="details column" style="height: {{windowHeight-3.5}}em" ng-if="show.details">
+    <div>
+      <device device-id="1"></device>
+    </div>
   </div>
 </div>
 
