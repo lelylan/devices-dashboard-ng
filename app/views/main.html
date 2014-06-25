@@ -1,29 +1,23 @@
 <div class="content ui {{columns}} column grid">
   <div id="categories" class="categories column scroller" style="height: {{windowHeight-4}}em;" ng-show="show.categories">
-    <div class="category active"><p class="name"><a href="#">All</a></p></div>
-    <div class="category"><p class="name"><a href="#">Lights</a></p></div>
-    <div class="category"><p class="name"><a href="#">Locks</a></p></div>
-    <div class="category"><p class="name"><a href="#">Sensors</a></p></div>
-    <div class="category"><p class="name"><a href="#">Thermostats</a></p></div>
-    <div class="category"><p class="name"><a href="#">Alarm System</a></p></div>
-    <div class="category"><p class="name"><a href="#">IP Cameras</a></p></div>
-    <div class="category"><p class="name"><a href="#">Windows</a></p></div>
-    <div class="category"><p class="name"><a href="#">Appliances</a></p></div>
-    <div class="category"><p class="name"><a href="#">Meters</a></p></div>
-    <div class="category"><p class="name"><a href="#">Gardenings</a></p></div>
-    <div class="category"><p class="name"><a href="#">Others</a></p></div>
+    <div class="category" ng-class="{active: !currentCategory}" ng-click="unsetCategory()">
+      <p class="name all"><a href="#">All</a></p>
+    </div>
+    <div class="category" ng-repeat="category in categories" ng-click="setCategory(category.tag)" ng-class="{active: category.tag == currentCategory.tag}">
+      <p class="name {{category}}"><a >{{category.name}}</a></p>
+    </div>
   </div>
   <div class="devices column" style="height: {{windowHeight-4}}em" ng-show="show.devices">
-    <div class="device" ng-repeat="id in [1, 2, 3, 4, 5, 6]" ng-class="{active: id==1}">
+    <div class="device" ng-repeat="device in devices" ng-class="{active: device.id == currentDevice.id}">
       <device
-        device-id="{{id}}"
+        device-json="{{device}}"
         device-template="bower_components/device-directive-ng/dist/views/templates/compact.html">
       </device>
     </div>
   </div>
   <div class="details column" style="height: {{windowHeight-4}}em" ng-show="show.details">
     <div>
-      <device device-id="1"></device>
+      <device device-json="{{currentDevice}}"></device>
     </div>
   </div>
 </div>

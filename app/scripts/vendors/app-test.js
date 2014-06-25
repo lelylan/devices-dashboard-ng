@@ -1,38 +1,54 @@
 var app = angular.module('app', ['lelylan.dashboards.device', 'ngMockE2E']);
 
-// mock all requests we need
+
+/* Mocks definition */
+
 app.run(function($httpBackend, $timeout, Profile) {
+
+  // Device names
+  names = ['light', 'lock', 'thermostat', 'alarm-clock'];
+
+  // Preset the logged user
   Profile.set({id: '1'});
+
+  // Jasmin configurations
   jasmine.getFixtures().fixturesPath = 'spec/fixtures';
 
-  device   = JSON.parse(readFixtures('device.json'));
-  type     = JSON.parse(readFixtures('type.json'));
-  privates = JSON.parse(readFixtures('privates.json'));
-
+  // Pass through requests
   $httpBackend.when('GET', /views/).passThrough();
-  $httpBackend.whenGET('http://api.lelylan.com/devices/1').respond(device);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/2').respond(device);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/3').respond(device);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/4').respond(device);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/5').respond(device);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/6').respond(device);
-  $httpBackend.whenPUT('http://api.lelylan.com/devices/1')
-    .respond(function(method, url, data, headers) { return [200, updateDevice(data), {}]; });
-  $httpBackend.whenPUT('http://api.lelylan.com/devices/1/properties')
-    .respond(function(method, url, data, headers) { return [200,  updateDeviceProperties(data), {}]; });
-  $httpBackend.whenDELETE('http://api.lelylan.com/devices/1').respond(device);
-  $httpBackend.whenGET('http://api.lelylan.com/types/1').respond(type);
-  $httpBackend.whenGET('http://api.lelylan.com/devices/1/privates').respond(privates);
 
-  var updateDevice = function(data) {
+  // Shared resources
+  devices = JSON.parse(readFixtures('devices.json'));
+  categories = JSON.parse(readFixtures('categories.json'));
+  privates = JSON.parse(readFixtures('privates.json'));
+  $httpBackend.whenGET('http://api.lelylan.com/devices').respond(devices);
+  $httpBackend.whenGET('http://api.lelylan.com/categories').respond(categories);
+
+  // Device Mocks
+  _.each(devices, function(device, index) {
+    var id   = index + 1;
+    var name = names[index];
+
+    type = JSON.parse(readFixtures(name + '-type.json'));
+    $httpBackend.whenPUT('http://api.lelylan.com/devices/' + id).respond(function(method, url, data, headers) { return [200, updateDevice(data, device), {}]; });
+    $httpBackend.whenPUT('http://api.lelylan.com/devices/' + id + '/properties').respond(function(method, url, data, headers) { return [200,  updateDeviceProperties(data, device), {}]; });
+    $httpBackend.whenGET('http://api.lelylan.com/types/' + id).respond(type);
+    $httpBackend.whenGET('http://api.lelylan.com/devices/' + id + '/privates').respond(privates);
+    $httpBackend.whenDELETE('http://api.lelylan.com/devices/' + id).respond(device);
+  })
+
+  // Device update
+  var updateDevice = function(data, device) {
     data = angular.fromJson(data);
     device.updated_at   = new Date();
     device.name         = data.name;
     device.physical.uri = data.physical.uri;
+    console.log(device)
     return device;
   }
 
-  var updateDeviceProperties = function(data) {
+  // Device properties update
+  var updateDeviceProperties = function(data, device) {
     data = angular.fromJson(data);
     device.updated_at = new Date();
     _.each(data.properties, function(property) {

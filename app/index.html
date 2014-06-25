@@ -25,12 +25,12 @@
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
     </style>
   </head>
-  <body ng-app="app" resize>
+  <body ng-app="app" ng-init="loading=true" resize>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
       <![endif]-->
 
-    <div class="preloading">
+    <div class="preloading" ng-show="loading">
       <div class="logo"></div>
       <div class="spinner">
         <div class="bounce-1"></div>
@@ -40,7 +40,7 @@
       <p class="description">Loading<p>
     </div>
 
-    <div class="app ng-cloak" ng-show="false">
+    <div class="app ng-cloak" ng-show="!loading">
       <div class="header">
         <span class="categories fa fa-circle-thin"></span> Lelylan Dashboard
         <span class="menu fa fa-bars"></span>
@@ -82,13 +82,12 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/directives/resize.js"></script>
-
-    <!--<script src="scripts/vendors/delayed-responses.js"></script>-->
     <!-- endbuild -->
 
     <!-- test -->
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="scripts/vendors/app-test.js"></script>
+    <!--<script src="scripts/vendors/delayed-responses.js"></script>-->
     <!-- end test -->
 
 </body>
