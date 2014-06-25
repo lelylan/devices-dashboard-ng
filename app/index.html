@@ -21,14 +21,33 @@
     <link rel="stylesheet" href="bower_components/semantic-ui/build/uncompressed/collections/grid.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
+    </style>
   </head>
   <body ng-app="app" resize>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+      <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view="" style="height: {{windowHeight}}em"></div>
+    <div class="preloading">
+      <div class="logo"></div>
+      <div class="spinner">
+        <div class="bounce-1"></div>
+        <div class="bounce-2"></div>
+        <div class="bounce-3"></div>
+      </div>
+      <p class="description">Loading<p>
+    </div>
+
+    <div class="app ng-cloak" ng-show="false">
+      <div class="header">
+        <span class="categories fa fa-circle-thin"></span> Lelylan Dashboard
+        <span class="menu fa fa-bars"></span>
+      </div>
+
+      <div class="container" ng-view="" style="height: {{windowHeight-4}}em"></div>
+    </div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>

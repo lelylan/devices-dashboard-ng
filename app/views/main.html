@@ -1,10 +1,5 @@
-<div class="header">
-  <span class="categories fa fa-circle-thin"></span> Lelylan Dashboard
-  <span class="menu fa fa-bars"></span>
-</div>
-
 <div class="content ui {{columns}} column grid">
-  <div id="categories" class="categories column scroller" style="height: {{windowHeight-3.5}}em;" ng-show="show.categories">
+  <div id="categories" class="categories column scroller" style="height: {{windowHeight-4}}em;" ng-show="show.categories">
     <div class="category active"><p class="name"><a href="#">All</a></p></div>
     <div class="category"><p class="name"><a href="#">Lights</a></p></div>
     <div class="category"><p class="name"><a href="#">Locks</a></p></div>
@@ -18,7 +13,7 @@
     <div class="category"><p class="name"><a href="#">Gardenings</a></p></div>
     <div class="category"><p class="name"><a href="#">Others</a></p></div>
   </div>
-  <div class="devices column" style="height: {{windowHeight-3.5}}em" ng-show="show.devices">
+  <div class="devices column" style="height: {{windowHeight-4}}em" ng-show="show.devices">
     <div class="device" ng-repeat="id in [1, 2, 3, 4, 5, 6]" ng-class="{active: id==1}">
       <device
         device-id="{{id}}"
@@ -26,7 +21,7 @@
       </device>
     </div>
   </div>
-  <div class="details column" style="height: {{windowHeight-3.5}}em" ng-show="show.details">
+  <div class="details column" style="height: {{windowHeight-4}}em" ng-show="show.details">
     <div>
       <device device-id="1"></device>
     </div>
