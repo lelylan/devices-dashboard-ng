@@ -15,18 +15,15 @@ angular.module('lelylan.dashboards.device')
         loadTypes($scope.devices);
       });
 
+    // count the number of devices we have per category
     $q.all([devices, categories]).then(function(values) {
       _.map($scope.categories, function(category) {
-        var result = _.countBy($scope.devices, function(device) {
+        var result = _.countBy($scope.all, function(device) {
           return (device.category == category.tag) ? 'count' : 'missed'
         });
-        category.count = result.count
+        category.devices = result.count;
       });
-
-      console.log($scope.categories)
-
     });
-
 
 
     var loadTypes = function(devices) {
@@ -34,7 +31,6 @@ angular.module('lelylan.dashboards.device')
 
       _.each(devices, function(device) {
         requests.push(Type.find(device.type.id));
-
         $q.all(requests).then(function(values) {
           init(values);
         });
@@ -42,7 +38,6 @@ angular.module('lelylan.dashboards.device')
     }
 
     var init = function(values) {
-      console.log('Loaded all types', values);
       $rootScope.loading = false;
       $scope.currentDevice = $scope.devices[0];
     }
@@ -50,7 +45,6 @@ angular.module('lelylan.dashboards.device')
 
     $scope.setCategory = function(category) {
       $scope.devices = _.where($scope.all, { category: category });
-      console.log($scope.devices);
       $scope.currentDevice = $scope.devices[0];
       $scope.currentCategory = _.find($scope.categories, function(resource) {
         return resource.tag == category;

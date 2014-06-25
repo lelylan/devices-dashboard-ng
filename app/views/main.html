@@ -3,13 +3,13 @@
     <div class="category" ng-class="{active: !currentCategory}" ng-click="unsetCategory()">
       <p class="name all">
         <a href="#">All</a>
-        <span>{{devices.length}}</span>
+        <span>{{all.length}}</span>
       </p>
     </div>
-    <div class="category" ng-repeat="category in categories" ng-click="setCategory(category.tag)" ng-class="{active: category.tag == currentCategory.tag, disabled: !category.count}">
+    <div class="category" ng-repeat="category in categories" ng-click="setCategory(category.tag)" ng-class="{active: category.tag == currentCategory.tag, disabled: !category.devices}">
       <p class="name {{category}}">
         <a>{{category.name}}</a>
-        <span ng-show="category.count">{{category.count}}</span>
+        <span ng-show="category.devices">{{category.devices}}</span>
       </p>
     </div>
   </div>
