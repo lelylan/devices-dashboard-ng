@@ -63,9 +63,14 @@ body * {
   background-color: #fff;
 }
 
-.content .active,
+
 .content .category:hover,
 .content .device:hover {
+ border-left: 0.2em solid #ddd;
+}
+
+.content .active,
+.content .active:hover {
  border-left: 0.2em solid #239cbb;
 }
 

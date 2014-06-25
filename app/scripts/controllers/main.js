@@ -49,9 +49,16 @@ angular.module('lelylan.dashboards.device')
       $scope.currentCategory = null;
     }
 
+    // set the current device in the
     $rootScope.$on('lelylan:device:custom:open', function(event, device) {
-      $scope.currentDevice = _.find($scope.devices, function(resource) {
+      $scope.currentDevice = device;
+    });
+
+    // let the list of devices keep the sync with the devices
+    $scope.$on('lelylan:device:update:set', function(event, device) {
+      var old = _.find($scope.devices, function(resource) {
         return resource.id == device.id;
       });
+      angular.extend(old, device);
     });
   });
