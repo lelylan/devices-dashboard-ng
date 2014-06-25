@@ -40,7 +40,7 @@ body * {
 }
 
 .content > div.column {
-  border: 1px solid #eee;
+  //border: 1px solid #eee;
   padding: 0 !important;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -55,6 +55,7 @@ body * {
 
 .device {
  padding: 0 0.5em 0 0.3em;
+ border-bottom: 1px solid #f8f8f8;
 }
 
 .device,
@@ -93,6 +94,32 @@ body * {
   text-decoration: none;
 }
 
+.category > p > span {
+  background-color: #eee;
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  color: #999;
+  display: inline-block;
+  vertical-align: text-bottom;
+  text-align: center;
+  margin-left: 0.5em;
+  font-weight: 100;
+  border: 1px solid #e6e6e6;
+}
+
+.categories .disabled a {
+  color: #ddd;
+}
+
+.category.disabled {
+  cursor: default;
+}
+
+.category.disabled:hover {
+  border-left: 0.2em solid #fff;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -117,6 +144,9 @@ body * {
   line-height: 1.15em;
 }
 
+.ly-compact .ly-status {
+  border-bottom: none;
+}
 
 /*
  * Device spinner
@@ -195,4 +225,28 @@ body * {
 
 .preloading .spinner > div {
   background-color: #239cbb;
+}
+
+/*
+ * Elements animation
+ */
+
+.view-animation.ng-enter {
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.view-animation.ng-leave {
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+.view-animation.ng-hide-remove {
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+.view-animation.ng-hide-add {
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
 }
