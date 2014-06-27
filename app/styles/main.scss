@@ -10,12 +10,22 @@ body * {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.5em;
   font-weight: 100;
+  letter-spacing: 1px;
 }
 
+hr {
+  margin: 2em 1em;
+  border: none;
+  border-bottom: 1px solid #e6e6e6;
+}
 
 a {
   color: #239cbb;
   text-decoration: none;
+}
+
+.container {
+  background-color: #fff;
 }
 
 .app {
@@ -55,8 +65,8 @@ a {
 
 .full-menu {
   display: none;
-  font-size: 0.9em;
-  padding-top: 0.1em;
+  font-size: 0.7em;
+  padding-top: 0.3em;
 }
 
 .full-menu a {
@@ -310,39 +320,52 @@ a {
   animation: fadeIn 1s;
 }
 
-
-
-.content .message {
-  background-color: #fff;
-  border: 1px solid #eee;
-  padding: 1em;
-  width: 20em;
-  height: 9.5em;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+.column .empty {
+  width: 0em !important;
 }
 
-.content .message p {
+.column .descriptive {
+  width: 100% !important;
+}
+
+.message * {
+  text-align: center;
+}
+
+
+.message {
+  background-color: #fff;
+  height: 100%;
+  padding-top: 1em;
+}
+
+.message p {
   text-align: center;
   color: #888;
 }
 
-.content .message p.title {
+.message p.title {
   margin: 0;
-  font-size: 2.2em;
+  margin-top: 0.5em;
+  font-size: 2.0em;
 }
 
-.content .message p.description {
+.message p.description {
   margin: 0;
-  margin-top: 0.75em;
-  font-size: 1.6em;
+  margin-top: 0.25em;
+  font-size: 1.4em;
+}
+
+.message p.sub-description {
+  margin: 0;
+  margin-top: 1.5em;
+  font-size: 1.1em;
 }
 
 @media (min-width: 46em) {
 
   .container {
-    padding-top: 0.5em;
+    margin-top: 0.5em;
   }
 
   .header {
@@ -354,9 +377,6 @@ a {
     border-left: 0.25em solid $background-color;
     border-right: 0.25em solid $background-color;
   }
-}
-
-@media (min-width: 46em) {
 
   .full-menu {
     display: block;
@@ -364,5 +384,10 @@ a {
 
   .compact-menu {
     display: none;
+  }
+
+  .message hr {
+    margin-left: 33.33333%;
+    width: 33.33333%;
   }
 }

@@ -18,7 +18,8 @@ app.run(function($httpBackend, $timeout, Profile) {
   $httpBackend.when('GET', /views/).passThrough();
 
   // Shared resources
-  devices = JSON.parse(readFixtures('devices.json'));
+  //devices = JSON.parse(readFixtures('devices.json'));
+  devices = JSON.parse(readFixtures('devices-empty.json'));
   categories = JSON.parse(readFixtures('categories.json'));
   privates = JSON.parse(readFixtures('privates.json'));
   $httpBackend.whenGET('http://api.lelylan.com/devices').respond(devices);
