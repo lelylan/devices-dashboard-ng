@@ -35,24 +35,59 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
        */
 
       if (scope.windowWidth > breakpoints.desktop) {
-        scope.show = { categories: true, devices: true, details: true }
+        if (scope.view != 'desktop') { // set default the first time
+          scope.show = { categories: true, devices: true, details: true };
+
+          scope.menu = { lelylan: true, categories: false, devices: false }
+        }
+
+        scope.view = 'desktop';
       }
 
       if (scope.windowWidth < breakpoints.desktop) {
-        scope.show = { categories: false, devices: true, details: true }
+        if (scope.view != 'tablet') { // set default the first time
+          scope.show = { categories: false, devices: true, details: true };
+
+          if (scope.show.categories) { scope.menu = { categories: false, devices: false } }
+          if (scope.show.details)    { scope.menu = { categories: true,  devices: false } }
+        }
+
+        scope.view = 'tablet';
       }
 
       if (scope.windowWidth < breakpoints.tablet) {
-        scope.show = { categories: false, devices: true, details: false }
+        if (scope.view != 'mobile') { // set default the first time
+          scope.show = { categories: false, devices: true, details: false };
+
+          if (scope.show.categories) { scope.menu = { categories: false, devices: false } }
+          if (scope.show.devices)    { scope.menu = { categories: true,  devices: false } }
+          if (scope.show.details)    { scope.menu = { categories: false, devices: true } }
+        }
+
+        scope.view = 'mobile';
       }
 
       scope.columns = 0;
       _.each(scope.show, function(column) { if (column) { scope.columns += 1; } })
+
       if (scope.columns == 1) { scope.columns = 'one'   }
       if (scope.columns == 2) { scope.columns = 'two'   }
       if (scope.columns == 3) { scope.columns = 'three' }
 
-      scope.$broadcast('rebuild:me');
+      if (scope.columns == 'three') { scope.menu = { lelylan: true, categories: false, devices: false } }
+
+      if (scope.columns == 'two') {
+        if (scope.show.categories) { scope.menu = { categories: false, devices: false } }
+        if (scope.show.details)    { scope.menu = { categories: true,  devices: false } }
+      }
+
+      if (scope.columns == 'one') {
+        if (scope.show.categories) { scope.menu = { categories: false, devices: false } }
+        if (scope.show.devices)    { scope.menu = { categories: true,  devices: false } }
+        if (scope.show.details)    { scope.menu = { categories: false, devices: true } }
+      }
+
+
 
     }, true);
 

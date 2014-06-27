@@ -25,15 +25,16 @@ angular.module('lelylan.dashboards.device')
       });
     });
 
-
     var loadTypes = function(devices) {
       var requests = [];
 
+      console.log("Loading types")
       _.each(devices, function(device) {
         requests.push(Type.find(device.type.id));
-        $q.all(requests).then(function(values) {
-          init(values);
-        });
+      });
+
+      $q.all(requests).then(function(values) {
+        init(values);
       });
     }
 
@@ -60,6 +61,7 @@ angular.module('lelylan.dashboards.device')
     // set the current device in the
     $rootScope.$on('lelylan:device:custom:open', function(event, device) {
       $scope.currentDevice = device;
+
     });
 
     // let the list of devices keep the sync with the devices
@@ -69,4 +71,32 @@ angular.module('lelylan.dashboards.device')
       });
       angular.extend(old, device);
     });
+
+    $rootScope.backToCategories = function() {
+      if ($scope.columns == 'two')
+        $scope.show = angular.extend($scope.show, { categories: true, devices: true, details: false });
+      duplicated();
+    };
+
+
+
+
+
+
+    var duplicated = function() {
+
+      console.log('back', $scope.columns)
+      if ($scope.columns == 'three') { $scope.menu = { lelylan: true, categories: false, devices: false } }
+
+      if ($scope.columns == 'two') {
+        if ($scope.show.categories) { angular.extend($scope.menu, { categories: false, devices: false }); }
+        if ($scope.show.details)    { angular.extend($scope.menu, { categories: true,  devices: false }); }
+      }
+
+      if ($scope.columns == 'one') {
+        if ($scope.show.categories) { $scope.menu = { categories: false, devices: false } }
+        if ($scope.show.devices)    { $scope.menu = { categories: true,  devices: false } }
+        if ($scope.show.details)    { $scope.menu = { categories: false, devices: true } }
+      }
+    }
   });

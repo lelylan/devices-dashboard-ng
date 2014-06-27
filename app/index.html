@@ -42,7 +42,15 @@
 
     <div class="app ng-cloak" ng-show="!loading">
       <div class="header">
-        <span class="categories fa fa-circle-thin"></span> Lelylan Dashboard
+        <a class="logo" ng-if="menu.lelylan">
+          <span class="fa fa-circle-thin"></span> Lelylan <span>Dashboard</span>
+        </a>
+        <a class="back-categories" href="#" ng-if="menu.categories" ng-click="backToCategories()">
+          <span class="fa fa-circle-thin"></span> Categories
+        </a>
+        <a class="back-devices" href="#" ng-if="menu.devices">
+          <span class="fa fa-circle-thin"></span> Devices
+        </a>
         <span class="menu fa fa-bars"></span>
       </div>
 

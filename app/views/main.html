@@ -1,4 +1,13 @@
-<div class="content ui {{columns}} column grid">
+<div class="content" ng-if="all.length == 0">
+  <div class="message">
+    <p class="title">You have no devices</p>
+    <p class="description">
+    <a href=""><i class="fa fa-plus"></i> Create</a> your first one<br>
+    or activate the <a href=""><i class="fa fa-desktop"></i> demo mode</a></p>
+  </div>
+</div>
+
+<div class="content ui {{columns}} column grid" ng-if="all.length > 0">
   <div id="categories" class="categories column scroller" style="height: {{windowHeight-4}}em;" ng-show="show.categories">
     <div class="category" ng-class="{active: !currentCategory}" ng-click="unsetCategory()">
       <p class="name all">
