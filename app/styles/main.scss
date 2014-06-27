@@ -53,6 +53,30 @@ a {
   line-height: 1.6em;
 }
 
+.full-menu {
+  display: none;
+  font-size: 0.9em;
+  padding-top: 0.1em;
+}
+
+.full-menu a {
+  padding-left: 0.75em;
+  font-weight: 100;
+}
+
+.full-menu .fa {
+  color: #67C2DA;
+}
+
+
+.full-menu a:hover .fa {
+  color: #fff;
+}
+
+.compact-menu {
+  display: block;
+}
+
 .back .fa {
   font-size: 1.6em;
   vertical-align: bottom;
@@ -329,5 +353,16 @@ a {
   .content > div.column {
     border-left: 0.25em solid $background-color;
     border-right: 0.25em solid $background-color;
+  }
+}
+
+@media (min-width: 46em) {
+
+  .full-menu {
+    display: block;
+  }
+
+  .compact-menu {
+    display: none;
   }
 }
