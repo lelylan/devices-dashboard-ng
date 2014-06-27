@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/device-directive-ng/dist/device-directive-ng.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="styles/vendors/dlmenu.css" />
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="bower_components/semantic-ui/build/uncompressed/collections/grid.css">
@@ -64,6 +65,38 @@
         </div>
       </div>
 
+
+
+<div id="dl-menu" class="dl-menuwrapper">
+    <button class="dl-trigger">Open Menu</button>
+    <ul class="dl-menu">
+        <li>
+            <a href="#">Item 1</a>
+            <ul class="dl-submenu">
+                <li><a href="#">Sub-Item 1</a></li>
+                <li><a href="#">Sub-Item 2</a></li>
+                <li><a href="#">Sub-Item 3</a></li>
+                <li>
+                    <a href="#">Sub-Item 4</a>
+                    <ul class="dl-submenu">
+                        <li><a href="#">Sub-Sub-Item 1</a></li>
+                        <li><a href="#">Sub-Sub-Item 2</a></li>
+                        <li><a href="#">Sub-Sub-Item 3</a></li>
+                    </ul>
+                </li>
+                <li><!-- ... --></li>
+                <!-- ... -->
+            </ul>
+        </li>
+        <li><!-- ... --></li>
+        <li><!-- ... --></li>
+        <!-- ... -->
+    </ul>
+</div><!-- /dl-menuwrapper -->
+
+
+
+
       <div class="container" ng-view="" style="height: {{appHeight}}em"></div>
     </div>
 
@@ -94,6 +127,9 @@
     <!-- TODO install jasmine with bower -->
     <script src="bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>
     <script src="bower_components/jasmine-jquery/lib/jasmine-jquery.js"></script>
+
+    <script src="scripts/vendors/modernizr.custom.js"></script>
+    <script src="scripts/vendors/jquery.dlmenu.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -108,5 +144,11 @@
     <!--<script src="scripts/vendors/delayed-responses.js"></script>-->
     <!-- end test -->
 
+
+<script>
+$( '#dl-menu' ).dlmenu({
+  animationClasses : { classin : 'animation-class-name', classout : 'animation-class-name' }
+});
+</script>
 </body>
 </html>
