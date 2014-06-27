@@ -6,7 +6,7 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
     var w = angular.element($window);
 
     scope.show      = { categories: true, devices: true, details: true }
-    var breakpoints = { desktop: 69, tablet: 43 }
+    var breakpoints = { desktop: 69, tablet: 46 }
 
     scope.getWindowDimensions = function () {
       var factor = parseFloat($("body").css("font-size"));
@@ -20,15 +20,6 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
     scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
       scope.windowHeight = newValue.h;
       scope.windowWidth = newValue.w;
-
-      scope.style = function () {
-        return {
-          'height': (newValue.h - 100) + 'px',
-          'width': (newValue.w - 100) + 'px'
-        };
-      };
-
-
 
       /*
        * Visualization logics

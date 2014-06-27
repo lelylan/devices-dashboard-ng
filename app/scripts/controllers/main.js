@@ -50,18 +50,38 @@ angular.module('lelylan.dashboards.device')
       $scope.currentCategory = _.find($scope.categories, function(resource) {
         return resource.tag == category;
       });
+
+      if ($scope.columns == 'one') {
+        angular.extend($scope.show, { categories: false, devices: true, details: false });
+        setMenu();
+      }
+
     }
 
     $scope.unsetCategory = function(category) {
       $scope.devices = $scope.all;
       $scope.currentDevice = $scope.devices[0];
       $scope.currentCategory = null;
+
+      if ($scope.columns == 'one') {
+        angular.extend($scope.show, { categories: false, devices: true, details: false });
+        setMenu();
+      }
     }
 
     // set the current device in the
     $rootScope.$on('lelylan:device:custom:open', function(event, device) {
       $scope.currentDevice = device;
 
+      if ($scope.columns == 'two') {
+        angular.extend($scope.show, { categories: false, devices: true, details: true });
+      }
+
+      if ($scope.columns == 'one') {
+        angular.extend($scope.show, { categories: false, devices: false, details: true });
+      }
+
+      setMenu();
     });
 
     // let the list of devices keep the sync with the devices
@@ -83,6 +103,16 @@ angular.module('lelylan.dashboards.device')
 
       setMenu();
     };
+
+    $rootScope.backToDevices = function() {
+
+      if ($scope.columns == 'one') {
+        angular.extend($scope.show, { categories: false, devices: true, details: false });
+      }
+
+      setMenu();
+    };
+
 
 
 
