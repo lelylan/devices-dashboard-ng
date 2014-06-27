@@ -5,7 +5,7 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
   return function (scope, element) {
     var w = angular.element($window);
 
-    scope.show      = { categories: true, devices: true, detail: true }
+    scope.show      = { categories: true, devices: true, details: true }
     var breakpoints = { desktop: 66, tablet: 40 }
 
     scope.getWindowDimensions = function () {
@@ -34,11 +34,13 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
        * Visualization logics
        */
 
+      scope.show = scope.show || {};
+      scope.menu = scope.menu || {};
+
       if (scope.windowWidth > breakpoints.desktop) {
         if (scope.view != 'desktop') { // set default the first time
-          scope.show = { categories: true, devices: true, details: true };
-
-          scope.menu = { lelylan: true, categories: false, devices: false }
+          angular.extend(scope.show, { categories: true, devices: true, details: true });
+          angular.extend(scope.menu, { lelylan: true, categories: false, devices: false });
         }
 
         scope.view = 'desktop';
@@ -46,10 +48,10 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
 
       if (scope.windowWidth < breakpoints.desktop) {
         if (scope.view != 'tablet') { // set default the first time
-          scope.show = { categories: false, devices: true, details: true };
+          angular.extend(scope.show, { categories: false, devices: true, details: true });
 
-          if (scope.show.categories) { scope.menu = { categories: false, devices: false } }
-          if (scope.show.details)    { scope.menu = { categories: true,  devices: false } }
+          if (scope.show.categories) { angular.extend(scope.menu, { categories: false, devices: false }); }
+          if (scope.show.details)    { angular.extend(scope.menu, { categories: true,  devices: false }); }
         }
 
         scope.view = 'tablet';
@@ -59,9 +61,9 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
         if (scope.view != 'mobile') { // set default the first time
           scope.show = { categories: false, devices: true, details: false };
 
-          if (scope.show.categories) { scope.menu = { categories: false, devices: false } }
-          if (scope.show.devices)    { scope.menu = { categories: true,  devices: false } }
-          if (scope.show.details)    { scope.menu = { categories: false, devices: true } }
+          if (scope.show.categories) { angular.extend(scope.menu, { categories: false, devices: false }); }
+          if (scope.show.devices)    { angular.extend(scope.menu, { categories: true,  devices: false }); }
+          if (scope.show.details)    { angular.extend(scope.menu, { categories: false, devices: true }); }
         }
 
         scope.view = 'mobile';

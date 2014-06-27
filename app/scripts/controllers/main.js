@@ -75,7 +75,7 @@ angular.module('lelylan.dashboards.device')
     $rootScope.backToCategories = function() {
       if ($scope.columns == 'two')
         $scope.show = angular.extend($scope.show, { categories: true, devices: true, details: false });
-      duplicated();
+      setMenu();
     };
 
 
@@ -83,10 +83,12 @@ angular.module('lelylan.dashboards.device')
 
 
 
-    var duplicated = function() {
+    var setMenu = function() {
 
       console.log('back', $scope.columns)
-      if ($scope.columns == 'three') { $scope.menu = { lelylan: true, categories: false, devices: false } }
+      if ($scope.columns == 'three') {
+        angular.extend($scope.menu, { lelylan: true, categories: false, devices: false });
+      }
 
       if ($scope.columns == 'two') {
         if ($scope.show.categories) { angular.extend($scope.menu, { categories: false, devices: false }); }
@@ -94,9 +96,9 @@ angular.module('lelylan.dashboards.device')
       }
 
       if ($scope.columns == 'one') {
-        if ($scope.show.categories) { $scope.menu = { categories: false, devices: false } }
-        if ($scope.show.devices)    { $scope.menu = { categories: true,  devices: false } }
-        if ($scope.show.details)    { $scope.menu = { categories: false, devices: true } }
+        if ($scope.show.categories) { angular.extend($scope.menu, { categories: false, devices: false }); }
+        if ($scope.show.devices)    { angular.extend($scope.menu, { categories: true,  devices: false }); }
+        if ($scope.show.details)    { angular.extend($scope.menu, { categories: false, devices: true }); }
       }
     }
   });
