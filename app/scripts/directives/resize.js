@@ -6,7 +6,7 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
     var w = angular.element($window);
 
     scope.show      = { categories: true, devices: true, details: true }
-    var breakpoints = { desktop: 66, tablet: 40 }
+    var breakpoints = { desktop: 69, tablet: 43 }
 
     scope.getWindowDimensions = function () {
       var factor = parseFloat($("body").css("font-size"));
@@ -46,7 +46,7 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
         scope.view = 'desktop';
       }
 
-      if (scope.windowWidth < breakpoints.desktop) {
+      if (scope.windowWidth < breakpoints.desktop && scope.windowWidth > breakpoints.tablet) {
         if (scope.view != 'tablet') { // set default the first time
           angular.extend(scope.show, { categories: false, devices: true, details: true });
 
@@ -58,6 +58,7 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
       }
 
       if (scope.windowWidth < breakpoints.tablet) {
+
         if (scope.view != 'mobile') { // set default the first time
           scope.show = { categories: false, devices: true, details: false };
 

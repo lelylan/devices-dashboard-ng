@@ -73,8 +73,14 @@ angular.module('lelylan.dashboards.device')
     });
 
     $rootScope.backToCategories = function() {
-      if ($scope.columns == 'two')
-        $scope.show = angular.extend($scope.show, { categories: true, devices: true, details: false });
+      if ($scope.columns == 'two') {
+        angular.extend($scope.show, { categories: true, devices: true, details: false });
+      }
+
+      if ($scope.columns == 'one') {
+        angular.extend($scope.show, { categories: true, devices: false, details: false });
+      }
+
       setMenu();
     };
 
@@ -85,7 +91,6 @@ angular.module('lelylan.dashboards.device')
 
     var setMenu = function() {
 
-      console.log('back', $scope.columns)
       if ($scope.columns == 'three') {
         angular.extend($scope.menu, { lelylan: true, categories: false, devices: false });
       }
