@@ -6,6 +6,7 @@ angular.module('lelylan.dashboards.device')
     var categories = Category.all().
       success(function(categories) {
         $scope.categories = categories;
+        $scope.categories.unshift({ tag: 'all', name: 'All'});
       });
 
     var devices = Device.all().
@@ -23,12 +24,12 @@ angular.module('lelylan.dashboards.device')
         });
         category.devices = result.count;
       });
+      $scope.categories[0].devices = $scope.all.length;
     });
 
     var loadTypes = function(devices) {
       var requests = [];
 
-      console.log("Loading types")
       _.each(devices, function(device) {
         requests.push(Type.find(device.type.id));
       });
@@ -40,28 +41,17 @@ angular.module('lelylan.dashboards.device')
 
     var init = function(values) {
       $rootScope.loading = false;
+      $rootScope.currentCategory = $scope.categories[0];
       $scope.currentDevice = $scope.devices[0];
     }
 
 
     $scope.setCategory = function(category) {
-      $scope.devices = _.where($scope.all, { category: category });
+      $scope.devices = (category == 'all') ? $scope.all : _.where($scope.all, { category: category });
       $scope.currentDevice = $scope.devices[0];
-      $scope.currentCategory = _.find($scope.categories, function(resource) {
+      $rootScope.currentCategory = _.find($scope.categories, function(resource) {
         return resource.tag == category;
       });
-
-      if ($scope.columns == 'one') {
-        angular.extend($scope.show, { categories: false, devices: true, details: false });
-        setMenu();
-      }
-
-    }
-
-    $scope.unsetCategory = function(category) {
-      $scope.devices = $scope.all;
-      $scope.currentDevice = $scope.devices[0];
-      $scope.currentCategory = null;
 
       if ($scope.columns == 'one') {
         angular.extend($scope.show, { categories: false, devices: true, details: false });
