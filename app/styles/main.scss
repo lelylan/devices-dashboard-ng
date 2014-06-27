@@ -25,6 +25,7 @@ a {
 }
 
 .header {
+  line-height: 1.5em;
   height: 1.5em;
   background-color: #239cbb;
   color: #fff;
@@ -48,8 +49,13 @@ a {
   float: right;
 }
 
-.fa-bars {
-  line-height: 1.5em;
+.menu .fa {
+  line-height: 1.6em;
+}
+
+.back .fa {
+  font-size: 1.6em;
+  vertical-align: bottom;
 }
 
 .content {

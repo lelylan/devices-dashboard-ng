@@ -45,13 +45,15 @@
         <a class="logo" ng-if="menu.lelylan">
           <span class="fa fa-circle-thin"></span> Lelylan <span>Dashboard</span>
         </a>
-        <a class="back-categories" href="#" ng-if="menu.categories" ng-click="backToCategories()">
+        <a class="back back-categories" href="#" ng-if="menu.categories" ng-click="backToCategories()">
           <span class="fa fa-angle-left"></span> Categories
         </a>
-        <a class="back-devices" href="#" ng-if="menu.devices" ng-click="backToDevices()">
+        <a class="back back-devices" href="#" ng-if="menu.devices" ng-click="backToDevices()">
           <span class="fa fa-angle-left"></span> {{currentCategory.name}}
         </a>
-        <span class="menu fa fa-bars"></span>
+        <a href="#" class="menu">
+          <span class="fa fa-bars"></span>
+        </a>
       </div>
 
       <div class="container" ng-view="" style="height: {{appHeight}}em"></div>
