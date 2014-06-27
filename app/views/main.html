@@ -8,7 +8,7 @@
 </div>
 
 <div class="content ui {{columns}} column grid" ng-if="all.length > 0">
-  <div id="categories" class="categories column scroller" style="height: {{windowHeight-4}}em;" ng-show="show.categories">
+  <div id="categories" class="categories column scroller" style="height: {{appHeight}}em;" ng-show="show.categories">
     <div class="category" ng-class="{active: !currentCategory}" ng-click="unsetCategory()">
       <p class="name all">
         <a href="#">All</a>
@@ -22,7 +22,7 @@
       </p>
     </div>
   </div>
-  <div class="devices column" style="height: {{windowHeight-4}}em" ng-show="show.devices">
+  <div class="devices column" style="height: {{appHeight}}em" ng-show="show.devices">
     <div class="device" ng-repeat="device in devices" ng-class="{active: device.id == currentDevice.id}">
       <device
         device-json="{{device}}"
@@ -30,7 +30,7 @@
       </device>
     </div>
   </div>
-  <div class="details column" style="height: {{windowHeight-4}}em" ng-show="show.details">
+  <div class="details column" style="height: {{appHeight}}em" ng-show="show.details">
     <div>
       <device device-json="{{currentDevice}}" ng-show="currentDevice"></device>
     </div>

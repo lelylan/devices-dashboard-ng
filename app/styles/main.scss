@@ -1,6 +1,8 @@
+$background-color: #f8f8f8;
+
 body {
   margin: 0;
-  background-color: #f6f6f6;
+  background-color: $background-color;
   color: #333;;
 }
 
@@ -161,6 +163,10 @@ a {
   border: none;
 }
 
+.ly-device {
+  border-bottom: 1px solid #f6f6f6;
+}
+
 .ly-compact .ly-status .ly-description .ly-name {
   font-size: 1.5em;
   line-height: 1.15em;
@@ -314,8 +320,8 @@ a {
 
   .app,
   .content > div.column {
-    border-left: 4px solid #f6f6f6;
-    border-right: 4px solid #f6f6f6;
+    border-left: 0.25em solid $background-color;
+    border-right: 0.25em solid $background-color;
   }
 
 

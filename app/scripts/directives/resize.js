@@ -18,8 +18,9 @@ angular.module('lelylan.dashboards.device').directive('resize', function ($windo
     };
 
     scope.$watch(scope.getWindowDimensions, function (newValue, oldValue) {
-      scope.windowHeight = newValue.h;
-      scope.windowWidth = newValue.w;
+      var menuOffset     = (scope.columns == 'one') ? 3.8 : 4.3
+      scope.appHeight    = newValue.h - menuOffset;
+      scope.windowWidth  = newValue.w;
 
       /*
        * Visualization logics
