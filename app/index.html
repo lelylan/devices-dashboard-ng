@@ -10,16 +10,18 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/device-directive-ng/dist/device-directive-ng.css" />
     <!-- endbower -->
+    <link rel="stylesheet" href="bower_components/semantic-ui/build/uncompressed/collections/grid.css">
     <link rel="stylesheet" href="styles/vendors/dlmenu.css" />
     <!-- endbuild -->
+
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="bower_components/semantic-ui/build/uncompressed/collections/grid.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <style>
@@ -58,6 +60,7 @@
             <a href=""><span class="fa fa-search"></span> <span class="text">Search</span></a>
             <a href=""><span class="fa fa-plus"></span> <span class="text">Add</span></a>
             <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
+            <a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
           </span>
           <div id="dl-menu" class="dl-menuwrapper compact-menu">
             <span class="fa fa-bars dl-trigger"></span>
@@ -114,6 +117,7 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/create.js"></script>
     <script src="scripts/directives/resize.js"></script>
     <!-- endbuild -->
 

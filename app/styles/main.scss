@@ -360,6 +360,7 @@ a {
   margin: 0;
   margin-top: 1.5em;
   font-size: 1.1em;
+  padding: 0 1em;
 }
 
 @media (min-width: 46em) {
@@ -389,5 +390,122 @@ a {
   .message hr {
     margin-left: 33.33333%;
     width: 33.33333%;
+  }
+}
+
+
+
+
+// CREATE
+
+.create .step-info {
+  display: none !important;
+}
+
+.create > div.step {
+  margin-top: 0 !important;
+}
+
+.create > div.step-info {
+  border-right: 1px solid #f6f6f6;
+  padding-left: 2.5em !important;
+  padding-right: 2em !important;
+}
+
+.create > div.step-content {
+  padding-left: 1em !important;
+  padding-right: 2em !important;
+}
+
+.create h1 {
+  color: #bbb;
+  margin: 0;
+  padding-bottom: 0.2em;
+  padding-top: 0.6em;
+  font-size: 2.0em;
+}
+
+.create h1 span.bubble {
+  background-color: #e6e6e6;
+  border-radius: 50%;
+  display: inline-block;
+  color: #fff;
+  font-size: 0.8em;
+  height: 1.4em;
+  margin-right: 0.2em;
+  padding-left: 0.4em;
+  width: 1em;
+}
+
+.create h2 {
+  color: #bbb;
+  line-height: 1.3em;
+  font-size: 1.4em;
+}
+
+.create ul {
+  color: #bbb;
+  padding-left: 1.2em;
+}
+
+.create input {
+  color: #666;
+  background: none repeat scroll 0 0 transparent;
+  border: medium none;
+  border-spacing: 0;
+  font-weight: 100;
+  list-style: none outside none;
+  padding-bottom: 0.1em;
+  border-bottom: 1px dashed #ddd;
+  width: 100%;
+  font-size: 1.5em;
+  padding-top: 0.8em;
+  margin-bottom: 1em;
+}
+
+.create .step-content h2 {
+  margin-top: 0;
+}
+
+.create button {
+  padding: 0.3em 1em;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+  font-size: 1.2em;
+  background: none repeat scroll 0 0 transparent;
+  border: none;
+  border-spacing: 0;
+  background-color: #239cbb;
+}
+
+.create button .fa {
+  padding-right: .3em;
+  font-size: 1.2em;
+}
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #666;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #666;
+  opacity: 1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #666;
+  opacity: 1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #666;
+}
+
+@media (min-width: 46em) {
+  .create .step-info {
+    display: inline-block !important;
+  }
+
+  .create .short-info {
+    display: none;
   }
 }

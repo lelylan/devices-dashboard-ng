@@ -1,0 +1,35 @@
+<!-- Step one -->
+
+<div class="create ui {{columns}} column grid" ng-if="step=='one'">
+
+  <div class="column step step-info" style="height: {{appHeight}}em">
+    <h1><span class="bubble">1</span> Device Name</h1>
+    <h2>Give a meaningful name to your device to easily find it.</h2>
+
+    <ul>
+      <li>Kitchen light</li>
+      <li>Garage lock</li>
+      <li>Bedroom thermostat</li>
+    </ul>
+  </div>
+
+  <div class="column step step-content" style="height: {{appHeight}}em">
+    <div class="short-info">
+      <h1>Step <span class="bubble">1</span>
+      <h2>Give a meaningful name to your device to easily find it.</h2>
+    </div>
+    <input type="text" placeholder="Set device name here" autofocus ng-model="device.name">
+    <button ng-click="execute(function)"><i class="fa fa-angle-right"></i> Confirm name </button>
+  </div>
+</div>
+
+<!-- Step two -->
+
+<div class="create ui {{columns}} column grid" ng-if="step=='two'">
+</div>
+
+<!-- Step three -->
+
+<div class="create ui {{columns}} column grid" ng-if="step=='three'">
+</div>
+
