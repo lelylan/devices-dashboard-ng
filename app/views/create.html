@@ -125,8 +125,8 @@
     <div class="physical item">
       <p class="name">
       <a><i name="form" class="fa fa-angle-right"></i> Custom URI</a>
-      <form novalidate ng-submit="setPhysical('custom')">
-        <input style="padding-top: 0.3em; font-size: 1em;" type="text" placeholder="Set the physical device URI" ng-model="device.physical.uri" required autofocus>
+      <form novalidate ng-submit="setPhysical('custom')" ng-disabled="form.$invalid">
+        <input style="padding-top: 0.3em; font-size: 1em;" type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required autofocus>
       </form>
       <p class="description">
         Set the URI that let you access your device through Internet.

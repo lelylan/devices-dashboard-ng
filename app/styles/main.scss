@@ -527,6 +527,7 @@ a {
 
 .item {
   padding: 1em;
+  padding-left: 0;
   border-bottom: 1px solid #f6f6f6;
   cursor: pointer;
 }
@@ -571,21 +572,13 @@ a {
 }
 
 
-@media (max-width: 46em) {
-  .create * {
-    font-size: 0.95em;
-  }
-
-  .create .item {
-    padding-left: 0;
-  }
-}
-
-
 // form validation
 
 .create button:disabled {
   background-color: #ddd;
 }
 
+.create input.ng-invalid.ng-dirty {
+  border-bottom-color: #FFB3B3;
+}
 
