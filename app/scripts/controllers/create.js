@@ -70,4 +70,5 @@ angular.module('lelylan.dashboards.device')
 
       $location.path('/');
     }
+
   });

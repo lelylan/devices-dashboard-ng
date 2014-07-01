@@ -14,7 +14,11 @@ angular.module('lelylan.dashboards.device', [
         templateUrl: 'views/create.html',
         controller: 'CreateCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
+      .when('/access_token', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl'
+      })
+      //.otherwise({
+        //redirectTo: '/'
+      //});
   });

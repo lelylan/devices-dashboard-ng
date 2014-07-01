@@ -22,9 +22,12 @@ app.run(function($httpBackend, $timeout, Profile) {
   //devices = JSON.parse(readFixtures('devices-empty.json'));
   categories = JSON.parse(readFixtures('categories.json'));
   privates = JSON.parse(readFixtures('privates.json'));
+  me = JSON.parse(readFixtures('me.json'));
+
   $httpBackend.whenGET('http://api.lelylan.com/devices').respond(devices);
   $httpBackend.whenGET('http://api.lelylan.com/categories').respond(categories);
   $httpBackend.whenPOST('http://api.lelylan.com/devices').respond(devices[0]);
+  $httpBackend.whenGET('http://api.lelylan.com/me').respond(me);
 
 
   // Device Mocks

@@ -11,7 +11,8 @@
     "semantic-ui": "~0.18.0",
     "underscore": "~1.6.0",
     "device-directive-ng": "~0.2.0-beta.4",
-    "angular-animate": "1.2.16"
+    "angular-animate": "1.2.16",
+    "oauth-ng": "~0.2.0-beta.2"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",

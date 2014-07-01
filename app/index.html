@@ -58,12 +58,31 @@
           </a>
         </div>
         <div href="#" class="menu">
-          <span class="full-menu">
-            <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
-            <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
-            <a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
-          </span>
-          <div id="dl-menu" class="dl-menuwrapper compact-menu">
+          <!--<span class="full-menu">-->
+            <!--<a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>-->
+            <!--<a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>-->
+            <!--<a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>-->
+
+            <!--<oauth-->
+              <!--template="views/templates/oauth-ng.html"-->
+              <!--site="http://people.lelylan.com"-->
+              <!--client-id="e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c"-->
+              <!--redirect-uri="http://localhost:9000"-->
+              <!--profile-uri="http://api.lelylan.com/me"-->
+              <!--scope="user">-->
+            <!--</oauth>-->
+          <!--</span>-->
+
+        <div id="dl-menu" class="dl-menuwrapper">
+            <oauth
+              template="views/templates/oauth-ng.html"
+              site="http://people.lelylan.com"
+              client-id="e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c"
+              redirect-uri="http://localhost:9000"
+              profile-uri="http://api.lelylan.com/me"
+              scope="user">
+            </oauth>
+
             <span class="fa fa-bars dl-trigger"></span>
             <ul class="dl-menu">
               <li><a href="#"><span class="fa fa-home"></span> <span class="text">Home</span></a></li>
