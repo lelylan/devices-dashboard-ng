@@ -2,6 +2,8 @@
 
 angular.module('lelylan.dashboards.device')
   .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $cacheFactory, Device, Type, Category) {
+    $rootScope.page = 'main';
+
 
     var $httpDefaultCache = $cacheFactory.get('$http');
     console.log("> Cached devices", $httpDefaultCache.get('http://api.lelylan.com/devices'));

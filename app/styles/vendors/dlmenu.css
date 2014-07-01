@@ -49,9 +49,9 @@
 .dl-menuwrapper li a {
   color: #239cbb;
   font-weight: 100;
-  font-size: 0.9em;
+  font-size: 0.7em;
   border-bottom: 1px solid #f6f6f6;
-  padding: 0.4em 0.8em;
+  padding: 0.6em 0.8em;
 }
 
 .no-touch .dl-menuwrapper li a:hover {

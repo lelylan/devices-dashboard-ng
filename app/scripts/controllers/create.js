@@ -2,10 +2,18 @@
 
 angular.module('lelylan.dashboards.device')
   .controller('CreateCtrl', function ($scope, $rootScope, $location, Device) {
+    $rootScope.page = 'create';
     $rootScope.loading = false;
 
-    $scope.device = {};
     $scope.step = 'one';
+    $scope.device = {};
+    $scope.invalid = {};
+
+    $scope.confirmName = function() {
+      console.log($scope.invalid)
+      $scope.invalid.one = false;
+      $scope.setStep('two');
+    }
 
     $scope.setStep = function(step) {
       $scope.step = step
@@ -14,28 +22,36 @@ angular.module('lelylan.dashboards.device')
     $scope.types = fixturePopularTypes;
 
     $scope.setType = function(type) {
+      $scope.invalid.two = false;
       $scope.device.type = { id: type.id };
       $scope.setStep('three');
     }
 
     $scope.setPhysical = function(mode) {
-      $rootScope.loading = true;
 
-      console.log($rootScope.all);
+      if (!$scope.device.name) { $scope.invalid.one = true }
+      if (!$scope.device.type) { $scope.invalid.two = true }
 
-      if (mode == 'simulate') {
-        Device.create($scope.device).success(redirect);
-      }
+      console.log($scope.invalid)
 
-      if (mode == 'mqtt') {
-        Device.create($scope.device).success(function(device) {
-          $scope.device.physical = { uri: "http://nodes.lelylan.com/mqtt/devices/" + device.id };
-          Device.update(device.id, $scope.device).success(redirect);
-        })
-      }
+      if ($scope.device.name && $scope.device.type) { // all fields set
 
-      if (mode == 'custom') {
-        Device.create($scope.device).success(redirect);
+        $rootScope.loading = true;
+
+        if (mode == 'simulate') {
+          Device.create($scope.device).success(redirect);
+        }
+
+        if (mode == 'mqtt') {
+          Device.create($scope.device).success(function(device) {
+            $scope.device.physical = { uri: "http://nodes.lelylan.com/mqtt/devices/" + device.id };
+            Device.update(device.id, $scope.device).success(redirect);
+          })
+        }
+
+        if (mode == 'custom') {
+          Device.create($scope.device).success(redirect);
+        }
       }
 
       // after the definition I add the device to the device list

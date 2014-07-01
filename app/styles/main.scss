@@ -418,14 +418,19 @@ a {
 }
 
 .create h1 {
-  color: #bbb;
+  color: #999;
   margin: 0;
-  padding-bottom: 0.2em;
   padding-top: 0.6em;
   font-size: 2.0em;
 }
 
-.create h1 span.bubble {
+.create .bubbles {
+  margin-top: 0.3em;
+  font-size: 2.0em;
+  margin-bottom: 0;
+}
+
+.create div span.bubble {
   background-color: #e6e6e6;
   border-radius: 50%;
   display: inline-block;
@@ -437,18 +442,31 @@ a {
   width: 1em;
 }
 
+.create div span.bubble-error {
+  background-color: #FF9999;
+}
+
+.create div span.bubble-active {
+  background-color: #239cbb;
+  color: #fff;
+}
+
+.create h1 {
+  padding-top: 0;
+}
+
 .create h2 {
-  color: #bbb;
+  color: #999;
   line-height: 1.3em;
   font-size: 1.4em;
 }
 
 .create p {
-  color: #bbb;
+  color: #999;
 }
 
 .create ul {
-  color: #bbb;
+  color: #999;
   padding-left: 1.2em;
 }
 
@@ -493,20 +511,19 @@ a {
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
-  color: #666;
+  color: #bbb;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: #666;
+  color: #bbb;
   opacity: 1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: #666;
+  color: #bbb;
   opacity: 1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
-  color: #666;
+  color: #bbb;
 }
-
 
 .item {
   padding: 1em;
@@ -556,6 +573,13 @@ a {
   .create * {
     font-size: 0.9em;
   }
+}
+
+
+// form validation
+
+.create button:disabled {
+  background-color: #ddd;
 }
 
 
