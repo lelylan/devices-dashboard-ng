@@ -1,6 +1,3 @@
-var app = angular.module('app', ['lelylan.dashboards.device', 'ngMockE2E']);
-
-
 /* Mocks definition */
 
 app.run(function($httpBackend, $timeout, Profile) {

@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $cacheFactory, Device, Type, Category) {
+  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, Device, Type, Category, AccessToken) {
     $rootScope.page = 'main';
-
 
     var $httpDefaultCache = $cacheFactory.get('$http');
     console.log("> Cached devices", $httpDefaultCache.get('http://api.lelylan.com/devices'));
@@ -142,4 +141,32 @@ angular.module('lelylan.dashboards.device')
         if ($scope.show.details)    { angular.extend($scope.menu, { categories: false, devices: true }); }
       }
     }
+
+
+    // OAuth logics
+
+    $rootScope.logged = !!AccessToken.get();
+
+    if (!$rootScope.logged) {
+      console.log('Moving to login page');
+      $location.path('login');
+    }
+
+    $scope.$on('oauth:logout', function(event) {
+      console.log('The user has signed out');
+      $location.path('login');
+    });
+
+    // load demo scripts
+
+    $rootScope.loadScript = (function(url) {
+      var html = document.getElementsByTagName("demo-scripts")[0];
+      var script = document.createElement('script');
+      script.setAttribute('src', url);
+      script.setAttribute('type', 'text/javascript');
+      return script;
+    });
+
+    $rootScope.loadScript('scripts/vendors/app-test.js');
+
   });

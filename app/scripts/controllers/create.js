@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('CreateCtrl', function ($scope, $rootScope, $location, Device) {
+  .controller('CreateCtrl', function ($scope, $rootScope, $location, Device, AccessToken) {
     $rootScope.page = 'create';
     $rootScope.loading = false;
 
@@ -70,5 +70,19 @@ angular.module('lelylan.dashboards.device')
 
       $location.path('/');
     }
+
+    // OAuth logics
+
+    $rootScope.logged = !!AccessToken.get();
+
+    if (!$rootScope.logged) {
+      console.log('Moving to login page');
+      $location.path('login');
+    }
+
+    $scope.$on('oauth:logout', function(event) {
+      console.log('The user has signed out');
+      $location.path('login');
+    });
 
   });

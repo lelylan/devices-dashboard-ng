@@ -1,10 +1,8 @@
 /* Common styles of menus */
 
-.dl-menuwrapper {
+.dl-menuwrapper div
   z-index: 100;
 	width: 100%;
-	max-width: 300px;
-	float: left;
 	position: relative;
 	-webkit-perspective: 1000px;
 	perspective: 1000px;

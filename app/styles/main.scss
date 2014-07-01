@@ -443,7 +443,7 @@ a {
 }
 
 .create div span.bubble-error {
-  background-color: #FF9999;
+  background-color: #FCE2E2;
 }
 
 .create div span.bubble-active {
@@ -582,3 +582,9 @@ a {
   border-bottom-color: #FFB3B3;
 }
 
+// login page
+
+.login .login-link {
+  font-size: 3em;
+  margin-bottom: 0;
+}
