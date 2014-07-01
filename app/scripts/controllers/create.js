@@ -5,7 +5,7 @@ angular.module('lelylan.dashboards.device')
     $rootScope.page = 'create';
     $rootScope.loading = false;
 
-    $scope.step = 'one';
+    $scope.step = 'three';
     $scope.device = {};
     $scope.invalid = {};
 

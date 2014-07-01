@@ -85,12 +85,12 @@
     </div>
     <h1>Device Connectivity</h1>
     <h2>Connect your device to the real world or experiment simulating it.</h2>
-    <p>
-    Connect your physical device so that you can start building the connected home
-    or simulate the device behaviour.
-    If you don't know how to connect a physical
-    device you can learn how to connect your first light in the
-    <a href="http://dev.lelylan.com/getting-started" target="_blank">dev center</a>.
+    <p class="description">
+      Connect your physical device so that you can start building the connected home
+      or simulate the device behaviour.
+      If you don't know how to connect a physical
+      device you can learn how to connect your first light in the
+      <a href="http://dev.lelylan.com/getting-started" target="_blank">dev center</a>.
     </p>
   </div>
 
@@ -105,23 +105,35 @@
       <h2>Connect your device to the real world or experiment simulating it.</h2>
     </div>
 
-    <div class="physical item" ng-click="setPhysical('simulate')">
+    <div class="physical item">
       <p class="name">
-        <a><i class="fa fa-angle-right"></i> Simulate</a>
-      </p>
-    </div>
-    <div class="physical item" ng-click="setPhysical('mqtt')">
-      <p class="name">
-        <a><i class="fa fa-angle-right"></i> Connect with MQTT</a>
+        <a href="" ng-click="setPhysical('simulate')"><i class="fa fa-angle-right"></i> Simulate</a>
+        <p>
+          Perfect for developers who wants to play with Lelylan without a physical device
+        </p>
       </p>
     </div>
     <div class="physical item">
       <p class="name">
-      <a><i class="fa fa-angle-right"></i> Custom URL</a>
-      <form ng-submit="setPhysical('custom')">
-        <input type="text" placeholder="Set device name" autofocus ng-model="device.physical.uri">
-      </form>
+        <a href="" ng-click="setPhysical('mqtt')"><i class="fa fa-angle-right"></i> Connect with MQTT</a>
+        <p class="description">
+        Connect your devices using MQTT, a simple is a publish/subscribe messaging protocol for
+        the Internet of Things. <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.
+        </p>
       </p>
+    </div>
+    <div class="physical item">
+      <p class="name">
+      <a><i name="form" class="fa fa-angle-right"></i> Custom URI</a>
+      <form novalidate ng-submit="setPhysical('custom')">
+        <input style="padding-top: 0.3em; font-size: 1em;" type="text" placeholder="Set the physical device URI" ng-model="device.physical.uri" required autofocus>
+      </form>
+      <p class="description">
+        Set the URI that let you access your device through Internet.
+        <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.
+      </p>
+      </p>
+
     </div>
   </div>
   <div class="column" style="height: {{appHeight}}em">

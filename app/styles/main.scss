@@ -544,10 +544,12 @@ a {
   text-decoration: none;
 }
 
-.item input {
-  font-size: 1.2em;
-  margin-left: 1em;
-  padding-top: 0.3em;
+.item p.description {
+  cursor: default;
+}
+
+.item p.description a {
+  font-size: 1em;
 }
 
 .item button {
@@ -571,7 +573,11 @@ a {
 
 @media (max-width: 46em) {
   .create * {
-    font-size: 0.9em;
+    font-size: 0.95em;
+  }
+
+  .create .item {
+    padding-left: 0;
   }
 }
 
