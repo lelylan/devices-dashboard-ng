@@ -1,30 +1,41 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, Device, Type, Category) {
+  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $cacheFactory, Device, Type, Category) {
+
+    var $httpDefaultCache = $cacheFactory.get('$http');
+    console.log("> Cached devices", $httpDefaultCache.get('http://api.lelylan.com/devices'));
+    console.log("> Cached categories", $httpDefaultCache.get('http://api.lelylan.com/categories'));
+    var addAll = !$httpDefaultCache.get('http://api.lelylan.com/categories');
 
     var categories = Category.all().
       success(function(categories) {
-        $scope.categories = categories;
-        $scope.categories.unshift({ tag: 'all', name: 'All'});
+        console.log("Loaded > categories");
+        $rootScope.categories = categories;
+        if (addAll) {
+          console.log("> Add 'All' categories")
+          $rootScope.categories.unshift({ tag: 'all', name: 'All'});
+        }
       });
 
     var devices = Device.all().
       success(function(devices) {
-        $scope.all = devices;
+        console.log("Loaded > devices");
+        $rootScope.all = devices;
         $scope.devices = devices;
         loadTypes($scope.devices);
       });
 
     // count the number of devices we have per category
     $q.all([devices, categories]).then(function(values) {
-      _.map($scope.categories, function(category) {
-        var result = _.countBy($scope.all, function(device) {
+      console.log("Loaded > devices & categories");
+      _.map($rootScope.categories, function(category) {
+        var result = _.countBy($rootScope.all, function(device) {
           return (device.category == category.tag) ? 'count' : 'missed'
         });
         category.devices = result.count;
       });
-      $scope.categories[0].devices = $scope.all.length;
+      $rootScope.categories[0].devices = $rootScope.all.length;
     });
 
     var loadTypes = function(devices) {
@@ -35,27 +46,30 @@ angular.module('lelylan.dashboards.device')
       });
 
       $q.all(requests).then(function(values) {
+        console.log("Loaded > types");
         init(values);
       });
     }
 
     var init = function(values) {
       $rootScope.loading = false;
-      $rootScope.currentCategory = $scope.categories[0];
+      $rootScope.currentCategory = $rootScope.categories[0];
       $scope.currentDevice = $scope.devices[0];
     }
 
 
     $scope.setCategory = function(category) {
-      $scope.devices = (category == 'all') ? $scope.all : _.where($scope.all, { category: category });
-      $scope.currentDevice = $scope.devices[0];
-      $rootScope.currentCategory = _.find($scope.categories, function(resource) {
-        return resource.tag == category;
-      });
+      if (category.devices) { // does not open when there are no devices per category
+        $scope.devices = (category.tag == 'all') ? $rootScope.all : _.where($rootScope.all, { category: category.tag });
+        $scope.currentDevice = $scope.devices[0];
+        $rootScope.currentCategory = _.find($rootScope.categories, function(resource) {
+          return resource.tag == category.tag;
+        });
 
-      if ($scope.columns == 'one') {
-        angular.extend($scope.show, { categories: false, devices: true, details: false });
-        setMenu();
+        if ($scope.columns == 'one') {
+          angular.extend($scope.show, { categories: false, devices: true, details: false });
+          setMenu();
+        }
       }
     }
 

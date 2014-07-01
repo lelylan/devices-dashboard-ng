@@ -45,7 +45,7 @@
 
     <div class="app ng-cloak" ng-show="!loading">
       <div class="header">
-        <a class="logo" ng-if="menu.lelylan">
+        <a class="logo" href="#" ng-if="menu.lelylan">
           <!--<span class="fa fa-circle-thin"></span>-->
           Lelylan Dashboard
         </a>
@@ -58,7 +58,7 @@
         <div href="#" class="menu">
           <span class="full-menu">
             <a href=""><span class="fa fa-search"></span> <span class="text">Search</span></a>
-            <a href=""><span class="fa fa-plus"></span> <span class="text">Add</span></a>
+            <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
             <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
             <a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
           </span>
@@ -87,8 +87,6 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-
-
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -109,9 +107,9 @@
     <!-- TODO install jasmine with bower -->
     <script src="bower_components/jasmine/lib/jasmine-core/jasmine.js"></script>
     <script src="bower_components/jasmine-jquery/lib/jasmine-jquery.js"></script>
-
     <script src="scripts/vendors/modernizr.custom.js"></script>
     <script src="scripts/vendors/jquery.dlmenu.js"></script>
+    <script src="scripts/vendors/fixtures/populars.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->

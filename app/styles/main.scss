@@ -408,13 +408,13 @@ a {
 
 .create > div.step-info {
   border-right: 1px solid #f6f6f6;
-  padding-left: 2.5em !important;
-  padding-right: 2em !important;
+  padding-left: 1em !important;
+  padding-right: 1em !important;
 }
 
 .create > div.step-content {
   padding-left: 1em !important;
-  padding-right: 2em !important;
+  padding-right: 1em !important;
 }
 
 .create h1 {
@@ -441,6 +441,10 @@ a {
   color: #bbb;
   line-height: 1.3em;
   font-size: 1.4em;
+}
+
+.create p {
+  color: #bbb;
 }
 
 .create ul {
@@ -484,6 +488,9 @@ a {
   font-size: 1.2em;
 }
 
+.create button.disabled {
+  background-color: #ddd;
+}
 
 ::-webkit-input-placeholder { /* WebKit browsers */
   color: #666;
@@ -500,6 +507,40 @@ a {
   color: #666;
 }
 
+
+.item {
+  padding: 1em;
+  border-bottom: 1px solid #f6f6f6;
+  cursor: pointer;
+}
+
+.item > p {
+  margin: 0;
+}
+
+.item > p > a {
+  color: #239cbb;
+  font-weight: 100;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.item input {
+  font-size: 1.2em;
+  margin-left: 1em;
+  padding-top: 0.3em;
+}
+
+.item button {
+  margin-left: 1em;
+}
+
+.physicals {
+  padding-top: 1em !important;
+}
+
 @media (min-width: 46em) {
   .create .step-info {
     display: inline-block !important;
@@ -509,3 +550,12 @@ a {
     display: none;
   }
 }
+
+
+@media (max-width: 46em) {
+  .create * {
+    font-size: 0.9em;
+  }
+}
+
+

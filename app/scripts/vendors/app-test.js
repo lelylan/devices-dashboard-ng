@@ -24,6 +24,8 @@ app.run(function($httpBackend, $timeout, Profile) {
   privates = JSON.parse(readFixtures('privates.json'));
   $httpBackend.whenGET('http://api.lelylan.com/devices').respond(devices);
   $httpBackend.whenGET('http://api.lelylan.com/categories').respond(categories);
+  $httpBackend.whenPOST('http://api.lelylan.com/devices').respond(devices[0]);
+
 
   // Device Mocks
   _.each(devices, function(device, index) {

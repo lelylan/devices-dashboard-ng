@@ -1,7 +1,6 @@
 <!-- Step one -->
 
-<div class="create ui {{columns}} column grid" ng-if="step=='one'">
-
+<div class="content create ui {{columns}} column grid" ng-if="step=='one'">
   <div class="column step step-info" style="height: {{appHeight}}em">
     <h1><span class="bubble">1</span> Device Name</h1>
     <h2>Give a meaningful name to your device to easily find it.</h2>
@@ -18,18 +17,94 @@
       <h1>Step <span class="bubble">1</span>
       <h2>Give a meaningful name to your device to easily find it.</h2>
     </div>
-    <input type="text" placeholder="Set device name here" autofocus ng-model="device.name">
-    <button ng-click="execute(function)"><i class="fa fa-angle-right"></i> Confirm name </button>
+    <form novalidate ng-submit="setStep('two')">
+      <input type="text" placeholder="Set device name" ng-model="device.name" required autofocus>
+      <button><i class="fa fa-angle-right"></i> Confirm device name</button>
+    </form>
   </div>
 </div>
 
 <!-- Step two -->
 
-<div class="create ui {{columns}} column grid" ng-if="step=='two'">
+<div class="content create ui {{columns}} column grid" ng-if="step=='two'">
+  <div class="column step step-info" style="height: {{appHeight}}em">
+    <h1><span class="bubble">2</span> Device type</h1>
+    <h2>Choose the device type between the suggested ones or create a new one.</h2>
+    <p>
+    What is a type? It defines what your device is by defining its properties,
+    functions and statuses. Learn more in the
+    <a href="http://dev.lelylan.com/types" target="_blank">dev center</a> if you are curious about.
+    </p>
+  </div>
+
+  <div class="types column step step-content scroller" style="height: {{appHeight}}em">
+    <div class="short-info">
+      <h1>Step <span class="bubble">2</span></h1>
+      <h2>Choose the device type between the suggested ones or create a new one.</h2>
+    </div>
+
+    <input type="search" placeholder="Search the device type" autofocus ng-model="query"></input>
+
+    <div class="type item" ng-repeat="type in types | filter:{name: query}" ng-click="setType(type)">
+      <p class="name {{type.id}}">
+      <a>{{type.name}}</a>
+      </p>
+    </div>
+  </div>
 </div>
 
-<!-- Step three -->
+  <!-- Step three -->
 
-<div class="create ui {{columns}} column grid" ng-if="step=='three'">
+<div class="content create ui {{columns}} column grid" ng-if="step=='three'">
+  <div class="column step step-info" style="height: {{appHeight}}em">
+    <h1><span class="bubble">3</span> Device Connectivity</h1>
+    <h2>Control or simulate the real world</h2>
+    <p>
+    Connect your physical device so that you can start building the connected home
+    or simulate the device behaviour.
+    If you don't know how to connect a physical
+    device you can learn how to connect your first light in the
+    <a href="http://dev.lelylan.com/getting-started" target="_blank">dev center</a>.
+    </p>
+  </div>
+
+  <div class="physicals column step step-content scroller" style="height: {{appHeight}}em">
+    <div class="short-info">
+      <h1>Step <span class="bubble">3</span>
+      <h2>Control or simulate the real world.</h2>
+    </div>
+
+    <div class="physical item" ng-click="setPhysical('simulate')">
+      <p class="name">
+        <a><i class="fa fa-angle-right"></i> Simulate</a>
+      </p>
+    </div>
+    <div class="physical item" ng-click="setPhysical('mqtt')">
+      <p class="name">
+        <a><i class="fa fa-angle-right"></i> Connect with MQTT</a>
+      </p>
+    </div>
+    <div class="physical item">
+      <p class="name">
+      <a><i class="fa fa-angle-right"></i> Custom URL</a>
+      <form ng-submit="setPhysical('custom')">
+        <input type="text" placeholder="Set device name" autofocus ng-model="device.physical.uri">
+      </form>
+      </p>
+    </div>
+  </div>
+  <div class="column" style="height: {{appHeight}}em">
+  </div>
+</div>
+
+
+<!-- Step four -->
+
+<div class="content create ui {{columns}} column grid" ng-if="step=='three'">
+  <div class="column step step-info" style="height: {{appHeight}}em">
+  </div>
+
+  <div class="types column step step-content scroller" style="height: {{appHeight}}em">
+  </div>
 </div>
 
