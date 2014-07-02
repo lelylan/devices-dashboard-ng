@@ -61,7 +61,7 @@
           <span class="full-menu">
             <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
             <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
-            <a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
+            <a href="" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
             <oauth
               template="views/templates/oauth-ng-menu.html"
               site="http://people.lelylan.com"
@@ -78,15 +78,15 @@
               <li><a href="#"><span class="fa fa-home"></span> <span class="text">Home</span></a></li>
               <li><a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a></li>
               <li><a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a></li>
-              <li><a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a></li>
+              <li><a href="" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a></li>
             </ul>
           </div>
         </div>
         <div class="menu" ng-show="demo">
-          <span class="title">Demo mode</span>
+          <span class="title">Turn off demo mode</span>
           <div class="switch">
             <input type="checkbox" id="checkbox" checked/>
-            <label class="slider" for="checkbox" ng-click="location.href('/')"></label>
+            <label class="slider" for="checkbox" ng-click="demoOff()"></label>
           </div>
         </div>
       </div>

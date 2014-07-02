@@ -158,6 +158,22 @@ angular.module('lelylan.dashboards.device')
         console.log('The user has signed out');
         $location.path('login');
       });
-    }
+    };
+
+    $rootScope.demoOn = function() {
+      console.log("Demo On");
+      $rootScope.loading = true;
+      $timeout(function() {
+        window.location.replace('/demo.html')
+      }, 300);
+    };
+
+    $rootScope.demoOff = function() {
+      console.log("Demo OFF")
+      $timeout(function() {
+        window.location.replace('/')
+        $rootScope.loading = true;
+      }, 300);
+    };
 
   });

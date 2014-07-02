@@ -594,8 +594,14 @@ a {
 .demo .header {
   background-color: #555;
 }
+.demo .menu span {
+  vertical-align: top;
+  color: #999;
+  margin-right: 0.25em;
+}
 
 // switch
+.switch { font-size: 0.5em; display: inline-block; }
 .switch input { position: absolute; left: -9999px; }
 .switch input:checked + .slider::before { box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 3em 0 0 0 #239cbb inset; }
 .switch input:checked + .slider::after { left: 3em; }
