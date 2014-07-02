@@ -28,10 +28,10 @@
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
     </style>
   </head>
-  <body ng-app="app" ng-init="loading=true" resize>
+  <body ng-app="app" ng-init="loading=true" ng-init="demo=true" ng-class="{demo: demo}" resize>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-      <![endif]-->
+    <![endif]-->
 
     <div class="preloading" ng-show="loading">
       <div class="logo"></div>
@@ -45,10 +45,10 @@
 
     <div class="app ng-cloak" ng-show="!loading">
       <div class="header">
-          <a class="logo" href="#" ng-if="menu.lelylan || page!='main'">
-            <!--<span class="fa fa-circle-thin"></span>-->
-            Lelylan Dashboard
-          </a>
+        <a class="logo" href="#" ng-if="menu.lelylan || page!='main'">
+          <!--<span class="fa fa-circle-thin"></span>-->
+          Lelylan Dashboard
+        </a>
         <div style="float:left;" ng-show="page=='main'">
           <a class="back back-categories" href="" ng-if="menu.categories" ng-click="backToCategories()">
             <span class="fa fa-angle-left"></span> Categories
@@ -57,7 +57,7 @@
             <span class="fa fa-angle-left"></span> {{currentCategory.name}}
           </a>
         </div>
-        <div class="menu">
+        <div class="menu" ng-show="!demo">
           <span class="full-menu">
             <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
             <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
@@ -80,6 +80,13 @@
               <li><a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a></li>
               <li><a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a></li>
             </ul>
+          </div>
+        </div>
+        <div class="menu" ng-show="demo">
+          <span class="title">Demo mode</span>
+          <div class="switch">
+            <input type="checkbox" id="checkbox" checked/>
+            <label class="slider" for="checkbox" ng-click="location.href('/')"></label>
           </div>
         </div>
       </div>
