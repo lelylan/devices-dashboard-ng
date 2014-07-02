@@ -18,6 +18,15 @@ angular.module('lelylan.dashboards.device', [
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/access_token=:accessToken', {
+        template: '-',
+        controller: function ($location, $routeParams, AccessToken) {
+          var hash = $location.path().substr(1);
+          AccessToken.setTokenFromString(hash);
+          $location.path('/');
+          $location.replace();
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });

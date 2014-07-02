@@ -45,7 +45,7 @@
 
     <div class="app ng-cloak" ng-show="!loading">
       <div class="header">
-          <a class="logo" href="/" ng-if="menu.lelylan || page!='main'">
+          <a class="logo" href="#" ng-if="menu.lelylan || page!='main'">
             <!--<span class="fa fa-circle-thin"></span>-->
             Lelylan Dashboard
           </a>
@@ -59,15 +59,14 @@
         </div>
         <div class="menu">
           <span class="full-menu">
-            <a href="/create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
+            <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
             <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
             <a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
-
             <oauth
               template="views/templates/oauth-ng-menu.html"
               site="http://people.lelylan.com"
               client-id="e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c"
-              redirect-uri="http://localhost:9000"
+              redirect-uri="http://localhost:9000/"
               profile-uri="http://api.lelylan.com/me"
               scope="user">
             </oauth>
@@ -76,8 +75,8 @@
           <div id="dl-menu" class="dl-menuwrapper compact-menu">
             <span class="fa fa-bars dl-trigger"></span>
             <ul class="dl-menu">
-              <li><a href="/"><span class="fa fa-home"></span> <span class="text">Home</span></a></li>
-              <li><a href="/create"><span class="fa fa-plus"></span> <span class="text">Create</span></a></li>
+              <li><a href="#"><span class="fa fa-home"></span> <span class="text">Home</span></a></li>
+              <li><a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a></li>
               <li><a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a></li>
               <li><a href=""><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a></li>
             </ul>
@@ -123,6 +122,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/create.js"></script>
     <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/access_token.js"></script>
     <script src="scripts/directives/resize.js"></script>
     <!-- endbuild -->
 
