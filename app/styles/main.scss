@@ -199,21 +199,21 @@ a {
     background-color: #e6e6e6;
 }
 
-.ly-device,
-.ly-compact {
+.device,
+.compact {
   border: none;
 }
 
-.details .ly-device {
+.details .device {
   border-bottom: 1px solid #f6f6f6;
 }
 
-.ly-compact .ly-status .ly-description .ly-name {
+.compact .status .description .name {
   font-size: 1.5em;
   line-height: 1.15em;
 }
 
-.ly-compact .ly-status {
+.compact .status {
   border-bottom: none;
 }
 
@@ -588,3 +588,28 @@ a {
   font-size: 3em;
   margin-bottom: 0;
 }
+
+// demo
+
+.demo .header {
+  background-color: #555;
+}
+
+.demo .menu span {
+  vertical-align: top;
+  color: #999;
+  margin-right: 0.25em;
+}
+
+// switch
+.switch { font-size: 0.5em; display: inline-block; }
+.switch input { position: absolute; left: -9999px; }
+.switch input:checked + .slider::before { box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 3em 0 0 0 #239cbb inset; }
+.switch input:checked + .slider::after { left: 3em; }
+.switch .slider { position: relative; display: block; width: 5.5em; height: 3em; cursor: pointer; border-radius: 1.5em; transition: 350ms; background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0)), #dddddd; box-shadow: 0 0.07em 0.1em -0.1em rgba(0, 0, 0, 0.4) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7);}
+.switch .slider::after { position: absolute; content: ''; width: 2em; height: 2em; top: 0.5em; left: 0.5em; border-radius: 50%; transition: 250ms ease-in-out; background: linear-gradient(#f5f5f5 10%, #eeeeee); box-shadow: 0 0.1em 0.15em -0.05em rgba(255, 255, 255, 0.9) inset, 0 0.2em 0.2em -0.12em rgba(0, 0, 0, 0.5); }
+.switch .slider::before { position: absolute; content: ''; width: 4em; height: 1.5em; top: 0.75em; left: 0.75em; border-radius: 0.75em; transition: 250ms ease-in-out; background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0.1)), #d0d0d0; box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 0 0 0 0 #239cbb inset; }
+.switch .spinner { padding-left: 1.5em; }
+.switch .spinner > div { background-color: #ccc; }
+
+
