@@ -20,7 +20,7 @@ angular.module('lelylan.dashboards.device', [
       })
       .when('/access_token=:accessToken', {
         template: '-',
-        controller: function ($location, $routeParams, AccessToken) {
+        controller: function ($location, $route, $routeParams, $timeout, AccessToken) {
           var hash = $location.path().substr(1);
           AccessToken.setTokenFromString(hash);
           $location.path('/');
