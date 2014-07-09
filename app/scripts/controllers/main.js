@@ -176,4 +176,8 @@ angular.module('lelylan.dashboards.device')
       }, 300);
     };
 
+    $scope.$on('oauth:expired', function(event) {
+      $location.path('expired')
+    });
+
   });

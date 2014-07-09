@@ -1,7 +1,7 @@
-'use strict';
+//'use strict';
 
-angular.module('lelylan.dashboards.device')
-  .controller('LoginCtrl', function ($scope, $rootScope, $location) {
+//angular.module('lelylan.dashboards.device')
+  //.controller('LoginCtrl', function ($scope, $rootScope, $location) {
 
-    $rootScope.loading = false;
-  });
+    //$rootScope.loading = false;
+  //});

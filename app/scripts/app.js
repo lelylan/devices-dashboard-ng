@@ -16,7 +16,17 @@ angular.module('lelylan.dashboards.device', [
       })
       .when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
+        controller: function($rootScope) {
+          $rootScope.page = 'login';
+          $rootScope.loading = false;
+        }
+      })
+      .when('/expired', {
+        templateUrl: 'views/expired.html',
+        controller: function($rootScope) {
+          $rootScope.page = 'expired';
+          $rootScope.loading = false;
+        }
       })
       .when('/access_token=:accessToken', {
         template: '-',
