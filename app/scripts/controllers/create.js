@@ -71,18 +71,4 @@ angular.module('lelylan.dashboards.device')
       $location.path('/');
     }
 
-    // OAuth logics
-
-    $rootScope.logged = !!AccessToken.get();
-
-    if (!$rootScope.logged) {
-      console.log('Moving to login page');
-      $location.path('login');
-    }
-
-    $scope.$on('oauth:logout', function(event) {
-      console.log('The user has signed out');
-      $location.path('login');
-    });
-
   });

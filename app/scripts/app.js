@@ -1,23 +1,25 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device', [
+  'lelylan.dashboards.device.dimension',
+  'lelylan.dashboards.device.column',
+  'lelylan.dashboards.device.menu',
   'lelylan.directives.device',
   'ngRoute'
 ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/devices.html',
+        controller:  'DevicesCtrl'
       })
       .when('/create', {
         templateUrl: 'views/create.html',
-        controller: 'CreateCtrl'
+        controller:  'CreateCtrl'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: function($rootScope) {
-          $rootScope.page = 'login';
           $rootScope.loading = false;
         }
       })

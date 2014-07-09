@@ -28,10 +28,14 @@
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
     </style>
   </head>
-  <body ng-app="app" ng-init="loading=true" ng-init="demo=true" ng-class="{demo: demo}" resize>
+
+  <body ng-app="app" ng-init="loading=true" ng-class="{ demo: demo }">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+
+
+    <!-- Preloading  -->
 
     <div class="preloading" ng-show="loading">
       <div class="logo"></div>
@@ -43,25 +47,32 @@
       <p class="description">Loading<p>
     </div>
 
-    <div class="app ng-cloak" ng-show="!loading">
+
+    <!-- App definition -->
+
+    <div class="app ng-cloak" ng-controller="MainCtrl" ng-show="!loading">
+
+      <!-- Menu -->
+
       <div class="header">
-        <a class="logo" href="#" ng-if="menu.lelylan || page!='main'">
-          <!--<span class="fa fa-circle-thin"></span>-->
+        <a class="logo" href="#" ng-show="menu.visible.lelylan">
           Lelylan Dashboard
         </a>
-        <div style="float:left;" ng-show="page=='main'">
-          <a class="back back-categories" href="" ng-if="menu.categories" ng-click="backToCategories()">
+
+        <div style="float:left;">
+          <a class="back back-categories" href="" ng-show="menu.categories" ng-click="moveToCategories()">
             <span class="fa fa-angle-left"></span> Categories
           </a>
-          <a class="back back-devices" href="" ng-if="menu.devices" ng-click="backToDevices()">
+          <a class="back back-devices" href="" ng-show="menu.devices" ng-click="moveToDevices()">
             <span class="fa fa-angle-left"></span> {{currentCategory.name}}
           </a>
         </div>
+
         <div class="menu" ng-show="!demo">
           <span class="full-menu">
             <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
             <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
-            <a href="" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
+            <a href="/demo" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
             <oauth
               template="views/templates/oauth-ng-menu.html"
               site="http://people.lelylan.com"
@@ -72,15 +83,15 @@
             </oauth>
           </span>
 
-          <div id="dl-menu" class="dl-menuwrapper compact-menu">
-            <span class="fa fa-bars dl-trigger"></span>
-            <ul class="dl-menu">
-              <li><a href="#"><span class="fa fa-home"></span> <span class="text">Home</span></a></li>
-              <li><a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a></li>
-              <li><a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a></li>
-              <li><a href="" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a></li>
-            </ul>
-          </div>
+          <!--<div id="dl-menu" class="dl-menuwrapper compact-menu">-->
+            <!--<span class="fa fa-bars dl-trigger"></span>-->
+            <!--<ul class="dl-menu">-->
+              <!--<li><a href="#"><span class="fa fa-home"></span> <span class="text">Home</span></a></li>-->
+              <!--<li><a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a></li>-->
+              <!--<li><a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a></li>-->
+              <!--<li><a href="" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a></li>-->
+            <!--</ul>-->
+          <!--</div>-->
         </div>
         <div class="menu" ng-show="demo">
           <span class="title">Demo mode</span>
@@ -91,7 +102,7 @@
         </div>
       </div>
 
-      <div class="container" ng-view="" style="height: {{appHeight}}em"></div>
+      <div class="container" ng-view="" style="height: {{dimensions.height}}em"></div>
     </div>
 
     <!--[if lt IE 9]>
@@ -127,9 +138,12 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/devices.js"></script>
     <script src="scripts/controllers/create.js"></script>
     <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/directives/resize.js"></script>
+    <script src="scripts/services/dimension.js"></script>
+    <script src="scripts/services/column.js"></script>
+    <script src="scripts/services/menu.js"></script>
     <!-- endbuild -->
 
     <!-- test -->
