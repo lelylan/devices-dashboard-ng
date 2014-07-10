@@ -59,8 +59,8 @@ service.factory('Column', function($location, Menu) {
         }
       }
 
-      if (columns.one) { Menu.set('none') }
-      if (columns.two) { Menu.set('categories') }
+      if (columns.visible.one) { Menu.set('none') }
+      if (columns.visible.two) { Menu.set('categories') }
 
       columns.count = 'two';
     }
@@ -78,16 +78,17 @@ service.factory('Column', function($location, Menu) {
         }
       }
 
-      if (columns.one)   { Menu.set('none'); }
-      if (columns.two)   { Menu.set('categories'); }
-      if (columns.three) { Menu.set('devices'); }
+      if (columns.visible.one)   { Menu.set('none'); }
+      if (columns.visible.two)   { Menu.set('categories'); }
+      if (columns.visible.three) { Menu.set('devices'); }
 
       columns.count = 'one';
     }
   }
 
-  service.setvisible = function(columns) {
-    columns.visible = columns;
+  // Directly set the visible columns
+  service.setVisible = function(_columns) {
+    columns.visible = _columns;
   }
 
   return service;

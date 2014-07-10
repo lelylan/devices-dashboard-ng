@@ -18,9 +18,12 @@ service.factory('Menu', function() {
 
   // Set the visible menu item to see on the left menu
   service.set = function(item) {
+
     _.each(menu.visible, function(value, key) {
       menu.visible[key] = (key == item) ? true : false
     });
+
+    console.log("Making visible menu", item, menu);
   }
 
   return service;

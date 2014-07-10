@@ -51,6 +51,8 @@
     <!-- App definition -->
 
     <div class="app ng-cloak" ng-controller="MainCtrl" ng-show="!loading">
+      COLUMNS {{columns}}<br>
+      MENU {{menu}}
 
       <!-- Menu -->
 
@@ -60,10 +62,10 @@
         </a>
 
         <div style="float:left;">
-          <a class="back back-categories" href="" ng-show="menu.categories" ng-click="moveToCategories()">
+          <a class="back back-categories" href="" ng-show="menu.visible.categories" ng-click="moveToCategories()">
             <span class="fa fa-angle-left"></span> Categories
           </a>
-          <a class="back back-devices" href="" ng-show="menu.devices" ng-click="moveToDevices()">
+          <a class="back back-devices" href="" ng-show="menu.visible.devices" ng-click="moveToDevices()">
             <span class="fa fa-angle-left"></span> {{currentCategory.name}}
           </a>
         </div>

@@ -105,9 +105,9 @@ angular.module('lelylan.dashboards.device')
         $scope.currentDevice = $scope.devices[0];
         $rootScope.currentCategory = category;
 
-        if ($rootScope.columns.count == 'one') {
-          Column.setVisibles({ one: false, two: true, three: false });
-          Column.set();
+        if ($scope.columns.count == 'one') {
+          Column.setVisible({ one: false, two: true, three: false });
+          Column.set($scope.dimensions);
         }
       }
     }
@@ -120,9 +120,17 @@ angular.module('lelylan.dashboards.device')
 
     $rootScope.$on('lelylan:device:custom:open', function(event, device) {
       $scope.currentDevice = device;
-      if ($rootScope.columns.count == 'two') { Column.setVisibles({ one: false, two: true, three: true });  }
-      if ($rootScope.columns.count == 'one') { Column.setVisibles({ one: false, two: false, three: true }); }
-      Column.set();
+
+      if ($scope.columns.count == 'two') {
+        Column.setVisible({ one: false, two: true, three: true });
+        Menu.set('categories');
+      }
+
+      if ($scope.columns.count == 'one') {
+        console.log("SON qui")
+        Column.setVisible({ one: false, two: false, three: true });
+        Menu.set('devices');
+      }
     });
 
 
@@ -151,9 +159,17 @@ angular.module('lelylan.dashboards.device')
      */
 
     $rootScope.moveToCategories = function() {
-      if ($rootScope.columns.count == 'two') { Column.setVisibles({ one: true, two: true, three: false });  }
-      if ($rootScope.columns.count == 'one') { Column.setVisibles({ one: true, two: false, three: false }); }
-      Column.set();
+
+      if ($scope.columns.count == 'two') {
+        Column.setVisible({ one: true, two: true, three: false });
+        Menu.set('none');
+      }
+
+      if ($scope.columns.count == 'one') {
+        Column.setVisible({ one: true, two: false, three: false });
+        Menu.set('none');
+      }
+
     };
 
 
@@ -163,8 +179,10 @@ angular.module('lelylan.dashboards.device')
      */
 
     $rootScope.moveToDevices = function() {
-      if ($rootScope.columns.count == 'one') { Column.setVisibles({ one: false, two: true, three: false }); }
-      Column.set();
+      if ($scope.columns.count == 'one') {
+        Column.setVisible({ one: false, two: true, three: false });
+        Menu.set('categories')
+      }
     };
 
   });
