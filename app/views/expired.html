@@ -5,17 +5,19 @@
     For security reasons we invalidate your credential every 24 hours.<br>
     Click the link below to get new ones.
     </p>
+
     <p class="login-link">
       <oauth
         template="views/templates/oauth-ng-only-login.html"
-        site="http://people.lelylan.com"
-        client-id="e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c"
-        redirect-uri="http://localhost:9000/"
-        profile-uri="http://api.lelylan.com/me"
+        scope="resources+privates"
         text="Refresh"
-        scope="user">
+        site="{{credentials.site}}"
+        client-id="{{credentials.clientId}}"
+        redirect-uri="{{credentials.redirectUri}}"
+        profile-uri="{{credentials.profileUri}}">
       </oauth>
     </p>
+
     <hr>
   </div>
 </div>

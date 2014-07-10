@@ -229,11 +229,11 @@ a {
   padding: 0 0 0 0.2em;
 }
 
-.ly-device {
+.details .ly-device {
   height: 99.8%;
 }
 
-.ly-device .ly-modal .ly-modal-window {
+.details .ly-device .ly-modal .ly-modal-window {
   width: 99.8%;
 }
 
@@ -584,6 +584,11 @@ a {
   padding-top: 1em !important;
 }
 
+.physicals .physical input {
+  padding-top: 0.3em;
+  font-size: 1em;
+}
+
 @media (min-width: 46em) {
   .create .step-info {
     display: inline-block !important;
@@ -617,7 +622,7 @@ a {
 .demo .header {
   background-color: #555;
 }
-.demo .menu span {
+.demo .menu .title {
   vertical-align: top;
   color: #999;
   margin-right: 0.25em;

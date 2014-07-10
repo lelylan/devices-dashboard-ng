@@ -1,4 +1,6 @@
+<!-- -------- -->
 <!-- Step one -->
+<!-- -------- -->
 
 <div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='one'">
   <div class="column step step-info" style="height: {{dimensions.height}}em">
@@ -35,7 +37,11 @@
   </div>
 </div>
 
+
+
+<!-- -------- -->
 <!-- Step two -->
+<!-- -------- -->
 
 <div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='two'">
   <div class="column step step-info" style="height: {{dimensions.height}}em">
@@ -75,9 +81,13 @@
   </div>
 </div>
 
-  <!-- Step three -->
 
-  <div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='three'">
+
+<!-- ------------ -->
+<!--  Step three  -->
+<!-- ------------ -->
+
+<div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='three'">
   <div class="column step step-info" style="height: {{dimensions.height}}em">
     <div class="bubbles">
       <a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a>
@@ -127,16 +137,13 @@
       <p class="name">
       <a><i name="form" class="fa fa-angle-right"></i> Custom URI</a>
       <form novalidate ng-submit="setPhysical('custom')" ng-disabled="form.$invalid">
-        <input style="padding-top: 0.3em; font-size: 1em;" type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required autofocus>
+        <input type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required>
       </form>
       <p class="description">
         Set the URI that let you access your device through Internet.
         <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.
       </p>
       </p>
-
     </div>
-  </div>
-  <div class="column" style="height: {{dimensions.height}}em">
   </div>
 </div>

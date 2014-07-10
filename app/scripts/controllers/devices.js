@@ -33,7 +33,9 @@ angular.module('lelylan.dashboards.device')
       success(function(devices) {
         $rootScope.all = devices;
         $scope.devices = devices;
-        loadTypes($scope.devices);
+
+        if (devices.length == 0) { $location.path('/empty') }
+        else                     { loadTypes($scope.devices); }
       });
 
 

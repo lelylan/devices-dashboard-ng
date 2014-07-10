@@ -1,24 +1,30 @@
 <div class="login message ui three column grid">
   <div class="column descriptive">
+
     <p class="title">Welcome to Lelylan Dashboard</p>
-    <p class="description">
-    The new place where to build the Connected Home
-    </p>
-    <p>
-    </p>
+    <p class="description">The new place where to build the Connected Home</p>
+
     <p class="login-link">
       <oauth
         template="views/templates/oauth-ng-only-login.html"
-        site="http://people.lelylan.com"
-        client-id="e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c"
-        redirect-uri="http://localhost:9000/"
-        profile-uri="http://api.lelylan.com/me"
-        scope="user">
+        scope="resources+privates"
+        site="{{credentials.site}}"
+        client-id="{{credentials.clientId}}"
+        redirect-uri="{{credentials.redirectUri}}"
+        profile-uri="{{credentials.profileUri}}">
       </oauth>
     </p>
-    <p>Or ask for an <a href="http://people.lelylan.com/invitations">Invitation</a>. It's free.</p>
+
+    <p>
+    Or ask for an <a href="http://people.lelylan.com/invitations">Invitation</a>.
+    It's free.
+    </p>
+
     <hr>
-    <p>Just curious? Activate the <a href=""><span class="fa fa-desktop"></span> demo mode</a></p>
+
+    <p>
+    Just curious?
+    Activate the <a href="/demo"><span class="fa fa-desktop"></span> demo mode</a>
+    </p>
   </div>
 </div>
-
