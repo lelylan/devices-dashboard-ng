@@ -108,6 +108,7 @@ a {
   padding: 0 !important;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overflow-x: none;
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
@@ -122,12 +123,12 @@ a {
  border-bottom: 1px solid #f8f8f8;
 }
 
+
 .device,
 .category {
   border-left: 0.2em solid #fff;
   background-color: #fff;
 }
-
 
 .content .category:hover,
 .content .device:hover {
@@ -138,6 +139,25 @@ a {
 .content .active:hover {
  border-left: 0.2em solid #239cbb;
 }
+
+
+.one .device,
+.one .category {
+  border-left: none;
+}
+
+.content.one .category:hover,
+.content.one .device:hover {
+  border-left: none !important;
+}
+
+.content.one .active,
+.content.one .active:hover {
+  border-left: none !important;
+}
+
+
+
 
 .category {
   padding: 1em;
@@ -205,6 +225,15 @@ a {
 
 .details .ly-device {
   border-bottom: 1px solid #f6f6f6;
+  padding: 0 0 0 0.2em;
+}
+
+.ly-device {
+  height: 99.8%;
+}
+
+.ly-device .ly-modal .ly-modal-window {
+  width: 99.8%;
 }
 
 .ly-compact .ly-status .ly-description .ly-name {
