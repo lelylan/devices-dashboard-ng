@@ -1,26 +1,34 @@
 $background-color: #f6f6f6;
+$lelylan-color: #239cbb;
+$lelylan-border: #e6e6e6;
+$app-width: 78em;
 
-body {
-  margin: 0;
-  background-color: $background-color;
-  color: #333;;
-}
+
+/* -------- *
+ * Generics *
+ * -------- */
 
 body * {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 1.5em;
   font-weight: 100;
   letter-spacing: 1px;
+  line-height: 1.6em;
+}
+
+body {
+  background-color: $background-color;
+  color: #333;
+  margin: 0;
 }
 
 hr {
-  margin: 2em 1em;
   border: none;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid $lelylan-border;
+  margin: 2em 1em;
 }
 
 a {
-  color: #239cbb;
+  color: $lelylan-color;
   text-decoration: none;
 }
 
@@ -29,226 +37,54 @@ a {
 }
 
 .app {
-  max-width: 75em;
+  max-width: $app-width;
   margin: 0 auto;
   overflow: hidden;
 }
 
-.header {
-  line-height: 1.5em;
-  height: 1.5em;
-  background-color: #239cbb;
-  color: #fff;
-  padding: 0.5em;
-  font-size: 1.5em;
-  letter-spacing: 1px;
-  box-shadow: 0 2px 2px 0px #ddd;
-  -moz-box-shadow: 0 4px 4px -2px #ddd;
-  -webkit-box-shadow: 0 4px 4px -2px #ddd;
+
+/* ---------- *
+ * Preloading *
+ * ---------- */
+
+.preloading {
+  width: 6.5em;
+  height: 6.5em;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 
-.header a {
-  color: #fff;
-}
-
-.header .logo {
-  text-shadow: 0 1px 0 #006A92;
-}
-
-.header .menu {
-  float: right;
-}
-
-.menu .fa {
-  line-height: 1.6em;
-}
-
-.full-menu {
-  display: none;
-  font-size: 0.65em;
-  padding-top: 0.5em;
-}
-
-.full-menu a {
-  padding-left: 0.75em;
-  font-weight: 100;
-}
-
-.full-menu .fa {
-  color: #67C2DA;
-}
-
-.full-menu a:hover .fa {
-  color: #fff;
-}
-
-.compact-menu {
-  display: block;
-}
-
-.back .fa {
-  font-size: 1.6em;
-  vertical-align: bottom;
-}
-
-.content {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.content > div.categories,
-.content > div.devices {
-  border-right: none;
-  margin-left: 0;
-}
-
-.content > div.column {
-  //border: 1px solid #eee;
-  background-color: #fff;
-  padding: 0 !important;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overflow-x: none;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-//.content > div.categories,
-//.content > div.devices {
-  //border-right: 8px solid #f6f6f6;
-//}
-
-.device {
- padding: 0 0.5em 0 0.3em;
- border-bottom: 1px solid #f8f8f8;
-}
-
-
-.device,
-.category {
-  border-left: 0.2em solid #fff;
-  background-color: #fff;
-}
-
-.content .category:hover,
-.content .device:hover {
- border-left: 0.2em solid #ddd;
-}
-
-.content .active,
-.content .active:hover {
- border-left: 0.2em solid #239cbb;
-}
-
-
-.one .device,
-.one .category {
-  border-left: none;
-}
-
-.one.content .category:hover,
-.one.content .device:hover {
-  border-left: none !important;
-}
-
-.one.content .active,
-.one.content .active:hover {
-  border-left: none !important;
-}
-
-
-
-
-
-.category {
-  padding: 1em;
-  border-bottom: 1px solid #f6f6f6;
-  cursor: pointer;
-}
-
-.category > p {
-  margin: 0;
-}
-
-.category > p > a {
-  color: #239cbb;
+.preloading .description {
   font-weight: 100;
   font-size: 2em;
-  line-height: 1.4em;
-  letter-spacing: 1px;
-  text-decoration: none;
+  color: $lelylan-color;
 }
 
-.category > p > span {
-  background-color: #eee;
-  border-radius: 50%;
-  width: 1.5em;
-  height: 1.5em;
-  color: #999;
-  display: inline-block;
-  vertical-align: text-bottom;
-  text-align: center;
-  margin-left: 0.5em;
-  font-weight: 100;
-  border: 1px solid #e6e6e6;
+.preloading .logo,
+.preloading .spinner {
+  margin: 0 1.3em;
 }
 
-.categories .disabled a {
-  color: #ddd;
+.preloading .logo {
+  float: left;
+  width: 3em;
+  height: 3em;
+  border: 2px solid $lelylan-color;
+  border-radius: 100%;
 }
 
-.category.disabled {
-  cursor: default;
+.preloading .spinner {
+  position: absolute;
+  top: 0.85em;
+  left: 0.65em;
 }
 
-.category.disabled:hover {
-  border-left: 0.2em solid #fff;
+.preloading .spinner > div {
+  background-color: $lelylan-color;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: none;
-    background-color: #f6f6f6;
-}
-
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: none;
-    background-color: #e6e6e6;
-}
-
-.ly-device,
-.ly-compact {
-  border: none;
-}
-
-.details .ly-device {
-  border-bottom: 1px solid #f6f6f6;
-  padding: 0 0 0 0.2em;
-}
-
-.details .ly-device {
-  height: 99.8%;
-}
-
-.details .ly-device .ly-modal .ly-modal-window {
-  width: 99.8%;
-}
-
-.ly-compact .ly-status .ly-description .ly-name {
-  font-size: 1.5em;
-  line-height: 1.15em;
-}
-
-.ly-compact .ly-status {
-  border-bottom: none;
-}
-
-/*
- * Device spinner
- */
+/* Spinner */
 
 .spinner > div {
   width: .5em;
@@ -288,48 +124,221 @@ a {
   }
 }
 
-.preloading {
-  width: 6.5em;
-  height: 6.5em;
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+
+
+/* -------*
+ * Header *
+ * ------ */
+
+.header {
+  background-color: $lelylan-color;
+  color: #fff;
+  font-size: 1.5em;
+  height: 1.5em;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  padding: 0.5em;
+  box-shadow: 0 2px 2px 0px #ddd;
+  -moz-box-shadow: 0 4px 4px -2px #ddd;
+  -webkit-box-shadow: 0 4px 4px -2px #ddd;
 }
 
-.preloading .description {
+.header a {
+  color: #fff;
+}
+
+.header .logo {
+  text-shadow: 0 1px 0 #006A92;
+}
+
+
+/* Right menu */
+
+.menu {
+  float: right;
+  font-size: 0.65em;
+  padding-top: 0.5em;
+  display: block;
+}
+
+.menu a {
+  padding-left: 0.75em;
   font-weight: 100;
-  font-size: 2em;
-  color: #239cbb;
 }
 
-.preloading .logo,
-.preloading .spinner {
-  margin: 0 1.3em;
+.menu a:hover .fa {
+  color: #fff;
 }
 
-.preloading .logo {
-  float: left;
-  width: 3em;
-  height: 3em;
-  border: 2px solid #239cbb;
-  border-radius: 100%;
+.menu a .fa {
+  color: #67C2DA;
+  line-height: 1.6em;
 }
 
-.preloading .spinner {
-  position: absolute;
-  top: 0.85em;
-  left: 0.65em;
+.menu .text {
+  display: none;
 }
 
-.preloading .spinner > div {
-  background-color: #239cbb;
+
+/* Left menu */
+
+.back .fa {
+  font-size: 1.6em;
+  vertical-align: bottom;
 }
 
 
 
-.column .empty {
-  width: 0em !important;
+/* --------------- *
+ * Devices content *
+ * --------------- */
+
+.content {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  .column {
+    background-color: #fff;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .device {
+    padding: 0 0.5em 0 0.3em;
+    border-bottom: 1px solid #f8f8f8;
+  }
 }
+
+/* Categories */
+
+.category {
+
+  padding: 1em;
+  border-bottom: 1px solid #f6f6f6;
+  cursor: pointer;
+
+  > p {
+    margin: 0;
+  }
+
+  > p > a {
+    color: $lelylan-color;
+    font-weight: 100;
+    font-size: 2em;
+    line-height: 1.4em;
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+
+  > p > span {
+    background-color: #eee;
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    color: #999;
+    display: inline-block;
+    vertical-align: text-bottom;
+    text-align: center;
+    margin-left: 0.5em;
+    font-weight: 100;
+    border: 1px solid $lelylan-border;
+  }
+}
+
+/* Selected category or device */
+
+.content {
+
+  .categories,
+  .devices {
+    border-right: none;
+    margin-left: 0;
+  }
+
+  .category,
+  .device {
+    border-left: 0.2em solid #fff;
+    background-color: #fff;
+  }
+
+  .category:hover,
+  .device:hover {
+    border-left: 0.2em solid #ddd;
+  }
+
+  .active,
+  .active:hover {
+    border-left: 0.2em solid $lelylan-color;
+  }
+}
+
+/* Disabled categories */
+
+.category.disabled a {
+  color: #ddd;
+}
+.category.disabled {
+  cursor: default;
+}
+
+.category.disabled:hover {
+  border-left: 0.2em solid #fff;
+}
+
+/* Disable the `selected`  blue border when there is only one column */
+
+.one .device,
+.one .category {
+  border-left: none;
+}
+
+.one .category:hover,
+.one .device:hover {
+  border-left: none !important;
+}
+
+.one .active,
+.one .active:hover {
+  border-left: none !important;
+}
+
+/* Device directive */
+
+.ly-device,
+.ly-compact {
+  border: none;
+}
+
+.devices .ly-status .ly-description .ly-name {
+  font-size: 1.5em;
+  line-height: 1.15em;
+}
+
+.devices .ly-status {
+  border-bottom: none;
+}
+
+.details .ly-device {
+  border-bottom: 1px solid #f6f6f6;
+  padding: 0 0 0 0.2em;
+}
+
+.details .ly-device {
+  height: 99.8%;
+}
+
+.details .ly-device .ly-modal .ly-modal-window {
+  width: 99.8%;
+}
+
+
+
+/* ----------- *
+ * Single page *
+ * ----------- */
 
 .column .descriptive {
   width: 100% !important;
@@ -338,7 +347,6 @@ a {
 .message * {
   text-align: center;
 }
-
 
 .message {
   background-color: #fff;
@@ -370,40 +378,11 @@ a {
   padding: 0 1em;
 }
 
-@media (min-width: 46em) {
-
-  .container {
-    margin-top: 0.5em;
-  }
-
-  .header {
-    margin: 0 0.15em;
-  }
-
-  .app,
-  .content > div.column {
-    border-left: 0.25em solid $background-color;
-    border-right: 0.25em solid $background-color;
-  }
-
-  .full-menu {
-    display: block;
-  }
-
-  .compact-menu {
-    display: none;
-  }
-
-  .message hr {
-    margin-left: 33.33333%;
-    width: 33.33333%;
-  }
-}
 
 
-
-
-// CREATE
+/* --------------- *
+ * Device creation *
+ * --------------- */
 
 .create .step-info {
   display: none !important;
@@ -426,53 +405,18 @@ a {
   padding-top: 0.6em !important;
 }
 
-.create > div.step-content input[type="search"] {
-  margin-left: -0.35em;
-}
-
 .create h1 {
   color: #999;
   margin: 0;
-  padding-top: 0.6em;
+  padding-top: 0em;
   font-size: 2.0em;
-}
-
-.create .bubbles {
-  margin-top: 0.3em;
-  font-size: 2.0em;
-  margin-bottom: 0;
-}
-
-.create div span.bubble {
-  background-color: #e6e6e6;
-  border-radius: 50%;
-  display: inline-block;
-  color: #fff;
-  font-size: 0.8em;
-  height: 1.4em;
-  margin-right: 0.2em;
-  padding-left: 0.4em;
-  width: 1em;
-  margin-right: 0.7em;
-}
-
-.create div span.bubble-error {
-  background-color: #E97C7C;
-}
-
-.create div span.bubble-active {
-  background-color: #239cbb;
-  color: #fff;
-}
-
-.create h1 {
-  padding-top: 0;
 }
 
 .create h2 {
   color: #999;
   line-height: 1.3em;
   font-size: 1.4em;
+  margin-top: 0.2em;
 }
 
 .create p {
@@ -499,9 +443,37 @@ a {
   margin-bottom: 1em;
 }
 
-.create .step-content h2 {
-  margin-top: 0;
+/* Step bubbles */
+
+.create .bubbles {
+  margin-top: 0.3em;
+  font-size: 2.0em;
+  margin-bottom: 0;
 }
+
+.create .bubbles .bubble {
+  background-color: $lelylan-border;
+  border-radius: 50%;
+  display: inline-block;
+  color: #fff;
+  font-size: 0.8em;
+  height: 1.4em;
+  margin-right: 0.2em;
+  padding-left: 0.4em;
+  width: 1em;
+  margin-right: 0.7em;
+}
+
+.create .bubbles .bubble-error {
+  background-color: #E97C7C;
+}
+
+.create .bubbles .bubble-active {
+  background-color: $lelylan-color;
+  color: #fff;
+}
+
+/* Create button */
 
 .create button {
   padding: 0.3em 1em;
@@ -512,7 +484,7 @@ a {
   background: none repeat scroll 0 0 transparent;
   border: none;
   border-spacing: 0;
-  background-color: #239cbb;
+  background-color: $lelylan-color;
 }
 
 .create button .fa {
@@ -524,25 +496,34 @@ a {
   background-color: #ddd;
 }
 
+/* Selected type */
+
 .create.step-two .fa-angle-right {
-  color: #239cbb;
+  color: $lelylan-color;
   font-size: 1.5em;
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
-  color: #bbb;
+/* Search input */
+
+.create > div.step-content input[type="search"] {
+  margin-left: -0.35em;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color: #bbb;
-  opacity: 1;
+
+/* Form validation */
+
+.create button:disabled {
+  background-color: #ddd;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color: #bbb;
-  opacity: 1;
+
+.create input.ng-invalid.ng-dirty {
+  border-bottom-color: #FFB3B3;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-  color: #bbb;
-}
+
+
+
+/* -------------- *
+ * Lists of types *
+ * -------------- */
 
 .item {
   padding: 1em;
@@ -551,16 +532,12 @@ a {
   cursor: pointer;
 }
 
-.step-three .item {
-  margin-bottom: 1em;
-}
-
 .item > p {
   margin: 0;
 }
 
 .item > p > a {
-  color: #239cbb;
+  color: $lelylan-color;
   font-weight: 100;
   font-size: 1.5em;
   line-height: 1.2em;
@@ -580,6 +557,15 @@ a {
   margin-left: 1em;
 }
 
+.step-three .item {
+  margin-bottom: 1em;
+}
+
+
+/* ----------------- *
+/* Lists of pysicals *
+/* ----------------- */
+
 .physicals {
   padding-top: 1em !important;
 }
@@ -589,38 +575,32 @@ a {
   font-size: 1em;
 }
 
-@media (min-width: 46em) {
-  .create .step-info {
-    display: inline-block !important;
-  }
-
-  .create .short-info {
-    display: none;
-  }
-}
 
 
-// form validation
-
-.create button:disabled {
-  background-color: #ddd;
-}
-
-.create input.ng-invalid.ng-dirty {
-  border-bottom-color: #FFB3B3;
-}
-
-// login page
+/* ---------- *
+ * Login page *
+ * ---------- */
 
 .login .login-link {
   font-size: 3em;
   margin-bottom: 0;
 }
 
-// demo
+
+
+/* --------- *
+ * Demo page *
+ * --------- */
 
 .demo .header {
   background-color: #555;
+}
+
+// menu definition
+
+.demo .menu {
+  font-size: 1em;
+  padding-top: 0em;
 }
 
 .demo .menu .title {
@@ -636,12 +616,94 @@ a {
 // switch
 .switch { font-size: 0.5em; display: inline-block; }
 .switch input { position: absolute; left: -9999px; }
-.switch input:checked + .slider::before { box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 3em 0 0 0 #239cbb inset; }
+.switch input:checked + .slider::before { box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 3em 0 0 0 $lelylan-color inset; }
 .switch input:checked + .slider::after { left: 3em; }
 .switch .slider { position: relative; display: block; width: 5.5em; height: 3em; cursor: pointer; border-radius: 1.5em; transition: 350ms; background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0)), #dddddd; box-shadow: 0 0.07em 0.1em -0.1em rgba(0, 0, 0, 0.4) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7);}
 .switch .slider::after { position: absolute; content: ''; width: 2em; height: 2em; top: 0.5em; left: 0.5em; border-radius: 50%; transition: 250ms ease-in-out; background: linear-gradient(#f5f5f5 10%, #eeeeee); box-shadow: 0 0.1em 0.15em -0.05em rgba(255, 255, 255, 0.9) inset, 0 0.2em 0.2em -0.12em rgba(0, 0, 0, 0.5); }
-.switch .slider::before { position: absolute; content: ''; width: 4em; height: 1.5em; top: 0.75em; left: 0.75em; border-radius: 0.75em; transition: 250ms ease-in-out; background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0.1)), #d0d0d0; box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 0 0 0 0 #239cbb inset; }
+.switch .slider::before { position: absolute; content: ''; width: 4em; height: 1.5em; top: 0.75em; left: 0.75em; border-radius: 0.75em; transition: 250ms ease-in-out; background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(255, 255, 255, 0.1)), #d0d0d0; box-shadow: 0 0.08em 0.15em -0.1em rgba(0, 0, 0, 0.5) inset, 0 0.05em 0.08em -0.01em rgba(255, 255, 255, 0.7), 0 0 0 0 $lelylan-color inset; }
 .switch .spinner { padding-left: 1.5em; }
 .switch .spinner > div { background-color: #ccc; }
 
 
+
+/* ---------------------------- *
+ * Desktop & mobile media query *
+ * ---------------------------- */
+
+@media (min-width: 46em) {
+
+  .container {
+    margin-top: 0.5em;
+  }
+
+  .header {
+    margin: 0 0.15em;
+  }
+
+  .app,
+  .content > div.column {
+    border-left: 0.25em solid $background-color;
+    border-right: 0.25em solid $background-color;
+  }
+
+  .message hr {
+    margin-left: 33.33333%;
+    width: 33.33333%;
+  }
+
+  .create .step-info {
+    display: inline-block !important;
+  }
+
+  .create .short-info {
+    display: none;
+  }
+
+  .menu .text {
+    display: inline;
+  }
+}
+
+
+
+/* --------------- *
+ * Scrollbar style *
+ * --------------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    background-color: #f6f6f6;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none;
+    background-color: $lelylan-border;
+}
+
+
+
+/* ------------ *
+ * Placeholders *
+ * ------------ */
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #bbb;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #bbb;
+  opacity: 1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #bbb;
+  opacity: 1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #bbb;
+}

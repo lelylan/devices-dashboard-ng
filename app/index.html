@@ -64,25 +64,23 @@
         <!-- Right menu -->
 
         <div class="menu" ng-show="!demo">
-          <span class="full-menu">
-            <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
-            <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
-            <a href="/demo" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
-            <oauth
-              template="views/templates/oauth-ng-menu.html"
-              scope="resources+privates"
-              site="{{credentials.site}}"
-              client-id="{{credentials.clientId}}"
-              redirect-uri="{{credentials.redirectUri}}"
-              profile-uri="{{credentials.profileUri}}">
-            </oauth>
-          </span>
+          <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
+          <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
+          <a href="/demo" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
+          <oauth
+          template="views/templates/oauth-ng-menu.html"
+          scope="resources+privates"
+          site="{{credentials.site}}"
+          client-id="{{credentials.clientId}}"
+          redirect-uri="{{credentials.redirectUri}}"
+          profile-uri="{{credentials.profileUri}}">
+          </oauth>
         </div>
 
         <!-- Right menu demo -->
 
         <div class="menu" ng-show="demo" ng-click="demoOff()">
-          <a class="title" href="" ng-click="demoOff()">Turn OFF demo mode</a>
+          <a class="title" href="" ng-click="demoOff()">Turn off demo</a>
           <div class="switch">
             <input type="checkbox" id="checkbox" checked/>
             <label class="slider" for="checkbox"></label>

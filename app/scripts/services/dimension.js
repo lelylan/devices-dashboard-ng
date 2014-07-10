@@ -19,7 +19,6 @@ service.factory('Dimension', function($window, $rootScope, Column) {
     // Set the window width
     dimensions.width = em(_window.width());
     // Set the window height removing the space used by the menu
-    console.log(_window.height(), _window.width());
     dimensions.height = em(_window.height()) - offsets.menu;
     // Set the column number
     Column.set(dimensions);
