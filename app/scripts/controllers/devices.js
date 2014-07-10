@@ -13,12 +13,13 @@ angular.module('lelylan.dashboards.device')
      * Categories API request
      */
 
+    // Verify if categories is already cached
+    var cached = $cacheFactory.get('$http').get('http://api.lelylan.com/categories');
+
+    // Get all categories
     var categories = Category.all().
       success(function(categories) {
         $rootScope.categories = categories;
-        // Cached categories check
-        // TODO (remove hard coded domain)
-        var cached = $cacheFactory.get('$http').get('http://api.lelylan.com/categories');
         if (!cached) { $rootScope.categories.unshift({ tag: 'all', name: 'All'}); }
       });
 
@@ -45,13 +46,13 @@ angular.module('lelylan.dashboards.device')
      */
 
     $q.all([devices, categories]).then(function(values) {
-      $rootScope.categories[0].devices = $rootScope.all.length;
-
       _.map($rootScope.categories, function(category) {
         category.devices = _.countBy($rootScope.all, function(device) {
           return (device.category == category.tag) ? 'count' : 'missed'
         }).count;
       });
+
+      $rootScope.categories[0].devices = $rootScope.all.length;
     });
 
 

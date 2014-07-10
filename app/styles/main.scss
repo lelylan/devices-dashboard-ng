@@ -295,29 +295,7 @@ a {
   background-color: #239cbb;
 }
 
-/*
- * Elements animation
- */
 
-.view-animation.ng-enter {
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
-
-.view-animation.ng-leave {
-  -webkit-animation: fadeOut 1s;
-  animation: fadeOut 1s;
-}
-
-.view-animation.ng-hide-remove {
-  -webkit-animation: fadeOut 1s;
-  animation: fadeOut 1s;
-}
-
-.view-animation.ng-hide-add {
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
 
 .column .empty {
   width: 0em !important;

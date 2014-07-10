@@ -11,8 +11,8 @@ service.factory('Column', function($location, Menu) {
 
   // Defines the columns structure:
   // * count: the number of visible columns
-  // * visibles: object defining which columns are visible
-  var columns = { visibles: { one: false, two: false, three: false }, count: undefined };
+  // * visible: object defining which columns are visible
+  var columns = { visible: { one: false, two: false, three: false }, count: undefined };
 
 
   // Returns the columns structure
@@ -35,7 +35,7 @@ service.factory('Column', function($location, Menu) {
   var setThreeColumns = function(dimensions) {
     if (dimensions.width > breakpoints.three) {
       if (columns.count != 'three') {
-        columns.visibles = {
+        columns.visible = {
           one: true,
           two: true,
           three: true
@@ -52,7 +52,7 @@ service.factory('Column', function($location, Menu) {
   var setTwoColumns = function(dimensions) {
     if (dimensions.width < breakpoints.three && dimensions.width > breakpoints.two) {
       if (columns.count != 'two') {
-        columns.visibles = {
+        columns.visible = {
           one: false,
           two: true,
           three: true
@@ -71,7 +71,7 @@ service.factory('Column', function($location, Menu) {
   var setOneColumn = function(dimensions) {
     if (dimensions.width < breakpoints.two) {
       if (columns.count != 'one') {
-        columns.visibles = {
+        columns.visible = {
           one: false,
           two: true,
           three: false
@@ -86,8 +86,8 @@ service.factory('Column', function($location, Menu) {
     }
   }
 
-  service.setVisibles = function(columns) {
-    columns.visibles = columns;
+  service.setvisible = function(columns) {
+    columns.visible = columns;
   }
 
   return service;

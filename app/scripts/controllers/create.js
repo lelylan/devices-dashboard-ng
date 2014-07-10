@@ -2,7 +2,7 @@
 
 angular.module('lelylan.dashboards.device')
   .controller('CreateCtrl', function ($scope, $rootScope, $location, Device, AccessToken) {
-    $rootScope.page = 'create';
+
     $rootScope.loading = false;
 
     $scope.step = 'one';
