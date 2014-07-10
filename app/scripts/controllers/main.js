@@ -20,24 +20,26 @@ angular.module('lelylan.dashboards.device')
     // Visible menu (on the left)
     $scope.menu = Menu.get();
 
-    // Logged in user
-    $scope.logged = !!AccessToken.get();
 
 
     /*
      * OAuth
      */
 
-    // Move to the login page when not logged in and when logs out
-    if (!$scope.demo) {
-      if (!$scope.logged) {
-        $location.path('login');
-      }
+    $timeout(function() {
+      var logged = !!AccessToken.get();
 
-      $scope.$on('oauth:logout', function(event) {
-        $location.path('login');
-      });
-    };
+      if (!$scope.demo) {
+        if (!logged) {
+          $location.path('login');
+        }
+
+        $scope.$on('oauth:logout', function(event) {
+          $location.path('login');
+        });
+      };
+    }, 0)
+
 
 
     /*
@@ -49,8 +51,9 @@ angular.module('lelylan.dashboards.device')
     });
 
 
+
     /*
-     * Demo logic
+     * Demo logic (with some timers to make the experience smoother)
      */
 
     $rootScope.demoOn = function() {

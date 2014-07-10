@@ -26,7 +26,6 @@ angular.module('lelylan.dashboards.device', [
       .when('/expired', {
         templateUrl: 'views/expired.html',
         controller: function($rootScope) {
-          $rootScope.page = 'expired';
           $rootScope.loading = false;
         }
       })
