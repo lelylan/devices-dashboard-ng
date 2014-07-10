@@ -146,15 +146,16 @@ a {
   border-left: none;
 }
 
-.content.one .category:hover,
-.content.one .device:hover {
+.one.content .category:hover,
+.one.content .device:hover {
   border-left: none !important;
 }
 
-.content.one .active,
-.content.one .active:hover {
+.one.content .active,
+.one.content .active:hover {
   border-left: none !important;
 }
+
 
 
 
