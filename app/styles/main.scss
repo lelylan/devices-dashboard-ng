@@ -411,6 +411,7 @@ a {
 
 .create > div.step {
   margin-top: 0 !important;
+  padding-top: 0.5em !important;
 }
 
 .create > div.step-info {
@@ -422,6 +423,11 @@ a {
 .create > div.step-content {
   padding-left: 1em !important;
   padding-right: 1em !important;
+  padding-top: 0.6em !important;
+}
+
+.create > div.step-content input[type="search"] {
+  margin-left: -0.35em;
 }
 
 .create h1 {
@@ -451,7 +457,7 @@ a {
 }
 
 .create div span.bubble-error {
-  background-color: #FCE2E2;
+  background-color: #E97C7C;
 }
 
 .create div span.bubble-active {
@@ -518,6 +524,11 @@ a {
   background-color: #ddd;
 }
 
+.create.step-two .fa-angle-right {
+  color: #239cbb;
+  font-size: 1.5em;
+}
+
 ::-webkit-input-placeholder { /* WebKit browsers */
   color: #bbb;
 }
@@ -538,6 +549,10 @@ a {
   padding-left: 0;
   border-bottom: 1px solid #f6f6f6;
   cursor: pointer;
+}
+
+.step-three .item {
+  margin-bottom: 1em;
 }
 
 .item > p {

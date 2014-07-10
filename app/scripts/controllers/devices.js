@@ -127,7 +127,6 @@ angular.module('lelylan.dashboards.device')
       }
 
       if ($scope.columns.count == 'one') {
-        console.log("SON qui")
         Column.setVisible({ one: false, two: false, three: true });
         Menu.set('devices');
       }
