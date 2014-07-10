@@ -622,10 +622,15 @@ a {
 .demo .header {
   background-color: #555;
 }
+
 .demo .menu .title {
   vertical-align: top;
-  color: #999;
+  color: #bbb;
   margin-right: 0.25em;
+  font-size: 0.65em;
+  padding-top: 0.5em;
+  display: inline-block;
+  text-transform: uppercase;
 }
 
 // switch
