@@ -5,6 +5,7 @@ angular.module('lelylan.dashboards.device', [
   'lelylan.dashboards.device.column',
   'lelylan.dashboards.device.menu',
   'lelylan.directives.device',
+  'config',
   'ngRoute'
 ])
 .config(function ($routeProvider) {

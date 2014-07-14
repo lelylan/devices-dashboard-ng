@@ -55,7 +55,7 @@
           "uri": "http://www.example.com/properties/status",
           "pending": false,
           "values": ["locked"],
-          "ranges": []
+          "range": null
         }],
         "function": {
           "id": "2",
@@ -72,7 +72,7 @@
           "uri": "http://www.example.com/properties/status",
           "pending": false,
           "values": ["unlocked"],
-          "ranges": []
+          "range": null
         }],
         "function": {
           "id": "1",

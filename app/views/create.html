@@ -72,7 +72,7 @@
 
     <input type="search" placeholder="Search the device type" autofocus ng-model="query"></input>
 
-    <div class="type item" ng-repeat="type in types | filter:{name: query}" ng-click="setType(type)">
+    <div class="type item" ng-repeat="type in popular | filter:{name: query}" ng-click="setType(type)">
       <p class="name {{type.id}}">
       <span class="fa fa-angle-right" ng-if="type.id == device.type.id"></span>
       <a>{{type.name}}</a>

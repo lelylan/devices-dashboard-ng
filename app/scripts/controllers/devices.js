@@ -1,26 +1,24 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('DevicesCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, Device, Type, Category, AccessToken, Dimension, Column, Menu) {
-
+  .controller('DevicesCtrl', function ($scope, $rootScope, $timeout, $q, $location, $route, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu) {
 
     /* -------------- *
      * INITIALIZATION *
      * -------------- */
-
 
     /*
      * Categories API request
      */
 
     // Verify if categories is already cached
-    var cached = $cacheFactory.get('$http').get('http://api.lelylan.com/categories');
+    var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/categories');
 
     // Get all categories
     var categories = Category.all().
       success(function(categories) {
         $rootScope.categories = categories;
-        if (!cached) { $rootScope.categories.unshift({ tag: 'all', name: 'All'}); }
+        $rootScope.categories.unshift({ tag: 'all', name: 'All'});
       });
 
 
@@ -32,10 +30,10 @@ angular.module('lelylan.dashboards.device')
     var devices = Device.all().
       success(function(devices) {
         $rootScope.all = devices;
-        $scope.devices = devices;
+        $rootScope.devices = devices;
 
         if (devices.length == 0) { $location.path('/empty') }
-        else                     { loadTypes($scope.devices); }
+        else                     { loadTypes($rootScope.devices); }
       });
 
 
@@ -86,7 +84,7 @@ angular.module('lelylan.dashboards.device')
 
     var init = function(values) {
       $rootScope.loading = false;
-      $scope.currentDevice = $scope.devices[0];
+      $scope.currentDevice = $rootScope.devices[0];
       $rootScope.currentCategory = $rootScope.categories[0];
     }
 
@@ -103,8 +101,8 @@ angular.module('lelylan.dashboards.device')
 
     $scope.setCategory = function(category) {
       if (category.devices) { // does not open when there are no devices per category
-        $scope.devices = (category.tag == 'all') ? $rootScope.all : _.where($rootScope.all, { category: category.tag });
-        $scope.currentDevice = $scope.devices[0];
+        $rootScope.devices = (category.tag == 'all') ? $rootScope.all : _.where($rootScope.all, { category: category.tag });
+        $scope.currentDevice = $rootScope.devices[0];
         $rootScope.currentCategory = category;
 
         if ($scope.columns.count == 'one') {
@@ -141,13 +139,39 @@ angular.module('lelylan.dashboards.device')
      */
 
     $scope.$on('lelylan:device:update:set', function(event, device) {
-      var _device = _.find($scope.devices, function(resource) {
+      var _device = _.find($rootScope.devices, function(resource) {
         return resource.id == device.id;
       });
 
       angular.extend(_device, device);
     });
 
+
+
+    /*
+     * Device deleted
+     */
+
+    $rootScope.$on('lelylan:device:delete', function(event, device) {
+      console.log("DELEEEEEEEEEEEEEtE")
+      var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/devices');
+
+      var devices = JSON.parse(cached[1]);
+
+      var _device = _.find(devices, function(resource) {
+        return resource.id == device.id;
+      });
+
+      if (_device) {
+        var index = devices.indexOf(_device);
+        devices.splice(index, 1);
+
+        cached[1] = JSON.stringify(devices);
+        console.log("DELETE CACHED", cached[1]);
+      }
+
+      $route.reload();
+    });
 
 
     /* ---------- *

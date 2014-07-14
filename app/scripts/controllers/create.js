@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('CreateCtrl', function ($scope, $rootScope, $location, Device, AccessToken) {
+  .controller('CreateCtrl', function ($scope, $rootScope, $location, $cacheFactory, ENV, Device, Type, AccessToken) {
 
 
     /* ------- *
@@ -20,8 +20,11 @@ angular.module('lelylan.dashboards.device')
     // validation structure
     $scope.invalid = {};
 
-    // set the existing types
-    $scope.types = fixturePopularTypes;
+    // Get the popular types
+    var types = Type.popular().
+      success(function(types) {
+        $scope.popular = types;
+      });
 
 
     /* --------- *
@@ -81,10 +84,15 @@ angular.module('lelylan.dashboards.device')
     // (if everything is cached)
     var redirect = function(device) {
 
-      // cached case
-      if ($rootScope.all) {
-        $rootScope.all.unshift(device);
-        console.log($rootScope.all);
+      var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/devices');
+
+      // If devices was already loaded
+      if (cached) {
+        var devices = JSON.parse(cached[1])
+        devices.unshift(device);
+        console.log(devices)
+        cached[1] = JSON.stringify(devices);
+
         var category = _.find($rootScope.categories, function(resource) { return resource.tag == device.category; });
         category.devices++;
 

@@ -332,31 +332,57 @@ module.exports = function (grunt) {
       ]
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= yeoman.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    ngconstant: {
+      // Options for all targets
+      options: {
+        space: '  ',
+        wrap: '"use strict";\n\n {%= __ngModule %}',
+        name: 'config',
+      },
+      // Environment targets
+      development: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'development',
+            endpoint: 'http://localhost:8000',
+            credentials: {
+              site: 'http://localhost:3000',
+              clientId: '0e9819715cce6100d8e95e734a42f94f628f91cc5934f8014b91efedb799d36e',
+              redirectUri: 'http://localhost:9000/',
+              profileUri: 'http://localhost:3000/me'
+            },
+            //remote endpoints
+            //endpoint: 'http://api.lelylan.com',
+            //oauth: {
+              //site: 'http://people.lelylan.com',
+              //clientId: "e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c",
+              //redirectUri: "http://localhost:9000/",
+              //profileUri: "http://api.lelylan.com/me"
+            //}
+          }
+        }
+      },
+      production: {
+        options: {
+          dest: '<%= yeoman.dist %>/scripts/config.js'
+        },
+        constants: {
+          ENV: {
+            name: 'production',
+            endpoint: 'http://api.lelylan.com',
+            credentials: {
+              site: 'http://people.lelylan.com',
+              clientId: '3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709',
+              redirectUri: 'http://lelylan.github.io/devices-dashboard-ng',
+              profileUri: 'http://api.lelylan.com/me'
+            }
+          }
+        }
+      }
+    },
 
     // Test settings
     karma: {
@@ -375,6 +401,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'ngconstant:development',
       'bower-install',
       'concurrent:server',
       'autoprefixer',
@@ -398,6 +425,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production',
     'bower-install',
     'useminPrepare',
     'concurrent:dist',

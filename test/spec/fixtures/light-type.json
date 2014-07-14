@@ -108,7 +108,7 @@
           "uri": "http://www.example.com/properties/status",
           "pending": false,
           "values": ["on"],
-          "ranges": []
+          "range": null
         }],
         "function": {
           "id": "2",
@@ -125,7 +125,7 @@
           "uri": "http://www.example.com/properties/status",
           "pending": false,
           "values": ["off"],
-          "ranges": []
+          "range": null
         }],
         "function": {
           "id": "1",
