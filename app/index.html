@@ -6,8 +6,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
+    <title>Lelylan Dashboard</title>
+    <meta name="description" content="The new place where to build the Connected Home">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -28,10 +28,13 @@
       [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
     </style>
   </head>
-  <body ng-app="app" ng-init="loading=true" ng-init="demo=true" ng-class="{demo: demo}" resize>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+
+  <body ng-app="app" ng-init="loading=true">
+
+
+    <!-- ------------ --
+    <!--  Preloading  --
+    <!-- ------------ -->
 
     <div class="preloading" ng-show="loading">
       <div class="logo"></div>
@@ -43,56 +46,51 @@
       <p class="description">Loading<p>
     </div>
 
-    <div class="app ng-cloak" ng-show="!loading">
-      <div class="header">
-        <a class="logo" href="#" ng-if="menu.lelylan || page!='main'">
-          <!--<span class="fa fa-circle-thin"></span>-->
-          Lelylan Dashboard
-        </a>
-        <div style="float:left;" ng-show="page=='main'">
-          <a class="back back-categories" href="" ng-if="menu.categories" ng-click="backToCategories()">
-            <span class="fa fa-angle-left"></span> Categories
-          </a>
-          <a class="back back-devices" href="" ng-if="menu.devices" ng-click="backToDevices()">
-            <span class="fa fa-angle-left"></span> {{currentCategory.name}}
-          </a>
-        </div>
-        <div class="menu" ng-show="!demo">
-          <span class="full-menu">
-            <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
-            <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
-            <a href="" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a>
-            <oauth
-              template="views/templates/oauth-ng-menu.html"
-              site="http://people.lelylan.com"
-              client-id="e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c"
-              redirect-uri="http://localhost:9000/"
-              profile-uri="http://api.lelylan.com/me"
-              scope="user">
-            </oauth>
-          </span>
 
-          <div id="dl-menu" class="dl-menuwrapper compact-menu">
-            <span class="fa fa-bars dl-trigger"></span>
-            <ul class="dl-menu">
-              <li><a href="#"><span class="fa fa-home"></span> <span class="text">Home</span></a></li>
-              <li><a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a></li>
-              <li><a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a></li>
-              <li><a href="" ng-click="demoOn()"><span class="fa fa-desktop"></span> <span class="text">Demo Mode</span></a></li>
-            </ul>
-          </div>
+    <!-- ------------- --
+    <!-- App Container --
+    <!-- ------------- -->
+
+    <div class="app ng-cloak" ng-class="{ demo: demo }" ng-controller="MainCtrl" ng-show="!loading">
+
+      <div class="header">
+
+        <!-- Left menu -->
+
+        <a class="logo" href="/" ng-show="menu.visible.lelylan">Lelylan Dashboard</a>
+        <a class="back" href=""  ng-show="menu.visible.categories" ng-click="moveToCategories()"><span class="fa fa-angle-left"></span> Categories</a>
+        <a class="back" href=""  ng-show="menu.visible.devices" ng-click="moveToDevices()"><span class="fa fa-angle-left"></span> {{currentCategory.name}}</a>
+
+        <!-- Right menu -->
+
+        <div class="menu" ng-show="!demo">
+          <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
+          <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
+          <oauth
+          template="views/templates/oauth-ng-menu.html"
+          scope="resources+privates"
+          site="{{credentials.site}}"
+          client-id="{{credentials.clientId}}"
+          redirect-uri="{{credentials.redirectUri}}"
+          profile-uri="{{credentials.profileUri}}">
+          </oauth>
         </div>
-        <div class="menu" ng-show="demo">
-          <span class="title">Demo mode</span>
+
+        <!-- Right menu demo -->
+
+        <div class="menu" ng-show="demo" ng-click="demoOff()">
+          <a class="title" href="" ng-click="demoOff()">Turn off demo</a>
           <div class="switch">
             <input type="checkbox" id="checkbox" checked/>
-            <label class="slider" for="checkbox" ng-click="demoOff()"></label>
+            <label class="slider" for="checkbox"></label>
           </div>
         </div>
       </div>
 
-      <div class="container" ng-view="" style="height: {{appHeight}}em"></div>
+      <div class="container" ng-view="" style="height: {{dimensions.height}}em"></div>
     </div>
+
+
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -127,9 +125,11 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/devices.js"></script>
     <script src="scripts/controllers/create.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/directives/resize.js"></script>
+    <script src="scripts/services/dimension.js"></script>
+    <script src="scripts/services/column.js"></script>
+    <script src="scripts/services/menu.js"></script>
     <!-- endbuild -->
 
     <!-- test -->
@@ -141,9 +141,5 @@
     <script>
       angular.module('app', ['lelylan.dashboards.device', 'ngMockE2E']);
     </script>
-
-  <script>
-    $( '#dl-menu' ).dlmenu({ animationClasses : { classin : 'dl-animate-in-1', classout : 'dl-animate-out-1' }});
-  </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <span class="oauth">
-  <a href="#" class="logged-out" ng-if="show=='logged-out'" ng-click="login()" ><span class="fa fa-sign-in"></span> {{text}}</a>
-  <a href="#" class="logged-in"  ng-if="show=='logged-in'"  ng-click="logout()"><span class="fa fa-sign-out"></span> Logout {{profile.full_name || profile.email}}</a>
-  <a href="#" class="denied"     ng-if="show=='denied'"     ng-click="login()"><span class="fa fa-sign-in"></span> Access denied. Try again.</a>
+  <a href="#" class="logged-out" ng-if="show=='logged-out'" ng-click="login()" ><span class="fa fa-sign-in"></span> <span class="text">{{text}}</span></a>
+  <a href="#" class="logged-in"  ng-if="show=='logged-in'"  ng-click="logout()"><span class="fa fa-sign-out"></span> <span class="text">Logout {{profile.full_name || profile.email}}</span></a>
+    <a href="#" class="denied"     ng-if="show=='denied'"     ng-click="login()"><span class="fa fa-sign-in"></span> <span class="text">Access denied. Try again.</span></a>
 </span>

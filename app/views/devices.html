@@ -1,0 +1,27 @@
+<div class="content ui {{columns.count}} column grid">
+
+  <div id="categories" class="categories column scroller" style="height: {{dimensions.height}}em;" ng-show="columns.visible.one">
+    <div class="category ly-animation" ng-repeat="category in categories" ng-click="setCategory(category)" ng-class="{active: category.tag == currentCategory.tag, disabled: !category.devices}">
+      <p class="name {{category}}">
+        <a>{{category.name}}</a>
+        <span ng-show="category.devices">{{category.devices}}</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="devices column" style="height: {{dimensions.height}}em" ng-show="columns.visible.two">
+    <div class="device" ng-repeat="device in devices" ng-class="{active: device.id == currentDevice.id}">
+      <device
+        device-json="{{device}}"
+        device-template="bower_components/device-directive-ng/dist/views/templates/compact.html">
+      </device>
+    </div>
+  </div>
+
+  <div class="details column" style="height: {{dimensions.height}}em" ng-show="columns.visible.three">
+    <div class="detail">
+      <device device-json="{{currentDevice}}" ng-show="currentDevice"></device>
+    </div>
+  </div>
+
+</div>
