@@ -153,9 +153,7 @@ angular.module('lelylan.dashboards.device')
      */
 
     $rootScope.$on('lelylan:device:delete', function(event, device) {
-      console.log("DELEEEEEEEEEEEEEtE")
       var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/devices');
-
       var devices = JSON.parse(cached[1]);
 
       var _device = _.find(devices, function(resource) {
@@ -165,9 +163,12 @@ angular.module('lelylan.dashboards.device')
       if (_device) {
         var index = devices.indexOf(_device);
         devices.splice(index, 1);
-
         cached[1] = JSON.stringify(devices);
-        console.log("DELETE CACHED", cached[1]);
+      }
+
+      if ($scope.columns.count == 'one') {
+        Column.setVisible({ one: false, two: true, three: false });
+        Menu.set('categories');
       }
 
       $route.reload();

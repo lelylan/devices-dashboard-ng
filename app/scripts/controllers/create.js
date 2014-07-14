@@ -90,7 +90,6 @@ angular.module('lelylan.dashboards.device')
       if (cached) {
         var devices = JSON.parse(cached[1])
         devices.unshift(device);
-        console.log(devices)
         cached[1] = JSON.stringify(devices);
 
         var category = _.find($rootScope.categories, function(resource) { return resource.tag == device.category; });

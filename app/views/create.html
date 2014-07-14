@@ -70,7 +70,7 @@
       <h2>Select the type that better represents your device.</h2>
     </div>
 
-    <input type="search" placeholder="Search the device type" autofocus ng-model="query"></input>
+    <!--<input type="search" placeholder="Search the device type" autofocus ng-model="query"></input>-->
 
     <div class="type item" ng-repeat="type in popular | filter:{name: query}" ng-click="setType(type)">
       <p class="name {{type.id}}">
