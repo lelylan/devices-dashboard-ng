@@ -374,7 +374,7 @@ module.exports = function (grunt) {
       },
       production: {
         options: {
-          dest: '<%= yeoman.dist %>/scripts/config.js'
+          dest: '<%= yeoman.app %>/scripts/config.js'
         },
         constants: {
           ENV: {
@@ -447,8 +447,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'ngconstant:production',
     'bower-install',
+    'ngconstant:production',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
