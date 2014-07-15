@@ -28,10 +28,10 @@ docs/
 .sass-cache/
 
 # Yeoman
-.bowerrc
 .editorconfig
 .gitattributes
 .jshintrc
 .tmp/
 
-# Development
+# Dist
+dist/

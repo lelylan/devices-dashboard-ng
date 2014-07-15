@@ -327,7 +327,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'compass:dist',
-        'imagemin',
+        //'imagemin',
         'svgmin'
       ]
     },
@@ -380,6 +380,21 @@ module.exports = function (grunt) {
               profileUri: 'http://api.lelylan.com/me'
             }
           }
+        }
+      }
+    },
+
+    buildcontrol: {
+      options: {
+        dir: 'dist',
+        commit: true,
+        push: true,
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+      },
+      pages: {
+        options: {
+          remote: 'git@github.com:lelylan/devices-dashboard-ng.git',
+          branch: 'gh-pages'
         }
       }
     },
