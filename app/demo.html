@@ -118,6 +118,7 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"/></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/devices.js"></script>
     <script src="scripts/controllers/create.js"></script>
@@ -129,11 +130,15 @@
     <!-- test -->
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="scripts/vendors/app-test.js"></script>
-    <!--<script src="scripts/vendors/delayed-responses.js"></script>-->
+    <script src="scripts/vendors/delayed-responses.js"></script>
     <!-- end test -->
 
     <script>
-      angular.module('app', ['lelylan.dashboards.device', 'ngMockE2E']);
+      angular.module('app', ['lelylan.dashboards.device', 'ngMockE2E'])
+
+      angular.module('app').config(function(lelylanClientConfigProvider, ENV) {
+        lelylanClientConfigProvider.configure({ endpoint: ENV.endpoint });
+      });
     </script>
 </body>
 </html>

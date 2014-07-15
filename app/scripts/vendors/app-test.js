@@ -1,6 +1,6 @@
 /* Mocks definition */
 
-app.run(function($httpBackend, $timeout, Profile) {
+app.run(function($httpBackend, $timeout, ENV, Profile) {
 
   // Device names
   names = ['light', 'lock', 'thermostat', 'alarm-clock'];
@@ -21,10 +21,10 @@ app.run(function($httpBackend, $timeout, Profile) {
   privates = JSON.parse(readFixtures('privates.json'));
   me = JSON.parse(readFixtures('me.json'));
 
-  $httpBackend.whenGET('http://api.lelylan.com/devices').respond(devices);
-  $httpBackend.whenGET('http://api.lelylan.com/categories').respond(categories);
-  $httpBackend.whenPOST('http://api.lelylan.com/devices').respond(devices[0]);
-  $httpBackend.whenGET('http://api.lelylan.com/me').respond(me);
+  $httpBackend.whenGET(ENV.endpoint + '/devices').respond(devices);
+  $httpBackend.whenGET(ENV.endpoint + '/categories').respond(categories);
+  $httpBackend.whenPOST(ENV.endpoint + '/devices').respond(devices[0]);
+  $httpBackend.whenGET(ENV.endpoint + '/me').respond(me);
 
 
   // Device Mocks
@@ -33,11 +33,11 @@ app.run(function($httpBackend, $timeout, Profile) {
     var name = names[index];
 
     type = JSON.parse(readFixtures(name + '-type.json'));
-    $httpBackend.whenPUT('http://api.lelylan.com/devices/' + id).respond(function(method, url, data, headers) { return [200, updateDevice(data, device), {}]; });
-    $httpBackend.whenPUT('http://api.lelylan.com/devices/' + id + '/properties').respond(function(method, url, data, headers) { return [200,  updateDeviceProperties(data, device), {}]; });
-    $httpBackend.whenGET('http://api.lelylan.com/types/' + id).respond(type);
-    $httpBackend.whenGET('http://api.lelylan.com/devices/' + id + '/privates').respond(privates);
-    $httpBackend.whenDELETE('http://api.lelylan.com/devices/' + id).respond(device);
+    $httpBackend.whenPUT(ENV.endpoint + '/devices/' + id).respond(function(method, url, data, headers) { return [200, updateDevice(data, device), {}]; });
+    $httpBackend.whenPUT(ENV.endpoint + '/devices/' + id + '/properties').respond(function(method, url, data, headers) { return [200,  updateDeviceProperties(data, device), {}]; });
+    $httpBackend.whenGET(ENV.endpoint + '/types/' + id).respond(type);
+    $httpBackend.whenGET(ENV.endpoint + '/devices/' + id + '/privates').respond(privates);
+    $httpBackend.whenDELETE(ENV.endpoint + '/devices/' + id).respond(device);
   })
 
   // Device update

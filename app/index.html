@@ -140,8 +140,11 @@
     <!-- end test -->
 
     <script>
-      var app = angular.module('app', ['lelylan.dashboards.device'])
-        .value('lelylan.client.config', { endpoint: 'http://localhost:8000' });
+      angular.module('app', ['lelylan.dashboards.device']);
+
+      angular.module('app').config(function(lelylanClientConfigProvider, ENV) {
+        lelylanClientConfigProvider.configure({ endpoint: ENV.endpoint });
+      });
     </script>
 </body>
 </html>
