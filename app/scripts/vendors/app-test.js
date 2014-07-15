@@ -1,9 +1,9 @@
 /* Mocks definition */
 
-app.run(function($httpBackend, $timeout, ENV, Profile) {
+app.run(['$httpBackend', '$timeout', 'ENV', 'Profile', function($httpBackend, $timeout, ENV, Profile) {
 
   // Device names
-  names = ['light', 'lock', 'thermostat', 'alarm-clock'];
+  var names = ['light', 'lock', 'thermostat', 'alarm-clock'];
 
   // Preset the logged user
   Profile.set({id: '1'});
@@ -15,11 +15,11 @@ app.run(function($httpBackend, $timeout, ENV, Profile) {
   $httpBackend.when('GET', /views/).passThrough();
 
   // Shared resources
-  devices = JSON.parse(readFixtures('devices.json'));
-  //devices = JSON.parse(readFixtures('devices-empty.json'));
-  categories = JSON.parse(readFixtures('categories.json'));
-  privates = JSON.parse(readFixtures('privates.json'));
-  me = JSON.parse(readFixtures('me.json'));
+  var devices = JSON.parse(readFixtures('devices.json'));
+  //var devices = JSON.parse(readFixtures('devices-empty.json'));
+  var categories = JSON.parse(readFixtures('categories.json'));
+  var privates = JSON.parse(readFixtures('privates.json'));
+  var me = JSON.parse(readFixtures('me.json'));
 
   $httpBackend.whenGET(ENV.endpoint + '/devices').respond(devices);
   $httpBackend.whenGET(ENV.endpoint + '/categories').respond(categories);
@@ -59,4 +59,4 @@ app.run(function($httpBackend, $timeout, ENV, Profile) {
       result.expected = result.value = property.expected; });
     return device;
   }
-});
+}]);
