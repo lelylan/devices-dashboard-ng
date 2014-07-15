@@ -25,12 +25,11 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <style>
-      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
+      .ng-cloak { display: none !important; }
     </style>
   </head>
 
   <body ng-app="app" ng-init="loading=true">
-
 
     <!-- ------------ --
     <!--  Preloading  --
@@ -45,7 +44,6 @@
       </div>
       <p class="description">Loading<p>
     </div>
-
 
     <!-- ------------- --
     <!-- App Container --
@@ -131,13 +129,14 @@
     <script src="scripts/services/dimension.js"></script>
     <script src="scripts/services/column.js"></script>
     <script src="scripts/services/menu.js"></script>
-    <!-- endbuild -->
 
     <!-- test -->
     <!--<script src="bower_components/angular-mocks/angular-mocks.js"></script>-->
     <!--<script src="scripts/vendors/app-test.js"></script>-->
     <!--<script src="scripts/vendors/delayed-responses.js"></script>-->
     <!-- end test -->
+
+    <!-- endbuild -->
 
     <script>
       angular.module('app', ['lelylan.dashboards.device']);
