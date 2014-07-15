@@ -1,0 +1,7 @@
+{
+  "uri": "http://api.lelylan.com/devices/light",
+  "id": "1",
+  "name": "Light",
+  "secret": "secret",
+  "activation_code": "activation_code"
+}

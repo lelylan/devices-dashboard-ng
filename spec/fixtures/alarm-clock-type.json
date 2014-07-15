@@ -1,0 +1,232 @@
+{
+    "id": "3",
+    "uri": "http://www.example.com/types/alarm-clock",
+    "name": "Alarm Clock",
+    "description": "Alarm clock description",
+    "category": "alarm-clocks",
+    "owner": {
+      "id": "1",
+      "uri": "http://api.lelylan.com/people/1"
+    },
+    "created_at": "2012-07-16T14:32:50Z",
+    "updated_at": "2012-07-16T14:32:50Z",
+    "properties": [{
+      "id": "1",
+      "uri": "http://www.example.com/properties/status",
+      "name": "Status",
+      "type": "text",
+      "default": "off",
+      "accepted": { "on": "On", "off": "Off" },
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    },{
+      "id": "2",
+      "uri": "http://www.example.com/properties/mode",
+      "name": "Mode",
+      "type": "text",
+      "default": "deactivated",
+      "accepted": { "activated": "Activated", "deactivated": "Not activated" },
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    },{
+      "id": "3",
+      "uri": "http://www.example.com/properties/alarm-time",
+      "name": "Alarm time",
+      "type": "text",
+      "default": "08:00",
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    },{
+      "id": "4",
+      "uri": "http://www.example.com/properties/volume",
+      "name": "Volume",
+      "type": "number",
+      "default": "20",
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    },{
+      "id": "5",
+      "uri": "http://www.example.com/properties/alarm-repetition",
+      "name": "Alarm repetition",
+      "type": "number",
+      "default": "3",
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    },{
+      "id": "6",
+      "uri": "http://www.example.com/properties/alarm-duration",
+      "name": "Alarm duration (sec)",
+      "type": "number",
+      "default": "30",
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    },{
+      "id": "7",
+      "uri": "http://www.example.com/properties/alarm-interval",
+      "name": "Alarm interval (sec)",
+      "type": "number",
+      "default": "300",
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    }],
+    "functions": [{
+        "uri": "http://www.example.com/functions/turn-on",
+        "id": "1",
+        "name": "Turn on",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "expected": "on"
+        }, {
+          "id": "2",
+          "uri": "http://www.example.com/properties/mode",
+          "expected": "activated"
+        }]
+    },
+    {
+        "uri": "http://www.example.com/functions/turn-off",
+        "id": "2",
+        "name": "Turn off",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "expected": "off"
+        }, {
+          "id": "2",
+          "uri": "http://www.example.com/properties/mode",
+          "expected": "deactivated"
+        }]
+    },
+    {
+        "uri": "http://www.example.com/functions/activate",
+        "id": "3",
+        "name": "Activate alarm",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "expected": "on"
+        }, {
+          "id": "2",
+          "uri": "http://www.example.com/properties/status",
+          "expected": "activated"
+        }]
+    },
+    {
+        "uri": "http://www.example.com/functions/deactivate",
+        "id": "4",
+        "name": "Deactivate alarm",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "expected": "on"
+        }, {
+          "id": "2",
+          "uri": "http://www.example.com/properties/mode",
+          "expected": "deactivated"
+        }]
+    },
+    {
+        "uri": "http://www.example.com/functions/set-alarm-time",
+        "id": "5",
+        "name": "Set alarm time",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "3",
+          "uri": "http://www.example.com/properties/alarm-time",
+          "expected": null
+        }]
+    },
+    {
+        "uri": "http://www.example.com/functions/set-alarm-volume",
+        "id": "6",
+        "name": "Set alarm volume",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "4",
+          "uri": "http://www.example.com/properties/alarm-volume",
+          "expected": null
+        }]
+    },
+    {
+        "uri": "http://www.example.com/functions/set-alarm-settings",
+        "id": "7",
+        "name": "Set alarm settings",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "5",
+          "uri": "http://www.example.com/properties/ripetition",
+          "expected": null
+        },{
+          "id": "6",
+          "uri": "http://www.example.com/properties/duration",
+          "expected": null
+        },{
+          "id": "7",
+          "uri": "http://www.example.com/properties/interval",
+          "expected": null
+        }]
+    }],
+    "statuses": [{
+        "uri": "http://www.example.com/statuses/1",
+        "id": "1",
+        "name": "Activated",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "2",
+          "uri": "http://www.example.com/properties/status",
+          "pending": false,
+          "values": ["activated"],
+          "range": []
+        }],
+        "function": {
+          "id": "4",
+          "uri": "http://www.example.com/functions/turn-off"
+        }
+      }, {
+        "uri": "http://www.example.com/statuses/2",
+        "id": "2",
+        "name": "Deactivated",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "2",
+          "uri": "http://www.example.com/properties/status",
+          "pending": false,
+          "values": ["deactivated"],
+          "range": null
+        }],
+        "function": {
+          "id": "3",
+          "uri": "http://www.example.com/functions/turn-on"
+        }
+    }, {
+        "uri": "http://www.example.com/statuses/1",
+        "id": "1",
+        "name": "Off",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "pending": false,
+          "values": ["off"],
+          "range": null
+        }],
+        "function": {
+          "id": "3",
+          "uri": "http://www.example.com/functions/turn-off"
+        }
+      }]
+}

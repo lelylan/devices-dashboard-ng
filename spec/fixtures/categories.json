@@ -1,0 +1,31 @@
+[{
+  "tag": "lights",
+  "name": "Lights"
+}, {
+  "tag": "locks",
+  "name": "Locks"
+}, {
+  "tag": "thermostats",
+  "name": "Thermostats"
+}, {
+  "tag": "alarms",
+  "name": "Alarms"
+}, {
+  "tag": "cameras",
+  "name": "Cameras"
+}, {
+  "tag": "windows",
+  "name": "Windows"
+}, {
+  "tag": "appliances",
+  "name": "Appliances"
+}, {
+  "tag": "alarm-clocks",
+  "name": "Alarm clocks"
+}, {
+  "tag": "sensors",
+  "name": "Sensors"
+}, {
+  "tag": "others",
+  "name": "Other categories"
+}]

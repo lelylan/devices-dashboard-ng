@@ -1,0 +1,82 @@
+{
+    "id": "2",
+    "uri": "http://www.example.com/types/lock",
+    "name": "Lock",
+    "description": "Lock description",
+    "category": "locks",
+    "owner": {
+      "id": "1",
+      "uri": "http://api.lelylan.com/people/1"
+    },
+    "created_at": "2012-07-16T14:32:50Z",
+    "updated_at": "2012-07-16T14:32:50Z",
+    "properties": [{
+      "id": "1",
+      "uri": "http://www.example.com/properties/status",
+      "name": "Status",
+      "type": "text",
+      "default": "0",
+      "accepted": { "locked": "Locked", "unlocked": "Unlocked" },
+      "created_at": "2012-07-16T14:32:50Z",
+      "updated_at": "2012-07-16T14:32:50Z"
+    }],
+    "functions": [{
+        "uri": "http://www.example.com/functions/lock",
+        "id": "1",
+        "name": "Lock",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "expected": "locked"
+        }]
+    },
+    {
+        "uri": "http://www.example.com/functions/unlock",
+        "id": "2",
+        "name": "Unlock",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "expected": "unlocked"
+        }]
+    }],
+    "statuses": [{
+        "uri": "http://www.example.com/statuses/1",
+        "id": "1",
+        "name": "Locked",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "pending": false,
+          "values": ["locked"],
+          "range": null
+        }],
+        "function": {
+          "id": "2",
+          "uri": "http://www.example.com/functions/unlock"
+        }
+      }, {
+        "uri": "http://www.example.com/statuses/2",
+        "id": "2",
+        "name": "Unlocked",
+        "created_at": "2012-07-16T14:32:50Z",
+        "updated_at": "2012-07-16T14:32:50Z",
+        "properties": [{
+          "id": "1",
+          "uri": "http://www.example.com/properties/status",
+          "pending": false,
+          "values": ["unlocked"],
+          "range": null
+        }],
+        "function": {
+          "id": "1",
+          "uri": "http://www.example.com/functions/lock"
+        }
+    }]
+}

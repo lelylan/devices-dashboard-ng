@@ -1,0 +1,222 @@
+[
+{
+  "id": "1",
+  "uri": "http://www.example.com/devices/light",
+  "name": "Light",
+  "category": "lights",
+  "pending": false,
+  "activated": true,
+  "type": {
+    "id": "1",
+    "uri": "https://type.lelylan.com/types/light"
+  },
+  "properties": [{
+    "id": "1",
+    "uri": "https://type.lelylan.com/properties/status",
+    "value": "off",
+    "expected": "off",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "2",
+    "uri": "https://type.lelylan.com/properties/intensity",
+    "expected": "0",
+    "value": "0",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "3",
+    "uri": "https://type.lelylan.com/properties/color",
+    "expected": "#239cbb",
+    "value": "#239cbb",
+    "pending": false,
+    "accepted": null
+  }],
+  "physical": {
+    "uri": "https://node.lelylan.com/mqtt/devices/1"
+  },
+  "maker": {
+    "id": "1",
+    "uri": "http://api.lelylan.com/people/1"
+  },
+  "owner": {
+    "id": "2",
+    "uri": "http://api.lelylan.com/people/2"
+  },
+  "created_at": "2014-06-20T15:54:42Z",
+  "updated_at": "2014-04-23T15:55:31Z",
+  "updated_from": "you"
+},
+{
+  "id": "2",
+  "uri": "http://www.example.com/devices/lock",
+  "name": "Lock",
+  "category": "locks",
+  "pending": false,
+  "activated": true,
+  "type": {
+    "id": "2",
+    "uri": "https://type.lelylan.com/types/lock"
+  },
+  "properties": [{
+    "id": "1",
+    "uri": "https://type.lelylan.com/properties/status",
+    "value": "locked",
+    "expected": "locked",
+    "pending": false,
+    "accepted": null
+  }],
+  "physical": {
+    "uri": "https://node.lelylan.com/mqtt/devices/2"
+  },
+  "maker": {
+    "id": "1",
+    "uri": "http://api.lelylan.com/people/1"
+  },
+  "owner": {
+    "id": "2",
+    "uri": "http://api.lelylan.com/people/2"
+  },
+  "created_at": "2014-06-20T15:54:42Z",
+  "updated_at": "2014-04-23T15:55:31Z",
+  "updated_from": "you"
+},
+{
+  "id": "3",
+  "uri": "http://www.example.com/devices/thermostat",
+  "name": "Thermostat",
+  "category": "thermostats",
+  "pending": false,
+  "activated": true,
+  "type": {
+    "id": "3",
+    "uri": "https://type.lelylan.com/types/thermostat"
+  },
+  "properties": [{
+    "id": "1",
+    "uri": "https://type.lelylan.com/properties/status",
+    "value": "off",
+    "expected": "off",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "2",
+    "uri": "https://type.lelylan.com/properties/mode",
+    "expected": "cooling",
+    "value": "cooling",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "3",
+    "uri": "https://type.lelylan.com/properties/speed",
+    "expected": "1",
+    "value": "1",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "4",
+    "uri": "https://type.lelylan.com/properties/temperature",
+    "expected": "24",
+    "value": "24",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "5",
+    "uri": "https://type.lelylan.com/properties/unit",
+    "expected": "ºC",
+    "value": "ºC",
+    "pending": false,
+    "accepted": null
+  }],
+  "physical": {
+    "uri": "https://node.lelylan.com/mqtt/devices/1"
+  },
+  "maker": {
+    "id": "1",
+    "uri": "http://api.lelylan.com/people/1"
+  },
+  "owner": {
+    "id": "2",
+    "uri": "http://api.lelylan.com/people/2"
+  },
+  "created_at": "2014-06-20T15:54:42Z",
+  "updated_at": "2014-04-23T15:55:31Z",
+  "updated_from": "you"
+},
+{
+  "id": "4",
+  "uri": "http://www.example.com/devices/alarm-clock",
+  "name": "Alarm Clock",
+  "category": "alarm-clocks",
+  "pending": false,
+  "activated": true,
+  "type": {
+    "id": "4",
+    "uri": "https://type.lelylan.com/types/alarm-clock"
+  },
+  "properties": [{
+    "id": "1",
+    "uri": "https://type.lelylan.com/properties/status",
+    "value": "off",
+    "expected": "off",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "2",
+    "uri": "https://type.lelylan.com/properties/mode",
+    "expected": "deactivated",
+    "value": "deactivated",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "3",
+    "uri": "https://type.lelylan.com/properties/alert-time",
+    "expected": "08:00",
+    "value": "08:00",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "4",
+    "uri": "https://type.lelylan.com/properties/volume",
+    "expected": "20",
+    "value": "20",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "5",
+    "uri": "https://type.lelylan.com/properties/alarm-repetition",
+    "expected": "3",
+    "value": "3",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "6",
+    "uri": "https://type.lelylan.com/properties/alarm-duration",
+    "expected": "30",
+    "value": "30",
+    "pending": false,
+    "accepted": null
+  }, {
+    "id": "7",
+    "uri": "https://type.lelylan.com/properties/alarm-interval",
+    "expected": "300",
+    "value": "300",
+    "pending": false,
+    "accepted": null
+  }],
+  "physical": {
+    "uri": "https://node.lelylan.com/mqtt/devices/1"
+  },
+  "maker": {
+    "id": "1",
+    "uri": "http://api.lelylan.com/people/1"
+  },
+  "owner": {
+    "id": "2",
+    "uri": "http://api.lelylan.com/people/2"
+  },
+  "created_at": "2014-06-20T15:54:42Z",
+  "updated_at": "2014-04-23T15:55:31Z",
+  "updated_from": "you"
+}
+]
