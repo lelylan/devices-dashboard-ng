@@ -37,11 +37,7 @@
 
     <div class="preloading" ng-show="loading">
       <div class="logo"></div>
-      <div class="spinner">
-        <div class="bounce-1"></div>
-        <div class="bounce-2"></div>
-        <div class="bounce-3"></div>
-      </div>
+      <div class="spinner"><div class="bounce-1"></div><div class="bounce-2"></div><div class="bounce-3"></div></div>
       <p class="description">Loading<p>
     </div>
 
@@ -56,14 +52,14 @@
         <!-- Left menu -->
 
         <a class="logo" href="/" ng-show="menu.visible.lelylan">Lelylan Dashboard</a>
-        <a class="back" href=""  ng-show="menu.visible.categories" ng-click="moveToCategories()"><span class="fa fa-angle-left"></span> Categories</a>
-        <a class="back" href=""  ng-show="menu.visible.devices" ng-click="moveToDevices()"><span class="fa fa-angle-left"></span> {{currentCategory.name}}</a>
+        <a class="back" href=""  ng-show="menu.visible.categories" ng-click="moveToCategories()"><span class="fa fa-angle-left"></span> Categories</a>  <!-- -->
+        <a class="back" href=""  ng-show="menu.visible.devices" ng-click="moveToDevices()"><span class="fa fa-angle-left"></span> {{currentCategory.name}}</a>  <!-- -->
 
         <!-- Right menu -->
 
         <div class="menu" ng-show="!demo">
-          <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
-          <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
+          <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>  <!-- hack inline block -->
+          <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>  <!-- hack inline block -->
           <oauth
           template="views/templates/oauth-ng-menu.html"
           scope="resources+privates"
@@ -77,7 +73,7 @@
         <!-- Right menu demo -->
 
         <div class="menu" ng-show="demo" ng-click="demoOff()">
-          <a class="title" href="" ng-click="demoOff()">Turn off demo</a>
+          <a class="title" href="" ng-click="demoOff()">Turn off demo</a> <!-- hack inline block -->
           <div class="switch">
             <input type="checkbox" id="checkbox" checked/>
             <label class="slider" for="checkbox"></label>

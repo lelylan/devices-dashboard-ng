@@ -37,11 +37,7 @@
 
     <div class="preloading" ng-show="loading">
       <div class="logo"></div>
-      <div class="spinner">
-        <div class="bounce-1"></div>
-        <div class="bounce-2"></div>
-        <div class="bounce-3"></div>
-      </div>
+      <div class="spinner"><div class="bounce-1"></div><div class="bounce-2"></div><div class="bounce-3"></div></div>
       <p class="description">Loading<p>
     </div>
 
@@ -55,9 +51,9 @@
 
         <!-- Left menu -->
 
-        <a class="logo" href="/" ng-show="menu.visible.lelylan">Lelylan Dashboard</a>
-        <a class="back" href=""  ng-show="menu.visible.categories" ng-click="moveToCategories()"><span class="fa fa-angle-left"></span> Categories</a>
-        <a class="back" href=""  ng-show="menu.visible.devices" ng-click="moveToDevices()"><span class="fa fa-angle-left"></span> {{currentCategory.name}}</a>
+        <a class="logo" href="/" ng-show="menu.visible.lelylan">Lelylan Dashboard</a> <!-- -->
+        <a class="back" href=""  ng-show="menu.visible.categories" ng-click="moveToCategories()"><span class="fa fa-angle-left"></span> Categories</a>  <!-- -->
+        <a class="back" href=""  ng-show="menu.visible.devices" ng-click="moveToDevices()"><span class="fa fa-angle-left"></span> {{currentCategory.name}}</a>  <!-- -->
 
         <!-- Right menu -->
 
