@@ -203,7 +203,7 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-            '<%= yeoman.dist %>/styles/fonts/*'
+            //'<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
       }
@@ -313,7 +313,9 @@ module.exports = function (grunt) {
         }, {
           expand: true, cwd: 'test/', src: ['spec/fixtures/*'], dest: '<%= yeoman.dist %>'
         }, {
-          expand: true, cwd: '<%= yeoman.app %>/bower_components/fontawesome/', src: ['fonts/*'], dest: '<%= yeoman.dist %>'
+          expand: true, cwd: '<%= yeoman.app %>/bower_components/fontawesome', src: ['fonts/*'], dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true, cwd: '<%= yeoman.app %>/bower_components/device-directive-ng/dist/', src: ['fonts/*'], dest: '<%= yeoman.dist %>/styles'
         }]
       },
       styles: {
