@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('fonts/SourceSansPro-ExtraLight.eot'); /* IE9 Compat Modes */
+  src: url('fonts/SourceSansPro-ExtraLight.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/SourceSansPro-ExtraLight.otf.woff') format('woff'), /* Modern Browsers */
+       url('fonts/SourceSansPro-ExtraLight.ttf.woff') format('woff'), /* Modern Browsers */
+       url('fonts/SourceSansPro-ExtraLight.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/SourceSansPro-ExtraLight.otf') format('otf'); /* Legacy iOS */
+}
+
 
 /*
  * Device component reset
@@ -5,19 +15,20 @@
 
 .ly-device * {
   font-size: 1em;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   background: none repeat scroll 0 0 transparent;
   border: medium none;
   border-spacing: 0;
   font-size: 1em;
-  font-weight: 100;
+  font-weight: 200;
   list-style: none outside none;
   margin: 0;
   padding: 0;
   text-align: left;
   text-decoration: none;
   text-indent: 0;
-  letter-spacing: 0.05em;
+  letter-spacing: 0em;
   line-height: 1.2em;
 }
 
@@ -30,7 +41,8 @@
  */
 
 .ly-device {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   background-color: #fff;
   color: #333;
   border: 1px solid #eee;
@@ -183,7 +195,7 @@
 
 .ly-header .ly-menu li a {
   font-size: 1em;
-  letter-spacing: 0.8px;
+  letter-spacing: 0px;
   text-decoration: none;
 }
 
@@ -229,7 +241,7 @@
 
 .ly-status .ly-description {
   margin-left: 3.5em;
-  letter-spacing: 0.5px;
+  letter-spacing: 0px;
 }
 
 .ly-status .ly-description .ly-name {
@@ -432,7 +444,7 @@
 .ly-property .ly-description {
   margin-left: 2.4em;
   font-size: 1.2em;
-  letter-spacing: 0.3px;
+  letter-spacing: 0px;
 }
 
 .ly-property  .ly-description .ly-name {
