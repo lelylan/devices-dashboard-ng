@@ -60,12 +60,12 @@ angular.module('lelylan.dashboards.device')
 
     $rootScope.demoOn = function() {
       $rootScope.loading = true;
-      $timeout(function() { window.location.replace('/demo.html'); }, 300);
+      $timeout(function() { window.location.replace('demo.html'); }, 300);
     };
 
     $rootScope.demoOff = function() {
       $timeout(function() {
-        window.location.replace('/');
+        window.location.replace('index.html');
         $rootScope.loading = true;
       }, 300);
     };
