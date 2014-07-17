@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('CreateCtrl', function ($scope, $rootScope, $location, $cacheFactory, ENV, Device, Type, AccessToken) {
+  .controller('CreateCtrl', function ($scope, $rootScope, $location, $cacheFactory, ENV, Device, Type, AccessToken, Menu) {
 
 
     /* ------- *
@@ -20,12 +20,14 @@ angular.module('lelylan.dashboards.device')
     // validation structure
     $scope.invalid = {};
 
-    // Get the popular types
+    // get the popular types
     var types = Type.popular().
       success(function(types) {
         $scope.popular = types;
       });
 
+    // set lelylan as top menu
+    Menu.set('lelylan');
 
     /* --------- *
      * BEHAVIOUR *

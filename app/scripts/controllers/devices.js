@@ -19,6 +19,7 @@ angular.module('lelylan.dashboards.device')
       success(function(categories) {
         $rootScope.categories = categories;
         $rootScope.categories.unshift({ tag: 'all', name: 'All'});
+        $rootScope.currentCategory = $rootScope.categories[0];
       });
 
 
@@ -85,7 +86,6 @@ angular.module('lelylan.dashboards.device')
     var init = function(values) {
       $rootScope.loading = false;
       $scope.currentDevice = $rootScope.devices[0];
-      $rootScope.currentCategory = $rootScope.categories[0];
     }
 
 
@@ -210,5 +210,12 @@ angular.module('lelylan.dashboards.device')
         Menu.set('categories')
       }
     };
+
+
+    // set the default menu when opening the page
+    if ($scope.columns.count == 'one') {
+      Column.setVisible({ one: false, two: true, three: false });
+      Menu.set('categories');
+    }
 
   });
