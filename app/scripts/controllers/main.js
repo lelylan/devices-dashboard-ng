@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu) {
+  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, WebSocket, Device, Type, Category, AccessToken, Dimension, Column, Menu) {
 
 
     /*
@@ -69,4 +69,27 @@ angular.module('lelylan.dashboards.device')
         $rootScope.loading = true;
       }, 300);
     };
+
+
+
+    /*
+     * Websocket definition
+     */
+
+    $timeout(function() {
+      var logged = !!AccessToken.get();
+
+      if (logged) {
+        console.log("Connecting to realtime")
+        var socket = io.connect('ws://127.0.0.1:8002');
+
+        socket.on('connect', function() {
+          socket.emit('subscribe', AccessToken.get().access_token);
+        });
+
+        socket.on('update', function (event) {
+          $rootScope.$broadcast('lelylan:device:update:set', event.data);
+        });
+      }
+    });
   });

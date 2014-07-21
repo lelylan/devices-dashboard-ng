@@ -6,7 +6,8 @@ angular.module('lelylan.dashboards.device', [
   'lelylan.dashboards.device.menu',
   'lelylan.directives.device',
   'config',
-  'ngRoute'
+  'ngRoute',
+  'angular-websocket'
 ])
 .config(function ($routeProvider) {
   $routeProvider
@@ -48,4 +49,9 @@ angular.module('lelylan.dashboards.device', [
     .otherwise({
       redirectTo: '/'
     });
+})
+angular.module('lelylan.dashboards.device').config(function(WebSocketProvider){
+  WebSocketProvider.uri('ws://localhot:8002/');
 });
+
+
