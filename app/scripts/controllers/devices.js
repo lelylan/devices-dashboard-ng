@@ -71,6 +71,7 @@ angular.module('lelylan.dashboards.device')
       });
 
       $q.all(requests).then(function(values) {
+        $rootScope.types = _.map(values, function(value) { return value.data });
         init(values);
       });
     }
@@ -139,7 +140,7 @@ angular.module('lelylan.dashboards.device')
      */
 
     $scope.$on('lelylan:device:update:set', function(event, device) {
-      var _device = _.find($rootScope.devices, function(resource) {
+      var _device = _.find($rootScope.all, function(resource) {
         return resource.id == device.id;
       });
 

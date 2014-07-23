@@ -586,6 +586,38 @@ a {
 }
 
 
+/* ------------- *
+/* Notifications *
+/* ------------- */
+
+.notification .message {
+  background-color: #EDF9FD;
+  color: #239cbb;
+  padding: 0.25em 0.5em;
+  border: 1px solid #D2EBFF;
+  border-top:none;
+}
+
+.notification .message .fa {
+  margin-right: 0.3em;
+}
+
+.notification.ng-enter,
+.notification.ng-leave {
+  -webkit-transition:0.3s linear all;
+  transition:0.3s linear all;
+}
+
+.notification.ng-enter,
+.notification.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.notification.ng-leave,
+.notification.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
 
 /* ---------- *
  * Login page *
@@ -671,6 +703,10 @@ a {
 
   .menu .text {
     display: inline;
+  }
+
+  .notification {
+    padding: 0em 0.25em 0;
   }
 }
 

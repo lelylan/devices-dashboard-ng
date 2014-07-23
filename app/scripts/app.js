@@ -4,6 +4,7 @@ angular.module('lelylan.dashboards.device', [
   'lelylan.dashboards.device.dimension',
   'lelylan.dashboards.device.column',
   'lelylan.dashboards.device.menu',
+  'lelylan.dashboards.device.notifications',
   'lelylan.directives.device',
   'config',
   'ngRoute',

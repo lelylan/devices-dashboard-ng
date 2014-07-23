@@ -80,6 +80,12 @@
         </div>
       </div>
 
+      <div class="notification" ng-if="notification.show">
+        <div class="message">
+          <i class="fa fa-paper-plane-o"></i> {{notification.message}}
+        </div>
+      </div>
+
       <div class="container" ng-view=""></div>
     </div>
 
@@ -123,6 +129,7 @@
     <script src="scripts/services/dimension.js"></script>
     <script src="scripts/services/column.js"></script>
     <script src="scripts/services/menu.js"></script>
+    <script src="scripts/services/notifications.js"></script>
     <!-- endbuild -->
 
 

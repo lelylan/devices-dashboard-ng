@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, WebSocket, Device, Type, Category, AccessToken, Dimension, Column, Menu) {
+  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, WebSocket, Device, Type, Category, AccessToken, Dimension, Column, Menu, Notifications) {
 
 
     /*
@@ -22,6 +22,15 @@ angular.module('lelylan.dashboards.device')
 
     // OAuth credentials
     $scope.credentials = ENV.credentials;
+
+    // Notifications list
+    $rootScope.notifications = Notifications.get();
+
+    // Notification for device update
+    $rootScope.notification = {};
+
+    // Types container
+    $rootScope.types = [];
 
 
     /*
@@ -80,16 +89,41 @@ angular.module('lelylan.dashboards.device')
       var logged = !!AccessToken.get();
 
       if (logged) {
-        console.log("Connecting to realtime")
         var socket = io.connect('ws://127.0.0.1:8002');
 
         socket.on('connect', function() {
+          console.log('Connected to the realtime system');
           socket.emit('subscribe', AccessToken.get().access_token);
         });
 
         socket.on('update', function (event) {
+          var notifications = Notifications.push(event.data);
           $rootScope.$broadcast('lelylan:device:update:set', event.data);
         });
       }
     });
+
+
+    /*
+     * Notifications
+     */
+
+    $rootScope.$watchCollection('notifications',
+      function(newValue) {
+        // if there it's not on login and it's not the page that makes the change
+        if ($rootScope.notifications.length > 0 && $rootScope.notifications[0].changes.length > 0) {
+          var notification = $rootScope.notifications[0];
+
+          if ($rootScope.notification.timeout)
+            $timeout.cancel($rootScope.notification.timeout);
+
+          $rootScope.notification.show = true;
+          $rootScope.notification.message = $rootScope.notifications[0].message;
+          $rootScope.notification.timeout = $timeout(function() {
+            $rootScope.notification.show = false;
+          }, 5000);
+        }
+      }
+    );
+
   });
