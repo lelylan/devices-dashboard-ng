@@ -171,11 +171,11 @@ a {
   font-weight: 100;
 }
 
-.menu a:hover .fa {
+.menu a:hover .menu-icon {
   color: #fff;
 }
 
-.menu a .fa {
+.menu a .menu-icon {
   color: #67C2DA;
   line-height: 1.6em;
 }
@@ -184,6 +184,19 @@ a {
   font-size: 1.1em;
   margin-left: 0.1em;
   display: none;
+}
+
+.menu .notification-circle {
+  color: #fff !important;
+  background-color: #67C2DA;
+  padding: 0em .5em;
+  text-align: center;
+  border-radius: 500rem;
+}
+
+.menu .menu-notification:hover .notification-circle {
+  color: #67C2DA !important;
+  background-color: #fff !important;
 }
 
 

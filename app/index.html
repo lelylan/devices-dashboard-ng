@@ -57,8 +57,8 @@
         <!-- Right menu -->
 
         <div class="menu" ng-show="!demo">
-          <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>  <!-- hack inline block -->
-          <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>  <!-- hack inline block -->
+          <a href="#notifications" class="menu-notification"><span class="menu-icon notification-circle">{{notifications.length}}</span> <span class="text">Notifications</span></a>  <!-- hack inline block -->
+          <a href="#create"><span class="menu-icon fa fa-plus"></span> <span class="text">Create</span></a>  <!-- hack inline block -->
           <oauth
           template="views/templates/oauth-ng-menu.html"
           scope="resources+privates"

@@ -117,11 +117,13 @@ angular.module('lelylan.dashboards.device')
           if ($rootScope.notification.timeout)
             $timeout.cancel($rootScope.notification.timeout);
 
-          $rootScope.notification.show = true;
+          $rootScope.notification.show    = true;
           $rootScope.notification.message = $rootScope.notifications[0].message;
           $rootScope.notification.timeout = $timeout(function() {
-            $rootScope.notification.show = false;
+            $rootScope.notification.show  = false;
           }, 5000);
+        } else {
+          $rootScope.notifications.shift();
         }
       }
     );
