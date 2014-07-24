@@ -47,21 +47,6 @@ angular.module('lelylan.dashboards.device')
     });
 
 
-
-    /*
-     * Device updated
-     */
-
-    $scope.$on('lelylan:device:update:set', function(event, device) {
-      var _device = _.find($rootScope.all, function(resource) {
-        return resource.id == device.id;
-      });
-
-      angular.extend(_device, device);
-    });
-
-
-
     /*
      * Device deleted
      */
