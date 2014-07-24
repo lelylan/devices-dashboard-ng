@@ -5,7 +5,7 @@ var service = angular.module('lelylan.dashboards.device.notifications', []);
 service.factory('Notifications', function($rootScope, Type) {
 
   var service = {};
-  var notifications = []
+  var notifications = [];
 
   service.get = function() {
     return notifications;
@@ -51,15 +51,12 @@ service.factory('Notifications', function($rootScope, Type) {
   };
 
   var setMessage = function(device, changes) {
-    var message = device.name.toLocaleUpperCase() + ' changed its ';
+    var message = 'Changed its ';
     _.each(changes, function(property, index) {
-      console.log(property);
-      message = message + property.name.toLocaleUpperCase() + ' to ' + property.value.toLocaleUpperCase();
+      message = message + property.name + ' from ' + property.previous + ' to ' + property.value;
       if (index+1 != changes.length)
         message = message + ', '
     });
-
-    console.log(message)
 
     return message;
   };

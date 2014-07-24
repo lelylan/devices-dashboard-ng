@@ -49,6 +49,94 @@ angular.module('lelylan.dashboards.device')
           $location.path('login');
         });
       };
+
+
+      /* ------------------------ *
+      * AUTHORIZED INITIALIZATION *
+      * ------------------------- */
+
+      /*
+      * Categories API request
+      */
+
+      // Verify if categories is already cached
+      var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/categories');
+
+      // Get all categories
+      var categories = Category.all().
+        success(function(categories) {
+          $rootScope.categories = categories;
+          $rootScope.categories.unshift({ tag: 'all', name: 'All'});
+          $rootScope.currentCategory = $rootScope.categories[0];
+        });
+
+
+
+      /*
+      * Devices API request
+      */
+
+      var devices = Device.all().
+        success(function(devices) {
+          $rootScope.all = devices;
+          $rootScope.devices = devices;
+
+          if (devices.length == 0) { $location.path('/no-devices') }
+          else                     { loadTypes($rootScope.devices); }
+        });
+
+
+
+      /*
+      * Devices per category
+      *
+      * Counts the number of devices per category when all devices and
+      * all categories are loaded.
+      */
+
+      $q.all([devices, categories]).then(function(values) {
+        _.map($rootScope.categories, function(category) {
+          category.devices = _.countBy($rootScope.all, function(device) {
+            return (device.category == category.tag) ? 'count' : 'missed'
+          }).count;
+        });
+
+        $rootScope.categories[0].devices = $rootScope.all.length;
+      });
+
+
+
+      /*
+      * Types preloading
+      *
+      * Makes an API request to each device type to cache it. This let you
+      * move between all devices instantaneously
+      */
+
+      var loadTypes = function(devices) {
+        var requests = _.map(devices, function(device) {
+          return Type.find(device.type.id)
+        });
+
+        $q.all(requests).then(function(values) {
+          $rootScope.types = _.map(values, function(value) { return value.data });
+          init(values);
+        });
+      }
+
+
+
+      /*
+      * Visualization
+      *
+      * All resources (categories, devices and types) are loaded and can be shown.
+      */
+
+      var init = function(values) {
+        $rootScope.loading = false;
+        $scope.currentDevice = $rootScope.devices[0];
+      }
+
     }, 0)
 
 
@@ -92,7 +180,6 @@ angular.module('lelylan.dashboards.device')
         var socket = io.connect('ws://127.0.0.1:8002');
 
         socket.on('connect', function() {
-          console.log('Connected to the realtime system');
           socket.emit('subscribe', AccessToken.get().access_token);
         });
 
@@ -109,28 +196,35 @@ angular.module('lelylan.dashboards.device')
      */
 
     $rootScope.$watchCollection('notifications.list',
-      function(newValue) {
-        // if there it's not on login and it's not the page that makes the change
-        if ($rootScope.notifications.list.length > 0 && $rootScope.notifications.list[0].changes.length > 0) {
-          var notification = $rootScope.notifications.list[0];
-
-          if ($rootScope.notification.timeout) {
-            $timeout.cancel($rootScope.notification.timeout);
-          }
-
-          $rootScope.notification.show    = true;
-          $rootScope.notification.message = $rootScope.notifications.list[0].message;
-
-          $rootScope.notification.timeout = $timeout(function() {
-            $rootScope.notification.show  = false;
-          }, 5000);
-        } else {
-          // remove the notification id created from the same page
-          $rootScope.notifications.list.shift();
-        }
-
-        $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length
+      function() {
+        notify();
       }
     );
+
+    var notify = function() {
+      console.log("Watch is working correctly")
+
+      // if there it's not on login and it's not the page that makes the change
+      if ($rootScope.notifications.list.length > 0 && $rootScope.notifications.list[0].changes.length > 0) {
+        var notification = $rootScope.notifications.list[0];
+
+        if ($rootScope.notification.timeout) {
+          $timeout.cancel($rootScope.notification.timeout);
+        }
+
+        $rootScope.notification.show    = true;
+        $rootScope.notification.message = $rootScope.notifications.list[0].message;
+        $rootScope.notification.device  = $rootScope.notifications.list[0].device;
+
+        $rootScope.notification.timeout = $timeout(function() {
+          $rootScope.notification.show  = false;
+        }, 5000);
+      } else {
+        // remove the notification id created from the same page
+        $rootScope.notifications.list.shift();
+      }
+
+      $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length
+    }
 
   });

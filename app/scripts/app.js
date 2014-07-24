@@ -35,8 +35,14 @@ angular.module('lelylan.dashboards.device', [
         $rootScope.loading = false;
       }
     })
-    .when('/empty', {
-      templateUrl: 'views/empty.html',
+    .when('/no-devices', {
+      templateUrl: 'views/no-devices.html',
+      controller: function($rootScope) {
+        $rootScope.loading = false;
+      }
+    })
+    .when('/no-notifications', {
+      templateUrl: 'views/no-notifications.html',
       controller: function($rootScope) {
         $rootScope.loading = false;
       }

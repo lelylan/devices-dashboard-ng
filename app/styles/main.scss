@@ -39,8 +39,6 @@ a {
 
 .container {
   background-color: #fff;
-  margin-left: 0.3em;
-  margin-right: 0.3em;
 }
 
 .app {
@@ -279,6 +277,14 @@ a {
     margin-left: 0;
   }
 
+  .categories {
+    border-left: 0 !important;
+  }
+
+  .details {
+    border-right: 0 !important;
+  }
+
   .category,
   .device {
     border-left: 0.2em solid #fff;
@@ -352,7 +358,7 @@ a {
 }
 
 .details .ly-device .ly-modal .ly-modal-window {
-  width: 99.8%;
+  width: 99.7%;
 }
 
 
@@ -369,10 +375,8 @@ a {
   text-align: center;
 }
 
-.message {
-  background-color: #fff;
-  height: 100%;
-  padding-top: 1em;
+.message .column {
+  font-size: 0.9rem !important;
 }
 
 .message p {
@@ -383,6 +387,7 @@ a {
 .message p.title {
   margin: 0;
   margin-top: 0.5em;
+  margin-bottom: 0.5em;
   font-size: 2.0em;
 }
 
@@ -611,10 +616,12 @@ a {
   padding: 0.25em 0.5em;
   border: 1px solid #D2EBFF;
   border-top:none;
+  text-transform: uppercase;
+  height: 1.5em;
 }
 
 .notification .message .fa {
-  margin-right: 0.3em;
+  margin-right: 0.5em;
 }
 
 .notification.ng-enter,
@@ -639,6 +646,7 @@ a {
  * Notifications list *
  * ------------------ */
 
+.no-notifications,
 .notifications-page {
 
   .column {
@@ -671,14 +679,15 @@ a {
     text-transform: uppercase;
     font-size: .9em;
   }
-
 }
+
 
 
 /* ---------- *
  * Login page *
  * ---------- */
 
+.no-notifications .devices-link,
 .login .login-link {
   font-size: 3em;
   margin-bottom: 0;
@@ -732,6 +741,8 @@ a {
 
   .container {
     margin-top: 0.5em;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
   }
 
   .header {
@@ -740,8 +751,8 @@ a {
 
   .app,
   .content > div.column {
-    border-left: 0.25em solid $background-color;
-    border-right: 0.25em solid $background-color;
+    //border-left: 0.25em solid $background-color;
+    border-right: 0.35em solid $background-color;
   }
 
   .message hr {
