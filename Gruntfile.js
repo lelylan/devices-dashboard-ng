@@ -396,7 +396,7 @@ module.exports = function (grunt) {
         options: {
           replacements: [{
             pattern: /http:\/\/127.0.0.1:8002/g,
-            replacement: 'http://96.126.109.170:80'
+            replacement: 'http://96.126.109.170'
           }]
         }
       }
@@ -471,7 +471,8 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'string-replace'
   ]);
 
   grunt.registerTask('default', [
