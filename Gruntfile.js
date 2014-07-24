@@ -391,7 +391,7 @@ module.exports = function (grunt) {
     'string-replace': {
       dist: {
         files: {
-          './': 'dist/**/*.*'
+          './': 'dist/index.html'
         },
         options: {
           replacements: [{
@@ -471,7 +471,7 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'htmlmin',
+    //'htmlmin',
     'string-replace'
   ]);
 
