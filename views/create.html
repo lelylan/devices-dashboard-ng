@@ -1,1 +1,149 @@
-<!-- -------- --><!-- Step one --><!-- -------- --><div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='one'"><div class="column step step-info" style="height: {{dimensions.height}}em"><div class="bubbles"><a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble bubble-active">1</span></a> <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a> <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a></div><h1>Device Name</h1><h2>Give a meaningful name to your device. It will be easier to find.</h2><p>Here some examples</p><ul><li>Kitchen light</li><li>Garage lock</li><li>Bedroom thermostat</li></ul></div><div class="column step step-content" style="height: {{dimensions.height}}em"><div class="short-info"><div class="bubbles"><a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble bubble-active">1</span></a> <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a> <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a></div><h1>Device Name</h1><h2>Give a meaningful name to your device. It will be easier to find.</h2></div><form name="form" novalidate ng-submit="setName()"><input type="text" placeholder="Set device name" ng-model="device.name" required autofocus><button ng-disabled="form.$invalid"><i class="fa fa-angle-right"></i> Confirm device name</button></form></div></div><!-- -------- --><!-- Step two --><!-- -------- --><div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='two'"><div class="column step step-info" style="height: {{dimensions.height}}em"><div class="bubbles"><a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a> <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble bubble-active">2</span></a> <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a></div><h1>Device type</h1><h2>Select the type that better represents your device.</h2><p>What is a type? It defines what a device is by defining its properties, functions and statuses. Learn more in the <a href="http://dev.lelylan.com/types" target="_blank">dev center</a> if you are curious about.</p></div><div class="types column step step-content scroller" style="height: {{dimensions.height}}em"><div class="short-info"><div class="bubbles"><a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a> <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble bubble-active">2</span></a> <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a></div><h1>Device type</h1><h2>Select the type that better represents your device.</h2></div><!--<input type="search" placeholder="Search the device type" autofocus ng-model="query"></input>--><div class="type item" ng-repeat="type in popular | filter:{name: query}" ng-click="setType(type)"><p class="name {{type.id}}"><span class="fa fa-angle-right" ng-if="type.id == device.type.id"></span> <a>{{type.name}}</a></p></div></div></div><!-- ------------ --><!--  Step three  --><!-- ------------ --><div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='three'"><div class="column step step-info" style="height: {{dimensions.height}}em"><div class="bubbles"><a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a> <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a> <a href="" ng-click="setStep('three')"><span class="bubble bubble-active">3</span></a></div><h1>Device Connectivity</h1><h2>Connect your device to the real world or start simulating it.</h2><p class="description">Connect your physical device so that you can start building the connected home or simulate the device behaviour. If you don't know how to connect a physical device you can learn how to connect your first light in the <a href="http://dev.lelylan.com/getting-started" target="_blank">dev center</a>.</p></div><div class="physicals column step step-content scroller" style="height: {{dimensions.height}}em"><div class="short-info"><div class="bubbles"><a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a> <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a> <a href="" ng-click="setStep('three')"><span class="bubble bubble-active">3</span></a></div><h1>Device Connectivity</h1><h2>Connect your device to the real world or start simulating it.</h2></div><div class="physical item"><p class="name"><a href="" ng-click="setPhysical('simulation')"><i class="fa fa-angle-right"></i> Simulation</a></p><p class="description">Perfect for developers who wants to play with Lelylan without a physical device</p></div><div class="physical item"><p class="name"><a href="" ng-click="setPhysical('mqtt')"><i class="fa fa-angle-right"></i> Connect with MQTT</a></p><p class="description">Connect your devices using MQTT, a simple is a publish/subscribe messaging protocol for the Internet of Things. <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.</p></div><div class="physical item"><p class="name"><a><i name="form" class="fa fa-angle-right"></i> Custom URI</a><form novalidate ng-submit="setPhysical('custom')" ng-disabled="form.$invalid"><input type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required></form></p><p class="description">Set the URI that let you access your device through Internet. <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.</p></div></div></div>
+<!-- -------- -->
+<!-- Step one -->
+<!-- -------- -->
+
+<div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='one'">
+  <div class="column step step-info" style="height: {{dimensions.height}}em">
+    <div class="bubbles">
+      <a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble bubble-active">1</span></a>
+      <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
+      <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
+    </div>
+    <h1>Device Name</h1>
+    <h2>Give a meaningful name to your device. It will be easier to find.</h2>
+
+    <p>Here some examples</p>
+    <ul>
+      <li>Kitchen light</li>
+      <li>Garage lock</li>
+      <li>Bedroom thermostat</li>
+    </ul>
+  </div>
+
+  <div class="column step step-content" style="height: {{dimensions.height}}em">
+    <div class="short-info">
+      <div class="bubbles">
+        <a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble bubble-active">1</span></a>
+        <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
+        <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
+      </div>
+      <h1>Device Name</h1>
+      <h2>Give a meaningful name to your device. It will be easier to find.</h2>
+    </div>
+    <form name="form" novalidate ng-submit="setName()">
+      <input type="text" placeholder="Set device name" ng-model="device.name" required autofocus>
+      <button ng-disabled="form.$invalid"><i class="fa fa-angle-right"></i> Confirm device name</button>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- -------- -->
+<!-- Step two -->
+<!-- -------- -->
+
+<div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='two'">
+  <div class="column step step-info" style="height: {{dimensions.height}}em">
+    <div class="bubbles">
+      <a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a>
+      <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble bubble-active">2</span></a>
+      <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
+    </div>
+    <h1>Device type</h1>
+    <h2>Select the type that better represents your device.</h2>
+    <p>
+    What is a type? It defines what a device is by defining its properties,
+    functions and statuses. Learn more in the
+    <a href="http://dev.lelylan.com/types" target="_blank">dev center</a> if you are curious about.
+    </p>
+  </div>
+
+  <div class="types column step step-content scroller" style="height: {{dimensions.height}}em">
+    <div class="short-info">
+      <div class="bubbles">
+        <a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a>
+        <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble bubble-active">2</span></a>
+        <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
+      </div>
+      <h1>Device type</h1>
+      <h2>Select the type that better represents your device.</h2>
+    </div>
+
+    <!--<input type="search" placeholder="Search the device type" autofocus ng-model="query"></input>-->
+
+    <div class="type item" ng-repeat="type in popular | filter:{name: query}" ng-click="setType(type)">
+      <p class="name {{type.id}}">
+      <span class="fa fa-angle-right" ng-if="type.id == device.type.id"></span>
+      <a>{{type.name}}</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ------------ -->
+<!--  Step three  -->
+<!-- ------------ -->
+
+<div class="content create ui {{columns.count}} column grid step-{{step}}" ng-show="step=='three'">
+  <div class="column step step-info" style="height: {{dimensions.height}}em">
+    <div class="bubbles">
+      <a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a>
+      <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
+      <a href="" ng-click="setStep('three')"><span class="bubble bubble-active">3</span></a>
+    </div>
+    <h1>Device Connectivity</h1>
+    <h2>Connect your device to the real world or start simulating it.</h2>
+    <p class="description">
+      Connect your physical device so that you can start building the connected home
+      or simulate the device behaviour.
+      If you don't know how to connect a physical
+      device you can learn how to connect your first light in the
+      <a href="http://dev.lelylan.com/getting-started" target="_blank">dev center</a>.
+    </p>
+  </div>
+
+  <div class="physicals column step step-content scroller" style="height: {{dimensions.height}}em">
+    <div class="short-info">
+      <div class="bubbles">
+        <a href="" ng-click="setStep('one')"><span ng-class="{'bubble-error': invalid.one}" class="bubble">1</span></a>
+        <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
+        <a href="" ng-click="setStep('three')"><span class="bubble bubble-active">3</span></a>
+      </div>
+      <h1>Device Connectivity</h1>
+      <h2>Connect your device to the real world or start simulating it.</h2>
+    </div>
+
+    <div class="physical item">
+      <p class="name">
+        <a href="" ng-click="setPhysical('simulation')"><i class="fa fa-angle-right"></i> Simulation</a>
+        <p class="description">
+          Perfect for developers who wants to play with Lelylan without a physical device
+        </p>
+      </p>
+    </div>
+    <div class="physical item">
+      <p class="name">
+        <a href="" ng-click="setPhysical('mqtt')"><i class="fa fa-angle-right"></i> Connect with MQTT</a>
+        <p class="description">
+        Connect your devices using MQTT, a simple is a publish/subscribe messaging protocol for
+        the Internet of Things. <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.
+        </p>
+      </p>
+    </div>
+    <div class="physical item">
+      <p class="name">
+      <a><i name="form" class="fa fa-angle-right"></i> Custom URI</a>
+      <form novalidate ng-submit="setPhysical('custom')" ng-disabled="form.$invalid">
+        <input type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required>
+      </form>
+      <p class="description">
+        Set the URI that let you access your device through Internet.
+        <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.
+      </p>
+      </p>
+    </div>
+  </div>
+</div>

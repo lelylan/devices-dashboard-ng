@@ -1,1 +1,24 @@
-<div class="login message ui three column grid"><div class="column descriptive"><p class="title">Credentials expired</p><p>For security reasons we invalidate your credential every 24 hours.<br>Click the link below to get new ones.</p><p class="login-link"><oauth template="views/templates/oauth-ng-only-login.html" scope="resources+privates" text="Refresh" site="{{credentials.site}}" client-id="{{credentials.clientId}}" redirect-uri="{{credentials.redirectUri}}" profile-uri="{{credentials.profileUri}}"></oauth></p><hr></div></div>
+<div class="login message ui three column grid">
+  <div class="column descriptive">
+    <p class="title">Credentials expired</p>
+    <p>
+    For security reasons we invalidate your credential every 24 hours.<br>
+    Click the link below to get new ones.
+    </p>
+
+    <p class="login-link">
+      <oauth
+        template="views/templates/oauth-ng-only-login.html"
+        scope="resources+privates"
+        text="Refresh"
+        site="{{credentials.site}}"
+        client-id="{{credentials.clientId}}"
+        redirect-uri="{{credentials.redirectUri}}"
+        profile-uri="{{credentials.profileUri}}">
+      </oauth>
+    </p>
+
+    <hr>
+  </div>
+</div>
+
