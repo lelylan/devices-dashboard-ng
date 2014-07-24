@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu, Notifications) {
-
+  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu, Notifications, Socket) {
 
     /*
      * Configs
@@ -133,6 +132,7 @@ angular.module('lelylan.dashboards.device')
       */
 
       var init = function(values) {
+        console.log('init')
         $rootScope.loading = false;
         $scope.currentDevice = $rootScope.devices[0];
       }
@@ -177,54 +177,44 @@ angular.module('lelylan.dashboards.device')
       var logged = !!AccessToken.get();
 
       if (logged) {
-        var socket = io.connect('ws://127.0.0.1:8002');
 
-        socket.on('connect', function() {
-          socket.emit('subscribe', AccessToken.get().access_token);
+        Socket.on('connect', function() {
+          Socket.emit('subscribe', AccessToken.get().access_token);
         });
 
-        socket.on('update', function (event) {
+        Socket.on('update', function (event) {
+          console.log("Websocket message received");
+
           var notifications = Notifications.push(event.data);
           $rootScope.$broadcast('lelylan:device:update:set', event.data);
+
+          console.log(notifications, notifications[0].changes);
+          if (notifications.length > 0 && notifications[0].changes.length > 0) {
+
+            console.log("Gonna show the notification element");
+
+            if ($rootScope.notification.timeout) {
+              $timeout.cancel($rootScope.notification.timeout);
+            }
+
+            $rootScope.notification.show    = true;
+            $rootScope.notification.message = notifications[0].message;
+            $rootScope.notification.device  = notifications[0].device;
+
+            $rootScope.notification.timeout = $timeout(function() {
+              $rootScope.notification.show  = false;
+            }, 5000);
+
+
+          } else {
+            // remove the notification id created from the same page
+            $rootScope.notifications.list.shift();
+          }
+
+          $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length
+
         });
       }
     });
-
-
-    /*
-     * Notifications
-     */
-
-    $rootScope.$watchCollection('notifications.list',
-      function() {
-        notify();
-      }
-    );
-
-    var notify = function() {
-      console.log("Watch is working correctly")
-
-      // if there it's not on login and it's not the page that makes the change
-      if ($rootScope.notifications.list.length > 0 && $rootScope.notifications.list[0].changes.length > 0) {
-        var notification = $rootScope.notifications.list[0];
-
-        if ($rootScope.notification.timeout) {
-          $timeout.cancel($rootScope.notification.timeout);
-        }
-
-        $rootScope.notification.show    = true;
-        $rootScope.notification.message = $rootScope.notifications.list[0].message;
-        $rootScope.notification.device  = $rootScope.notifications.list[0].device;
-
-        $rootScope.notification.timeout = $timeout(function() {
-          $rootScope.notification.show  = false;
-        }, 5000);
-      } else {
-        // remove the notification id created from the same page
-        $rootScope.notifications.list.shift();
-      }
-
-      $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length
-    }
 
   });

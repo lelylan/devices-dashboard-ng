@@ -3,10 +3,12 @@
 
     <div ng-repeat="notification in notifications.list" class="item">
       <p class="title">
-        <span class="name">{{notification.device.name}}</span>
-        <span class="updated"> | {{notification.device.updated_at | date:'medium'}}</span>
+        <!--<span class="name">{{notification.device.name}}</span>-->
+        <span class="description">{{notification.device.name}} {{notification.message}}</span>
       </p>
-      <p class="description">{{notification.message}}</p>
+      <p class="time">
+        <span am-time-ago="notification.device.updated_at"></span> (<span>{{notification.device.updated_at | date:'medium'}}</span>)
+      </p>
     </div>
 
   </div>
