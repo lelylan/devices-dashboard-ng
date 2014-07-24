@@ -7,8 +7,7 @@ angular.module('lelylan.dashboards.device', [
   'lelylan.dashboards.device.notifications',
   'lelylan.directives.device',
   'config',
-  'ngRoute',
-  'angular-websocket'
+  'ngRoute'
 ])
 .config(function ($routeProvider) {
   $routeProvider
@@ -19,6 +18,10 @@ angular.module('lelylan.dashboards.device', [
     .when('/create', {
       templateUrl: 'views/create.html',
       controller:  'CreateCtrl'
+    })
+    .when('/notifications', {
+      templateUrl: 'views/notifications.html',
+      controller:  'NotificationsCtrl'
     })
     .when('/login', {
       templateUrl: 'views/login.html',
@@ -51,8 +54,5 @@ angular.module('lelylan.dashboards.device', [
       redirectTo: '/'
     });
 })
-angular.module('lelylan.dashboards.device').config(function(WebSocketProvider){
-  WebSocketProvider.uri('ws://localhot:8002/');
-});
 
 

@@ -39,6 +39,8 @@ a {
 
 .container {
   background-color: #fff;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
 }
 
 .app {
@@ -189,7 +191,7 @@ a {
 .menu .notification-circle {
   color: #fff !important;
   background-color: #67C2DA;
-  padding: 0em .5em;
+  padding: 0em .4em;
   text-align: center;
   border-radius: 500rem;
 }
@@ -629,6 +631,47 @@ a {
 .notification.ng-leave,
 .notification.ng-enter.ng-enter-active {
   opacity:1;
+}
+
+
+
+/* ------------------ *
+ * Notifications list *
+ * ------------------ */
+
+.notifications-page {
+
+  .column {
+    margin: 0 !important;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .item {
+    padding: 0.7em;
+    border-bottom: 1px solid #f6f6f6;
+    cursor: default;
+  }
+
+  .item .title {
+    color: #239cbb;
+  }
+
+  .item .name {
+    font-size: 1.5em;
+    line-height: 1.15em;
+  }
+
+  .item .time {
+    font-size: 1em;
+    margin-left: 0.3em;
+  }
+
+  .item p.description {
+    text-transform: uppercase;
+    font-size: .9em;
+  }
+
 }
 
 

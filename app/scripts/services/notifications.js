@@ -15,7 +15,15 @@ service.factory('Notifications', function($rootScope, Type) {
     var previous = findDevice(device.id);
     var changes  = diff(previous, device);
     var message  = setMessage(device, changes);
-    notifications.unshift({ device: device, previous: previous, changes: changes, message: message });
+
+    notifications.unshift({
+      unread: true,
+      device: device,
+      previous: previous,
+      changes: changes,
+      message: message
+    });
+
     return notifications;
   };
 
@@ -34,8 +42,6 @@ service.factory('Notifications', function($rootScope, Type) {
         result.previous = previous.properties[index].value;
         result.value    = device.properties[index].value;
 
-        console.log("ME", result)
-
         // push the updated property
         changes.push(result);
       }
@@ -48,7 +54,7 @@ service.factory('Notifications', function($rootScope, Type) {
     var message = device.name.toLocaleUpperCase() + ' changed its ';
     _.each(changes, function(property, index) {
       console.log(property);
-      message = message + property.name.toLocaleUpperCase() + ' from ' + property.previous.toLocaleUpperCase() + ' to ' + property.value.toLocaleUpperCase();
+      message = message + property.name.toLocaleUpperCase() + ' to ' + property.value.toLocaleUpperCase();
       if (index+1 != changes.length)
         message = message + ', '
     });

@@ -57,7 +57,7 @@
         <!-- Right menu -->
 
         <div class="menu" ng-show="!demo">
-          <a href="#notifications" class="menu-notification"><span class="menu-icon notification-circle">{{notifications.length}}</span> <span class="text">Notifications</span></a>  <!-- hack inline block -->
+          <a href="#notifications" class="menu-notification"><span class="menu-icon notification-circle">{{notifications.unread}}</span> <span class="text">Notifications</span></a>  <!-- hack inline block -->
           <a href="#create"><span class="menu-icon fa fa-plus"></span> <span class="text">Create</span></a>  <!-- hack inline block -->
           <oauth
           template="views/templates/oauth-ng-menu.html"
@@ -111,7 +111,6 @@
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/device-directive-ng/dist/device-directive-ng.js"></script>
-    <script src="bower_components/angular-websocket/angular-websocket.js"></script>
     <!-- endbower -->
 
     <!-- TODO install with bower -->
@@ -126,6 +125,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/devices.js"></script>
     <script src="scripts/controllers/create.js"></script>
+    <script src="scripts/controllers/notifications.js"></script>
     <script src="scripts/services/dimension.js"></script>
     <script src="scripts/services/column.js"></script>
     <script src="scripts/services/menu.js"></script>

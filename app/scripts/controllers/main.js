@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, WebSocket, Device, Type, Category, AccessToken, Dimension, Column, Menu, Notifications) {
+  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu, Notifications) {
 
 
     /*
@@ -24,7 +24,7 @@ angular.module('lelylan.dashboards.device')
     $scope.credentials = ENV.credentials;
 
     // Notifications list
-    $rootScope.notifications = Notifications.get();
+    $rootScope.notifications = { list: Notifications.get(), unread: 0 };
 
     // Notification for device update
     $rootScope.notification = {};
@@ -108,23 +108,28 @@ angular.module('lelylan.dashboards.device')
      * Notifications
      */
 
-    $rootScope.$watchCollection('notifications',
+    $rootScope.$watchCollection('notifications.list',
       function(newValue) {
         // if there it's not on login and it's not the page that makes the change
-        if ($rootScope.notifications.length > 0 && $rootScope.notifications[0].changes.length > 0) {
-          var notification = $rootScope.notifications[0];
+        if ($rootScope.notifications.list.length > 0 && $rootScope.notifications.list[0].changes.length > 0) {
+          var notification = $rootScope.notifications.list[0];
 
-          if ($rootScope.notification.timeout)
+          if ($rootScope.notification.timeout) {
             $timeout.cancel($rootScope.notification.timeout);
+          }
 
           $rootScope.notification.show    = true;
-          $rootScope.notification.message = $rootScope.notifications[0].message;
+          $rootScope.notification.message = $rootScope.notifications.list[0].message;
+
           $rootScope.notification.timeout = $timeout(function() {
             $rootScope.notification.show  = false;
           }, 5000);
         } else {
-          $rootScope.notifications.shift();
+          // remove the notification id created from the same page
+          $rootScope.notifications.list.shift();
         }
+
+        $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length
       }
     );
 
