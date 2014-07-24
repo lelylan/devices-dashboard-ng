@@ -57,7 +57,7 @@ service.factory('Notifications', function($rootScope, Type) {
   var setMessage = function(device, changes) {
     var message = 'Changed its ';
     _.each(changes, function(property, index) {
-      message = message + property.name + ' from ' + property.previous + ' to ' + property.value;
+      message = message + property.name + ' to ' + property.value;
       if (index+1 != changes.length)
         message = message + ', '
     });
