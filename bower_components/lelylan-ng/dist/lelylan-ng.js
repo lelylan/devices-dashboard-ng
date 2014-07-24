@@ -110,7 +110,6 @@ client.factory('Device', ['$http', 'lelylanClientConfig', function($http, config
   }
 
   service.all = function(params) {
-    console.log("GET ALL DEVICES", config)
     return $http.get(base, { params: params, cache: true });
   }
 

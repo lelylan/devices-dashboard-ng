@@ -74,7 +74,6 @@ directives.directive('oauth', ['AccessToken', 'Endpoint', 'Profile', '$location'
       if (token && token.access_token && scope.profileUri) {
         Profile.find(scope.profileUri).success(function(response) {
           scope.profile = response
-          console.log(":: GOT PROFILE")
         })
       }
     }
@@ -123,7 +122,6 @@ directives.directive('oauth', ['AccessToken', 'Endpoint', 'Profile', '$location'
 
     scope.$on('$routeChangeSuccess', function () {
       init();
-      console.log(":: ROUTE")
     });
   };
 
