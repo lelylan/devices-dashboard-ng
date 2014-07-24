@@ -210,7 +210,8 @@ angular.module('lelylan.dashboards.device')
                 $rootScope.notification.show  = false;
               }, 5000);
 
-             $rootScope.notification.timeoutHeight = $timeout(function() {
+              // set the height with 500ms of delay to not see the scrollbar
+              $rootScope.notification.timeoutHeight = $timeout(function() {
                 $scope.dimensions.height += 2;
               }, 5000+500);
 
@@ -221,8 +222,7 @@ angular.module('lelylan.dashboards.device')
             }
           }
 
-          $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length
-
+          countUnreadNotifications();
         });
       }
     });
@@ -254,7 +254,15 @@ angular.module('lelylan.dashboards.device')
         });
       }
 
-      $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length;
+      countUnreadNotifications();
     });
+
+
+    var countUnreadNotifications = function() {
+      $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length;
+      if ($rootScope.notifications.unread >= 50) {
+        $rootScope.notifications.unread = '+50';
+      }
+    }
 
   });

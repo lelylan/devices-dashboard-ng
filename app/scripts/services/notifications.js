@@ -24,6 +24,10 @@ service.factory('Notifications', function($rootScope, Type) {
       message: message
     });
 
+    if (notifications.length > 51) {
+      notifications.pop();
+    };
+
     return notifications;
   };
 
