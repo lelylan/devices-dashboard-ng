@@ -2,8 +2,8 @@
 
 var service = angular.module('lelylan.dashboards.device.socket', []);
 
-service.factory('Socket', function ($rootScope) {
-  var socket = io.connect('ws://127.0.0.1:8002');
+service.factory('Socket', function ($rootScope, ENV) {
+  var socket = io.connect(ENV.websocket);
 
   return {
     on: function (eventName, callback) {

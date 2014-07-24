@@ -363,14 +363,7 @@ module.exports = function (grunt) {
               redirectUri: 'http://localhost:9000/',
               profileUri: 'http://localhost:3000/me'
             },
-            //remote endpoints
-            //endpoint: 'http://api.lelylan.com',
-            //oauth: {
-              //site: 'http://people.lelylan.com',
-              //clientId: "e72c43c75adc9665e4d4c13354c41f337d5a2e439d3da1243bb47e39745f435c",
-              //redirectUri: "http://localhost:9000/",
-              //profileUri: "http://api.lelylan.com/me"
-            //}
+            websocket: 'ws://127.0.0.1:8002'
           }
         }
       },
@@ -387,8 +380,24 @@ module.exports = function (grunt) {
               clientId: '3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709',
               redirectUri: 'http://lelylan.github.io/devices-dashboard-ng',
               profileUri: 'http://api.lelylan.com/me'
-            }
+            },
+            websocket: 'ws://96.126.109.170:80'
           }
+        }
+      }
+    },
+
+    // search and replace for specific strings in the code
+    'string-replace': {
+      dist: {
+        files: {
+          './': 'dist/**/*.*'
+        },
+        options: {
+          replacements: [{
+            pattern: /http:\/\/127.0.0.1:8002/g,
+            replacement: 'http://96.126.109.170:80'
+          }]
         }
       }
     },

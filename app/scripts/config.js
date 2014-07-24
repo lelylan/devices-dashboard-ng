@@ -3,14 +3,15 @@
  angular.module("config", [])
 
 .constant("ENV", {
-  "name": "development",
-  "endpoint": "http://localhost:8000",
+  "name": "production",
+  "endpoint": "http://api.lelylan.com",
   "credentials": {
-    "site": "http://localhost:3000",
-    "clientId": "0e9819715cce6100d8e95e734a42f94f628f91cc5934f8014b91efedb799d36e",
-    "redirectUri": "http://localhost:9000/",
-    "profileUri": "http://localhost:3000/me"
-  }
+    "site": "http://people.lelylan.com",
+    "clientId": "3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709",
+    "redirectUri": "http://lelylan.github.io/devices-dashboard-ng",
+    "profileUri": "http://api.lelylan.com/me"
+  },
+  "websocket": "ws://96.126.109.170:80"
 })
 
 ;
