@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu, Notifications, Socket) {
+  .controller('MainCtrl', function ($scope, $rootScope, $timeout, $q, $location, $route, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu, Notifications, Socket) {
 
     /*
      * Configs
@@ -132,7 +132,6 @@ angular.module('lelylan.dashboards.device')
       */
 
       var init = function(values) {
-        console.log('init')
         $rootScope.loading = false;
         $scope.currentDevice = $rootScope.devices[0];
       }
@@ -183,32 +182,43 @@ angular.module('lelylan.dashboards.device')
         });
 
         Socket.on('update', function (event) {
-          console.log("Websocket message received");
 
           var notifications = Notifications.push(event.data);
           $rootScope.$broadcast('lelylan:device:update:set', event.data);
 
-          console.log(notifications, notifications[0].changes);
-          if (notifications.length > 0 && notifications[0].changes.length > 0) {
+          // hide the notification whith the alert in the notification page
+          if ($route.current.$$route.controller != 'NotificationsCtrl') {
 
-            console.log("Gonna show the notification element");
+            if (notifications.length > 0 && notifications[0].changes.length > 0) {
 
-            if ($rootScope.notification.timeout) {
-              $timeout.cancel($rootScope.notification.timeout);
+              if (!$rootScope.notification.show)
+                $scope.dimensions.height -= 2;
+
+              if ($rootScope.notification.timeout) {
+                $timeout.cancel($rootScope.notification.timeout);
+              }
+
+              if ($rootScope.notification.timeoutHeight) {
+                $timeout.cancel($rootScope.notification.timeoutHeight);
+              }
+
+              $rootScope.notification.show    = true;
+              $rootScope.notification.message = notifications[0].message;
+              $rootScope.notification.device  = notifications[0].device;
+
+              $rootScope.notification.timeout = $timeout(function() {
+                $rootScope.notification.show  = false;
+              }, 5000);
+
+             $rootScope.notification.timeoutHeight = $timeout(function() {
+                $scope.dimensions.height += 2;
+              }, 5000+500);
+
+
+            } else {
+              // remove the notification id created from the same page
+              $rootScope.notifications.list.shift();
             }
-
-            $rootScope.notification.show    = true;
-            $rootScope.notification.message = notifications[0].message;
-            $rootScope.notification.device  = notifications[0].device;
-
-            $rootScope.notification.timeout = $timeout(function() {
-              $rootScope.notification.show  = false;
-            }, 5000);
-
-
-          } else {
-            // remove the notification id created from the same page
-            $rootScope.notifications.list.shift();
           }
 
           $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length
@@ -231,5 +241,20 @@ angular.module('lelylan.dashboards.device')
     });
 
 
+    /* --------------------- *
+     * READ UNREAD BEHAVIOUR *
+     * --------------------- */
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+
+      if ($rootScope.archiveNotifications == true) {
+        $rootScope.archiveNotifications = false;
+        _.each($rootScope.notifications.list, function(notification) {
+          notification.unread = false;
+        });
+      }
+
+      $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length;
+    });
 
   });

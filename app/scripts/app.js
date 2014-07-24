@@ -42,12 +42,6 @@ angular.module('lelylan.dashboards.device', [
         $rootScope.loading = false;
       }
     })
-    .when('/no-notifications', {
-      templateUrl: 'views/no-notifications.html',
-      controller: function($rootScope) {
-        $rootScope.loading = false;
-      }
-    })
     .when('/access_token=:accessToken', {
       template: '-',
       controller: function ($location, $route, $routeParams, $timeout, AccessToken) {

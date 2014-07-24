@@ -7,26 +7,15 @@ angular.module('lelylan.dashboards.device')
      * CONFIGS *
      * ------- */
 
-    // check the notifications existance
-    if ($rootScope.notifications.list.length == 0) {
-      $location.path('/no-notifications')
-    };
-
     // set the view as loaded
     $rootScope.loading = false;
 
+    // Hide the notification with the alert
+    $rootScope.notification.show = false;
+
+    // set the reset
+    $rootScope.archiveNotifications = true;
+
     // set lelylan as top menu
     Menu.set('lelylan');
-
-    /* --------- *
-     * BEHAVIOUR *
-     * --------- */
-
-
-    _.each($rootScope.notifications.list, function(notification) {
-      notification.unread = false;
-    });
-
-    $rootScope.notifications.unread = _.where($rootScope.notifications.list, { unread: true }).length;
-
   });

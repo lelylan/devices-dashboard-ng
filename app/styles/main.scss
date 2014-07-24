@@ -305,7 +305,7 @@ a {
 /* Disabled categories */
 
 .category.disabled a {
-  color: #bbb;
+  color: #d8d8d8;
 }
 .category.disabled {
   cursor: default;
@@ -640,11 +640,10 @@ a {
   opacity:1;
 }
 
-
-
 /* ------------------ *
  * Notifications list *
  * ------------------ */
+
 
 .no-notifications,
 .notifications-page {
@@ -661,13 +660,13 @@ a {
     cursor: default;
   }
 
-  .item .title {
-    color: #239cbb;
+  .item.unread {
+    background-color: #EDF9FD;
+    border-bottom: 1px solid #DAF3FF;
   }
 
-  .item .name {
-    font-size: 1.5em;
-    line-height: 1.15em;
+  .item .title {
+    color: #239cbb;
   }
 
   .item .time {
