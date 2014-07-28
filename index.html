@@ -48,8 +48,8 @@
         <!-- Right menu -->
 
         <div class="menu" ng-show="!demo">
-          <a href="#notifications" class="menu-notification"><span class="menu-icon notification-circle">{{notifications.unread}}</span> <span class="text">Notifications</span></a>  <!-- hack inline block -->
-          <a href="#create"><span class="menu-icon fa fa-plus"></span> <span class="text">Create</span></a>  <!-- hack inline block -->
+          <a href="#notifications" class="menu-notification" ng-if="logged"><span class="menu-icon notification-circle">{{notifications.unread}}</span> <span class="text">Notifications</span></a>  <!-- hack inline block -->
+          <a href="#create" ng-if="logged"><span class="menu-icon fa fa-plus"></span> <span class="text">Create</span></a>  <!-- hack inline block -->
           <oauth
           template="views/templates/oauth-ng-menu.html"
           scope="resources+privates"
@@ -63,7 +63,7 @@
         <!-- Right menu demo -->
 
         <div class="menu" ng-show="demo" ng-click="demoOff()">
-          <a class="title" href="" ng-click="demoOff()">Turn off demo</a> <!-- hack inline block -->
+          <a class="title" href="" ng-click="demoOff()"><span class="text">Turn off demo</span></a> <!-- hack inline block -->
           <div class="switch">
             <input type="checkbox" id="checkbox" checked/>
             <label class="slider" for="checkbox"></label>
@@ -80,18 +80,16 @@
       <div class="container" ng-view=""></div>
     </div>
 
-
-
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <script src="scripts/837364ec.vendor.js"></script>
+    <script src="scripts/b8f16cbe.vendor.js"></script>
 
     <script src="http://96.126.109.170/socket.io/socket.io-client/socket.io.js"></script>
 
-    <script src="scripts/d0c24dc7.scripts.js"></script>
+    <script src="scripts/edec88b9.scripts.js"></script>
 
 
     <script>

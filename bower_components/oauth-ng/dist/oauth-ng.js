@@ -147,7 +147,9 @@ service.factory('ExpiredInterceptor', ['$rootScope', '$q', '$sessionStorage',
     };
 
     var expired = function(token) {
-      return (token && token.expires_at && new Date(token.expires_at) < new Date())
+      var expired = (token && token.expires_at && new Date(token.expires_at) < new Date())
+      if (expired) { delete $sessionStorage.token }
+      return expired;
     }
 
     return service;
@@ -202,7 +204,7 @@ service.factory('AccessToken', ['$rootScope', '$location', '$http', '$sessionSto
    */
 
   service.expired = function() {
-    return (token && token.expires_at && token.expires_at < new Date())
+    return (token && token.expires_at && token.expires_at < new Date());
   }
 
 
@@ -222,6 +224,7 @@ service.factory('AccessToken', ['$rootScope', '$location', '$http', '$sessionSto
     if (token) {
       removeFragment();
       service.setToken(token);
+      setExpiresAt();
     }
   };
 
@@ -274,7 +277,6 @@ service.factory('AccessToken', ['$rootScope', '$location', '$http', '$sessionSto
   service.setToken = function(params) {
     token = token || {}                 // init the token
     angular.extend(token, params);      // set the access token params
-    setExpiresAt();                     // set the expiring time
     setTokenInSession();                // save the token into the session
     return token;
   };

@@ -48,24 +48,22 @@
         <!-- Right menu -->
 
         <div class="menu" ng-show="!demo">
-          <span class="full-menu">
-            <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
-            <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
-            <oauth
-              template="views/templates/oauth-ng-menu.html"
-              scope="resources+privates"
-              site="{{credentials.site}}"
-              client-id="{{credentials.clientId}}"
-              redirect-uri="{{credentials.redirectUri}}"
-              profile-uri="{{credentials.profileUri}}">
-            </oauth>
-          </span>
+          <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
+          <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
+          <oauth
+          template="views/templates/oauth-ng-menu.html"
+          scope="resources+privates"
+          site="{{credentials.site}}"
+          client-id="{{credentials.clientId}}"
+          redirect-uri="{{credentials.redirectUri}}"
+          profile-uri="{{credentials.profileUri}}">
+          </oauth>
         </div>
 
         <!-- Right menu demo -->
 
         <div class="menu" ng-show="demo" ng-click="demoOff()">
-          <a class="title" href="" ng-click="demoOff()">Turn off demo</a>
+          <a class="title" href="" ng-click="demoOff()"><span class="text">Turn off demo</span></a> <!-- hack inline block -->
           <div class="switch">
             <input type="checkbox" id="checkbox" checked/>
             <label class="slider" for="checkbox"></label>
@@ -73,7 +71,13 @@
         </div>
       </div>
 
-      <div class="container" ng-view="" style="height: {{dimensions.height}}em"></div>
+      <div class="notification" ng-if="notification.show">
+        <div class="message">
+          <i class="fa fa-paper-plane-o"></i>{{notification.device.name}} {{notification.message}}
+        </div>
+      </div>
+
+      <div class="container" ng-view=""></div>
     </div>
 
     <!--[if lt IE 9]>
@@ -81,16 +85,17 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <script src="scripts/837364ec.vendor.js"></script>
+    <script src="scripts/b8f16cbe.vendor.js"></script>
 
-    <script src="scripts/d0c24dc7.scripts.js"></script>
+    <script src="http://127.0.0.1:8002/socket.io/socket.io-client/socket.io.js"></script>
+
+    <script src="scripts/edec88b9.scripts.js"></script>
 
     <!-- test -->
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="scripts/vendors/766b325c.app-test.js"></script>
     <!--<script src="scripts/vendors/40918631.delayed-responses.js"></script>-->
     <!-- end test -->
-
 
     <script>
       angular.module('app', ['lelylan.dashboards.device', 'ngMockE2E'])
