@@ -3,6 +3,13 @@
 angular.module('lelylan.dashboards.device')
   .controller('DevicesCtrl', function ($scope, $rootScope, $timeout, $q, $location, $route, $cacheFactory, ENV, Device, Type, Category, AccessToken, Dimension, Column, Menu) {
 
+    /* ------------------------ *
+     * AUTHORIZED INITIALIZATION *
+     * ------------------------- */
+
+    $rootScope.load();
+
+
 
     /* --------- *
      * BEHAVIOUR *

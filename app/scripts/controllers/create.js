@@ -90,6 +90,7 @@ angular.module('lelylan.dashboards.device')
 
       // If devices was already loaded
       if (cached) {
+
         var devices = JSON.parse(cached[1])
         devices.unshift(device);
         cached[1] = JSON.stringify(devices);
@@ -102,6 +103,7 @@ angular.module('lelylan.dashboards.device')
       }
 
       $location.path('/');
+      $rootScope.loading = false;
     }
 
   });

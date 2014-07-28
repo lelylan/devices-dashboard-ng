@@ -57,18 +57,16 @@
         <!-- Right menu -->
 
         <div class="menu" ng-show="!demo">
-          <span class="full-menu">
-            <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
-            <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
-            <oauth
-              template="views/templates/oauth-ng-menu.html"
-              scope="resources+privates"
-              site="{{credentials.site}}"
-              client-id="{{credentials.clientId}}"
-              redirect-uri="{{credentials.redirectUri}}"
-              profile-uri="{{credentials.profileUri}}">
-            </oauth>
-          </span>
+          <a href="#create"><span class="fa fa-plus"></span> <span class="text">Create</span></a>
+          <a href=""><span class="fa fa-circle"></span> <span class="text">Notifications</span></a>
+          <oauth
+          template="views/templates/oauth-ng-menu.html"
+          scope="resources+privates"
+          site="{{credentials.site}}"
+          client-id="{{credentials.clientId}}"
+          redirect-uri="{{credentials.redirectUri}}"
+          profile-uri="{{credentials.profileUri}}">
+          </oauth>
         </div>
 
         <!-- Right menu demo -->
@@ -82,7 +80,13 @@
         </div>
       </div>
 
-      <div class="container" ng-view="" style="height: {{dimensions.height}}em"></div>
+      <div class="notification" ng-if="notification.show">
+        <div class="message">
+          <i class="fa fa-paper-plane-o"></i>{{notification.device.name}} {{notification.message}}
+        </div>
+      </div>
+
+      <div class="container" ng-view=""></div>
     </div>
 
     <!--[if lt IE 9]>
@@ -112,15 +116,20 @@
     <script src="bower_components/jasmine-jquery/lib/jasmine-jquery.js"></script>
     <!-- endbuild -->
 
+    <script src="http://127.0.0.1:8002/socket.io/socket.io-client/socket.io.js"></script>
+
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/config.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/devices.js"></script>
     <script src="scripts/controllers/create.js"></script>
+    <script src="scripts/controllers/notifications.js"></script>
     <script src="scripts/services/dimension.js"></script>
     <script src="scripts/services/column.js"></script>
     <script src="scripts/services/menu.js"></script>
+    <script src="scripts/services/socket.js"></script>
+    <script src="scripts/services/notifications.js"></script>
     <!-- endbuild -->
 
     <!-- test -->
@@ -128,7 +137,6 @@
     <script src="scripts/vendors/app-test.js"></script>
     <!--<script src="scripts/vendors/delayed-responses.js"></script>-->
     <!-- end test -->
-
 
     <script>
       angular.module('app', ['lelylan.dashboards.device', 'ngMockE2E'])

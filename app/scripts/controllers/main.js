@@ -49,10 +49,16 @@ angular.module('lelylan.dashboards.device')
         });
       };
 
+      $rootScope.load();
 
-      /* ------------------------ *
-      * AUTHORIZED INITIALIZATION *
-      * ------------------------- */
+    }, 0)
+
+
+    /* ------------------------ *
+     * AUTHORIZED INITIALIZATION *
+     * ------------------------- */
+
+    $rootScope.load = function() {
 
       /*
       * Categories API request
@@ -64,10 +70,10 @@ angular.module('lelylan.dashboards.device')
       // Get all categories
       var categories = Category.all().
         success(function(categories) {
-          $rootScope.categories = categories;
-          $rootScope.categories.unshift({ tag: 'all', name: 'All'});
-          $rootScope.currentCategory = $rootScope.categories[0];
-        });
+        $rootScope.categories = categories;
+        $rootScope.categories.unshift({ tag: 'all', name: 'All'});
+        $rootScope.currentCategory = $rootScope.categories[0];
+      });
 
 
 
@@ -77,12 +83,12 @@ angular.module('lelylan.dashboards.device')
 
       var devices = Device.all().
         success(function(devices) {
-          $rootScope.all = devices;
-          $rootScope.devices = devices;
+        $rootScope.all = devices;
+        $rootScope.devices = devices;
 
-          if (devices.length == 0) { $location.path('/no-devices') }
-          else                     { loadTypes($rootScope.devices); }
-        });
+        if (devices.length == 0) { $location.path('/no-devices') }
+        else                     { loadTypes($rootScope.devices); }
+      });
 
 
 
@@ -124,7 +130,6 @@ angular.module('lelylan.dashboards.device')
       }
 
 
-
       /*
       * Visualization
       *
@@ -136,7 +141,8 @@ angular.module('lelylan.dashboards.device')
         $scope.currentDevice = $rootScope.devices[0];
       }
 
-    }, 0)
+    }
+
 
 
 
