@@ -125,9 +125,18 @@ angular.module('lelylan.dashboards.device')
       */
 
       var loadTypes = function(devices) {
+        var runningRequests = [];
+
         var requests = _.map(devices, function(device) {
-          return Type.find(device.type.id)
+          // hack to make once the call to a specific type resource
+          var called = _.contains(runningRequests, device.type.id);
+          if (!called) {
+            runningRequests.push(device.type.id);
+            return Type.find(device.type.id);
+          }
         });
+
+        var requests = _.reject(requests, function(req){ return req == undefined; });
 
         $q.all(requests).then(function(values) {
           $rootScope.types = _.map(values, function(value) { return value.data });
