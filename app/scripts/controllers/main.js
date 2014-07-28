@@ -10,6 +10,11 @@ angular.module('lelylan.dashboards.device')
     // Flag telling us if the demo mode is active
     $scope.demo = !!($location.absUrl().match(/demo/));
 
+    //
+    $timeout(function() {
+      $scope.logged = !!AccessToken.get();
+    }, 0);
+
     // App dimensions (to fit the page)
     $scope.dimensions = Dimension.get();
 
@@ -46,6 +51,7 @@ angular.module('lelylan.dashboards.device')
 
         $scope.$on('oauth:logout', function(event) {
           $location.path('login');
+          Menu.set('lelylan');
         });
       };
 

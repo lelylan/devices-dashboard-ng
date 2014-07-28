@@ -26,8 +26,15 @@ angular.module('lelylan.dashboards.device', [
     })
     .when('/login', {
       templateUrl: 'views/login.html',
-      controller: function($rootScope) {
+      controller: function($rootScope, $timeout, AccessToken) {
         $rootScope.loading = false;
+        $timeout(function() {
+          console.log("Access Token", !!AccessToken.get())
+          if(!!AccessToken.get()) {
+            $location.path('/');
+            $location.replace();
+          }
+        }, 0);
       }
     })
     .when('/expired', {
