@@ -7,7 +7,9 @@ angular.module('lelylan.dashboards.device')
      * AUTHORIZED INITIALIZATION *
      * ------------------------- */
 
-    $rootScope.load();
+
+    if (!$scope.demo)
+      $rootScope.load();
 
 
 
