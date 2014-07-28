@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="bower_components/device-directive-ng/dist/device-directive-ng.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="bower_components/semantic-ui/build/uncompressed/collections/grid.css">
+    <link rel="stylesheet" href="bower_components/shepherd.js/css/shepherd-theme-arrows.css">
     <!-- endbuild -->
 
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -109,6 +110,7 @@
     <script src="bower_components/device-directive-ng/dist/device-directive-ng.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/shepherd.js/shepherd.js"></script>
     <!-- endbower -->
 
     <!-- TODO install jasmine with bower -->
@@ -144,6 +146,104 @@
       angular.module('app').config(function(lelylanClientConfigProvider, ENV) {
         lelylanClientConfigProvider.configure({ endpoint: ENV.endpoint });
       });
+    </script>
+
+    <script>
+
+      setTimeout(function() {
+
+        var shepherd;
+
+        shepherd = new Shepherd.Tour({
+          defaults: {
+            classes: 'shepherd-theme-arrows',
+          }
+        });
+
+        shepherd.addStep('example-step', {
+          text: 'Welcome to Lelylan Dashboard. Here few things to know',
+          attachTo: '.category',
+          buttons: [
+          {
+            text: 'Exit',
+            classes: 'shepherd-button-secondary',
+            action: shepherd.cancel
+            }, {
+            text: 'Next',
+            action: shepherd.next,
+            classes: 'shepherd-button-example-primary'
+          }
+          ]
+        });
+
+        shepherd.addStep('example-step', {
+          text: 'Filter your devices selecting the desired category',
+          attachTo: '.categories',
+          buttons: [
+          {
+            text: 'Exit',
+            classes: 'shepherd-button-secondary',
+            action: shepherd.cancel
+            }, {
+            text: 'Next',
+            action: shepherd.next,
+            classes: 'shepherd-button-example-primary'
+          }
+          ]
+        });
+
+        shepherd.addStep('example-step', {
+          text: 'Use the compact view for a fast access to the device',
+          attachTo: '.ly-device-1',
+          buttons: [
+          {
+            text: 'Exit',
+            classes: 'shepherd-button-secondary',
+            action: shepherd.cancel
+            }, {
+            text: 'Next',
+            action: shepherd.next,
+            classes: 'shepherd-button-example-primary'
+          }
+          ]
+        });
+
+        shepherd.addStep('example-step', {
+          text: 'Use the blue button to execute the default function',
+          attachTo: '.ly-button:first-child',
+          buttons: [
+          {
+            text: 'Exit',
+            classes: 'shepherd-button-secondary',
+            action: shepherd.cancel
+            }, {
+            text: 'Next',
+            action: shepherd.next,
+            classes: 'shepherd-button-example-primary'
+          }
+          ]
+        });
+
+        shepherd.addStep('example-step', {
+          text: '<p>Here you have the detailed view with: <ul><li>the device name</li><li>the device status</li><li>the functions you can apply</li><li>the device properties values</li></ul>',
+          attachTo: '.detail',
+          buttons: [
+          {
+            text: 'Exit',
+            classes: 'shepherd-button-secondary',
+            action: shepherd.cancel
+            }, {
+            text: 'Done',
+            action: shepherd.next,
+            classes: 'shepherd-button-example-primary'
+          }
+          ]
+        });
+
+        shepherd.start();
+
+      }, 3000);
+
     </script>
 </body>
 </html>
