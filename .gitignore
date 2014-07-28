@@ -35,3 +35,6 @@ docs/
 
 # Dist
 dist/
+
+# config
+app/scripts/config.js
