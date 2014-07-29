@@ -56,7 +56,6 @@ angular.module('lelylan.dashboards.device')
       };
 
       $rootScope.load();
-
     }, 0)
 
 
@@ -74,8 +73,7 @@ angular.module('lelylan.dashboards.device')
       var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/categories');
 
       // Get all categories
-      var categories = Category.all().
-        success(function(categories) {
+      var categories = Category.all().success(function(categories) {
         $rootScope.categories = categories;
         $rootScope.categories.unshift({ tag: 'all', name: 'All'});
         $rootScope.currentCategory = $rootScope.categories[0];
@@ -207,7 +205,26 @@ angular.module('lelylan.dashboards.device')
           var notifications = Notifications.push(event.data);
           $rootScope.$broadcast('lelylan:device:update:set', event.data);
 
-          // hide the notification whith the alert in the notification page
+
+          /*
+           * fix bug on rendering the devices list when I was in another page
+           */
+
+          var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/devices');
+          var devices = JSON.parse(cached[1]);
+
+          var _device = _.find(devices, function(resource) {
+            return resource.id == event.data.id;
+          });
+
+          angular.extend(_device, event.data);
+          cached[1] = JSON.stringify(devices);
+
+
+          /*
+           * hide the notification whith the alert in the notification page
+           */
+
           if ($route.current.$$route.controller != 'NotificationsCtrl') {
 
             if (notifications.length > 0 && notifications[0].changes.length > 0) {
@@ -254,6 +271,7 @@ angular.module('lelylan.dashboards.device')
      */
 
     $scope.$on('lelylan:device:update:set', function(event, device) {
+
       var _device = _.find($rootScope.all, function(resource) {
         return resource.id == device.id;
       });

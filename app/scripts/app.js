@@ -29,7 +29,6 @@ angular.module('lelylan.dashboards.device', [
       controller: function($rootScope, $timeout, AccessToken) {
         $rootScope.loading = false;
         $timeout(function() {
-          console.log("Access Token", !!AccessToken.get())
           if(!!AccessToken.get()) {
             $location.path('/');
             $location.replace();
@@ -62,5 +61,3 @@ angular.module('lelylan.dashboards.device', [
       redirectTo: '/'
     });
 })
-
-
