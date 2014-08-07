@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lelylan.dashboards.device')
-  .controller('CreateCtrl', function ($scope, $rootScope, $location, $cacheFactory, ENV, Device, Type, AccessToken, Menu) {
+  .controller('CreateCtrl', function ($scope, $rootScope, $location, $cacheFactory, $timeout, ENV, Device, Type, AccessToken, Menu) {
 
 
     /* ------- *
@@ -12,7 +12,7 @@ angular.module('lelylan.dashboards.device')
     $rootScope.loading = false;
 
     // creation step
-    $scope.step = 'three';
+    $scope.step = 'two';
 
     // device instance
     $scope.device = {};
@@ -74,6 +74,24 @@ angular.module('lelylan.dashboards.device')
       $scope.device.type = { id: type.id };
       $scope.invalid.two = false;
       $scope.setStep('three');
+      $scope.message = null;
+    }
+
+    // set device type by id (step 2)
+    $scope.setTypeId = function(id) {
+      $scope.message = 'Searching';
+
+      Type.find(id).
+        success(function(response) {
+          $scope.message = 'Found type "' + response.name + '"';
+          $scope.invalid.two = false;
+          $timeout(function() {
+            $scope.setStep('three');
+          }, 1000);
+        }).
+        error(function() {
+          $scope.message = 'Type id not existing';
+        });
     }
 
     // set physical (step 3)

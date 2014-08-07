@@ -82,8 +82,8 @@
         <a>{{type.name}}</a>
       </p>
       <span class="fa fa-info selection" ng-class="{ 'active': type.visible }" ng-click="type.visible = !type.visible"></span>
-      <div class="details" ng-show="type.visible">
-        <p>Detailed view mode</p>
+      <div class="details" ng-if="type.visible">
+        <p>Detailed mode</p>
         <lelylan-type type-id="{{type.id}}"></lelylan-type>
       </div>
     </div>
@@ -102,10 +102,18 @@
         <a>{{type.name}}</a>
       </p>
       <span class="fa fa-info selection" ng-class="{ 'active': type.visible }" ng-click="type.visible = !type.visible"></span>
-      <div class="details" ng-show="type.visible">
-        <p>Detailed view mode</p>
+      <div class="details" ng-if="type.visible">
+        <p>Detailed mode</p>
         <lelylan-type type-id="{{type.id}}"></lelylan-type>
       </div>
+    </div>
+
+    <div class="type item id" ng-if="menu=='id'">
+      <p ng-if="message" class="message">{{message}}</p>
+      <form name="form" novalidate ng-submit="setTypeId(device.type.id)">
+        <input class="create-input" type="text" placeholder="Set type id" ng-model="device.type.id" required autofocus>
+        <button ng-disabled="form.$invalid">Search type</button>
+      </form>
     </div>
   </div>
 </div>
@@ -123,7 +131,6 @@
       <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
       <a href="" ng-click="setStep('three')"><span class="bubble bubble-active">3</span></a>
     </div>
-    <h1>Device Connectivity</h1>
     <h2>Connect your device to the real world or start simulating it.</h2>
     <p class="description">
       Connect your physical device so that you can start building the connected home
@@ -141,9 +148,9 @@
         <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
         <a href="" ng-click="setStep('three')"><span class="bubble bubble-active">3</span></a>
       </div>
-      <h1>Device Connectivity</h1>
-      <h2>Connect your device to the real world or start simulating it.</h2>
     </div>
+
+    <h1>Device Connectivity</h1>
 
     <div class="physical item">
       <p class="name">

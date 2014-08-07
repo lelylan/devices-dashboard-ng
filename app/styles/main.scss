@@ -652,8 +652,25 @@ a {
   margin-left: 1em;
 }
 
+.item .message {
+  font-size: 1.2em;
+  margin-bottom: 0;
+  cursor: default;
+}
+
+.step-two .item.id button {
+  margin-left: 0;
+}
+
+.step-two .item.id {
+  padding-top: 0;
+}
+
+.step-two .item button {
+  margin-left: 0;
+}
+
 .step-three .item {
-  margin-bottom: 1em;
   padding-bottom: 0;
 }
 
