@@ -7,6 +7,7 @@ angular.module('lelylan.dashboards.device', [
   'lelylan.dashboards.device.socket',
   'lelylan.dashboards.device.notifications',
   'lelylan.directives.device',
+  'lelylan.directives.type',
   'config',
   'ngRoute'
 ])

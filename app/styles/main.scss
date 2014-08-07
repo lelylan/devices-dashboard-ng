@@ -438,7 +438,7 @@ a {
 .create h1 {
   color: #999;
   margin: 0;
-  padding-top: 0em;
+  padding-top: 0.3em;
   font-size: 2.0em;
 }
 
@@ -446,7 +446,7 @@ a {
   color: #999;
   line-height: 1.3em;
   font-size: 1.4em;
-  margin-top: 0.2em;
+  margin-top: 0.8em;
 }
 
 .create p {
@@ -458,7 +458,7 @@ a {
   padding-left: 1.2em;
 }
 
-.create input {
+.create .create-input {
   color: #666;
   background: none repeat scroll 0 0 transparent;
   border: medium none;
@@ -557,14 +557,19 @@ a {
  * -------------- */
 
 .item {
-  padding: 1em;
+  position: relative;
   padding-left: 0;
   border-bottom: 1px solid #f6f6f6;
   cursor: pointer;
+  padding: 1em 0;
 }
 
-.item > p {
+.item > .name {
   margin: 0;
+}
+
+.item > .details {
+  margin: 1em 0;
 }
 
 .item > p > a {
@@ -581,6 +586,66 @@ a {
 
 .item p.description a {
   font-size: 1em;
+}
+
+.create .types ul {
+  padding-left: 0.2em;
+  margin-top: 0;
+}
+
+.create .types li {
+  display: inline;
+  padding-right: 0.8em;
+}
+
+.create .types .type-menu {
+  color: #ddd;
+  border-left: none;
+}
+
+.create .types li .type-menu:hover {
+  border-left: none;
+}
+
+.create .types li a.active {
+  color: $lelylan-color
+}
+
+.create .types li a {
+  font-size: 1em;
+  letter-spacing: 0px;
+  text-decoration: none;
+}
+
+.item .selection,
+.item .name .selection {
+  font-size: 1.5em;
+  margin-right: .25em;
+  color: #eee;
+}
+.item .fa-info:hover ,
+.item .fa-info.active,
+.item .name:hover .fa-check,
+.item .name .fa-check.active {
+  color: $lelylan-color;
+  border-left: none;
+}
+
+.item .fa-info {
+  padding: 0.1em 1em;
+  float: right;
+  position: absolute;
+  top: .6em;
+  right: -1em;
+}
+
+.item .name .fa-plus-circle {
+  color: $lelylan-color;
+  border-left: none;
+}
+
+.item button {
+  margin-left: 1em;
 }
 
 .item button {
@@ -796,7 +861,6 @@ a {
 }
 
 
-
 /* ------------ *
  * Placeholders *
  * ------------ */
@@ -817,4 +881,12 @@ a {
 
 :-ms-input-placeholder { /* Internet Explorer 10+ */
   color: #bbb;
+}
+
+
+/* -------------------- *
+ * Type personalization *
+ * -------------------- */
+
+.ly-type .ly-content > .ly-header {
 }

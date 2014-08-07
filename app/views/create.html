@@ -9,7 +9,6 @@
       <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
       <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
     </div>
-    <h1>Device Name</h1>
     <h2>Give a meaningful name to your device. It will be easier to find.</h2>
 
     <p>Here some examples</p>
@@ -27,11 +26,11 @@
         <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble">2</span></a>
         <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
       </div>
-      <h1>Device Name</h1>
-      <h2>Give a meaningful name to your device. It will be easier to find.</h2>
     </div>
+
+    <h1>Define the device name</h1>
     <form name="form" novalidate ng-submit="setName()">
-      <input type="text" placeholder="Set device name" ng-model="device.name" required autofocus>
+      <input class="create-input" type="text" placeholder="Set device name" ng-model="device.name" required autofocus>
       <button ng-disabled="form.$invalid"><i class="fa fa-angle-right"></i> Confirm device name</button>
     </form>
   </div>
@@ -50,8 +49,7 @@
       <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble bubble-active">2</span></a>
       <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
     </div>
-    <h1>Device type</h1>
-    <h2>Select the type that better represents your device.</h2>
+    <h2>Select the type that better represents your device or create a new one.</h2>
     <p>
     What is a type? It defines what a device is by defining its properties,
     functions and statuses. Learn more in the
@@ -66,17 +64,46 @@
         <a href="" ng-click="setStep('two')"><span ng-class="{'bubble-error': invalid.two}" class="bubble bubble-active">2</span></a>
         <a href="" ng-click="setStep('three')"><span class="bubble">3</span></a>
       </div>
-      <h1>Device type</h1>
-      <h2>Select the type that better represents your device.</h2>
     </div>
 
     <!--<input type="search" placeholder="Search the device type" autofocus ng-model="query"></input>-->
 
-    <div class="type item" ng-repeat="type in popular | filter:{name: query}" ng-click="setType(type)">
-      <p class="name {{type.id}}">
-      <span class="fa fa-angle-right" ng-if="type.id == device.type.id"></span>
-      <a>{{type.name}}</a>
+    <h1>Choose the device type</h1>
+    <ul>
+      {{menu.active}}
+      <li><a href="" class="type-menu" ng-class="{active: menu=='populars'}" ng-click="menu='populars'">Populars</a></li>
+      <li><a href="" class="type-menu" ng-class="{active: menu=='created'}" ng-click="menu='created'">Created types</a></li>
+      <li><a href="" class="type-menu" ng-class="{active: menu=='id'}" ng-click="menu='id'">From ID</a></li>
+    </ul>
+
+    <div class="type item" ng-repeat="type in popular | filter:{name: query}" ng-if="menu=='populars'">
+      <p class="name {{type.id}}" ng-click="setType(type)">
+        <span class="fa fa-check selection" ng-class="{ 'active': type.id == device.type.id }"></span>
+        <a>{{type.name}}</a>
       </p>
+      <span class="fa fa-info selection" ng-class="{ 'active': type.visible }" ng-click="type.visible = !type.visible"></span>
+      <div class="details" ng-if="type.visible">
+        <lelylan-type type-id="{{type.id}}"></lelylan-type>
+      </div>
+    </div>
+
+
+    <div class="type item" ng-if="menu=='created'">
+      <p class="name" ng-click="createType()">
+        <span class="fa fa-plus-circle selection"></span>
+        <a>Create new type</a>
+      </p>
+    </div>
+
+    <div class="type item" ng-repeat="type in created | filter:{name: query}" ng-if="menu=='created'">
+      <p class="name {{type.id}}" ng-click="setType(type)">
+        <span class="fa fa-check selection" ng-class="{ 'active': type.id == device.type.id }"></span>
+        <a>{{type.name}}</a>
+      </p>
+      <span class="fa fa-info selection" ng-class="{ 'active': type.visible }" ng-click="type.visible = !type.visible"></span>
+      <div class="details" ng-if="type.visible">
+        <lelylan-type type-id="{{type.id}}"></lelylan-type>
+      </div>
     </div>
   </div>
 </div>
@@ -137,7 +164,7 @@
       <p class="name">
       <a><i name="form" class="fa fa-angle-right"></i> Custom URI</a>
       <form novalidate ng-submit="setPhysical('custom')" ng-disabled="form.$invalid">
-        <input type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required>
+        <input class="create-input" type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required>
       </form>
       <p class="description">
         Set the URI that let you access your device through Internet.

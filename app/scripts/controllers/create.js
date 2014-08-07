@@ -12,7 +12,7 @@ angular.module('lelylan.dashboards.device')
     $rootScope.loading = false;
 
     // creation step
-    $scope.step = 'one';
+    $scope.step = 'two';
 
     // device instance
     $scope.device = {};
@@ -20,14 +20,39 @@ angular.module('lelylan.dashboards.device')
     // validation structure
     $scope.invalid = {};
 
+    // type menu definition
+    $scope.menu = 'populars';
+
+    // set lelylan as top menu
+    Menu.set('lelylan');
+
+
+    /* --------- *
+     * API CALLS *
+     * --------- */
+
     // get the popular types
-    var types = Type.popular().
+    Type.popular().
       success(function(types) {
         $scope.popular = types;
       });
 
-    // set lelylan as top menu
-    Menu.set('lelylan');
+    // get created types
+    Type.all().
+      success(function(types) {
+        console.log('types', types);
+        $scope.created = types;
+      });
+
+    // create a new type
+    $scope.createType = function() {
+      Type.create({ name: 'New', category: 'others' }).
+        success(function(type) {
+          type.visible = true;
+          $scope.created.unshift(type);
+        });
+    }
+
 
     /* --------- *
      * BEHAVIOUR *
