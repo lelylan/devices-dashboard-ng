@@ -82,7 +82,8 @@
         <a>{{type.name}}</a>
       </p>
       <span class="fa fa-info selection" ng-class="{ 'active': type.visible }" ng-click="type.visible = !type.visible"></span>
-      <div class="details" ng-if="type.visible">
+      <div class="details" ng-show="type.visible">
+        <p>Detailed view mode</p>
         <lelylan-type type-id="{{type.id}}"></lelylan-type>
       </div>
     </div>
@@ -101,7 +102,8 @@
         <a>{{type.name}}</a>
       </p>
       <span class="fa fa-info selection" ng-class="{ 'active': type.visible }" ng-click="type.visible = !type.visible"></span>
-      <div class="details" ng-if="type.visible">
+      <div class="details" ng-show="type.visible">
+        <p>Detailed view mode</p>
         <lelylan-type type-id="{{type.id}}"></lelylan-type>
       </div>
     </div>
@@ -127,8 +129,8 @@
       Connect your physical device so that you can start building the connected home
       or simulate the device behaviour.
       If you don't know how to connect a physical
-      device you can learn how to connect your first light in the
-      <a href="http://dev.lelylan.com/getting-started" target="_blank">dev center</a>.
+      device you can learn how to
+      <a href="http://dev.lelylan.com/getting-started">connect your first light</a>.
     </p>
   </div>
 
@@ -147,7 +149,7 @@
       <p class="name">
         <a href="" ng-click="setPhysical('simulation')"><i class="fa fa-angle-right"></i> Simulation</a>
         <p class="description">
-          Perfect for developers who wants to play with Lelylan without a physical device
+          Simulate the physical device (no hardware needed).
         </p>
       </p>
     </div>
@@ -155,8 +157,7 @@
       <p class="name">
         <a href="" ng-click="setPhysical('mqtt')"><i class="fa fa-angle-right"></i> Connect with MQTT</a>
         <p class="description">
-        Connect your devices using MQTT, a simple is a publish/subscribe messaging protocol for
-        the Internet of Things. <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.
+        Connect your physical device using MQTT (<a href="http://dev.lelylan.com/getting-started" target="_blank">learn more</a>).
         </p>
       </p>
     </div>
@@ -167,8 +168,7 @@
         <input class="create-input" type="url" placeholder="Set the physical device URI" ng-model="device.physical.uri" required>
       </form>
       <p class="description">
-        Set the URI that let you access your device through Internet.
-        <a href="http://dev.lelylan.com/getting-started" target="_blank">Learn how it works</a>.
+        Set the URI that identify your device (<a href="http://dev.lelylan.com/getting-started" target="_blank">learn more</a>).
       </p>
       </p>
     </div>

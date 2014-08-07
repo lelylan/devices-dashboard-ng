@@ -636,7 +636,7 @@ a {
   float: right;
   position: absolute;
   top: .6em;
-  right: -1em;
+  right: -.7em;
 }
 
 .item .name .fa-plus-circle {
@@ -654,6 +654,11 @@ a {
 
 .step-three .item {
   margin-bottom: 1em;
+  padding-bottom: 0;
+}
+
+.step-three p.description {
+  margin-top: 0em;
 }
 
 
@@ -889,4 +894,19 @@ a {
  * -------------------- */
 
 .ly-type .ly-content > .ly-header {
+  background-color: #fff;
 }
+
+.ly-type .ly-header .ly-menu a {
+  color: #666;
+}
+
+.ly-type .ly-header .ly-name {
+  color: #666;
+}
+
+.ly-type .ly-header .ly-name {
+  font-size: 1.5em;
+  padding: .25em 0;
+}
+

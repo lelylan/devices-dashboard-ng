@@ -12,7 +12,7 @@ angular.module('lelylan.dashboards.device')
     $rootScope.loading = false;
 
     // creation step
-    $scope.step = 'two';
+    $scope.step = 'three';
 
     // device instance
     $scope.device = {};
