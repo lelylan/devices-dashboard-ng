@@ -156,6 +156,16 @@ a {
   text-shadow: 0 1px 0 #006A92;
 }
 
+.header .spinner {
+  display: inline-block;
+  font-size: .5em;
+  margin-left: .5em;
+}
+
+.header .spinner div {
+  background-color: #fff;
+}
+
 
 /* Right menu */
 

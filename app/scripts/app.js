@@ -11,7 +11,9 @@ angular.module('lelylan.dashboards.device', [
   'config',
   'ngRoute'
 ])
-.config(function ($routeProvider) {
+
+// routing
+angular.module('lelylan.dashboards.device').config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/devices.html',
@@ -62,3 +64,27 @@ angular.module('lelylan.dashboards.device', [
       redirectTo: '/'
     });
 })
+
+// spinner on http request
+angular.module('lelylan.dashboards.device').config(function ($httpProvider) {
+  $httpProvider.responseInterceptors.push('myHttpInterceptor');
+  var spinnerFunction = function spinnerFunction(data, headersGetter) {
+    $("#spinner").show();
+    return data;
+  };
+
+  $httpProvider.defaults.transformRequest.push(spinnerFunction);
+});
+
+angular.module('lelylan.dashboards.device').factory('myHttpInterceptor', function ($q, $window) {
+  return function (promise) {
+    return promise.then(function (response) {
+      $("#spinner").hide();
+      return response;
+    }, function (response) {
+      $("#spinner").hide();
+      return $q.reject(response);
+    });
+  };
+});
+
