@@ -1,0 +1,521 @@
+<div class="ly-type ly-type-{{type.id}}">
+
+
+  <!-- ---------------- -->
+  <!--  Type message  -->
+  <!-- ---------------- -->
+
+  <div class="ly-message ly-generic-message ly-animation-fast" ng-if="view.path=='/message'">
+    <p class="ly-description">{{message.title}}</p>
+    <p class="ly-description-sub">{{message.description}}</p>
+  </div>
+
+
+  <!-- ----------------- -->
+  <!--  Loading message  -->
+  <!-- ----------------- -->
+
+  <div class="ly-message ly-loading" ng-if="view.path=='/loading'">
+    <p class="ly-description">Loading Type</p>
+    <div class="ly-spinner">
+      <div class="ly-bounce-1"></div>
+      <div class="ly-bounce-2"></div>
+      <div class="ly-bounce-3"></div>
+    </div>
+  </div>
+
+
+  <!-- ------------ -->
+  <!-- Type Content -->
+  <!-- ------------ -->
+
+  <div class="ly-content" ng-class="{'ly-animation': view.path=='/default'}" ng-if="view.path!='/loading' && view.path!='/message'">
+
+
+    <!-- ------------- -->
+    <!--  Type header  -->
+    <!-- ------------- -->
+
+    <div class="ly-header">
+
+      <!-- Name -->
+
+      <p class="ly-name ly-type-name">{{type.name}}</p>
+
+      <!-- Side menu -->
+
+      <div class="ly-menu" ng-if="isOwner()">
+        <a href="" ng-click="view.path='/menu'"><i class="fa fa-ellipsis-v"></i></a>
+      </div>
+    </div>
+
+
+    <!-- ---------------- -->
+    <!--  Type subheader  -->
+    <!-- ---------------- -->
+
+    <div class="ly-subheader">
+
+      <!-- Connection name -->
+
+      <div class="ly-connection ly-properties" ng-if="connection=='properties'">
+        <span class="ly-name">Properties</span>
+        <span class="ly-label">{{type.properties.length}}</span>
+        <ul class="ly-menu-add" ng-click="addProperty()" ng-if="isOwner()">
+          <li><a href="">Add</a></li>
+        </ul>
+      </div>
+
+      <div class="ly-connection ly-functions" ng-if="connection=='functions'">
+        <span class="ly-name">Functions</span>
+        <span class="ly-label">{{type.functions.length}}</span>
+        <ul class="ly-menu-add" ng-click="addFunction()" ng-if="isOwner()">
+          <li><a href="">Add</a></li>
+        </ul>
+      </div>
+
+      <div class="ly-connection ly-statuses" ng-if="connection=='statuses'">
+        <span class="ly-name">Statuses</span>
+        <span class="ly-label">{{type.statuses.length}}</span>
+        <ul class="ly-menu-add" ng-click="addStatus()" ng-if="isOwner()">
+          <li><a href="">Add</a></li>
+        </ul>
+      </div>
+
+      <div class="ly-connection ly-category" ng-if="connection=='category'">
+        <span class="ly-name">Category</span>
+      </div>
+
+      <div class="ly-menu" ng-click="view.path='/connections'">
+        <a href=""><i class="fa fa-angle-down"></i></a>
+      </div>
+    </div>
+
+
+
+    <!-- ------------ -->
+    <!--  Properties  -->
+    <!-- ------------ -->
+
+    <div class="ly-properties" ng-show="connection=='properties'">
+      <div class="ly-property ly-item" ng-repeat="property in type.properties">
+
+        <!-- Property form -->
+
+        <form class="ly-form" name="form" ng-submit="updateProperty(property, form)" novalidate>
+          <div class="ly-fields" ng-class="{'ly-owner': isOwner(), 'ly-open-connection': property.open}">
+            <a href="" ng-click="updateProperty(property, form)" class="ly-save" ng-class="{'ly-save-enabled': form.$dirty && form.$valid}" ng-if="isOwner()">
+              <span>{{property.status || 'Save'}}</span> <i class="fa fa-check-circle" ></i>
+            </a>
+
+            <a href="" ng-click="confirmDeleteConnection(property, $index, 'properties')" class="ly-delete" ng-if="isOwner()">
+              <i class="fa fa-minus-circle" ></i>
+            </a>
+
+            <div class="ly-field ly-field-top" ng-click="toggle(property)">
+              <i class="fa fa-angle-right" ng-if="!property.open"></i>
+              <i class="fa fa-angle-down" ng-if="property.open"></i>
+              <input class="ly-value ly-name-field" type="text" disabled ng-model="property.name"></input>
+            </div>
+
+            <div class="ly-detail" ng-show="property.open">
+
+              <div class="ly-field ly-editable" ng-if="isOwner()">
+                <p class="ly-description" ng-class="{'ly-error': form.name.$error.required}">Name</p>
+                <input class="ly-value" type="text" ng-disabled="!isOwner()" name="name" ng-model="property.name" required></input>
+              </div>
+              <div class="ly-field">
+                <p class="ly-description">ID</p>
+                <input class="ly-value ly-id-field" type="text" disabled ng-model="property.id"></input>
+              </div>
+              <div class="ly-field ly-editable">
+                <p class="ly-description">Type</p>
+                <select class="ly-value"
+                  ng-disabled="!isOwner()"
+                  ng-model="property.type"
+                  ng-options="key as value for (key , value) in config.property.types">
+                </select>
+              </div>
+
+              <!-- Text case -->
+
+              <div class="ly-field ly-editable" ng-if="property.type=='text'">
+                <p class="ly-description">Accepted values from the device <a href="http://dev.lelylan.com/support#faq-accepted-values" target="_blank"><i class="fa fa-info-circle"></i></a></p>
+                <p class="ly-description" ng-if="property.accepted && property.accepted.length!=0">
+                  <span>received value</span>
+                  <span>descriptive value</span>
+                </p>
+                <p ng-if="!property.accepted || property.accepted.length==0">
+                Any value is accepted
+                </p>
+                <div ng-repeat="pair in property.accepted">
+                  <div class="ly-multiple">
+                    <input class="ly-value ly-multiple-field ly-accepted-field" placeholder="key" type="text" ng-disabled="!isOwner()" ng-model="pair.key"></input>
+                    <input class="ly-value ly-multiple-field ly-accepted-field" placeholder="value" type="text" ng-disabled="!isOwner()" ng-model="pair.value"></input>
+                    <a href="" ng-click="removeAccepted(property, $index, form)" ng-if="isOwner()"><i class="fa fa-minus-circle ly-remove-multiple"></i></a>
+                  </div>
+                </div>
+                <div class="ly-multiple ly-multiple-add" ng-if="isOwner()">
+                  <a href="" ng-click="addAccepted(property)"><i class="fa fa-plus"></i> <span>Add accepted values</span></a>
+                </div>
+              </div>
+
+              <!-- Range case -->
+
+              <div class="ly-field ly-editable" ng-if="property.type=='range'">
+                  <p class="ly-description">From value</p>
+                  <input class="ly-value ly-range-field" placeholder="min" type="text" ng-disabled="!isOwner()" ng-model="property.range.min"></input>
+              </div>
+              <div class="ly-field ly-editable" ng-if="property.type=='range'">
+                <p class="ly-description">To value</p>
+                <input class="ly-value ly-range-field" placeholder="max" type="text" ng-disabled="!isOwner()" ng-model="property.range.max"></input>
+              </div>
+              <div class="ly-field ly-editable" ng-if="property.type=='range'">
+                <p class="ly-description">With interval</p>
+                <input class="ly-value ly-range-field" placeholder="interval" type="text" ng-disabled="!isOwner()" ng-model="property.range.step"></input>
+              </div>
+
+              <!-- Other cases -->
+
+              <div class="ly-field ly-editable" ng-if="property.type!='text' && property.type!='range'">
+                <p class="ly-description">Accepted values</p>
+                <input class="ly-value ly-default-field" type="text" disabled value="Any {{property.type}} value"></input>
+              </div>
+
+              <div class="ly-field ly-editable">
+                <p class="ly-description">Default value</p>
+                <input class="ly-value ly-default-field" type="text" ng-disabled="!isOwner()" ng-model="property.default"></input>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- --------- -->
+    <!-- Functions -->
+    <!-- --------- -->
+
+    <div class="ly-functions" ng-show="connection=='functions'">
+      <div class="ly-function ly-item" ng-repeat="function in type.functions">
+
+        <form class="ly-form" name="form" ng-submit="updateFunction(function, form)" novalidate>
+          <div class="ly-fields" ng-class="{'ly-owner': isOwner(), 'ly-open-connection': function.open}">
+            <a href="" ng-click="updateFunction(function, form)" class="ly-save" ng-class="{'ly-save-enabled': form.$dirty && form.$valid}" ng-if="isOwner()">
+              <span>{{function.status || 'Save'}}</span> <i class="fa fa-check-circle" ></i>
+            </a>
+
+            <a href="" ng-click="confirmDeleteConnection(function, $index, 'functions')" class="ly-delete" ng-if="isOwner()">
+              <i class="fa fa-minus-circle" ></i>
+            </a>
+
+            <div class="ly-field ly-field-top" ng-click="toggle(function)">
+              <i class="fa fa-angle-right" ng-if="!function.open"></i>
+              <i class="fa fa-angle-down" ng-if="function.open"></i>
+              <input class="ly-value ly-name-field" type="text" disabled ng-model="function.name"></input>
+            </div>
+
+            <div class="ly-detail" ng-show="function.open">
+
+              <div class="ly-field ly-editable">
+                <p class="ly-description" ng-class="{'ly-error': form.name.$error.required}">Name</p>
+                <input class="ly-value" type="text" ng-disabled="!isOwner()" name="name" ng-model="function.name" required></input>
+              </div>
+
+              <div class="ly-field">
+                <p class="ly-description">ID</p>
+                <input class="ly-value ly-id-field" type="text" disabled ng-model="function.id"></input>
+              </div>
+
+              <div class="ly-field ly-editable">
+                <p class="ly-description">Properties updated from the function</p>
+                <p class="ly-description" ng-if="function.properties.length!=0">
+                  <span>property</span>
+                  <span>new value</span>
+                </p>
+                <div ng-repeat="property in function.properties">
+                  <div class="ly-multiple">
+                    <select class="ly-value"
+                      ng-disabled="!isOwner()"
+                      ng-model="property.id"
+                      ng-options="property.id as property.name for property in type.properties">
+                    </select>
+                    <input class="ly-value ly-multiple-field" placeholder="from user" type="text" ng-disabled="!isOwner()" ng-model="property.expected"></input>
+                    <a href="" ng-click="removeFunctionProperty(function, $index, form)"  ng-if="isOwner()"><i class="fa fa-minus-circle ly-remove-multiple"></i></a>
+                  </div>
+                </div>
+                <div class="ly-multiple ly-multiple-add" ng-if="isOwner()">
+                  <a href="" ng-click="addFunctionProperty(function)"><i class="fa fa-plus"></i> <span>Add property</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- -------- -->
+    <!-- Statuses -->
+    <!-- -------- -->
+
+    <div class="ly-statuses" ng-show="connection=='statuses'">
+      <div class="ly-status ly-item" ng-repeat="status in type.statuses">
+
+        <form class="ly-form" name="form" ng-submit="updateStatus(status, form)" novalidate>
+          <div class="ly-fields" ng-class="{'ly-owner': isOwner(), 'ly-open-connection': status.open}">
+            <a href="" ng-click="updateStatus(status, form)" class="ly-save" ng-class="{'ly-save-enabled': form.$dirty && form.$valid}" ng-if="isOwner()">
+              <span>{{status.status || 'Save'}}</span> <i class="fa fa-check-circle" ></i>
+            </a>
+
+            <a href="" ng-click="confirmDeleteConnection(status, $index, 'statuses')" class="ly-delete" ng-if="isOwner()">
+              <i class="fa fa-minus-circle" ></i>
+            </a>
+
+            <div class="ly-field ly-field-top" ng-click="toggle(status)">
+              <i class="fa fa-angle-right" ng-if="!status.open"></i>
+              <i class="fa fa-angle-down" ng-if="status.open"></i>
+              <input class="ly-value ly-name-field" type="text" disabled ng-model="status.name"></input>
+            </div>
+
+            <div class="ly-detail" ng-show="status.open">
+
+              <div class="ly-field ly-editable">
+                <p class="ly-description" ng-class="{'ly-error': form.name.$error.required}">Name</p>
+                <input class="ly-value" type="text" ng-disabled="!isOwner()" name="name" ng-model="status.name" required></input>
+              </div>
+
+              <div class="ly-field">
+                <p class="ly-description">ID</p>
+                <input class="ly-value ly-id-field" type="text" disabled ng-model="status.id"></input>
+              </div>
+
+              <div class="ly-field ly-editable">
+                <p class="ly-description">
+                Matching property values
+                <a href="http://dev.lelylan.com/support#faq-device-status" target="_blank"><i class="fa fa-info-circle"></i></a>
+                </p>
+                <p class="ly-description" ng-if="status.properties!=0">
+                  <span>property</span>
+                  <span>matching value</span>
+                </p>
+                <div ng-repeat="property in status.properties">
+                  <div class="ly-multiple">
+                    <select class="ly-value"
+                      ng-disabled="!isOwner()"
+                      ng-model="property.id"
+                      ng-options="property.id as property.name for property in type.properties">
+                    </select>
+                    <input class="ly-value ly-multiple-field" placeholder="any" type="text" ng-disabled="!isOwner()" ng-model="property.values"></input>
+                    <a href="" ng-click="removeStatusProperty(status, $index, form)"  ng-if="isOwner()"><i class="fa fa-minus-circle ly-remove-multiple"></i></a>
+                  </div>
+                </div>
+                <div class="ly-multiple ly-multiple-add" ng-if="isOwner()">
+                  <a href="" ng-click="addStatusProperty(status)"><i class="fa fa-plus"></i> <span>Add property</span></a>
+                </div>
+              </div>
+
+              <div class="ly-field ly-editable">
+                <p class="ly-description">Default function when {{status.name}}</p>
+                <select class="ly-value"
+                  ng-disabled="!isOwner()"
+                  ng-model="status.function.id"
+                  ng-options="function.id as function.name for function in type.functions">
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- -------- -->
+    <!-- Category -->
+    <!-- -------- -->
+
+    <div class="ly-categories" ng-show="connection=='category'" ng-class="{ 'ly-no-owner': !isOwner() }">
+      <div class="ly-category-item" ng-repeat="category in categories" ng-click="updateCategory(category.tag)" ng-class="{'ly-active': category.tag == type.category}">
+        <a href="">
+          <i class="fa fa-star-o"></i>
+          <i class="fa fa-star"></i>
+          {{category.name}}
+        </a>
+      </div>
+    </div>
+
+
+    <!-- ----------------- -->
+    <!-- Connection Delete -->
+    <!-- ----------------- -->
+
+    <div class="ly-settings ly-delete ly-modal ly-animation-fast" ng-if="view.path=='/delete'">
+    <!--<div class="ly-settings ly-delete ly-modal ly-animation-fast">-->
+      <div class="ly-modal-backdrop" ng-click="showDefault()"></div>
+      <div class="ly-modal-window">
+        <a class="ly-close" href="" ng-click="showDefault()">×</a>
+        <div class="ly-connection-delete">
+          <div class="ly-header">
+            <p class="ly-name">Delete</p>
+          </div>
+          <form class="ly-form" ng-submit="deleteConnection(confirm)">
+            <div ng-class="{'ly-owner': isOwner()}">
+              <div>
+                <p class="ly-info">
+                Deleting one of your {{deleting.name}} is irreversible.
+                Enter the name to confirm you want to permanently delete it.
+                </p>
+              </div>
+
+              <div class="ly-field ly-editable">
+                <input class="ly-value ly-name" type="text" autofocus placeholder="Property name" ng-model="confirm"></input>
+              </div>
+              <div class="ly-actions">
+                <button class="ly-button ly-delete-button" ng-class="{'ly-disabled-button': confirm!=deleting.connection.name}">delete</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ----------------- -->
+    <!-- Connection choice -->
+    <!-- ----------------- -->
+
+    <div class="ly-connections ly-modal ly-animation-fast" ng-if="view.path=='/connections'">
+      <div class="ly-modal-backdrop" ng-click="showDefault()"></div>
+      <div class="ly-modal-window">
+        <a class="ly-close" href="" ng-click="showDefault()">×</a>
+
+        <div class="ly-connections-type">
+          <div class="ly-header">
+            <p class="ly-name">Connections</p>
+          </div>
+          <div class="ly-list">
+            <div class="ly-connection ly-properties" ng-click="setConnection('properties')">
+              <i class="fa fa-angle-right"></i>
+              <span class="ly-name">Properties</span>
+              <span class="ly-label">{{type.properties.length}}</span>
+            </div>
+            <div class="ly-connection ly-functions" ng-click="setConnection('functions')">
+              <i class="fa fa-angle-right"></i>
+              <span class="ly-name">Functions</span>
+              <span class="ly-label">{{type.functions.length}}</span>
+            </div>
+            <div class="ly-connection ly-statuses" ng-click="setConnection('statuses')">
+              <i class="fa fa-angle-right"></i>
+              <span class="ly-name">Statuses</span>
+              <span class="ly-label">{{type.statuses.length}}</span>
+            </div>
+            <div class="ly-connection ly-category" ng-click="setConnection('category')">
+              <i class="fa fa-angle-right"></i>
+              <span class="ly-name">Category</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ------------- -->
+    <!--  Menu choice  -->
+    <!-- ------------- -->
+
+    <div class="ly-connections ly-modal ly-animation-fast" ng-if="view.path=='/menu'">
+      <div class="ly-modal-backdrop" ng-click="showDefault()"></div>
+      <div class="ly-modal-window">
+        <a class="ly-close" href="" ng-click="showDefault()">×</a>
+
+        <div class="ly-connections-type">
+          <div class="ly-header">
+            <p class="ly-name">Menu</p>
+          </div>
+          <div class="ly-list">
+            <div class="ly-connection ly-properties" ng-click="view.path='/edit'">
+              <i class="fa fa-angle-right"></i>
+              <span class="ly-name">Edit name</span>
+            </div>
+            <div class="ly-connection ly-functions"  ng-click="view.path='/delete-type'">
+              <i class="fa fa-angle-right"></i>
+              <span class="ly-name">Delete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- ------------- -->
+    <!-- Edit type name -->
+    <!-- ------------- -->
+
+    <div class="ly-connections ly-edit ly-modal ly-animation-fast" ng-if="view.path=='/edit'">
+      <div class="ly-modal-backdrop" ng-click="showDefault()"></div>
+      <div class="ly-modal-window">
+        <a class="ly-close" href="" ng-click="showDefault()">×</a>
+        <div class="ly-connection-delete">
+          <div class="ly-header">
+            <p class="ly-name">Edit Name</p>
+          </div>
+
+          <form class="ly-form" name="form" ng-submit="updateType()" novalidate>
+            <div class="ly-fields" ng-class="{'ly-owner': isOwner(), 'ly-open-connection': function.open}">
+              <div class="ly-detail">
+                <div class="ly-field ly-editable">
+                  <p class="ly-description" ng-class="{'ly-error': form.name.$error.required}">Name</p>
+                  <input class="ly-value" type="text" name="name" ng-model="type.name" required></input>
+                </div>
+              </div>
+            </div>
+            <div class="ly-actions">
+              <button class="ly-button ly-update-button" ng-class="{'ly-disabled-button': !form.$valid}" ng-click="updateType(function)">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ------------- -->
+    <!--  Type Delete  -->
+    <!-- ------------- -->
+
+    <div class="ly-settings ly-delete ly-modal ly-animation-fast" ng-if="view.path=='/delete-type'">
+    <!--<div class="ly-settings ly-delete ly-modal ly-animation-fast">-->
+      <div class="ly-modal-backdrop" ng-click="showDefault()"></div>
+      <div class="ly-modal-window">
+        <a class="ly-close" href="" ng-click="showDefault()">×</a>
+        <div class="ly-connection-delete">
+          <div class="ly-header">
+            <p class="ly-name">Delete Type</p>
+          </div>
+          <form class="ly-form" ng-submit="deleteType(confirm)">
+            <div ng-class="{'ly-owner': isOwner()}">
+              <div>
+                <p class="ly-info">
+                Deleting your type is irreversible. If you have defined any
+                device with it, they will not work anymore. Enter the name
+                to confirm you want to permanently delete it.
+                </p>
+              </div>
+
+              <div class="ly-field ly-editable">
+                <input class="ly-value ly-name" type="text" autofocus placeholder="Type name" ng-model="confirm"></input>
+              </div>
+              <div class="ly-actions">
+                <button class="ly-button ly-delete-button" ng-class="{'ly-disabled-button': confirm!=type.name}">delete</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

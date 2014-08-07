@@ -11,9 +11,10 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/db73b6eb.vendor.css"/>
+    <link rel="stylesheet" href="styles/c195c678.vendor.css"/>
 
-    <link rel="stylesheet" href="styles/4fbb1d66.main.css"/>
+    <link rel="stylesheet" href="styles/b7ace65c.main.css"/>
+
     <style>
       .ng-cloak { display: none !important; }
     </style>
@@ -41,9 +42,12 @@
 
         <!-- Left menu -->
 
-        <a class="logo" href="#" ng-show="menu.visible.lelylan">Lelylan Dashboard</a>
+        <a class="logo" href="#" ng-show="menu.visible.lelylan">
+          Lelylan Dashboard
+        </a>
         <a class="back" href=""  ng-show="menu.visible.categories" ng-click="moveToCategories()"><span class="fa fa-angle-left"></span> Categories</a>  <!-- -->
         <a class="back" href=""  ng-show="menu.visible.devices" ng-click="moveToDevices()"><span class="fa fa-angle-left"></span> {{currentCategory.name}}</a>  <!-- -->
+        <div class="spinner" id="spinner"><div class="bounce-1"></div><div class="bounce-2"></div><div class="bounce-3"></div></div>
 
         <!-- Right menu -->
 
@@ -85,11 +89,11 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <script src="scripts/6e5b0ab1.vendor.js"></script>
+    <script src="scripts/1357c226.vendor.js"></script>
 
     <script src="http://96.126.109.170/socket.io/socket.io-client/socket.io.js"></script>
 
-    <script src="scripts/91a49d82.scripts.js"></script>
+    <script src="scripts/bae34133.scripts.js"></script>
 
 
     <script>
