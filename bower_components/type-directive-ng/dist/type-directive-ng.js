@@ -4,8 +4,13 @@ angular.module('lelylan.directives.type', [
   'lelylan.client',
   'lelylan.directives.type.directive',
   'ngTouch',
-  'ngAnimate'
-]);
+  'ngAnimate',
+  'ngClipboard'
+])
+.config(['ngClipProvider', function(ngClipProvider) {
+  ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
+}]);
+
 
 'use strict';
 
@@ -49,7 +54,7 @@ angular.module('lelylan.directives.type.directive').directive('lelylanType',
     scope.connection = 'properties';
 
     // template
-    scope.template = attrs.deviceTemplate || 'bower_components/type-directive-ng/dist/views/templates/default.html';
+    scope.template = attrs.typeTemplate || 'bower_components/type-directive-ng/dist/views/templates/default.html';
 
     // property types
     scope.config = {
@@ -287,11 +292,16 @@ angular.module('lelylan.directives.type.directive').directive('lelylanType',
      * TYPE BEHAVIOUR
      */
 
-    scope.updateType = function() {
+    scope.updateType = function(form) {
+      scope.type.status = 'Saving';
       scope.showDefault();
       Type.update(scope.type.id, { name: scope.type.name } ).
         success(function(response) {
           scope.type.name = response.name;
+          $timeout(function() {
+            form.$setPristine();
+            scope.type.status = null;
+          }, 500)
         }).
         error(function() {
           scope.view.path = '/message';
@@ -317,12 +327,46 @@ angular.module('lelylan.directives.type.directive').directive('lelylanType',
      */
 
     scope.confirmDeleteConnection = function(connection, index, name) {
+      scope.blocking = getBlocking(connection, name);
+
       scope.deleting = { connection: connection, index: index, name: name };
       if (scope.deleting.name == 'properties') { scope.deleting.klass = Property }
       if (scope.deleting.name == 'functions')  { scope.deleting.klass = Function }
       if (scope.deleting.name == 'statuses')   { scope.deleting.klass = Status }
       scope.view.path = '/delete' ;
     }
+
+    // check if the connection is used from other connections
+    // * check if a property is used from functions or statuses
+    // * check if a function is used from statuse
+    var getBlocking = function(connection, name) {
+      var resources = {
+        functions: [],
+        statuses: []
+      }
+
+      if (name == 'properties') {
+        _.each(scope.type.functions, function(_function) {
+          var ids = _.pluck(_function.properties, 'id');
+          if (_.contains(ids, connection.id)) { resources.functions.push(_function.name) }
+        });
+      }
+
+      if (name == 'properties') {
+        _.each(scope.type.statuses, function(status) {
+          var ids = _.pluck(status.properties, 'id');
+          if (_.contains(ids, connection.id)) { resources.statuses.push(status.name) }
+        });
+      }
+
+      if (name == 'functions') {
+        _.each(scope.type.statuses, function(status) {
+          if (status.function.id == connection.id) { resources.statuses.push(status.name) }
+        });
+      }
+
+      return resources;
+    };
 
     scope.deleteConnection = function(confirm) {
       if (scope.deleting.connection.name == confirm) {
@@ -342,8 +386,14 @@ angular.module('lelylan.directives.type.directive').directive('lelylanType',
             scope.showDefault();
           });
       }
-    }
+    };
 
+    // copy embedded code
+    scope.copyEmbed = function() {
+      scope.messageEmbed = 'Copied'
+      $timeout(function() { scope.messageEmbed = null; }, 2000);
+      return document.getElementById('embed').innerHTML;
+    };
 
   }
 

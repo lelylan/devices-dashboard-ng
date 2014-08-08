@@ -40,13 +40,23 @@
 
       <!-- Name -->
 
-      <p class="ly-name ly-type-name">{{type.name}}</p>
+      <form class="ly-form" name="form" ng-submit="updateType(form)" novalidate>
+        <div class="ly-fields" ng-class="{'ly-owner': isOwner()}">
+          <div class="ly-field ly-editable">
+            <input class="ly-value ly-name-field" type="text" ng-disabled="!isOwner()" ng-model="type.name"></input>
+          </div>
+        </div>
+        <a href="" class="save-name ly-animation-fast" ng-click="updateType(form)" ng-if="form.$dirty">
+          <i class="fa fa-check-circle"></i> <span class="text">{{ type.status || 'Save' }}</span>
+        </a>
+      </form>
 
       <!-- Side menu -->
 
-      <div class="ly-menu" ng-if="isOwner()">
+      <div class="ly-menu">
         <a href="" ng-click="view.path='/menu'"><i class="fa fa-ellipsis-v"></i></a>
       </div>
+
     </div>
 
 
@@ -242,7 +252,8 @@
                       ng-model="property.id"
                       ng-options="property.id as property.name for property in type.properties">
                     </select>
-                    <input class="ly-value ly-multiple-field" placeholder="from user" type="text" ng-disabled="!isOwner()" ng-model="property.expected"></input>
+                    <input class="ly-value ly-multiple-field" type="text" ng-if="isOwner()" placeholder="from user" ng-disabled="!isOwner()" ng-model="property.expected"></input>
+                    <input class="ly-value ly-multiple-field" type="text" ng-if="!isOwner()" disabled value="from user"></input>
                     <a href="" ng-click="removeFunctionProperty(function, $index, form)"  ng-if="isOwner()"><i class="fa fa-minus-circle ly-remove-multiple"></i></a>
                   </div>
                 </div>
@@ -360,23 +371,40 @@
           <div class="ly-header">
             <p class="ly-name">Delete</p>
           </div>
-          <form class="ly-form" ng-submit="deleteConnection(confirm)">
-            <div ng-class="{'ly-owner': isOwner()}">
-              <div>
-                <p class="ly-info">
-                Deleting one of your {{deleting.name}} is irreversible.
-                Enter the name to confirm you want to permanently delete it.
-                </p>
-              </div>
 
-              <div class="ly-field ly-editable">
-                <input class="ly-value ly-name" type="text" autofocus placeholder="Property name" ng-model="confirm"></input>
+          <div class="ly-blocking" ng-show="blocking.functions.length!=0 || blocking.statuses.length!=0">
+            <p class="ly-info">You can't delete this resource because it is used from:</p>
+            <ul class="ly-list-disc">
+              <li ng-repeat="function in blocking.functions">
+              {{function}} (function)
+              </li>
+            </ul>
+            <ul class="ly-list-disc">
+              <li ng-repeat="status in blocking.statuses">
+              {{status}} (status)
+              </li>
+            </ul>
+          </div>
+
+          <div ng-show="blocking.functions.length==0 && blocking.statuses.length==0">
+            <form class="ly-form" ng-submit="deleteConnection(confirm)">
+              <div ng-class="{'ly-owner': isOwner()}">
+                <div>
+                  <p class="ly-info">
+                  Deleting one of your {{deleting.name}} is irreversible.
+                  Enter the name to confirm you want to permanently delete it.
+                  </p>
+                </div>
+
+                <div class="ly-field ly-editable">
+                  <input class="ly-value ly-name" type="text" autofocus placeholder="Property name" ng-model="confirm"></input>
+                </div>
+                <div class="ly-actions">
+                  <button class="ly-button ly-delete-button" ng-class="{'ly-disabled-button': confirm!=deleting.connection.name}">delete</button>
+                </div>
               </div>
-              <div class="ly-actions">
-                <button class="ly-button ly-delete-button" ng-class="{'ly-disabled-button': confirm!=deleting.connection.name}">delete</button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -435,11 +463,14 @@
             <p class="ly-name">Menu</p>
           </div>
           <div class="ly-list">
-            <div class="ly-connection ly-properties" ng-click="view.path='/edit'">
-              <i class="fa fa-angle-right"></i>
-              <span class="ly-name">Edit name</span>
+            <div class="ly-connection ly-description">
+              <span class="ly-name">ID {{type.id}}</span>
             </div>
-            <div class="ly-connection ly-functions"  ng-click="view.path='/delete-type'">
+            <div class="ly-connection"  ng-click="view.path='/embed'">
+              <i class="fa fa-angle-right"></i>
+              <span class="ly-name">Embed</span>
+            </div>
+            <div class="ly-connection" ng-if="isOwner()" ng-click="view.path='/delete-type'">
               <i class="fa fa-angle-right"></i>
               <span class="ly-name">Delete</span>
             </div>
@@ -449,33 +480,38 @@
     </div>
 
 
+    <!-- ------------ -->
+    <!--  Embed type  -->
+    <!-- ------------ -->
 
-    <!-- ------------- -->
-    <!-- Edit type name -->
-    <!-- ------------- -->
-
-    <div class="ly-connections ly-edit ly-modal ly-animation-fast" ng-if="view.path=='/edit'">
+    <div class="ly-settings ly-embed ly-modal ly-animation-fast" ng-if="view.path=='/embed'">
       <div class="ly-modal-backdrop" ng-click="showDefault()"></div>
       <div class="ly-modal-window">
         <a class="ly-close" href="" ng-click="showDefault()">×</a>
         <div class="ly-connection-delete">
           <div class="ly-header">
-            <p class="ly-name">Edit Name</p>
+            <p class="ly-name">Embed</p>
           </div>
+          <div class="ly-code ly-form">
 
-          <form class="ly-form" name="form" ng-submit="updateType()" novalidate>
-            <div class="ly-fields" ng-class="{'ly-owner': isOwner(), 'ly-open-connection': function.open}">
-              <div class="ly-detail">
-                <div class="ly-field ly-editable">
-                  <p class="ly-description" ng-class="{'ly-error': form.name.$error.required}">Name</p>
-                  <input class="ly-value" type="text" name="name" ng-model="type.name" required></input>
-                </div>
-              </div>
+            <div class="ly-action">
+              <button type="button" class="ly-button" clip-copy="copyEmbed()" ng-click="copyEmbed()">{{messageEmbed || 'Copy to clipboard'}}</button>
             </div>
-            <div class="ly-actions">
-              <button class="ly-button ly-update-button" ng-class="{'ly-disabled-button': !form.$valid}" ng-click="updateType(function)">Update</button>
+
+            <code><xmp id="embed"><div ng-app="type-directive" style="width:360px;">
+  <lelylan-type type-template="https://s3.amazonaws.com/lelylan/directives/type/templates/default.html" type-id="{{type.id}}"></lelylan-type>
+</div>
+<link rel="stylesheet" href="https://s3.amazonaws.com/lelylan/directives/type/type-directive-ng-embed.css">
+<script src="https://s3.amazonaws.com/lelylan/directives/type/type-directive-ng-embed.js"></script>
+<script>
+  angular.module('type-directive', ['lelylan.directives.type']);
+</script></xmp></code>
+          </div>
+            <div class="ly-info">
+              This is a beta feature. It could not work and it's not optimized to be loaded fast.
+              If you are into AngularJS and you like what we are doing
+              <a href="https://github.com/lelylan/type-directive-ng" target="_blank">Help us</a> on making it better.
             </div>
-          </form>
         </div>
       </div>
     </div>
@@ -516,6 +552,9 @@
       </div>
     </div>
 
+    <div class="ly-footer">
+      <p class="ly-content">Powered by <a href="http://lelylan.com" target="_blank">Lelylan</a></p>
+    </div>
 
   </div>
 </div>

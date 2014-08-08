@@ -1,6 +1,6 @@
 {
   "name": "type-directive-ng",
-  "version": "0.2.0-beta",
+  "version": "0.2.0",
   "main": [
     "dist/type-directive-ng.js",
     "dist/type-directive-ng.css"
@@ -23,7 +23,9 @@
     "angular-moment": "~0.6.2",
     "animate.css": "~3.1.1",
     "underscore": "~1.6.0",
-    "fontawesome": "~4.1.0"
+    "fontawesome": "~4.1.0",
+    "ng-clip": "~0.2.2",
+    "zeroclipboard": "~2.1.6"
   },
   "devDependencies": {
     "json3": "~3.2.6",
@@ -35,14 +37,14 @@
     "jasmine-jquery": "~2.0.3"
   },
   "homepage": "https://github.com/lelylan/type-directive-ng",
-  "_release": "0.2.0-beta",
+  "_release": "0.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.2.0-beta",
-    "commit": "b3ad2065ae457a9f8ecee17097fc8cf702233390"
+    "tag": "0.2.0",
+    "commit": "8fdf70e59caf87f0c42e358bcb0c1fd6a5d3e735"
   },
   "_source": "git://github.com/lelylan/type-directive-ng.git",
-  "_target": "~0.2.0-beta",
+  "_target": "~0.2.0",
   "_originalSource": "type-directive-ng",
   "_direct": true
 }
