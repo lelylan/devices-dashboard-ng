@@ -15,7 +15,7 @@
     "oauth-ng": "~0.2.0-beta.2",
     "socket.io-client": "~1.0.6",
     "shepherd.js": "~0.5.1",
-    "type-directive-ng": "~0.2.0-beta"
+    "type-directive-ng": "~0.2.0"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
@@ -24,7 +24,7 @@
     "jasmine": "v1.3.1"
   },
   "resolutions": {
-    "angular": "1.2.16",
+    "angular": "1.2.21",
     "jasmine": "v1.3.1"
   }
 }

@@ -925,15 +925,29 @@ a {
 }
 
 .ly-type .ly-header .ly-menu a {
-  color: #666;
+  color: $lelylan-color;
 }
 
+.ly-type .ly-header .ly-form .ly-field .ly-value,
 .ly-type .ly-header .ly-name {
   color: #666;
+  width: 60%;
+  font-size: 1.1em;
 }
 
-.ly-type .ly-header .ly-name {
-  font-size: 1.5em;
-  padding: .25em 0;
+.ly-type .ly-modal .ly-header .ly-name {
+  font-size: 2em;
+}
+
+.ly-type .ly-header .ly-form .ly-owner .ly-field .ly-value {
+  border-bottom: 1px dashed #ddd;
+}
+
+.ly-type .ly-footer {
+  display: none;
+}
+
+.ly-type .ly-delete .ly-blocking .ly-list-disc li {
+  display: list-item;
 }
 
