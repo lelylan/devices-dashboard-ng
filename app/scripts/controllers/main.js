@@ -10,7 +10,6 @@ angular.module('lelylan.dashboards.device')
     // Flag telling us if the demo mode is active
     $scope.demo = !!($location.absUrl().match(/demo/));
 
-    //
     $timeout(function() {
       $scope.logged = !!AccessToken.get();
     }, 0);
@@ -50,6 +49,7 @@ angular.module('lelylan.dashboards.device')
         }
 
         $scope.$on('oauth:logout', function(event) {
+          $scope.logged = false;
           $location.path('login');
           Menu.set('lelylan');
         });
@@ -73,7 +73,7 @@ angular.module('lelylan.dashboards.device')
       var cached = $cacheFactory.get('$http').get(ENV.endpoint + '/categories');
 
       // Get all categories
-      var categories = Category.all().success(function(categories) {
+      var categories = Category.all({}, { cache: true }).success(function(categories) {
         $rootScope.categories = categories;
         $rootScope.categories.unshift({ tag: 'all', name: 'All'});
         $rootScope.currentCategory = $rootScope.categories[0];
@@ -85,14 +85,13 @@ angular.module('lelylan.dashboards.device')
       * Devices API request
       */
 
-      var devices = Device.all().
+      var devices = Device.all({}, { cache: true }).
         success(function(devices) {
-        $rootScope.all = devices;
-        $rootScope.devices = devices;
-
-        if (devices.length == 0) { $location.path('/no-devices') }
-        else                     { loadTypes($rootScope.devices); }
-      });
+          $rootScope.all = devices;
+          $rootScope.devices = devices;
+          if (devices.length == 0) { $location.path('/no-devices') }
+          else                     { loadTypes($rootScope.devices); }
+        });
 
 
 
@@ -126,11 +125,11 @@ angular.module('lelylan.dashboards.device')
         var runningRequests = [];
 
         var requests = _.map(devices, function(device) {
-          // hack to make once the call to a specific type resource
+          // Hack to make once the call to a specific type resource
           var called = _.contains(runningRequests, device.type.id);
           if (!called) {
             runningRequests.push(device.type.id);
-            return Type.find(device.type.id);
+            return Type.find(device.type.id, { cache: true });
           }
         });
 

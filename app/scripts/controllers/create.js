@@ -40,7 +40,6 @@ angular.module('lelylan.dashboards.device')
     // get created types
     Type.all().
       success(function(types) {
-        console.log('types', types);
         $scope.created = types;
       });
 
@@ -81,7 +80,7 @@ angular.module('lelylan.dashboards.device')
     $scope.setTypeId = function(id) {
       $scope.message = 'Searching';
 
-      Type.find(id).
+      Type.find(id, { cache: true }).
         success(function(response) {
           $scope.message = 'Found type "' + response.name + '"';
           $scope.invalid.two = false;
