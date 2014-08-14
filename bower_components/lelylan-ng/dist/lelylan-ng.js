@@ -1,10 +1,10 @@
-/* lelylan-ng - v0.1.0-beta.1 - 2014-05-17 */
+/* lelylan-ng - v0.2.0 - 2014-08-13 */
 
 'use strict';
 
 angular.module('lelylan.client', [
   'oauth',
-  'lelylan.client.config',
+  'lelylan.client.utils',
   'lelylan.client.category',
   'lelylan.client.device',
   'lelylan.client.activation',
@@ -34,46 +34,49 @@ angular.module('lelylan.client').provider('lelylanClientConfig', function() {
   }
 });
 
-
-angular.module('lelylan.client.config', [])
-  .value('lelylan.client.config', { endpoint: 'http://api.lelylan.com' });
-
 'use strict';
 
+var client = angular.module('lelylan.client.utils', []);
 
-/* Sets and clears the access token used during the API requests */
+client.factory('LelylanClientUtils', ['AccessToken', function(AccessToken) {
 
-angular.module('lelylan.client').run(function($rootScope, $http) {
-  $rootScope.$on('oauth:login', function(event, token) {
-    $http.defaults.headers.common.Authorization = 'Bearer ' + token.access_token;
-  });
+  var service = {};
 
-  $rootScope.$on('oauth:logout', function(event) {
-    delete $http.defaults.headers.common.Authorization;
-  });
+  service.headers = function() {
+    return AccessToken.get() ? { Authorization: 'Bearer ' + AccessToken.get().access_token } : {}
+  }
 
-  $rootScope.$on('oauth:denied', function(event) {
-    delete $http.defaults.headers.common.Authorization;
-  });
-});
+  service.merge = function(object1, object2) {
+    for (var attrname in object2) { object1[attrname] = object2[attrname]; }
+    return object1
+  }
 
+  return service;
+}]);
 
 'use strict';
 
 var client = angular.module('lelylan.client.activation', []);
 
-client.factory('Activation', ['$http', 'lelylanClientConfig', function($http, config) {
+client.factory('Activation', [
+  '$http',
+  'lelylanClientConfig',
+  'LelylanClientUtils',
+
+  function($http, config, Utils) {
 
   var service = {};
   var base = config.endpoint + '/activations';
 
 
-  service.activate = function(params) {
-    return $http.post(base, params);
+  service.activate = function(params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.post(base, params, Utils.merge(options, _options));
   }
 
-  service.deactivate = function(id) {
-    return $http.delete(base + '/' + id);
+  service.deactivate = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.delete(base + '/' + id, Utils.merge(options, _options));
   }
 
   return service;
@@ -83,13 +86,19 @@ client.factory('Activation', ['$http', 'lelylanClientConfig', function($http, co
 
 var client = angular.module('lelylan.client.category', []);
 
-client.factory('Category', ['$http', 'lelylanClientConfig', function($http, config) {
+client.factory('Category', [
+  '$http',
+  'lelylanClientConfig',
+  'LelylanClientUtils',
+
+  function($http, config, Utils) {
 
   var service = {};
   var base = config.endpoint + '/categories';
 
-  service.all = function(params) {
-    return $http.get(base, { params: params, cache: true });
+  service.all = function(params, _options) {
+    var options = { params: params, headers: Utils.headers() };
+    return $http.get(base, Utils.merge(options, _options));
   }
 
   return service;
@@ -99,38 +108,50 @@ client.factory('Category', ['$http', 'lelylanClientConfig', function($http, conf
 
 var client = angular.module('lelylan.client.device', []);
 
-client.factory('Device', ['$http', 'lelylanClientConfig', function($http, config) {
+client.factory('Device', [
+  '$http',
+  'lelylanClientConfig',
+  'LelylanClientUtils',
+
+  function($http, config, Utils) {
 
   var service = {};
   var base = config.endpoint + '/devices';
 
 
-  service.find = function(id) {
-    return $http.get(base + '/' + id);
+  service.find = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.get(base + '/' + id, Utils.merge(options, _options));
   }
 
-  service.all = function(params) {
-    return $http.get(base, { params: params, cache: true });
+  service.all = function(params, _options) {
+    var options = { params: params, headers: Utils.headers() };
+    return $http.get(base, Utils.merge(options, _options));
   }
 
-  service.privates = function(id) {
-    return $http.get(base + '/' + id + '/privates');
+  service.privates = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.get(base + '/' + id + '/privates', Utils.merge(options, _options));
   }
 
-  service.create = function(params) {
-    return $http.post(base, params);
+  service.create = function(params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.post(base, params, Utils.merge(options, _options));
   }
 
-  service.update = function(id, params) {
-    return $http.put(base + '/' + id, params);
+  service.update = function(id, params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.put(base + '/' + id, params, Utils.merge(options, _options));
   }
 
-  service.delete = function(id) {
-    return $http.delete(base + '/' + id);
+  service.delete = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.delete(base + '/' + id, Utils.merge(options, _options));
   }
 
-  service.properties = function(id, params) {
-    return $http.put(base + '/' + id + '/properties', params);
+  service.properties = function(id, params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.put(base + '/' + id + '/properties', params, Utils.merge(options, _options));
   }
 
   return service;
@@ -140,34 +161,45 @@ client.factory('Device', ['$http', 'lelylanClientConfig', function($http, config
 
 var client = angular.module('lelylan.client.function', []);
 
-client.factory('Function', ['$http', 'lelylanClientConfig', function($http, config) {
+client.factory('Function', [
+  '$http',
+  'lelylanClientConfig',
+  'LelylanClientUtils',
+
+  function($http, config, Utils) {
 
   var service = {};
   var base = config.endpoint + '/functions';
 
 
-  service.find = function(id) {
-    return $http.get(base + '/' + id);
+  service.find = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.get(base + '/' + id, Utils.merge(options, _options));
   }
 
-  service.all = function(params) {
-    return $http.get(base, { params: params });
+  service.all = function(params, _options) {
+    var options = { params: params, headers: Utils.headers() };
+    return $http.get(base, Utils.merge(options, _options));
   }
 
-  service.public = function(params) {
-    return $http.get(base + '/public', { params: params });
+  service.public = function(params, _options) {
+    var options = { params: params };
+    return $http.get(base + '/public', Utils.merge(options, _options));
   }
 
-  service.create = function(params) {
-    return $http.post(base, params);
+  service.create = function(params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.post(base, params, Utils.merge(options, _options));
   }
 
-  service.update = function(id, params) {
-    return $http.put(base + '/' + id, params);
+  service.update = function(id, params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.put(base + '/' + id, params, Utils.merge(options, _options));
   }
 
-  service.delete = function(id) {
-    return $http.delete(base + '/' + id);
+  service.delete = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.delete(base + '/' + id, Utils.merge(options, _options));
   }
 
   return service;
@@ -177,34 +209,45 @@ client.factory('Function', ['$http', 'lelylanClientConfig', function($http, conf
 
 var client = angular.module('lelylan.client.property', []);
 
-client.factory('Property', ['$http', 'lelylanClientConfig', function($http, config) {
+client.factory('Property', [
+  '$http',
+  'lelylanClientConfig',
+  'LelylanClientUtils',
+
+  function($http, config, Utils) {
 
   var service = {};
   var base = config.endpoint + '/properties';
 
 
-  service.find = function(id) {
-    return $http.get(base + '/' + id);
+  service.find = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.get(base + '/' + id, Utils.merge(options, _options));
   }
 
-  service.all = function(params) {
-    return $http.get(base, { params: params });
+  service.all = function(params, _options) {
+    var options = { params: params, headers: Utils.headers() };
+    return $http.get(base, Utils.merge(options, _options));
   }
 
-  service.public = function(params) {
-    return $http.get(base + '/public', { params: params });
+  service.public = function(params, _options) {
+    var options = { params: params };
+    return $http.get(base + '/public', Utils.merge(options, _options));
   }
 
-  service.create = function(params) {
-    return $http.post(base, params);
+  service.create = function(params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.post(base, params, Utils.merge(options, _options));
   }
 
-  service.update = function(id, params) {
-    return $http.put(base + '/' + id, params);
+  service.update = function(id, params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.put(base + '/' + id, params, Utils.merge(options, _options));
   }
 
-  service.delete = function(id) {
-    return $http.delete(base + '/' + id);
+  service.delete = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.delete(base + '/' + id, Utils.merge(options, _options));
   }
 
   return service;
@@ -214,34 +257,45 @@ client.factory('Property', ['$http', 'lelylanClientConfig', function($http, conf
 
 var client = angular.module('lelylan.client.status', []);
 
-client.factory('Status', ['$http', 'lelylanClientConfig', function($http, config) {
+client.factory('Status', [
+  '$http',
+  'lelylanClientConfig',
+  'LelylanClientUtils',
+
+  function($http, config, Utils) {
 
   var service = {};
   var base = config.endpoint + '/statuses';
 
 
-  service.find = function(id) {
-    return $http.get(base + '/' + id);
+  service.find = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.get(base + '/' + id, Utils.merge(options, _options));
   }
 
-  service.all = function(params) {
-    return $http.get(base, { params: params });
+  service.all = function(params, _options) {
+    var options = { params: params, headers: Utils.headers() };
+    return $http.get(base, Utils.merge(options, _options));
   }
 
-  service.public = function(params) {
-    return $http.get(base + '/public', { params: params });
+  service.public = function(params, _options) {
+    var options = { params: params };
+    return $http.get(base + '/public', Utils.merge(options, _options));
   }
 
-  service.create = function(params) {
-    return $http.post(base, params);
+  service.create = function(params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.post(base, params, Utils.merge(options, _options));
   }
 
-  service.update = function(id, params) {
-    return $http.put(base + '/' + id, params);
+  service.update = function(id, params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.put(base + '/' + id, params, Utils.merge(options, _options));
   }
 
-  service.delete = function(id) {
-    return $http.delete(base + '/' + id);
+  service.delete = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.delete(base + '/' + id, Utils.merge(options, _options));
   }
 
   return service;
@@ -251,32 +305,38 @@ client.factory('Status', ['$http', 'lelylanClientConfig', function($http, config
 
 var client = angular.module('lelylan.client.subscription', []);
 
-client.factory('Subscription', ['$http', '$window', 'lelylanClientConfig', function($http, $window, config) {
+client.factory('Subscription', ['$http', '$window', 'LelylanClientUtils', 'lelylanClientConfig', function($http, $window, Utils, config) {
 
   var service = {};
   var credentials = {};
   var base = config.endpoint + '/subscriptions';
 
 
-  service.find = function(id) {
-    return $http.get(base + '/' + id, { headers: headers() });
+  service.find = function(id, _options) {
+    var options = { headers: headers() };
+    return $http.get(base + '/' + id, Utils.merge(options, _options));
   }
 
-  service.all = function(params) {
-    return $http.get(base, { params: params, headers: headers() });
+  service.all = function(params, _options) {
+    var options = { params: params, headers: headers() };
+    return $http.get(base, Utils.merge(options, _options));
   }
 
-  service.create = function(params) {
-    return $http.post(base, params, { headers: headers() });
+  service.create = function(params, _options) {
+    var options = { headers: headers() };
+    return $http.post(base, params, Utils.merge(options, _options));
   }
 
-  service.update = function(id, params) {
-    return $http.put(base + '/' + id, params, { headers: headers() });
+  service.update = function(id, params, _options) {
+    var options = { headers: headers() };
+    return $http.put(base + '/' + id, params, Utils.merge(options, _options));
   }
 
-  service.delete = function(id) {
-    return $http.delete(base + '/' + id, { headers: headers() });
+  service.delete = function(id, _options) {
+    var options = { headers: headers() };
+    return $http.delete(base + '/' + id, Utils.merge(options, _options));
   }
+
 
 
   service.auth = function(params) {
@@ -298,38 +358,50 @@ client.factory('Subscription', ['$http', '$window', 'lelylanClientConfig', funct
 
 var client = angular.module('lelylan.client.type', []);
 
-client.factory('Type', ['$http', 'lelylanClientConfig', function($http, config) {
+client.factory('Type', [
+  '$http',
+  'lelylanClientConfig',
+  'LelylanClientUtils',
+
+  function($http, config, Utils) {
 
   var service = {};
   var base = config.endpoint + '/types';
 
 
-  service.find = function(id) {
-    return $http.get(base + '/' + id, { cache: true });
+  service.find = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.get(base + '/' + id, Utils.merge(options, _options));
   }
 
-  service.all = function(params) {
-    return $http.get(base, { params: params });
+  service.all = function(params, _options) {
+    var options = { params: params, headers: Utils.headers() };
+    return $http.get(base, Utils.merge(options, _options));
   }
 
-  service.public = function(params) {
-    return $http.get(base + '/public', { params: params });
+  service.public = function(params, _options) {
+    var options = { params: params };
+    return $http.get(base + '/public', Utils.merge(options, _options));
   }
 
-  service.popular = function(params) {
-    return $http.get(base + '/popular');
+  service.popular = function(params, _options) {
+    var options = { params: params };
+    return $http.get(base + '/popular', Utils.merge(options, _options));
   }
 
-  service.create = function(params) {
-    return $http.post(base, params);
+  service.create = function(params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.post(base, params, Utils.merge(options, _options));
   }
 
-  service.update = function(id, params) {
-    return $http.put(base + '/' + id, params);
+  service.update = function(id, params, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.put(base + '/' + id, params, Utils.merge(options, _options));
   }
 
-  service.delete = function(id) {
-    return $http.delete(base + '/' + id);
+  service.delete = function(id, _options) {
+    var options = { headers: Utils.headers() };
+    return $http.delete(base + '/' + id, Utils.merge(options, _options));
   }
 
   return service;

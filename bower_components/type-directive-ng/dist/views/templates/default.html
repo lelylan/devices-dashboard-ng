@@ -108,6 +108,14 @@
     <!-- ------------ -->
 
     <div class="ly-properties" ng-show="connection=='properties'">
+
+      <div class="ly-no-connections" ng-show="type.properties.length==0">
+        <p>
+        There are no properties for this type.<br>
+          <a href="" ng-click="addProperty()">Add</a> your first one to get started.
+        </p>
+      </div>
+
       <div class="ly-property ly-item" ng-repeat="property in type.properties">
 
         <!-- Property form -->
@@ -209,6 +217,14 @@
     <!-- --------- -->
 
     <div class="ly-functions" ng-show="connection=='functions'">
+
+      <div class="ly-no-connections" ng-show="type.functions.length==0">
+        <p>
+        There are no functions for this type.<br>
+        <a href="" ng-click="addFunction()">Add</a> your first one to get started.
+        </p>
+      </div>
+
       <div class="ly-function ly-item" ng-repeat="function in type.functions">
 
         <form class="ly-form" name="form" ng-submit="updateFunction(function, form)" novalidate>
@@ -252,8 +268,8 @@
                       ng-model="property.id"
                       ng-options="property.id as property.name for property in type.properties">
                     </select>
-                    <input class="ly-value ly-multiple-field" type="text" ng-if="isOwner()" placeholder="from user" ng-disabled="!isOwner()" ng-model="property.expected"></input>
-                    <input class="ly-value ly-multiple-field" type="text" ng-if="!isOwner()" disabled value="from user"></input>
+                    <input class="ly-value ly-multiple-field" type="text" ng-if="isOwner() || property.expected" placeholder="from user" ng-disabled="!isOwner()" ng-model="property.expected"></input>
+                    <input class="ly-value ly-multiple-field" type="text" ng-if="!isOwner() && !property.expected" disabled value="from user"></input>
                     <a href="" ng-click="removeFunctionProperty(function, $index, form)"  ng-if="isOwner()"><i class="fa fa-minus-circle ly-remove-multiple"></i></a>
                   </div>
                 </div>
@@ -273,6 +289,14 @@
     <!-- -------- -->
 
     <div class="ly-statuses" ng-show="connection=='statuses'">
+
+      <div class="ly-no-connections" ng-show="type.statuses.length==0">
+        <p>
+        There are no statuses for this type.<br>
+        <a href="" ng-click="addStatus()">Add</a> your first one to get started.
+        </p>
+      </div>
+
       <div class="ly-status ly-item" ng-repeat="status in type.statuses">
 
         <form class="ly-form" name="form" ng-submit="updateStatus(status, form)" novalidate>
@@ -493,24 +517,16 @@
             <p class="ly-name">Embed</p>
           </div>
           <div class="ly-code ly-form">
-
             <div class="ly-action">
               <button type="button" class="ly-button" clip-copy="copyEmbed()" ng-click="copyEmbed()">{{messageEmbed || 'Copy to clipboard'}}</button>
             </div>
-
-            <code><xmp id="embed"><div ng-app="type-directive" style="width:360px;">
-  <lelylan-type type-template="https://s3.amazonaws.com/lelylan/directives/type/templates/default.html" type-id="{{type.id}}"></lelylan-type>
-</div>
-<link rel="stylesheet" href="https://s3.amazonaws.com/lelylan/directives/type/type-directive-ng-embed.css">
-<script src="https://s3.amazonaws.com/lelylan/directives/type/type-directive-ng-embed.js"></script>
-<script>
-  angular.module('type-directive', ['lelylan.directives.type']);
-</script></xmp></code>
+            <code><xmp id="embed"><div ng-app="type-directive" style="width:360px;"><lelylan-type type-template="https://s3.amazonaws.com/lelylan/directives/type/templates/default.html" type-id="{{type.id}}"></lelylan-type></div><link rel="stylesheet" href="https://s3.amazonaws.com/lelylan/directives/type/type-directive-ng-embed.css"><script src="https://s3.amazonaws.com/lelylan/directives/type/type-directive-ng-embed.js"></script><script>angular.module('type-directive', ['lelylan.directives.type']);</script></xmp></code>
           </div>
             <div class="ly-info">
-              This is a beta feature. It could not work and it's not optimized to be loaded fast.
+              This is a beta feature and it needs to be improved becoming more solid and faster.
               If you are into AngularJS and you like what we are doing
-              <a href="https://github.com/lelylan/type-directive-ng" target="_blank">Help us</a> on making it better.
+              <a href="https://github.com/lelylan/type-directive-ng" target="_blank">help us</a>
+              on making it better.
             </div>
         </div>
       </div>

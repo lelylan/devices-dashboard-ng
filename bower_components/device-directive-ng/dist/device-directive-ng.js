@@ -1,3 +1,5 @@
+/* device-directive-ng - v0.2.1 - 2014-08-14 */
+
 'use strict';
 
 angular.module('lelylan.directives.device', [
@@ -45,7 +47,7 @@ client.factory('DeviceProperties', ['$rootScope', 'Device', 'Utils', function($r
 
   service.extend = function(scope) {
     _.each(scope.device.properties, function(property) {
-      var resource = Utils.getResource(property.id, scope.type.properties)
+      var resource = Utils.getResource(property.id, scope.type.properties);
       property.name = resource.name;
       property.type = resource.type;
     });
@@ -78,7 +80,7 @@ client.factory('DeviceProperties', ['$rootScope', 'Device', 'Utils', function($r
   /*
    * Updates the device properties (API).
    *
-   * When the response is 200 (and not 202) the request is resolved.
+   * When the response is 200 (and 202) the request is propagated.
    * This happens when the physical uri is not set in the device.
    */
 
@@ -90,8 +92,8 @@ client.factory('DeviceProperties', ['$rootScope', 'Device', 'Utils', function($r
         scope.device = response;
         service.extend(scope);
 
-        if (status == 200)
-          $rootScope.$broadcast('lelylan:device:update:set', scope.device);
+        //if (status == 200)
+        $rootScope.$broadcast('lelylan:device:update:set', scope.device);
       });
   }
 
@@ -316,7 +318,7 @@ client.factory('DeviceStatuses', ['Utils', function(Utils) {
 
   service.checkValues = function(property, statusProperty) {
     if (statusProperty.values.length == 0) { return true }
-    return (_.contains(statusProperty.values, property.value)) ? true : false
+    return (_.contains(statusProperty.values, property.expected)) ? true : false
   }
 
 
@@ -325,10 +327,11 @@ client.factory('DeviceStatuses', ['Utils', function(Utils) {
    */
 
   service.checkRanges = function(property, statusProperty) {
-    if (!statusProperty.range) { return true }
+    statusProperty.ranges = statusProperty.ranges || [];
+    if (statusProperty.ranges.length == 0) { return true }
 
     var pass = false;
-    _.each(statusProperty.range, function(range) {
+    _.each(statusProperty.ranges, function(range) {
       var value = parseInt(property.value);
       pass = pass || ((value >= range.min) && (value <= range.max))
     });
@@ -480,10 +483,25 @@ angular.module('lelylan.directives.device.directive').directive('device', [
 
     /* gets the type representation */
     var getType = function(id) {
-      Type.find(id).success(function(response) {
+      Type.find(id, { cache: true }).success(function(response) {
         scope.type = response;
         loadingCompleted();
       });
+    }
+
+
+    /* Gets the device privates info */
+    var getPrivates = function(id) {
+      if (scope.isMaker()) {
+        Device.privates(id).
+          success(function(response) {
+            scope.privates = response;
+          }).
+          error(function(data, status) {
+            scope.view.path = '/message';
+            scope.message = { title: 'Unauthorized Access', description: 'You have not the rights to access this device' }
+          });
+      }
     }
 
 
@@ -534,21 +552,6 @@ angular.module('lelylan.directives.device.directive').directive('device', [
     }
 
 
-    /* Gets the device privates info */
-    var getPrivates = function(id) {
-      if (scope.isMaker()) {
-        Device.privates(id).
-          success(function(response) {
-            scope.privates = response;
-          }).
-          error(function(data, status) {
-            scope.view.path = '/message';
-            scope.message = { title: 'Unauthorized Access', description: 'You have not the rights to access this device' }
-          });
-      }
-    }
-
-
     /* Returns true if the logged user (if any) is the maker of the device */
     scope.isMaker = function() {
       return (Profile.get() && Profile.get().id == scope.device.maker.id);
@@ -563,7 +566,7 @@ angular.module('lelylan.directives.device.directive').directive('device', [
 
     /* Properties update */
     scope.updateProperties = function(properties) {
-      DeviceProperties.update(scope, properties, element);
+      DeviceProperties.update(scope, properties);
       scope.initialize();
     }
 
@@ -574,7 +577,6 @@ angular.module('lelylan.directives.device.directive').directive('device', [
       Device.update(scope.device.id, scope.device).success(function(response) {
         scope.device = response;
         $rootScope.$broadcast('lelylan:device:update:set', response);
-
       });
     }
 
