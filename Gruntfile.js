@@ -381,7 +381,7 @@ module.exports = function (grunt) {
               redirectUri: 'http://lelylan.github.io/devices-dashboard-ng',
               profileUri: 'http://api.lelylan.com/me'
             },
-            websocket: 'ws://96.126.109.170:80'
+            websocket: 'ws://lelylan-websockets.herokuapp.com/:80'
           }
         }
       }
@@ -396,7 +396,7 @@ module.exports = function (grunt) {
         options: {
           replacements: [{
             pattern: /http:\/\/127.0.0.1:8002/g,
-            replacement: 'http://96.126.109.170'
+            replacement: 'http://lelylan-websockets.herokuapp.com/'
           }]
         }
       }
