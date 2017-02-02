@@ -396,7 +396,7 @@ module.exports = function (grunt) {
         options: {
           replacements: [{
             pattern: /http:\/\/127.0.0.1:8002/g,
-            replacement: 'http://lelylan-websockets.herokuapp.com'
+            replacement: 'http://lelylan.github.io/devices-dashboard-ng/bower_components/'
           }]
         }
       }
