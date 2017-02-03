@@ -25,7 +25,11 @@
     "jasmine": "v1.3.1"
   },
   "resolutions": {
-    "angular": "1.2.22",
-    "jasmine": "v1.3.1"
+    "jasmine": "v1.3.1",
+    "angular": "1.3.12",
+    "oauth-ng": "~0.3.8",
+    "angular-animate": "~1.3.12",
+    "angular-touch": "~1.3.12",
+    "zeroclipboard": "~2.2.0"
   }
 }
