@@ -27,6 +27,7 @@ module.exports = function (grunt) {
         LELYLAN_API_PUBLIC_URL: 'localhost:8000',
         LELYLAN_PEOPLE_PUBLIC_URL: 'localhost:3000',
         LELYLAN_CLIENT_ID: '0e9819715cce6100d8e95e734a42f94f628f91cc5934f8014b91efedb799d36e',
+        LELYLAN_TYPE_DASHBOARD_PUBLIC_URL: 'lelylan.github.io/types-dashboard-ng',
         LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL: 'localhost:9000',
         LELYLAN_DEV_CENTER_PUBLIC_URL: 'dev.lelylan.com',
         LELYLAN_WEBSOCKETS_PUBLIC_URL: '127.0.0.1:8002',
@@ -40,6 +41,7 @@ module.exports = function (grunt) {
         LELYLAN_PEOPLE_PUBLIC_URL: process.env.LELYLAN_PEOPLE_PUBLIC_URL || 'people.lelylan.com',
         LELYLAN_CLIENT_ID: process.env.LELYLAN_CLIENT_ID || '3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709',
         LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL: process.env.LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL || 'lelylan.github.io/devices-dashboard-ng',
+        LELYLAN_TYPE_DASHBOARD_PUBLIC_URL: process.env.LELYLAN_TYPE_DASHBOARD_PUBLIC_URL || 'lelylan.github.io/types-dashboard-ng',
         LELYLAN_WEBSOCKETS_PUBLIC_URL: process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL || 'lelylan-websockets.herokuapp.com',
         LELYLAN_DEV_CENTER_PUBLIC_URL: process.env.LELYLAN_DEV_CENTER_PUBLIC_URL || 'dev.lelylan.com',
         LELYLAN_NODES_PUBLIC_URL: process.env.LELYLAN_NODES_PUBLIC_URL || 'nodes.lelylan.com',
@@ -450,6 +452,18 @@ module.exports = function (grunt) {
         replacements: [{
             pattern: 'nodes.lelylan.com',
             replacement: process.env.LELYLAN_NODES_PUBLIC_URL
+          }]
+        }
+      },
+      'types-dashboard': {
+        files: {
+          'type-directive-ng': 'dist/bower_components/type-directive-ng/dist/views/templates/default.html',
+          'device-directive-ng': 'dist/bower_components/device-directive-ng/dist/views/templates/default.html'
+        },
+        options: {
+        replacements: [{
+            pattern: 'lelylan.github.io/types-dashboard-ng',
+            replacement: process.env.LELYLAN_TYPE_DASHBOARD_PUBLIC_URL
           }]
         }
       },
