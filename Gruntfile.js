@@ -443,7 +443,7 @@ module.exports = function (grunt) {
       },
       nodes: {
         files: {
-          './': 'dist/scripts/2d0f2591.scripts.js'
+          './': 'dist/scripts/**/*.js'
         },
         options: {
         replacements: [{
