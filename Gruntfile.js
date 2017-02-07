@@ -423,22 +423,22 @@ module.exports = function (grunt) {
             pattern: /http:\/\/127.0.0.1:8002/g,
             replacement: 'http://' + process.env.LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL + '/bower_components/'
           },{
-            pattern: 'api.lelylan.com',
+            pattern: /api.lelylan.com/g,
             replacement: process.env.LELYLAN_API_PUBLIC_URL
           },{
-            pattern: 'people.lelylan.com',
+            pattern: /people.lelylan.com/g,
             replacement: process.env.LELYLAN_PEOPLE_PUBLIC_URL
           },{
-            pattern: '3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709',
+            pattern: /3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709/g,
             replacement: process.env.LELYLAN_CLIENT_ID
           },{
-            pattern: 'lelylan.github.io/devices-dashboard-ng',
+            pattern: /lelylan.github.io\/devices-dashboard-ng/g,
             replacement: process.env.LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL
           },{
-            pattern: 'lelylan-websockets.herokuapp.com',
+            pattern: /lelylan-websockets.herokuapp.com/g,
             replacement: process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL
           },{
-            pattern: 'http://localhost/bower_components/socket.io-client/socket.io.js',
+            pattern: /http:\/\/localhost\/bower_components\/socket.io-client\/socket.io.js/g,
             replacement: 'http://' + process.env.PUBLIC_HOST + '/bower_components/socket.io-client/socket.io.js'
           }]
         }
@@ -450,7 +450,7 @@ module.exports = function (grunt) {
         },
         options: {
         replacements: [{
-            pattern: 'nodes.lelylan.com',
+            pattern: /nodes.lelylan.com/g,
             replacement: process.env.LELYLAN_NODES_PUBLIC_URL
           }]
         }
@@ -462,7 +462,7 @@ module.exports = function (grunt) {
         },
         options: {
         replacements: [{
-            pattern: 'lelylan.github.io/types-dashboard-ng',
+            pattern: /lelylan.github.io\/types-dashboard-ng/g,
             replacement: process.env.LELYLAN_TYPE_DASHBOARD_PUBLIC_URL
           }]
         }
@@ -475,7 +475,7 @@ module.exports = function (grunt) {
         },
         options: {
         replacements: [{
-            pattern: 'dev.lelylan.com',
+            pattern: /dev.lelylan.com/g,
             replacement: process.env.LELYLAN_DEV_CENTER_PUBLIC_URL
           }]
         }
