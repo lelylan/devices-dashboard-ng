@@ -29,6 +29,7 @@ module.exports = function (grunt) {
         LELYLAN_CLIENT_ID: '0e9819715cce6100d8e95e734a42f94f628f91cc5934f8014b91efedb799d36e',
         LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL: 'localhost:9000',
         LELYLAN_WEBSOCKETS_PUBLIC_URL: '127.0.0.1:8002',
+        LELYLAN_NODES_PUBLIC_URL: 'localhost:8003'
         PUBLIC_HOST: 'localhost',
         LISTEN_HOST: 'localhost',
         PORT: 9000
@@ -39,6 +40,7 @@ module.exports = function (grunt) {
         LELYLAN_CLIENT_ID: process.env.LELYLAN_CLIENT_ID || '3bfdab6de9b9f2b82c595bd8befef178d5ea929dc40b0848de6a67b2a182d709',
         LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL: process.env.LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL || 'lelylan.github.io/devices-dashboard-ng',
         LELYLAN_WEBSOCKETS_PUBLIC_URL: process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL || 'lelylan-websockets.herokuapp.com',
+        LELYLAN_NODES_PUBLIC_URL: process.env.LELYLAN_NODES_PUBLIC_URL || 'nodes.lelylan.com',
         PUBLIC_HOST: process.env.PUBLIC_HOST || 'lelylan.github.io/devices-dashboard-ng',
         LISTEN_HOST: process.env.LISTEN_HOST || '0.0.0.0',
         PORT: process.env.PORT || 80
@@ -434,6 +436,17 @@ module.exports = function (grunt) {
           },{
             pattern: 'http://localhost/bower_components/socket.io-client/socket.io.js',
             replacement: 'http://' + process.env.PUBLIC_HOST + '/bower_components/socket.io-client/socket.io.js'
+          }]
+        }
+      },
+      nodes: {
+        files: {
+          './': 'dist/scripts/2d0f2591.scripts.js'
+        },
+        options: {
+        replacements: [{
+            pattern: 'nodes.lelylan.com',
+            replacement: process.env.LELYLAN_NODES_PUBLIC_URL
           }]
         }
       }
