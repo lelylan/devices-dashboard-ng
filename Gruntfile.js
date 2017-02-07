@@ -455,7 +455,9 @@ module.exports = function (grunt) {
       },
       'dev-center': {
         files: {
-          './': 'dist/views/create.html'
+          './': 'dist/views/create.html',
+          'type-directive-ng': 'dist/bower_components/type-directive-ng/dist/views/templates/default.html',
+          'device-directive-ng': 'dist/bower_components/device-directive-ng/dist/views/templates/default.html'
         },
         options: {
         replacements: [{
