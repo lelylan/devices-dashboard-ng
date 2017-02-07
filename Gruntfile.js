@@ -443,7 +443,8 @@ module.exports = function (grunt) {
       },
       nodes: {
         files: {
-          './': 'dist/scripts/**/*.js'
+          './': 'dist/scripts/**/*.js',
+          'device-directive-ng': 'dist/bower_components/device-directive-ng/dist/views/templates/default.html'
         },
         options: {
         replacements: [{
