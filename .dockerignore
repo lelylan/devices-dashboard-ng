@@ -18,9 +18,6 @@ app/bower_components
 # Ignore logs
 *.log
 
-# Procfile env
-*.env
-
 # Documentation
 docs/
 
