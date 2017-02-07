@@ -385,7 +385,7 @@ module.exports = function (grunt) {
             credentials: {
               site: 'http://' + process.env.LELYLAN_PEOPLE_PUBLIC_URL,
               clientId: process.env.LELYLAN_CLIENT_ID,
-              redirectUri: 'http://' + process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL,
+              redirectUri: 'http://' + process.env.LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL,
               profileUri: 'http://' + process.env.LELYLAN_API_PUBLIC_URL + '/me'
             },
             websocket: 'ws://' + process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL + '/'
@@ -403,7 +403,7 @@ module.exports = function (grunt) {
             credentials: {
               site: 'http://' + process.env.LELYLAN_PEOPLE_PUBLIC_URL,
               clientId: process.env.LELYLAN_CLIENT_ID,
-              redirectUri: 'http://' + process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL,
+              redirectUri: 'http://' + process.env.LELYLAN_DEVICES_DASHBOARD_PUBLIC_URL,
               profileUri: 'http://' + process.env.LELYLAN_API_PUBLIC_URL + '/me'
             },
             websocket: 'ws://' + process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL + '/'
