@@ -416,7 +416,7 @@ module.exports = function (grunt) {
     'string-replace': {
       dist: {
         files: {
-          './': 'dist/index.html'
+          './': 'dist/**/*'
         },
         options: {
           replacements: [{
