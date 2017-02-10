@@ -440,6 +440,15 @@ module.exports = function (grunt) {
           },{
             pattern: /http:\/\/localhost\/bower_components\/socket.io-client\/socket.io.js/g,
             replacement: 'http://' + process.env.PUBLIC_HOST + '/bower_components/socket.io-client/socket.io.js'
+          },{
+            pattern: /dev.lelylan.com/g,
+            replacement: process.env.LELYLAN_DEV_CENTER_PUBLIC_URL
+          },{
+            pattern: /nodes.lelylan.com/g,
+            replacement: process.env.LELYLAN_NODES_PUBLIC_URL
+          },{
+            pattern: /lelylan.github.io\/types-dashboard-ng/g,
+            replacement: process.env.LELYLAN_TYPE_DASHBOARD_PUBLIC_URL
           }]
         }
       },
