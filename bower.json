@@ -13,7 +13,7 @@
     "device-directive-ng": "~0.2.4",
     "angular-animate": "1.2.16",
     "oauth-ng": "~0.2.6",
-    "socket.io-client": "~1.0.6",
+    "socket.io-client": "~0.9.16",
     "shepherd.js": "~0.5.1",
     "type-directive-ng": "~0.2.0",
     "lelylan-ng": "~0.2.0"

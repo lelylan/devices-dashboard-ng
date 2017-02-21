@@ -438,9 +438,6 @@ module.exports = function (grunt) {
             pattern: /lelylan-websockets.herokuapp.com/g,
             replacement: process.env.LELYLAN_WEBSOCKETS_PUBLIC_URL
           },{
-            pattern: /http:\/\/localhost\/bower_components\/socket.io-client\/socket.io.js/g,
-            replacement: 'http://' + process.env.PUBLIC_HOST + '/bower_components/socket.io-client/socket.io.js'
-          },{
             pattern: /dev.lelylan.com/g,
             replacement: process.env.LELYLAN_DEV_CENTER_PUBLIC_URL
           },{
