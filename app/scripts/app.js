@@ -67,7 +67,7 @@ angular.module('lelylan.dashboards.device').config(function ($routeProvider) {
 
 // spinner on http request
 angular.module('lelylan.dashboards.device').config(function ($httpProvider) {
-  $httpProvider.responseInterceptors.push('myHttpInterceptor');
+  $httpProvider.interceptors.push('myHttpInterceptor');
   var spinnerFunction = function spinnerFunction(data, headersGetter) {
     $("#spinner").show();
     return data;
@@ -87,4 +87,3 @@ angular.module('lelylan.dashboards.device').factory('myHttpInterceptor', functio
     });
   };
 });
-

@@ -1,0 +1,14 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www;
+	server_name _;
+
+	location / {
+	    gzip_static  on;
+		gzip_proxied expired no-cache no-store private auth;
+		expires 365d;
+	    root /var/www;
+	    index  index.html;
+	}
+}

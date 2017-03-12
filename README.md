@@ -1,6 +1,6 @@
 # AngularJS Dashboard for Lelylan
 
-Lelylan Dashboard based on AngularJS working on mobile, tablet and desktop. 
+Lelylan Dashboard based on AngularJS working on mobile, tablet and desktop.
 Check out the [demo](http://lelylan.github.io/devices-dashboard-ng/demo.html).
 
 
@@ -15,6 +15,29 @@ Do not forget to provide specs to your contribution.
 * Fork and clone the repository
 * Run `npm install && bower install`
 
+### With docker
+
+#### Badges
+Docker image: [lelylanlab/devices-dashboard-ng](https://hub.docker.com/r/lelylanlab/devices-dashboard-ng/)
+
+[![](https://images.microbadger.com/badges/version/lelylanlab/devices-dashboard-ng:latest.svg)](http://microbadger.com/images/lelylanlab/devices-dashboard-ng:latest "Get your own version badge on microbadger.com")  [![](https://images.microbadger.com/badges/image/lelylanlab/devices-dashboard-ng:latest.svg)](http://microbadger.com/images/lelylanlab/devices-dashboard-ng:latest "Get your own image badge on microbadger.com")
+
+### Use docker hub image
+```bash
+$ docker run -d -it --name devices-dashboard-ng lelylanlab/devices-dashboard-ng
+```
+
+### Generate local image
+```bash
+$ docker build --tag=devices-dashboard-ng .
+$ docker run -d -it --name devices-dashboard-ng devices-dashboard-ng
+```
+
+### Generate local image
+```bash
+$ docker-compose build
+$ docker-compose up -d
+```
 
 ### Unit tests (karma)
 

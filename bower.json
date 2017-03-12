@@ -10,10 +10,10 @@
     "fontawesome": "~4.1.0",
     "semantic-ui": "~0.18.0",
     "underscore": "~1.6.0",
-    "device-directive-ng": "~0.2.4",
+    "device-directive-ng": "~0.2.9",
     "angular-animate": "1.2.16",
     "oauth-ng": "~0.2.6",
-    "socket.io-client": "~1.0.6",
+    "socket.io-client": "~0.9.16",
     "shepherd.js": "~0.5.1",
     "type-directive-ng": "~0.2.0",
     "lelylan-ng": "~0.2.0"
@@ -25,7 +25,11 @@
     "jasmine": "v1.3.1"
   },
   "resolutions": {
-    "angular": "1.2.22",
-    "jasmine": "v1.3.1"
+    "jasmine": "v1.3.1",
+    "angular": "1.3.12",
+    "oauth-ng": "~0.3.8",
+    "angular-animate": "~1.3.12",
+    "angular-touch": "~1.3.12",
+    "zeroclipboard": "~2.2.0"
   }
 }
